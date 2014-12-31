@@ -34,5 +34,9 @@ app.get('/api/posts', function *() {
   };
 });
 
+app.get('/', function *() {
+  this.body = 'Hello, Parisleaf!';
+});
+
 app.listen(process.env.PORT);
 log('info', `App started listening on port ${process.env.PORT}`);
