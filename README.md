@@ -1,3 +1,3 @@
-# beta.parisleaf.com
+# parisleaf.com
 
-Home of the upcoming, new home for Parisleaf on the web.
+The new parisleaf.com, currently at beta.parisleaf.com.
