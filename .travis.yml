@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - '0.11'
+- '0.11'
 before_install:
-  - openssl aes-256-cbc -K $encrypted_178fa280071e_key -iv $encrypted_178fa280071e_iv
+- openssl aes-256-cbc -K $encrypted_178fa280071e_key -iv $encrypted_178fa280071e_iv
   -in deploy_staging_rsa.enc -out deploy_staging_rsa -d
 after_success:
-  - chmod 600 deploy_staging_rsa
-  - ssh-add deploy_staging_rsa
-  - git remote add staging dokku@beta.parisleaf.com:staging
-  - git push staging
+- chmod 600 deploy_staging_rsa
+- ssh-add deploy_staging_rsa
+- git remote add staging dokku@beta.parisleaf.com:staging
+- git push staging
