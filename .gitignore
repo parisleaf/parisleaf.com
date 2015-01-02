@@ -28,3 +28,5 @@ node_modules
 
 dist
 .env
+
+deploy_staging_rsa
