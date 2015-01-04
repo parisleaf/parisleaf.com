@@ -29,4 +29,5 @@ node_modules
 dist
 .env
 
-deploy_staging_rsa
+.travis/deploy_key
+.travis/deploy_key.pub
