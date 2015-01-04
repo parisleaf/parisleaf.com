@@ -2,11 +2,8 @@ language: node_js
 node_js:
 - '0.11'
 after_success:
-- chmod 600 .travis/deploy_key.pem
-- eval `ssh-agent -s`
-- ssh-add .travis/deploy_key.pem
-- git remote add staging dokku@beta.parisleaf.com:staging
-- git push staging master
+- chmod +x .travis/after_success.sh
+- ./after_success.sh
 addons:
   ssh_known_hosts: beta.parisleaf.com
 before_install:
