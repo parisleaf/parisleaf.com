@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 
 # Deploy to staging server if on branch `develop`
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "develop" ]]; then
