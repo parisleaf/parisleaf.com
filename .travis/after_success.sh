@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Deploy to staging server if on branch `develop`
-if [ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "develop" ]; then
+if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "develop" ]]; then
   # Add deploy key
   chmod 600 .travis/deploy_key.pem
   eval `ssh-agent -s`
