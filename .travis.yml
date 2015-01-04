@@ -2,8 +2,8 @@ language: node_js
 node_js:
 - '0.11'
 after_success:
-- chmod 600 deploy_staging_rsa
-- ssh-add deploy_staging_rsa
+- chmod 600 .travis/deploy_key.pem
+- ssh-add .travis/deploy_key.pem
 - git remote add staging dokku@beta.parisleaf.com:staging
 - git push staging master
 addons:
