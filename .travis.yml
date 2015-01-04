@@ -3,7 +3,7 @@ node_js:
 - '0.11'
 after_success:
 - chmod +x .travis/after_success.sh
-- ./after_success.sh
+- .travis/after_success.sh
 addons:
   ssh_known_hosts: beta.parisleaf.com
 before_install:
