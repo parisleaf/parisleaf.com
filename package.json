@@ -2,11 +2,10 @@
   "name": "parisleaf.com",
   "version": "1.0.0",
   "description": "New parisleaf.com",
-  "main": "dist/app.js",
+  "main": "lib/app.js",
   "scripts": {
-    "build": "make build",
     "test": "make test",
-    "start": "make test && node --harmony dist/app.js"
+    "start": "make test && node --harmony lib/app.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "license": "ISC",
