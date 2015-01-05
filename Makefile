@@ -1,7 +1,7 @@
 6TO5_CMD = node_modules/.bin/6to5
 MOCHA_CMD = node_modules/.bin/mocha
 
-SRC_JS = $(wildcard src/**/*.js)
+SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 # Test with mocha
