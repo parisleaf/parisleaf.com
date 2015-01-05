@@ -14,6 +14,7 @@ ADD . /app
 
 RUN npm install
 
+ENV NODE_ENV=production
 ENV PORT=8080
 EXPOSE $PORT
 
