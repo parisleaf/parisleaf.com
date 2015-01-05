@@ -11,6 +11,15 @@ test: build
 # Build application
 build: transpile-js
 
+# Start watchman to rebuild on changes
+watch: build
+	watchman watch .
+	watchman -- trigger . remake src/**/*.js -- make
+
+# Stop watching for changes
+stop-watch:
+	watchman watch-del .
+
 # Clean up
 clean:
 	rm -rf lib
