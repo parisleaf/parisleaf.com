@@ -2,7 +2,8 @@
 MOCHA_CMD = node_modules/.bin/mocha
 BROWSERIFY_CMD = node_modules/.bin/browserify
 WATCHIFY_CMD = node_modules/.bin/watchify
-SASS_CMD = node_modules/.bin/node-sass
+SASS_CMD = sassc
+WATCH_CMD = node_modules/.bin/watch
 
 6TO5_ARGS = --blacklist generators,letScoping
 BROWSERIFY_ARGS = -t 6to5ify -t envify -t es3ify
@@ -55,7 +56,7 @@ watch-js:
 css: public/css/app.css
 
 public/css/app.css: sass/app.sass
-	mkdir -p $(dir $@) && $(SASS_CMD) sass/app.sass $@
+	mkdir -p $(dir $@) && $(SASS_CMD) $< $@
 
 watch-css:
 	mkdir -p $(dir $@) && $(SASS_CMD) sass/app.sass public/css/app.css -w

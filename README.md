@@ -30,7 +30,17 @@ JavaScript files in `src` are compiled with 6to5. This lets us use ES6 features 
 
 ### libsass
 
-Stylesheets are compiled using node-sass, a wrapper around the libsass project. There is a bug with the latest versions of node-sass on node v0.11+, which is unsupported due to it being a preview release. Because the stable v0.12 release is imminent, we will continue to use an older version of node-sass until then.
+Stylesheets are compiled using the [sassc](https://github.com/sass/sassc) implementation of [libsass](https://github.com/sass/node-sass).
+
+"Hey, if this is a node app, why not use node-sass?"
+
+Because waiting for node-sass to catch up with the latest libsass release is un-fun. sassc is always up to date.
+
+The Dockerfile takes care of installing sassc. You'll probably want to install it on your own machine, too. On OS X:
+
+`brew install sassc`
+
+On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-install-sassc-and-libsass-on-ubuntu).
 
 ## Building
 
