@@ -1,3 +1,6 @@
 'use strict';
 
-console.log('Hello');
+import React from 'react';
+import App from '../shared/components/App';
+
+React.render(<App />, document.getElementById('app'));

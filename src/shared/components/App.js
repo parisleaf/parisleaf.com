@@ -5,7 +5,7 @@ import React from 'react';
 let App = React.createClass({
   render() {
     return (
-      <div className="App">Hello, Parisleaf! react</div>
+      <div className="App">Hello, Parisleaf!</div>
     );
   }
 });

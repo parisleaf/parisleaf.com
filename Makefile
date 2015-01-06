@@ -27,7 +27,7 @@ fast-build: fast-js build
 
 # Watch for changes
 watch:
-	make -j3 watch-css watch-js watchify
+	make -j4 watch-css watch-js watchify browser-sync
 
 # Clean up
 clean:
@@ -38,7 +38,7 @@ clean:
 browserify: public/js/app.js
 
 watchify: src/client/app.js
-	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS)
+	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
 
 public/js/app.js: src/client/app.js
 	mkdir -p $(dir $@) && $(BROWSERIFY_CMD) $< -o $@ $(BROWSERIFY_ARGS)
