@@ -6,6 +6,7 @@ SASS_CMD = sassc
 WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 BROWSER_SYNC = node_modules/.bin/browser-sync
+SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
 
 6TO5_ARGS = --blacklist generators,letScoping
 BROWSERIFY_ARGS = -t 6to5ify -t envify -t es3ify
@@ -13,13 +14,13 @@ BROWSERIFY_ARGS = -t 6to5ify -t envify -t es3ify
 SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
+# Build application
+build: js browserify css
 
 # Test with mocha
 test: js
 	$(MOCHA_CMD) lib/**/__tests__/*-test.js
 
-# Build application
-build: js browserify css
 
 # Build application quickly
 # Faster on first build, but not after that
@@ -34,6 +35,7 @@ clean:
 	rm -rf lib
 	rm -f public/js/app.js
 	rm -f public/css/app.css
+	rm -f views/icon-sprite.svg
 
 browserify: public/js/app.js
 
@@ -68,4 +70,11 @@ watch-css:
 browser-sync:
 	$(BROWSER_SYNC) start --config "bs-config.js"
 
-.PHONY: test build fast-build watch clean browserify watchify js fast-js watch-js css watch-css
+icons: views/icon-sprite.svg
+
+ICON_SVGS = $(shell find icons -name "*.svg")
+views/icon-sprite.svg: $(ICON_SVGS)
+	$(SVG_SPRITE_CMD) --symbol --symbol-inline --symbol-dest=views --symbol-sprite="./icon-sprite.svg" icons/*.svg
+
+.PHONY: test build fast-build watch clean browserify watchify js fast-js
+.PHONY: watch-js css watch-css icons

@@ -5,7 +5,8 @@
   "main": "lib/app.js",
   "scripts": {
     "test": "make fast-js && make test",
-    "start": "make build && node --harmony lib/app.js"
+    "start": "make build && node --harmony lib/app.js",
+    "watch": "make build && nodemon --harmony lib/app.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
@@ -38,6 +39,7 @@
     "es3ify": "~0.1.3",
     "mocha": "~2.1.0",
     "pixrem-cli": "~1.0.3",
+    "svg-sprite": "~1.0.8",
     "watch": "~0.13.0",
     "watchify": "~2.2.1"
   }

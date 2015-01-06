@@ -35,3 +35,4 @@ lib
 
 public/js/app.js
 public/css/app.css
+views/icon-sprite.svg

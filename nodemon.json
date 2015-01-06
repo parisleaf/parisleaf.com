@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "lib/",
+    "views/"
+  ],
+  "ext": "js json jade",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
