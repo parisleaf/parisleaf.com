@@ -1,30 +1,16 @@
-# Based on https://github.com/sass/libsass/wiki/Building-with-autotools
+cd /usr/local/lib/
 
-# Install dependencies
-# Commented out because we're doing this in Dockerfile
-# apt-get install automake libtool
-
-# Fetch sources
+git clone https://github.com/sass/sassc.git
 git clone https://github.com/sass/libsass.git
-git clone https://github.com/sass/sassc.git libsass/sassc
 
-# Create configure script
-cd libsass
-autoreconf --force --install
-cd ..
+# Initialize and update the submodule sass2scss…
+cd libsass/
+git submodule update –-init
 
-# Create custom makefiles for **shared library**, for more info read:
-# 'Difference between static and shared libraries?' before installing libsass  http://stackoverflow.com/q/2649334/802365
-cd libsass
-autoreconf --force --install
-./configure \
-  --disable-tests \
-  --enable-shared \
-  --prefix=/usr
-cd ..
+export SASS_LIBSASS_PATH=/usr/local/lib/libsass
 
-# Build the library
-make -C libsass -j5
+cd /usr/local/lib/sassc/
+make
 
-# Install the library
-sudo make -C libsass -j5 install
+cd /usr/local/bin/
+ln -s ../lib/sassc/bin/sassc sassc
