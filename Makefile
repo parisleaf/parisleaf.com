@@ -61,10 +61,11 @@ css: public/css/app.css
 public/css/app.css: sass/app.sass
 	mkdir -p $(dir $@) && $(SASS_CMD) $< \
 	| $(AUTOPREFIXER_CMD) > $@
+
 watch-css:
 	$(WATCH_CMD) "make css" sass
 
 browser-sync:
-	$(BROWSER_SYNC) start --proxy "localhost:3000" --files "public/css/app.css"
+	$(BROWSER_SYNC) start --config "bs-config.js"
 
 .PHONY: test build fast-build watch clean browserify watchify js fast-js watch-js css watch-css
