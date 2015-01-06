@@ -5,7 +5,7 @@
   "main": "lib/app.js",
   "scripts": {
     "test": "make fast-js && make test",
-    "start": "make test && node --harmony lib/app.js"
+    "start": "make build && node --harmony lib/app.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
