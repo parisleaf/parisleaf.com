@@ -54,7 +54,7 @@ watch-js:
 # Compile Sass
 css: public/css/app.css
 
-public/css/app.css:
+public/css/app.css: sass/app.sass
 	mkdir -p $(dir $@) && $(SASS_CMD) sass/app.sass $@
 
 watch-css:

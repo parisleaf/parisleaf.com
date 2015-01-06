@@ -31,3 +31,6 @@ lib
 
 .travis/deploy_key
 .travis/deploy_key.pub
+
+public/js/app.js
+public/css/app.css

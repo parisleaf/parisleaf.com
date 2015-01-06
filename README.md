@@ -39,5 +39,3 @@ Run `make build` (or just `make`) to build the application. Running make again w
 Run `make watch` to watch for changes and rebuild.
 
 If it's the first build, you can run `make fast-build`. This will build the application more quickly, but it won't check for changes — it runs every time. On subsequent builds, use `make build`.
-
-## Deployment
