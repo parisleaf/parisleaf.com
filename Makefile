@@ -13,7 +13,7 @@ LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 
 # Test with mocha
-test: build
+test: js
 	$(MOCHA_CMD) lib/**/__tests__/*-test.js
 
 # Build application
