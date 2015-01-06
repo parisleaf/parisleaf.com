@@ -10,7 +10,6 @@ The front-end is a [koa](https://github.com/koajs/koa) app running on node v0.11
 
 Content is fetched from an external WordPress application using [WP-API](http://wp-api.org/). That project can be found at [parisleaf/wp.parisleaf.com](https://github.com/parisleaf/wp.parisleaf.com).
 
-
 ### React
 
 [React](https://github.com/facebook/react) is compiled server-side and then resumed on the client.
