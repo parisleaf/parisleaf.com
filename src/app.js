@@ -19,11 +19,21 @@ app.use(json());
 import qs from 'koa-qs';
 qs(app);
 
+import views from 'koa-views';
+
+let viewsOptions = {
+  cache: true,
+};
+
+viewsOptions.default = 'jade';
+app.use(views('../views', viewsOptions));
+
 import router from 'koa-router';
 app.use(router(app));
 
 import request from 'superagent';
 import url from 'url';
+
 
 app.get('/api/posts', function *() {
 
@@ -34,8 +44,15 @@ app.get('/api/posts', function *() {
   };
 });
 
+import React from 'react';
+import App from './shared/components/App';
+
 app.get('/', function *() {
-  this.body = 'Hello, Parisleaf!';
+  let appString = React.renderToString(<App />);
+
+  yield this.render('app', {
+    appString,
+  });
 });
 
 app.listen(process.env.PORT);

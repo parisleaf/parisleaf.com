@@ -4,6 +4,8 @@ BROWSERIFY_CMD = node_modules/.bin/browserify
 WATCHIFY_CMD = node_modules/.bin/watchify
 SASS_CMD = sassc
 WATCH_CMD = node_modules/.bin/watch
+AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
+BROWSER_SYNC = node_modules/.bin/browser-sync
 
 6TO5_ARGS = --blacklist generators,letScoping
 BROWSERIFY_ARGS = -t 6to5ify -t envify -t es3ify
@@ -24,7 +26,8 @@ build: js browserify css
 fast-build: fast-js build
 
 # Watch for changes
-watch: watch-js watchify
+watch:
+	make -j3 watch-css watch-js watchify
 
 # Clean up
 clean:
@@ -56,9 +59,12 @@ watch-js:
 css: public/css/app.css
 
 public/css/app.css: sass/app.sass
-	mkdir -p $(dir $@) && $(SASS_CMD) $< $@
-
+	mkdir -p $(dir $@) && $(SASS_CMD) $< \
+	| $(AUTOPREFIXER_CMD) > $@
 watch-css:
-	mkdir -p $(dir $@) && $(SASS_CMD) sass/app.sass public/css/app.css -w
+	$(WATCH_CMD) "make css" sass
+
+browser-sync:
+	$(BROWSER_SYNC) start --proxy "localhost:3000" --files "public/css/app.css"
 
 .PHONY: test build fast-build watch clean browserify watchify js fast-js watch-js css watch-css
