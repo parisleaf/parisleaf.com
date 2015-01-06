@@ -29,7 +29,6 @@ node_modules
 lib
 .env
 
-.travis/deploy_key
 .travis/deploy_key.pem
 .travis/deploy_key.pub
 
