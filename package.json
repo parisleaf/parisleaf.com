@@ -4,7 +4,7 @@
   "description": "New parisleaf.com",
   "main": "lib/app.js",
   "scripts": {
-    "test": "make fast-js && test",
+    "test": "make fast-js && make test",
     "start": "make test && node --harmony lib/app.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
