@@ -1,6 +1,11 @@
 'use strict';
 
 /*
+ * Polyfills
+ */
+import '6to5/polyfill';
+
+/*
  * Superagent promisification
  */
 import { Request } from 'superagent';

@@ -8,8 +8,8 @@ AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 BROWSER_SYNC = node_modules/.bin/browser-sync
 SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
 
-6TO5_ARGS = --blacklist generators,letScoping
-BROWSERIFY_ARGS = -t 6to5ify -t envify -t es3ify
+6TO5_ARGS = --experimental
+BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
 
 SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
@@ -49,7 +49,7 @@ public/js/app.js: src/client/app.js
 js: $(LIB_JS)
 
 $(LIB_JS): lib/%.js: src/%.js
-	mkdir -p $(dir $@) && $(6TO5_CMD) $< -o $@ $(6TO5_ARGS)
+	mkdir -p $(dir $@) && $(6TO5_CMD) $< -o $@ $(6TO5_ARGS) --blacklist generators,letScoping --options asyncToGenerator
 
 fast-js:
 	$(6TO5_CMD) src -d lib $(6TO5_ARGS)
