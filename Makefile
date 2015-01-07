@@ -32,7 +32,7 @@ fast-build: fast-js build
 # Watch for changes
 watch:
 	$(MAKE) -j4 watch-css watch-js watchify browser-sync
-#	$(MAKE) -j3 watch-js watchify browser-sync
+
 # Clean up
 clean:
 	rm -rf lib
