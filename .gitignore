@@ -34,5 +34,7 @@ lib
 .travis/deploy_key.pub
 
 public/js/app.js
+public/js/app.js.map
+public/js/app.min.js
 public/css/app.css
 views/icon-sprite.svg

@@ -13,4 +13,8 @@ html(class='no-js')
     #app!=appString
   
     script(src='https://cdn.jsdelivr.net/polyfills/polyfill.js', defer)
-    script(src='/js/app.js', defer)
+    
+    if (nodeEnv == 'development')
+      script(src='/js/app.js', defer)
+    else
+      script(src='/js/app.min.js', defer)

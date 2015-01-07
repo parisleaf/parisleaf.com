@@ -5,8 +5,6 @@ import './shared/init';
 import dotenv from 'dotenv';
 dotenv.load();
 
-import { log } from 'winston';
-
 import koa from 'koa';
 let app = koa();
 
@@ -52,8 +50,9 @@ app.get('/', function *() {
 
   yield this.render('app', {
     appString,
+    nodeEnv: process.env.NODE_ENV,
   });
 });
 
 app.listen(process.env.PORT);
-log('info', `App started listening on port ${process.env.PORT}`);
+console.log(`App started listening on port ${process.env.PORT}`);

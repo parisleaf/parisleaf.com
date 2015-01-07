@@ -6,7 +6,8 @@
   "scripts": {
     "test": "make fast-js && make test",
     "start": "make build && node --harmony lib/app.js",
-    "watch": "make build && nodemon --harmony lib/app.js"
+    "start-dev": "make build && NODE_ENV=development node --harmony lib/app.js",
+    "watch": "make build && NODE_ENV=development nodemon --harmony lib/app.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
@@ -24,12 +25,12 @@
     "koa-views": "~2.1.2",
     "qs": "~2.3.3",
     "react": "~0.12.2",
-    "superagent": "~0.21.0",
-    "winston": "~0.8.3"
+    "superagent": "~0.21.0"
   },
   "devDependencies": {
     "6to5": "~2.7.4",
     "6to5ify": "~3.1.0",
+    "acorn": "~0.11.0",
     "autoprefixer": "~4.0.0",
     "browser-sync": "~1.8.3",
     "browserify": "~8.0.3",
@@ -37,8 +38,8 @@
     "chai-as-promised": "~4.1.1",
     "envify": "~3.2.0",
     "mocha": "~2.1.0",
-    "pixrem-cli": "~1.0.3",
     "svg-sprite": "~1.0.8",
+    "uglify-js": "~2.4.16",
     "watch": "~0.13.0",
     "watchify": "~2.2.1"
   }

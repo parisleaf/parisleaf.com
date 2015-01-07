@@ -7,6 +7,8 @@ WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 BROWSER_SYNC = node_modules/.bin/browser-sync
 SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
+UGLIFY_CMD = node_modules/.bin/uglifyjs
+EXORCIST_CMD = node_modules/.bin/exorcist
 
 6TO5_ARGS = --experimental
 BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
@@ -15,7 +17,7 @@ SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 # Build application
-build: js browserify css
+build: js browserify uglify-js css icons
 
 # Test with mocha
 test: js
@@ -33,8 +35,8 @@ watch:
 # Clean up
 clean:
 	rm -rf lib
-	rm -f public/js/app.js
-	rm -f public/css/app.css
+	rm -rf public/js/
+	rm -rf public/css/
 	rm -f views/icon-sprite.svg
 
 browserify: public/js/app.js
@@ -43,7 +45,7 @@ watchify: src/client/app.js
 	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
 
 public/js/app.js: src/client/app.js
-	mkdir -p $(dir $@) && $(BROWSERIFY_CMD) $< -o $@ $(BROWSERIFY_ARGS)
+	mkdir -p $(dir $@) && $(BROWSERIFY_CMD) $< $(BROWSERIFY_ARGS) > $@
 
 # Transpile JavaScript using 6to5
 js: $(LIB_JS)
@@ -56,6 +58,15 @@ fast-js:
 
 watch-js:
 	$(6TO5_CMD) src -d lib $(6TO5_ARGS) -w
+
+uglify-js: public/js/app.min.js
+
+public/js/app.min.js: public/js/app.js
+	mkdir -p public/js
+	$(UGLIFY_CMD) public/js/app.js \
+	--acorn \
+	--screw-ie8 \
+	> public/js/app.min.js
 
 # Compile Sass
 css: public/css/app.css
