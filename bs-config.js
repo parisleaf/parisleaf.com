@@ -1,5 +1,5 @@
 module.exports = {
-  files: [ "public/**/*.js", "public/**/*.css" ],
+  files: [ "public/js/**/*.js", "public/css/app.css" ],
   proxy: "localhost:3000",
-  reloadDelay: 500,
+  reloadDelay: 200,
 };

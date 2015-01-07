@@ -9,6 +9,7 @@ BROWSER_SYNC = node_modules/.bin/browser-sync
 SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
 UGLIFY_CMD = node_modules/.bin/uglifyjs
 EXORCIST_CMD = node_modules/.bin/exorcist
+CLEANCSS_CMD = node_modules/.bin/cleancss
 
 6TO5_ARGS = --experimental
 BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
@@ -30,7 +31,7 @@ fast-build: fast-js build
 
 # Watch for changes
 watch:
-	make -j4 watch-css watch-js watchify browser-sync
+	$(MAKE) -j4 watch-css watch-js watchify browser-sync
 
 # Clean up
 clean:
@@ -69,14 +70,16 @@ public/js/app.min.js: public/js/app.js
 	> public/js/app.min.js
 
 # Compile Sass
-css: public/css/app.css
+css: public/css/app.css public/css/app.min.css
 
 public/css/app.css: sass/app.sass
-	mkdir -p $(dir $@) && $(SASS_CMD) $< \
-	| $(AUTOPREFIXER_CMD) > $@
+	mkdir -p $(dir $@) && $(SASS_CMD) -m $< | $(AUTOPREFIXER_CMD) > $@
+
+public/css/app.min.css: public/css/app.css
+	$(CLEANCSS_CMD) $< > $@
 
 watch-css:
-	$(WATCH_CMD) "make css" sass
+	$(WATCH_CMD) "$(MAKE) public/css/app.css" sass
 
 browser-sync:
 	$(BROWSER_SYNC) start --config "bs-config.js"

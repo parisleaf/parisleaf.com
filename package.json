@@ -36,6 +36,7 @@
     "browserify": "~8.0.3",
     "chai": "~1.10.0",
     "chai-as-promised": "~4.1.1",
+    "clean-css": "~3.0.3",
     "envify": "~3.2.0",
     "mocha": "~2.1.0",
     "svg-sprite": "~1.0.8",
