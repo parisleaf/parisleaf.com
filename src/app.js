@@ -32,14 +32,10 @@ app.use(router(app));
 import request from 'superagent';
 import url from 'url';
 
+import wp from './WP';
 
 app.get('/api/posts', function *() {
-
-  let { body: posts } = yield request(url.resolve(process.env.WORDPRESS_URL, '/wp-json/posts')).exec();
-
-  this.body = {
-    posts,
-  };
+  this.body = yield wp.posts();
 });
 
 import React from 'react';
