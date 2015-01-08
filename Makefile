@@ -8,8 +8,8 @@ AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 BROWSER_SYNC = node_modules/.bin/browser-sync
 SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
 UGLIFY_CMD = node_modules/.bin/uglifyjs
-EXORCIST_CMD = node_modules/.bin/exorcist
 CLEANCSS_CMD = node_modules/.bin/cleancss
+JSON_SASS_CMD = node_modules/.bin/json-sass
 
 6TO5_ARGS = --experimental
 BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
@@ -39,6 +39,7 @@ clean:
 	rm -rf public/js/
 	rm -rf public/css/
 	rm -f views/icon-sprite.svg
+	rm -f sass/_theme.scss
 
 browserify: public/js/app.js
 
@@ -72,7 +73,7 @@ public/js/app.min.js: public/js/app.js
 # Compile Sass
 css: public/css/app.css public/css/app.min.css
 
-public/css/app.css: sass/app.sass
+public/css/app.css: sass/app.sass theme
 	mkdir -p $(dir $@) && $(SASS_CMD) -m $< | $(AUTOPREFIXER_CMD) > $@
 
 public/css/app.min.css: public/css/app.css
@@ -80,6 +81,13 @@ public/css/app.min.css: public/css/app.css
 
 watch-css:
 	$(WATCH_CMD) "mkdir -p public/css && $(SASS_CMD) -m sass/app.sass | $(AUTOPREFIXER_CMD) > public/css/app.css" sass
+
+theme: sass/_theme.scss
+
+sass/_theme.scss: lib/shared/theme.js
+	mkdir -p $(dir $@) && $(JSON_SASS_CMD) -i $< \
+	| sed '1s/^/$$theme: /' \
+	> $@
 
 browser-sync:
 	$(BROWSER_SYNC) start --config "bs-config.js"

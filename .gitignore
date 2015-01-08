@@ -39,3 +39,4 @@ public/js/app.min.js
 public/css/app.css
 public/css/app.min.css
 views/icon-sprite.svg
+sass/_theme.scss
