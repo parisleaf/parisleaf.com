@@ -46,8 +46,8 @@ browserify: public/js/app.js
 watchify: src/client/app.js
 	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
 
-public/js/app.js: src/client/app.js
-	mkdir -p $(dir $@) && $(BROWSERIFY_CMD) $< $(BROWSERIFY_ARGS) > $@
+public/js/app.js: $(SRC_JS)
+	mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js $(BROWSERIFY_ARGS) > $@
 
 # Transpile JavaScript using 6to5
 js: $(LIB_JS)
@@ -66,7 +66,6 @@ uglify-js: public/js/app.min.js
 public/js/app.min.js: public/js/app.js
 	mkdir -p public/js
 	$(UGLIFY_CMD) public/js/app.js \
-	--acorn \
 	--screw-ie8 \
 	> public/js/app.min.js
 

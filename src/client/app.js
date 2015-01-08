@@ -1,6 +1,9 @@
 'use strict';
 
+// Initialization
 import '../shared/init';
+import './init';
+
 import React from 'react';
 import Router from 'react-router';
 import routes from '../shared/routes';
