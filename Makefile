@@ -5,7 +5,6 @@ WATCHIFY_CMD = node_modules/.bin/watchify
 SASS_CMD = sassc
 WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
-BROWSER_SYNC = node_modules/.bin/browser-sync
 SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
 UGLIFY_CMD = node_modules/.bin/uglifyjs
 CLEANCSS_CMD = node_modules/.bin/cleancss
@@ -89,7 +88,7 @@ sass/_theme.scss: lib/shared/theme.js
 	> $@
 
 browser-sync:
-	$(BROWSER_SYNC) start --config "bs-config.js"
+	browser-sync start --config "bs-config.js"
 
 icons: views/icon-sprite.svg
 
