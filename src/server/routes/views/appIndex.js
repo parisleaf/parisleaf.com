@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Router from 'react-router';
-import routes from '../../shared/routes';
+import routes from '../../../shared/routes';
 
 export default function(app) {
   app.get(/.*/, function *() {

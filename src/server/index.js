@@ -1,7 +1,7 @@
 'use strict';
 
 // Initialization
-import './shared/init';
+import '../shared/init';
 
 // Load environment variables
 import dotenv from 'dotenv';
@@ -15,6 +15,7 @@ export default app;
 // Add routes
 import routes from './routes';
 routes(app);
+
 
 // Start listening
 app.listen(process.env.PORT);

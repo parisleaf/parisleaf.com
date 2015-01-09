@@ -19,10 +19,9 @@ LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 # Build application
 build: js browserify uglify-js css icons
 
-# Test with mocha
+# Test
 test: js
-	$(MOCHA_CMD) lib/**/__tests__/*-test.js
-
+	@NODE_ENV=test $(MOCHA_CMD) --harmony --require lib/test-init.js lib/{server,shared}/**/__tests__/*-test.js
 
 # Build application quickly
 # Faster on first build, but not after that
