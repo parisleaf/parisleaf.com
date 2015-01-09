@@ -14,8 +14,8 @@ Flux.createStore({
   actions: [
     [PostConstants.POST_GET_POSTS_SUCCESS, function(posts) {
       posts = posts.reduce((result, post) => {
-        if (post.id) {
-          result[post.id] = post;
+        if (post.slug) {
+          result[post.slug] = post;
         }
 
         return result;
@@ -26,16 +26,22 @@ Flux.createStore({
     }],
 
     [PostConstants.POST_GET_POST_BY_SLUG_SUCCESS, function(post) {
-      if (post.id) {
-        this.posts = this.posts.set(post.id, post);
+      if (post.slug) {
+        post = Immutable.fromJS(post);
+        this.posts = this.posts.set(post.get('slug'), post);
       }
-      
+
       this.emit('change');
     }],
   ],
 
   getPosts() {
-    return this.posts.toJS();
+    return this.posts.toList();
+  },
+
+  getPostBySlug(slug) {
+    let post = this.posts.get(slug);
+    return post;
   }
 
 });

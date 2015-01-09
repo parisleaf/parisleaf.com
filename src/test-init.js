@@ -1,5 +1,12 @@
 'use strict';
 
+import isNode from 'detect-node';
+
+if (isNode) {
+  import sourceMapSupport from 'source-map-support';
+  sourceMapSupport.install();
+}
+
 import './shared/init';
 import chai from 'chai';
 

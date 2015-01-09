@@ -10,7 +10,7 @@ UGLIFY_CMD = node_modules/.bin/uglifyjs
 CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
 
-6TO5_ARGS = --experimental
+6TO5_ARGS = --experimental --source-maps-inline
 BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
 
 SRC_JS = $(shell find src -name "*.js")

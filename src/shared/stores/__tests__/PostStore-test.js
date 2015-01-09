@@ -1,5 +1,6 @@
 'use strict';
 
+import Immutable from 'immutable';
 import Flux from 'flummox';
 import '../../constants/PostConstants';
 import '../../actions/PostActions';
@@ -17,45 +18,87 @@ describe('PostStore', () => {
 
   afterEach(() => {
     Flux.reset();
-  })
+  });
 
-  it('responds to POST_GET_POSTS action', () => {
-    expect(PostStore.getPosts()).to.deep.equal({});
+  describe('#getPosts', () => {
+    it('returns a list of posts', () => {
+      let posts = Immutable.fromJS({
+        foo: {
+          slug: 'foo',
+        },
+        bar: {
+          slug: 'bar',
+        },
+        baz: {
+          slug: 'baz',
+        },
+      });
 
-    Flux.dispatch({
-      actionType: 'POST_GET_POSTS_SUCCESS',
-      body: [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-      ],
-    });
+      PostStore.posts = posts;
 
-    expect(PostStore.getPosts()).to.deep.equal({
-      '1': {
-        id: 1,
-      },
-      '2': {
-        id: 2,
-      },
-      '3': {
-        id: 3,
-      },
+      expect(PostStore.getPosts().toJS()).to.deep.equal([
+        { slug: 'foo' },
+        { slug: 'bar' },
+        { slug: 'baz' },
+      ]);
     });
   });
 
-  it('responds to POST_GET_POST_BY_SLUG action', () => {
-    expect(PostStore.getPosts()).to.deep.equal({});
+  describe('#getPostBySlug', () => {
+    it('returns a post', () => {
+      let posts = Immutable.fromJS({
+        foo: {
+          slug: 'foo',
+        },
+        bar: {
+          slug: 'bar',
+        },
+        baz: {
+          slug: 'baz',
+        },
+      });
 
-    Flux.dispatch({
-      actionType: 'POST_GET_POST_BY_SLUG_SUCCESS',
-      body: {id: 1},
+      PostStore.posts = posts;
+
+      expect(PostStore.getPostBySlug('foo').toJS()).to.deep.equal({ slug: 'foo' });
+      expect(PostStore.getPostBySlug('bar').toJS()).to.deep.equal({ slug: 'bar' });
+      expect(PostStore.getPostBySlug('foobar')).to.be.undefined;
+    });
+  });
+
+  describe('responds to Flux action', () => {
+    it('POST_GET_POSTS', () => {
+      expect(PostStore.getPosts().toJS()).to.deep.equal([]);
+
+      Flux.dispatch({
+        actionType: 'POST_GET_POSTS_SUCCESS',
+        body: [
+          { slug: 'foo' },
+          { slug: 'bar' },
+          { slug: 'baz' },
+        ],
+      });
+
+      expect(PostStore.getPosts().toJS()).to.deep.equal([
+        { slug: 'foo' },
+        { slug: 'bar' },
+        { slug: 'baz' },
+      ]);
     });
 
-    expect(PostStore.getPosts()).to.deep.equal({
-      '1': {
-        id: 1,
-      },
+    it('POST_GET_POST_BY_SLUG', () => {
+      expect(PostStore.getPosts().toJS()).to.deep.equal([]);
+
+      Flux.dispatch({
+        actionType: 'POST_GET_POST_BY_SLUG_SUCCESS',
+        body: {
+          slug: 'foo',
+        },
+      });
+
+      expect(PostStore.getPosts().toJS()).to.deep.equal([
+        { slug: 'foo' },
+      ]);
     });
   });
 });

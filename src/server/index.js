@@ -1,6 +1,10 @@
 'use strict';
 
+
 // Initialization
+import sourceMapSupport from 'source-map-support';
+sourceMapSupport.install();
+
 import '../shared/init';
 
 // Load environment variables
