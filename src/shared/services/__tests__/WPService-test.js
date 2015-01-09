@@ -41,9 +41,9 @@ describe('WPService', () => {
           ]);
       }
 
-      expect(getPostBySlug('hello-world')).to.eventually.deep.equal([
+      expect(getPostBySlug('hello-world')).to.eventually.deep.equal(
         { slug: 'hello-world' }
-      ]).notify(done);
+      ).notify(done);
 
     });
 

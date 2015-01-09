@@ -27,5 +27,5 @@ export function getPostBySlug(slug, query = {}) {
   }
 
   return request.get(`/api/posts/${slug}`).query(query).exec()
-    .then(response => response.body);
+    .then(response => response.body[0]);
 }
