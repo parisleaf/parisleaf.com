@@ -12,7 +12,7 @@ Content is fetched from an external WordPress application using [WP-API](http://
 
 ### React
 
-[React](https://github.com/facebook/react) is compiled server-side and then resumed on the client.
+[React](https://github.com/facebook/react) is rendered server-side and then resumed on the client.
 
 
 ### browserify (CommonJS)
