@@ -9,7 +9,7 @@ import request from 'superagent';
  * @returns {Promise} Resolves to array of posts
  */
 export function getPosts(query = {}) {
-  return request.get('/api/posts').query(query).exec()
+  return request.get(ensureIsomorphicUrl('/api/posts')).query(query).exec()
     .then(response => {
       return response.body;
     });
@@ -26,6 +26,6 @@ export function getPostBySlug(slug, query = {}) {
     return Promise.reject(new Error('slug must be a string'));
   }
 
-  return request.get(`/api/posts/${slug}`).query(query).exec()
+  return request.get(ensureIsomorphicUrl(`/api/posts/${slug}`)).query(query).exec()
     .then(response => response.body[0]);
 }
