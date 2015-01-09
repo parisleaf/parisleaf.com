@@ -8,7 +8,7 @@ Flux.createConstants({
 
   serviceActionTypes: [
     'POST_GET_POSTS',
-    'POST_GET_POST',
+    'POST_GET_POST_BY_SLUG',
   ],
 
 });

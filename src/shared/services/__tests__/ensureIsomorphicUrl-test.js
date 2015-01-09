@@ -1,7 +1,7 @@
 'use strict';
 
 describe('ensureIsomorphicUrl', () => {
-  import { ensureIsomorphicUrl } from '../fetch';
+  import ensureIsomorphicUrl from '../ensureIsomorphicUrl';
   import isNode from 'detect-node';
   import url from 'url';
 
