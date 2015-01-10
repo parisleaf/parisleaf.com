@@ -7,21 +7,17 @@ import prepareForRun from '../../../shared/prepareForRun';
 
 export default function(app) {
   app.get(/.*/, function *() {
-    let appString = yield new Promise((resolve, reject) =>
-      Router.run(routes, this.path, (Handler, state) => {
-        prepareForRun(state)
-          .then(() => {
-            console.log('kalsdjflasd');
-            let s = React.renderToString(<Handler />);
-            console.log(s);
-            resolve(s);
-          })
-      })
-    );
+    let { Handler, state } = yield new Promise((resolve, reject) => {
+      Router.run(routes, this.path, (Handler,state) => resolve({ Handler, state }));
+    });
+
+    yield prepareForRun(state);
+
+    let appString = React.renderToString(<Handler />);
 
     yield this.render('app', {
       appString,
-      nodeEnv: process.env.NODE_ENV,
+      env: process.env,
     });
   });
 }

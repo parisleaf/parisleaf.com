@@ -6,7 +6,6 @@ import co from 'co';
  * Prepare matched routes for `Router.run`, allowing them to fetch data as
  * necessary. Based on async-data example.
  * (https://github.com/rackt/react-router/blob/master/examples/async-data/app.js)
- *
  * @param {Object} state - Router state with `routes` and `params` properties
  * @returns {Promise}
  */

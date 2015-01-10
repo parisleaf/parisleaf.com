@@ -10,7 +10,7 @@ import routes from '../shared/routes';
 
 import prepareForRun from '../shared/prepareForRun';
 
-Router.run(routes, Router.HistoryLocation, (Handler, state) => {
-  prepareForRun(state)
-    .then(() => React.render(<Handler />, document.body));
+Router.run(routes, Router.HistoryLocation, async function(Handler, state) {
+  await prepareForRun(state);
+  React.render(<Handler />, document.body);
 });

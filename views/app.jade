@@ -7,7 +7,7 @@ html(class='no-js')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    if (nodeEnv == 'development')
+    if (env.NODE_ENV == 'development')
       link(rel='stylesheet', href='/css/app.css')
     else
       link(rel='stylesheet', href='/css/app.min.css')
@@ -15,7 +15,7 @@ html(class='no-js')
             
   body!=appString
     
-  if (nodeEnv == 'development')
+  if (env.NODE_ENV == 'development')
     script(src='/js/app.js', defer)
   else
     script(src='/js/app.min.js', defer)

@@ -7,7 +7,7 @@ import PostHandler from './components/PostHandler';
 
 let Routes = (
   <Route name="app" path="/" handler={AppHandler}>
-    <Route name="post" path="/:slug" handler={PostHandler} />
+    <Route name="post" path="/blog/:slug" handler={PostHandler} />
   </Route>
 );
 

@@ -64,6 +64,8 @@ uglify-js: public/js/app.min.js
 public/js/app.min.js: public/js/app.js
 	mkdir -p public/js
 	$(UGLIFY_CMD) public/js/app.js \
+	--compress=dead_code,sequences,unused,conditionals,booleans,if_return,drop_console \
+	--mangle \
 	--screw-ie8 \
 	> public/js/app.min.js
 
