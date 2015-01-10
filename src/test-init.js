@@ -1,5 +1,7 @@
 'use strict';
 
+require('6to5/runtime');
+
 import isNode from 'detect-node';
 
 if (isNode) {
