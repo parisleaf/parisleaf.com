@@ -1,6 +1,7 @@
 'use strict';
 
 // Initialization
+require('6to5/runtime');
 import '../shared/init';
 import './init';
 

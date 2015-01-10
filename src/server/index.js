@@ -1,7 +1,7 @@
 'use strict';
 
-
 // Initialization
+require('6to5/runtime');
 import sourceMapSupport from 'source-map-support';
 sourceMapSupport.install();
 
