@@ -45,7 +45,7 @@ watchify: src/client/app.js
 	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
 
 public/js/app.js: $(SRC_JS)
-	@NODE_ENV=development mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js $(BROWSERIFY_ARGS) > $@
+	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js $(BROWSERIFY_ARGS) > $@
 
 # Transpile JavaScript using 6to5
 js: $(LIB_JS)
