@@ -11,7 +11,7 @@ CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
 
 6TO5_ARGS = --experimental --source-maps-inline --runtime
-BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
+BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify -g aliasify
 
 SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
@@ -45,7 +45,7 @@ watchify: src/client/app.js
 	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
 
 public/js/app.js: $(SRC_JS)
-	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js $(BROWSERIFY_ARGS) > $@
+	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js -o $@ $(BROWSERIFY_ARGS)
 
 # Transpile JavaScript using 6to5
 js: $(LIB_JS)
