@@ -98,5 +98,6 @@ function pxToRem(pixels, remBase = 16) {
 export {
   colors,
   fontFamilies,
-  fontSizes
+  fontSizes,
+  zIndices
 };
