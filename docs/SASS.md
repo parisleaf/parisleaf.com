@@ -1,3 +1,4 @@
+
 In the Sass directory, `app.sass` acts as the main entry point for all the other styles in the project.
 
 There also contains several folders organized in a logical manner to distinguish different aspects of the styles used in the project.  The files are also imported in this order in order to ensure that dependencies are correctly satisfied.
