@@ -27,16 +27,16 @@ build/Release
 node_modules
 
 /lib
-.env
+/.env
 
 # Deploy keys
-.travis/deploy_key.pem
-.travis/deploy_key.pub
+/.travis/deploy_key.pem
+/.travis/deploy_key.pub
 
-public/js/app.js
-public/js/app.js.map
-public/js/app.min.js
-public/css/app.css
-public/css/app.min.css
-views/icon-sprite.svg
-sass/dependencies/_theme.scss
+/public/js/app.js
+/public/js/app.js.map
+/public/js/app.min.js
+/public/css/app.css
+/public/css/app.min.css
+/views/icon-sprite.svg
+/sass/dependencies/_theme.scss
