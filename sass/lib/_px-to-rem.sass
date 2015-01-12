@@ -1,0 +1,17 @@
+$rem-base: 16px
+
+@function px-to-rem($value)
+  @if type-of($value) == list
+    $list: $value
+    $separator: list-separator($list)
+    $px: ()
+
+    @each $item in $list
+      $px: append($px, px-to-rem($item), $separator)
+
+    @return $px
+
+  @else if type-of($value) == number and unit($value) == px and $value != 0
+    @return ($value / $rem-base) * 1rem;
+  @else
+    @return $value

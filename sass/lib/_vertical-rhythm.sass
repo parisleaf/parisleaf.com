@@ -1,0 +1,59 @@
+$base-font-size: 1rem !global
+$base-line-height: $base-font-size * 1.5 !global
+$round-to-nearest-half-line: true !global
+
+/**
+ * Convert a unitless value to vertical rhythm units.
+ * Non-unitless numbers are ignored.
+ * @param  {number | list} $values - Number of lines
+ * @return {number | list} Output
+ */
+@function rhythm($value)
+  @if type-of($value) == list
+    $list: $value
+    $separator: list-separator($list)
+    $rhythm: ()
+
+    @each $item in $list
+      $rhythm: append($rhythm, rhythm($item), $separator)
+
+    @return $rhythm
+
+  @else if type-of($value) == number and unit($value) == "" and $value != 0
+    $lines: $value
+    $value: $lines * $base-line-height
+
+  @return $value
+
+@function base-line-height-ratio()
+  @return $base-font-size / $base-line-height
+
+
+/**
+ * Calculate the minimum number of lines needed for a given font-size.
+ * Unlike Compass, this won't do a minimum padding check.
+ * Instead, just set the line-height manually with `rhythm()`.
+ * @param {number} $font-size - Font size, in pixels
+ * @return {number} Number of lines
+ */
+@function lines-for-font-size($font-size)
+  $font-size: px-to-rem($font-size)
+
+  @if $round-to-nearest-half-line
+    @return ceil(2 * $font-size / $base-line-height) / 2
+  @else
+    @return ceil($font-size / $base-line-height)
+
+/**
+ * Set the font-size and line-height at the same time.
+ * Uses unitless line-heights
+ * @param {number} $font-size - Font size, in pixels
+ * @param {number} [$lines] - Number of lines for line-height. Defaults
+ *                            to using `lines-for-font-size`.
+ */
+@mixin rhythm-font-size($font-size: $base-font-size, $lines: auto)
+  @if $lines == auto
+    $lines: lines-for-font-size($font-size)
+
+  font-size: rhythm($font-size)
+  line-height: $lines * base-line-height-ratio()
