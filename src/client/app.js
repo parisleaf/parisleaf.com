@@ -1,8 +1,7 @@
 'use strict';
 
 // Initialization
-require('6to5/runtime');
-import '../shared/init';
+require('../shared/init');
 import './init';
 
 import React from 'react';

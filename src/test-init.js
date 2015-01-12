@@ -1,7 +1,6 @@
 'use strict';
 
-require('6to5/runtime');
-
+require('./shared/init');
 import isNode from 'detect-node';
 
 if (isNode) {
@@ -9,7 +8,6 @@ if (isNode) {
   sourceMapSupport.install();
 }
 
-import './shared/init';
 import chai from 'chai';
 
 global.expect = chai.expect;

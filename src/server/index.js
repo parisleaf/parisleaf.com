@@ -1,11 +1,10 @@
 'use strict';
 
 // Initialization
-require('6to5/runtime');
+require('../shared/init');
 import sourceMapSupport from 'source-map-support';
 sourceMapSupport.install();
 
-import '../shared/init';
 
 // Load environment variables
 import dotenv from 'dotenv';
