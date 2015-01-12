@@ -51,7 +51,7 @@ public/js/app.js: $(SRC_JS)
 js: $(LIB_JS)
 
 $(LIB_JS): lib/%.js: src/%.js
-	mkdir -p $(dir $@) && $(6TO5_CMD) $< -o $@ $(6TO5_ARGS) --blacklist generators,letScoping --options asyncToGenerator
+	mkdir -p $(dir $@) && $(6TO5_CMD) $< -o $@ $(6TO5_ARGS) --blacklist generators,letScoping --optional asyncToGenerator
 
 fast-js:
 	$(6TO5_CMD) src -d lib $(6TO5_ARGS)
