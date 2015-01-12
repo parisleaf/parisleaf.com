@@ -81,9 +81,9 @@ public/css/app.min.css: public/css/app.css
 watch-css:
 	$(WATCH_CMD) "mkdir -p public/css && $(SASS_CMD) -m sass/app.sass | $(AUTOPREFIXER_CMD) > public/css/app.css" sass
 
-theme: sass/_theme.scss
+theme: sass/dependencies/_theme.scss
 
-sass/_theme.scss: lib/shared/theme.js
+sass/dependencies/_theme.scss: lib/shared/theme.js
 	mkdir -p $(dir $@) && $(JSON_SASS_CMD) -i $< \
 	| sed '1s/^/$$theme: /' \
 	> $@
