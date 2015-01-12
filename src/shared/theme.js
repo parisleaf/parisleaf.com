@@ -68,12 +68,12 @@ var breakpoints = {
   l:       1200,
 };
 
-theme.breakpoints = Object.keys(breakpoints).reduce(
-  (result, key) => {
-    result[key] = breakpoints[key] + 'px';
-    return result;
-  },{}
-);
+var mediaQueries = Object.keys(breakpoints).reduce((result, key) => {
+  var pixels = breakpoints[key];
+  result[key] = `"screen and (min-width:${pixels}px)"`;
+  return result;
+}, {});
+
 
 /**
  * Wrap a Sass string in parentheses.
@@ -99,5 +99,7 @@ export {
   colors,
   fontFamilies,
   fontSizes,
-  zIndices
+  zIndices,
+  breakpoints,
+  mediaQueries
 };

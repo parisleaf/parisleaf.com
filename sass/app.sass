@@ -1,8 +1,9 @@
 @import 'vendor'
-@import 'lib'
 @import 'dependencies'
+@import 'lib'
 
 body
   display: flex
-  background: teal 
-  @include z-index('Home')
+  background: teal
+  @include bp(m)
+    background: red
