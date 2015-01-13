@@ -24,11 +24,11 @@ let PostHandler = React.createClass({
   },
 
   componentDidMount() {
-    PostStore.addEventListener('change', this.postStoreDidChange);
+    PostStore.addListener('change', this.postStoreDidChange);
   },
 
   componentWillUnmount() {
-    PostStore.removeEventListener('change', this.postStoreDidChange);
+    PostStore.removeListener('change', this.postStoreDidChange);
   },
 
   postStoreDidChange() {
@@ -39,6 +39,10 @@ let PostHandler = React.createClass({
 
   render() {
     let post = this.state.post;
+
+    if (!post) {
+      return <div>Post not found</div>;
+    }
 
     return (
       <div>

@@ -64,10 +64,5 @@
     "watch": "~0.13.0",
     "watchify": "~2.2.1",
     "webdriverio": "~2.4.2"
-  },
-  "aliasify": {
-    "aliases": {
-      "when/lib/Promise": "./src/shared/Promise"
-    }
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { RouteHandler } from 'react-router';
+import { RouteHandler, Link } from 'react-router';
 
 import Flux from 'flummox';
 
@@ -33,11 +33,11 @@ let App = React.createClass({
   },
 
   componentDidMount() {
-    MenuStore.addEventListener('change', this.menuStoreDidChange);
+    MenuStore.addListener('change', this.menuStoreDidChange);
   },
 
   componentWillUnmount() {
-    MenuStore.removeEventListener('change', this.menuStoreDidChange);
+    MenuStore.removeListener('change', this.menuStoreDidChange);
   },
 
   menuStoreDidChange() {
@@ -47,12 +47,20 @@ let App = React.createClass({
   },
 
   render() {
-    let links = this.state.menu.get('items')
-      .map(item => <a href={item.get('url')}>{item.get('title')}</a>)
-      .toJS();
+    let links;
+    if (this.state.menu) {
+      links = this.state.menu.get('items');
+
+      if (links) {
+        links = links
+          .map(item => <a href={item.get('url')} key={item.get('ID')}>{item.get('title')}</a>)
+          .toJS();
+      }
+    }
 
     return (
       <div className="App">
+        <Link to="app">Parisleaf</Link>
         <nav>{links}</nav>
         <RouteHandler />
       </div>

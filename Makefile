@@ -11,7 +11,7 @@ CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
 
 6TO5_ARGS = --experimental --source-maps-inline --runtime
-BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify -g aliasify
+BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
 
 SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
