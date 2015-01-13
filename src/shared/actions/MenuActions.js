@@ -7,15 +7,15 @@ let MenuConstants = Flux.getConstants('MenuConstants');
 
 Flux.createActions({
 
-  name: 'MenuConstants',
+  name: 'MenuActions',
 
   serviceActions: {
-    getPosts: [MenuConstants.MENU_GET_MENUS, function(...args) {
-      return APIService.getPosts(...args);
+    getMenus: [MenuConstants.MENU_GET_MENUS, function(...args) {
+      return APIService.getMenus(...args);
     }],
 
-    getPostBySlug: [MenuConstants.MENU_GET_MENU_BY_SLUG, function(...args) {
-      return APIService.getPostBySlug(...args);
+    getMenuBySlug: [MenuConstants.MENU_GET_MENU_BY_SLUG, function(...args) {
+      return APIService.getMenuBySlug(...args);
     }],
   },
 

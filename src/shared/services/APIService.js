@@ -8,11 +8,9 @@ import request from 'superagent';
  * @param {object} query - Query params
  * @returns {Promise} Resolves to array of posts
  */
-export function getPosts(query = {}) {
-  return request.get(ensureIsomorphicUrl('/api/posts')).query(query).exec()
-    .then(response => {
-      return response.body;
-    });
+export async function getPosts(query = {}) {
+  let posts = await request.get(ensureIsomorphicUrl('/api/posts')).query(query).exec();
+  return posts.body;
 }
 
 /**
@@ -21,13 +19,13 @@ export function getPosts(query = {}) {
  * @param {object} [query] - Query params
  * @returns {Promise} Resolves to post object
  */
-export function getPostBySlug(slug, query = {}) {
+export async function getPostBySlug(slug, query = {}) {
   if (typeof slug !== 'string') {
-    return Promise.reject(new Error('slug must be a string'));
+    throw new Error('slug must be a string');
   }
 
-  return request.get(ensureIsomorphicUrl(`/api/posts/${slug}`)).query(query).exec()
-    .then(response => response.body[0]);
+  let posts = await request.get(ensureIsomorphicUrl(`/api/posts/${slug}`)).query(query).exec();
+  return posts.body[0];
 }
 
 /**
@@ -35,9 +33,9 @@ export function getPostBySlug(slug, query = {}) {
  * @param {object} query - Query params
  * @returns {Promise} Resolves to array of menus
  */
-export function getMenus(query = {}) {
-  return request.get(ensureIsomorphicUrl('/api/menus')).query(query).exec()
-    .then(response => response.body);
+export async function getMenus(query = {}) {
+  let menus = await request.get(ensureIsomorphicUrl('/api/menus')).query(query).exec();
+  return menus.body;
 }
 
 /**
@@ -46,11 +44,11 @@ export function getMenus(query = {}) {
  * @param {object} [query] - Query params
  * @returns {Promise} Resolves to menu object
  */
-export function getMenuBySlug(slug, query = {}) {
+export async function getMenuBySlug(slug, query = {}) {
   if (typeof slug !== 'string') {
-    return Promise.reject(new Error('slug must be a string'));
+    throw new Error('slug must be a string');
   }
 
-  return request.get(ensureIsomorphicUrl(`/api/menus/${slug}`)).query(query).exec()
-    .then(response => response.body[0]);
+  let menu = await request.get(ensureIsomorphicUrl(`/api/menus/${slug}`)).query(query).exec();
+  return menu.body[0];
 }

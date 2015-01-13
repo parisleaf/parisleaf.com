@@ -18,11 +18,23 @@ let PostHandler = React.createClass({
   },
 
   getInitialState() {
-    let slug = this.getParams().slug;
-
     return {
-      post: PostStore.getPostBySlug(slug),
+      post: PostStore.getPostBySlug(this.getParams().slug),
     };
+  },
+
+  componentDidMount() {
+    PostStore.addEventListener('change', this.postStoreDidChange);
+  },
+
+  componentWillUnmount() {
+    PostStore.removeEventListener('change', this.postStoreDidChange);
+  },
+
+  postStoreDidChange() {
+    this.setState({
+      posts: PostStore.getPostBySlug(this.getParams().slug),
+    });
   },
 
   render() {
@@ -30,7 +42,7 @@ let PostHandler = React.createClass({
 
     return (
       <div>
-        <h1>{post.get('title')}</h1>
+        <h1>{ post.get('title') }</h1>
         <article dangerouslySetInnerHTML={{ __html: post.get('content') }} />
       </div>
     );

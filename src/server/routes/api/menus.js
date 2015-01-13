@@ -20,7 +20,7 @@ export default function(app) {
     if (menus.body.length > 0) {
       let menuId = menus.body[0].ID;
       let menu = yield wpRequest(`/menus/${menuId}`).exec();
-      this.body = menu.body;
+      this.body = [ menu.body ];
     } else {
       this.body = [];
     }
