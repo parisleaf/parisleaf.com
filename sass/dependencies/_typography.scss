@@ -1,8 +1,8 @@
-$font-families: map-get($theme, fontFamilies);
+$font-families: map-get($theme, sassFontFamilies);
 $font-sizes: map-get($theme, fontSizes);
 
 @function font-family($name) {
-  @return map-get($font-families, $name) or $name;
+  @return map-get($font-families, $name);
 }
 
 @mixin font-family($name) {
@@ -10,7 +10,7 @@ $font-sizes: map-get($theme, fontSizes);
 }
 
 @function font-size($name) {
-  @return map-get($font-sizes, $name) or $name;
+  @return map-get($font-sizes, $name);
 }
 
 $base-font-size: font-size('text');

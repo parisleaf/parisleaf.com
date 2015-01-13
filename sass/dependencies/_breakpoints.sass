@@ -1,7 +1,7 @@
-$mediaQueries: map-get($theme, 'mediaQueries')
+$mediaQueries: map-get($theme, 'sassMediaQueries')
 
 @function media-query($name)
-  @return unquote(map-get($mediaQueries, $name)) or $name
+  @return unquote(map-get($mediaQueries, $name))
 
 @mixin bp($name)
   @media #{media-query($name)}

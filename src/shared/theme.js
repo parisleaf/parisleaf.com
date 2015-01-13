@@ -1,40 +1,42 @@
 'use strict';
 
-var _ = require('lodash');
+/**
+ * Exports of this module are converted to Sass by json-sass. This lets us share
+ * values between JavaScript and CSS.
+ *
+ * Some values must be formatted specially for Sass consumption -- for instance,
+ * wrapping media queries in quotes so they aren't interpreted as booleans.
+ * By convention, these values are exported inside objects prefixed with 'sass'.
+ */
 
 var theme = {};
 
-// COLORS
-
-var colors = {
+export var colors = {
   red: 'red',
   blue: 'blue',
 };
 
-
-theme.color = function(name) {
-  return colors[name] || name;
+/**
+ * Return a theme color
+ */
+export function color(name) {
+  return colors[name];
 };
 
-
-// Font families
-
-var fontFamilies = { 
+export var fontFamilies = {
   'sans-serif': 'sans-serif',
 };
 
+export var sassFontFamiles = mapObject(fontFamilies, wrapSassExpression);
 
-// Wrap font-families in parentheses before attaching to Sass object since they
-// may contain commas
-theme['font-families'] = _.transform(fontFamilies, function(result, fontFamily, key) {
-  result[key] = wrapSassExpression(fontFamily);
-});
-
-theme.fontFamily = function(name) {
-  return fontFamilies[name] || name;
+/**
+ * Return a theme font-family
+ */
+export function fontFamily(name) {
+  return fontFamilies[name];
 };
 
-var fontSizes = {
+export var fontSizes = {
   s:               '0.8rem',
   text:            '1.0rem',
   m:               '1.1rem',
@@ -48,32 +50,48 @@ var fontSizes = {
   xxxxxxxl:        '5.1rem',
 };
 
-
-theme.fontSize = function(name) {
-  return fontSizes[name] || name;
+/**
+ * Return a theme font-size
+ */
+export function fontSizes(name) {
+  return fontSizes[name];
 };
 
-var zIndices = {
+
+export var zIndices = {
   Home:              999,
 };
 
-
-theme.zIndex = function(name, offset = 0) {
-  return (zIndices[name] || name) + offset;
+/**
+ * Return a theme z-index, optionally offset.
+ * @param {string} name - Name of z-index
+ * @param {number} [offset] - Offset (defaults to 0)
+ */
+export function zIndex(name, offset = 0) {
+  return zIndices[name] + offset;
 };
 
-var breakpoints = {
+export var breakpoints = {
   s:       768,
   m:       1024,
   l:       1200,
 };
 
-var mediaQueries = Object.keys(breakpoints).reduce((result, key) => {
-  var pixels = breakpoints[key];
-  result[key] = `"screen and (min-width:${pixels}px)"`;
-  return result;
-}, {});
+export var mediaQueries = mapObject(breakpoints,
+  breakpoint => `screen and (min-width:${breakpoint}px)`
+);
 
+export var sassMediaQueries = mapObject(mediaQueries, mq => `'${mq}'`);
+
+/**
+ * Convert a pixel value to rems
+ * @param {pixels}
+ * @param {[remBase]}
+ * @returns {String} Value in rems
+ */
+export function pxToRem(pixels, remBase = 16) {
+  return pixels / remBase + 'rem';
+}
 
 /**
  * Wrap a Sass string in parentheses.
@@ -85,21 +103,15 @@ function wrapSassExpression(sassString) {
 }
 
 /**
- * Convert a pixel value to rems
- * @param {pixels}
- * @param {[remBase]}
- * @returns {String} Value in rems
+ * Takes an object and returns a new object by applying a transformation to
+ * each value.
+ * @param {object} object - Original object
+ * @param {function} transform - Transformation function
+ * @return {object} New object with transformed values
  */
-function pxToRem(pixels, remBase = 16) {
-  return pixels / remBase + 'rem';
+function mapObject(object, transform) {
+  return Object.keys(object).reduce((result, key) => {
+    result[key] = transform(object[key]);
+    return result;
+  }, {});
 }
-
-
-export {
-  colors,
-  fontFamilies,
-  fontSizes,
-  zIndices,
-  breakpoints,
-  mediaQueries
-};
