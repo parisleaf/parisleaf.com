@@ -1,0 +1,36 @@
+// Buttons
+//
+// The Button component can be used to style links, `button` elements, and
+// button-style inputs.
+//
+// The base Button class does something you may not expect: it removes all
+// styles, including browser defaults. This enables you to wrap arbitrary
+// content inside a `button` (or `a`) element without changing its appearance.
+// Then you can attach a click handler to the `button` element, rather than
+// attaching a click handler to some other element like a `div`, which is bad
+// for accessibility.
+
+@mixin reset-button {
+  display: inline;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  text-decoration: none;
+  color: inherit;
+  text-align: start;
+  white-space: normal;
+
+  &:hover {
+    cursor: pointer
+  }
+}
+
+.Button {
+  @include reset-button;
+}

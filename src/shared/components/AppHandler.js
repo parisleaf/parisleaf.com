@@ -16,19 +16,19 @@ import '../stores/MenuStore';
 let MenuStore = Flux.getStore('MenuStore');
 let MenuActions = Flux.getActions('MenuActions');
 
-const menuSlug = 'primary';
+import AppNav from './AppNav';
 
 let App = React.createClass({
 
   statics: {
     prepareForRun(state) {
-      return MenuActions.getMenuBySlug(menuSlug);
+      return MenuActions.getMenuBySlug('primary');
     }
   },
 
   getInitialState() {
     return {
-      menu: MenuStore.getMenuBySlug(menuSlug),
+      primaryMenu: MenuStore.getMenuBySlug('primary'),
     };
   },
 
@@ -42,26 +42,20 @@ let App = React.createClass({
 
   menuStoreDidChange() {
     this.setState({
-      menu: MenuStore.getMenuBySlug(menuSlug),
+      menu: MenuStore.getMenuBySlug('primary'),
     });
   },
 
   render() {
-    let links;
-    if (this.state.menu) {
-      links = this.state.menu.get('items');
+    let appNav;
 
-      if (links) {
-        links = links
-          .map(item => <a href={item.get('url')} key={item.get('ID')}>{item.get('title')}</a>)
-          .toJS();
-      }
+    if (this.state.primaryMenu) {
+      appNav = <AppNav primaryMenu={this.state.primaryMenu} />;
     }
 
     return (
       <div className="App">
-        <Link to="app">Parisleaf</Link>
-        <nav>{links}</nav>
+        {appNav}
         <RouteHandler />
       </div>
     );

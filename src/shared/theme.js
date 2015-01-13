@@ -12,8 +12,16 @@
 var theme = {};
 
 export var colors = {
-  red: 'red',
-  blue: 'blue',
+  gray: '#4d4d4d',
+  yellow: '#f7ee23',
+  lightGray: '#f2f2f2',
+
+  blue: '#146cce',
+  lightBlue: '#58a8fd',
+  green: '#89f7bf',
+  aqua: '#2bd5d3',
+  pink: '#fb5382',
+  orange: '#fd7450',
 };
 
 /**
@@ -53,13 +61,13 @@ export var fontSizes = {
 /**
  * Return a theme font-size
  */
-export function fontSizes(name) {
+export function fontSize(name) {
   return fontSizes[name];
 };
 
 
 export var zIndices = {
-  Home:              999,
+  AppNav:              9999,
 };
 
 /**
@@ -82,6 +90,10 @@ export var mediaQueries = mapObject(breakpoints,
 );
 
 export var sassMediaQueries = mapObject(mediaQueries, mq => `'${mq}'`);
+
+export function rhythm(lines) {
+  return `${(1.5 * lines)}rem`;
+}
 
 /**
  * Convert a pixel value to rems

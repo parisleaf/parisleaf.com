@@ -36,6 +36,8 @@
     "qs": "~2.3.3",
     "react": "~0.12.2",
     "react-router": "~0.11.6",
+    "react-suitcss": "~1.0.3",
+    "react-tween-state": "0.0.4",
     "superagent": "~0.21.0",
     "url-join": "0.0.1",
     "wordpress-rest-api": "~0.3.1"

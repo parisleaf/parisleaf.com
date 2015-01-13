@@ -1,6 +1,6 @@
 'use strict';
 
-import ensureIsomorphicUrl from './ensureIsomorphicUrl';
+import { ensureIsomorphicUrl } from '../utils/LinkUtils';
 import request from 'superagent';
 
 /**
