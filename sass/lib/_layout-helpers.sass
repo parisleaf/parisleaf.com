@@ -1,0 +1,6 @@
+@mixin square($length)
+  width: $length
+  height: $length
+
+@mixin rhythm-square($lines)
+  +square(rhythm($lines))

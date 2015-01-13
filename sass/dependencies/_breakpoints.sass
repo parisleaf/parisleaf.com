@@ -1,0 +1,10 @@
+$mediaQueries: map-get($theme, 'sassMediaQueries')
+
+@function media-query($name)
+  @return unquote(map-get($mediaQueries, $name))
+
+@mixin bp($name)
+  @media #{media-query($name)}
+    @content
+
+$breakpoints: map-get($theme, 'breakpoints')

@@ -1,0 +1,22 @@
+$font-families: map-get($theme, sassFontFamilies);
+$font-sizes: map-get($theme, fontSizes);
+
+@function font-family($name) {
+  @return map-get($font-families, $name);
+}
+
+@mixin font-family($name) {
+  font-family: font-family($name);
+}
+
+@function font-size($name) {
+  @return map-get($font-sizes, $name);
+}
+
+$base-font-size: font-size('text');
+$base-line-height: $base-font-size * 1.5;
+
+@mixin font-size($name, $args...) {
+  $font-size: font-size($name);
+  @include rhythm-font-size($font-size, $args...);
+}

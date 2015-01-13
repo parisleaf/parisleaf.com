@@ -26,7 +26,7 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
-lib
+/lib
 .env
 
 # Deploy keys
@@ -39,4 +39,4 @@ public/js/app.min.js
 public/css/app.css
 public/css/app.min.css
 views/icon-sprite.svg
-sass/_theme.scss
+sass/dependencies/_theme.scss
