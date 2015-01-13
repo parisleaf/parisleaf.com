@@ -13,6 +13,17 @@ import views from 'koa-views';
 import router from 'koa-router';
 
 export default function(app) {
+  // Error handling
+  app.use(function *(next) {
+    try {
+      yield next;
+    } catch (error) {
+      this.status = error.status || 500;
+      this.body = error.message;
+      this.app.emit('error', error, this);
+    }
+  });
+
   // gzip compression
   app.use(gzip());
 
