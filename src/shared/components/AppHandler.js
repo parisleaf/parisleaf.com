@@ -7,6 +7,10 @@ import '../constants/PostConstants';
 import '../actions/PostActions';
 import '../stores/PostStore';
 
+import '../constants/MenuConstants';
+import '../actions/MenuActions';
+import '../stores/MenuStore';
+
 let App = React.createClass({
   render() {
     return (

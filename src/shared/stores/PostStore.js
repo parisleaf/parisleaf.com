@@ -40,8 +40,7 @@ Flux.createStore({
   },
 
   getPostBySlug(slug) {
-    let post = this.posts.get(slug);
-    return post;
+    return this.posts.get(slug);
   }
 
 });
