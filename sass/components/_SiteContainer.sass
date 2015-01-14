@@ -1,0 +1,7 @@
+.SiteContainer
+  margin: 0 auto
+  padding: 0 rhythm(1)
+
+  @each $name, $breakpoint in map-get($theme, 'breakpoints')
+    @include bp($name)
+      max-width: $breakpoint * 1px

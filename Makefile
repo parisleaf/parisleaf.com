@@ -95,7 +95,7 @@ icons: views/icon-sprite.svg
 
 ICON_SVGS = $(shell find icons -name "*.svg")
 views/icon-sprite.svg: $(ICON_SVGS)
-	$(SVG_SPRITE_CMD) --symbol --symbol-inline --symbol-dest=views --symbol-sprite="./icon-sprite.svg" icons/*.svg
+	$(SVG_SPRITE_CMD) --symbol --symbol-inline --symbol-dest=views --symbol-prefix="icon-" --symbol-sprite="./icon-sprite.svg" icons/*.svg
 
 .PHONY: test build fast-build watch clean browserify watchify js fast-js
 .PHONY: watch-js css watch-css icons

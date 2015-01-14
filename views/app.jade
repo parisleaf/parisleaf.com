@@ -13,7 +13,9 @@ html(class='no-js')
       link(rel='stylesheet', href='/css/app.min.css')
           
             
-  body!=appString
+  body
+    include icon-sprite.svg
+    #app!=appString
     
   if (env.NODE_ENV == 'development')
     script(src='/js/app.js', defer)

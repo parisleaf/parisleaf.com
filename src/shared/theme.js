@@ -32,10 +32,13 @@ export function color(name) {
 };
 
 export var fontFamilies = {
-  'sans-serif': 'sans-serif',
+  alright: 'Alright Sans',
 };
 
-export var sassFontFamiles = mapObject(fontFamilies, wrapSassExpression);
+fontFamilies.text = fontFamilies.alright;
+fontFamilies.header = fontFamilies.alright;
+
+export var sassFontFamilies = mapObject(fontFamilies, wrapSassExpression);
 
 /**
  * Return a theme font-family

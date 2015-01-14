@@ -12,5 +12,5 @@ import prepareForRun from '../shared/prepareForRun';
 
 Router.run(routes, Router.HistoryLocation, async function(Handler, state) {
   await prepareForRun(state);
-  React.render(<Handler />, document.body);
+  React.render(<Handler />, document.getElementById('app'));
 });

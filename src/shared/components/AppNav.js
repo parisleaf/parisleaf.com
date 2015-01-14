@@ -4,23 +4,32 @@ import React from 'react';
 import Immutable from 'immutable';
 import tweenState from 'react-tween-state';
 import { Link } from 'react-router';
-import { color, rhythm, zIndex } from '../../shared/theme';
+import { color, rhythm, zIndex } from '../theme';
 import Button from './Button';
+import SvgIcon from './SvgIcon';
 
 const navBarRhythmHeight = 2;
+const logoAspectRatio = 769.9 / 200;
 
 let style = {
   AppNav: {
-    backgroundColor: color('lightGray'),
+    color: color('gray'),
     height: rhythm(navBarRhythmHeight),
     lineHeight: rhythm(navBarRhythmHeight),
     position: 'relative',
     zIndex: zIndex('AppNav'),
   },
 
-  toggleButton: {
+  logoIcon: {
+    height: rhythm(navBarRhythmHeight),
+    width: rhythm(navBarRhythmHeight * logoAspectRatio), // Use aspect ratio
+    padding: `${rhythm(1/4)} ${rhythm((1/4) / logoAspectRatio)}`,
+  },
+
+  toggleIcon: {
     width: rhythm(navBarRhythmHeight),
-    textAlign: 'center',
+    height: rhythm(navBarRhythmHeight),
+    padding: rhythm(1/4),
   },
 
   AppNavDrawer: {
@@ -51,7 +60,6 @@ let AppNav = React.createClass({
   },
 
   onToggleClick(event) {
-    console.log('click');
     event.preventDefault();
     this.setState({ open: !this.state.open });
   },
@@ -67,12 +75,18 @@ let AppNav = React.createClass({
       <span>
         <nav className="AppNav" style={style.AppNav}>
           <div className="AppNav-bar">
+            <div className="AppNav-bar-logo">
+              <Button component={Link} to="/">
+                <SvgIcon name="logo" style={style.logoIcon} preserveAspectRatio="xMinYMin slice" />
+              </Button>
+            </div>
             <div className="AppNav-bar-content">
-              <Link to="/">Parisleaf</Link>
               {primaryMenuItems}
             </div>
             <div className="AppNav-bar-toggle">
-              <Button onClick={this.onToggleClick} style={style.toggleButton}>X</Button>
+              <Button onClick={this.onToggleClick}>
+                <SvgIcon name="ui_ux" style={style.toggleIcon} />
+              </Button>
             </div>
           </div>
         </nav>
