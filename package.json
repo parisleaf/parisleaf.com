@@ -38,7 +38,7 @@
     "react-router": "~0.11.6",
     "react-suitcss": "~1.0.3",
     "react-tween-state": "0.0.4",
-    "react-viewport": "parisleaf/react-viewport#ea26ac346ffb262d9242c212bdbb3f260ab34c10",
+    "react-viewport": "git://github.com/parisleaf/react-viewport.git#ea26ac346ffb262d9242c212bdbb3f260ab34c10",
     "superagent": "~0.21.0",
     "url-join": "0.0.1",
     "wordpress-rest-api": "~0.3.1"
