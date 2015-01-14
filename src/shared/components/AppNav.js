@@ -77,7 +77,7 @@ let AppNav = React.createClass({
           <div className="AppNav-bar">
             <div className="AppNav-bar-logo">
               <Button component={Link} to="/">
-                <SvgIcon name="logo" style={style.logoIcon} preserveAspectRatio="xMinYMin slice" />
+                <SvgIcon name="logo" style={style.logoIcon} />
               </Button>
             </div>
             <div className="AppNav-bar-content">

@@ -49,9 +49,7 @@ let App = React.createClass({
   render() {
     let appNav;
 
-    if (this.state.primaryMenu) {
-      appNav = <AppNav primaryMenu={this.state.primaryMenu} />;
-    }
+    appNav = <AppNav primaryMenu={this.state.primaryMenu} />;
 
     return (
       <div className="App">

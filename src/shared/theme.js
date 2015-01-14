@@ -9,8 +9,6 @@
  * By convention, these values are exported inside objects prefixed with 'sass'.
  */
 
-var theme = {};
-
 export var colors = {
   gray: '#4d4d4d',
   yellow: '#f7ee23',

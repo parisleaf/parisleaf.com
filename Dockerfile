@@ -11,7 +11,7 @@ RUN /bin/bash -c "source /.nvm/nvm.sh && nvm install 0.11.14 && \
     ln -s /.nvm/v0.11.14/bin/npm /usr/bin/npm"
 
 # Install sassc
-ADD docker/libsass-install.sh /libsass-install.sh
+ADD scripts/libsass-install.sh /libsass-install.sh
 RUN bash /libsass-install.sh
 
 WORKDIR /app
