@@ -8,7 +8,10 @@ import { color, rhythm, zIndex } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 
-const navBarRhythmHeight = 2;
+import Flux from 'flummox';
+let AppActions = Flux.getActions('AppActions');
+
+const navBarRhythmHeight = 3;
 const logoAspectRatio = 769.9 / 200;
 
 let style = {
@@ -18,18 +21,18 @@ let style = {
     lineHeight: rhythm(navBarRhythmHeight),
     position: 'relative',
     zIndex: zIndex('AppNav'),
+    padding: `0 ${rhythm(1)}`,
   },
 
   logoIcon: {
-    height: rhythm(navBarRhythmHeight),
-    width: rhythm(navBarRhythmHeight * logoAspectRatio), // Use aspect ratio
-    padding: `${rhythm(1/4)} ${rhythm((1/4) / logoAspectRatio)}`,
+    height: rhythm(navBarRhythmHeight * 0.5),
+    width: rhythm(navBarRhythmHeight * 0.5 * logoAspectRatio), // Use aspect ratio
   },
 
   toggleIcon: {
-    width: rhythm(navBarRhythmHeight),
-    height: rhythm(navBarRhythmHeight),
-    padding: rhythm(1/4),
+    width: rhythm(navBarRhythmHeight * 0.5),
+    height: rhythm(navBarRhythmHeight * 0.5),
+    fill: color('gray'),
   },
 
   AppNavDrawer: {
@@ -46,22 +49,21 @@ let style = {
 
 let AppNav = React.createClass({
 
-  getInitialState() {
-    return {
-      // True if the menu is open/active
-      open: false,
-    };
-  },
-
   getDefaultProps() {
     return {
+      open: false,
       primaryMenu: Immutable.Map(),
     };
   },
 
   onToggleClick(event) {
     event.preventDefault();
-    this.setState({ open: !this.state.open });
+
+    if (this.props.open) {
+      AppActions.closeNav();
+    } else {
+      AppActions.openNav();
+    }
   },
 
   render() {
@@ -71,13 +73,17 @@ let AppNav = React.createClass({
       .map(item => <a href={item.get('url')} key={item.get('ID')}>{item.get('title')}</a>)
       .toJS();
 
+    let logoIconStyle = Object.assign({
+      fill: this.props.open ? color('lightGray') : color('gray'),
+    }, style.logoIcon);
+
     return (
       <span>
         <nav className="AppNav" style={style.AppNav}>
           <div className="AppNav-bar">
             <div className="AppNav-bar-logo">
               <Button component={Link} to="/">
-                <SvgIcon name="logo" style={style.logoIcon} />
+                <SvgIcon name="logo" style={logoIconStyle} />
               </Button>
             </div>
             <div className="AppNav-bar-content">
@@ -85,12 +91,12 @@ let AppNav = React.createClass({
             </div>
             <div className="AppNav-bar-toggle">
               <Button onClick={this.onToggleClick}>
-                <SvgIcon name="ui_ux" style={style.toggleIcon} />
+                <SvgIcon name="menu" style={style.toggleIcon} />
               </Button>
             </div>
           </div>
         </nav>
-        <AppNavDrawer open={this.state.open} />
+        <AppNavDrawer open={this.props.open} />
       </span>
     );
   }

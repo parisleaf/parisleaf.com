@@ -1,26 +1,26 @@
 'use strict';
 
 import React from 'react';
-import ViewportContainer from 'react-viewport';
 import SiteContainer from './SiteContainer';
 import { color, rhythm } from '../theme';
 
 let style = {
-  minHeight: '90vh',
+  minHeight: rhythm(8),
   paddingTop: rhythm(2),
   marginTop: rhythm(-2),
-  background: color('aqua'),
+  background: '#fff',
 };
 
 let HomeFirstImpression = React.createClass({
 
   render() {
     return (
-      <ViewportContainer className="HomeFirstImpression" style={style}>
+      <section className="HomeFirstImpression" style={style}>
         <SiteContainer>
-          Lorem ipsum dolor sit amet
+          <h1>Everyone has an ego.</h1>
+          <h2>We just hook ours to the bike rack on our way in.</h2>
         </SiteContainer>
-      </ViewportContainer>
+      </section>
     );
   }
 

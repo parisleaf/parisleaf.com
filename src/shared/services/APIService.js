@@ -29,6 +29,31 @@ export async function getPostBySlug(slug, query = {}) {
 }
 
 /**
+ * Get list of pages
+ * @param {object} query - Query params
+ * @returns {Promise} Resolves to array of pages
+ */
+export async function getPages(query = {}) {
+  let pages = await request.get(ensureIsomorphicUrl('/api/pages')).query(query).exec();
+  return pages.body;
+}
+
+/**
+ * Get a page by its slug
+ * @param {string} slug - page slug
+ * @param {object} [query] - Query params
+ * @returns {Promise} Resolves to page object
+ */
+export async function getPageBySlug(slug, query = {}) {
+  if (typeof slug !== 'string') {
+    throw new Error('slug must be a string');
+  }
+
+  let pages = await request.get(ensureIsomorphicUrl(`/api/pages/${slug}`)).query(query).exec();
+  return pages.body[0];
+}
+
+/**
  * Get list of menus
  * @param {object} query - Query params
  * @returns {Promise} Resolves to array of menus
