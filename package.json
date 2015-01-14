@@ -8,7 +8,7 @@
     "start": "make fast-build && node --harmony lib/server/index.js",
     "start-dev": "make build && NODE_ENV=development node --harmony lib/server/index.js",
     "watch": "make build && NODE_ENV=development nodemon --harmony lib/server/index.js",
-    "postinstall": "cd node_modules/react-viewport && npm run build"
+    "postinstall": "cd node_modules/react-viewport && npm run build --unsafe-perm"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
