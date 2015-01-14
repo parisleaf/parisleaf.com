@@ -7,8 +7,7 @@
     "test": "make fast-js && make test",
     "start": "make fast-build && node --harmony lib/server/index.js",
     "start-dev": "make build && NODE_ENV=development node --harmony lib/server/index.js",
-    "watch": "make build && NODE_ENV=development nodemon --harmony lib/server/index.js",
-    "postinstall": "cd node_modules/react-viewport && npm run build --unsafe-perm"
+    "watch": "make build && NODE_ENV=development nodemon --harmony lib/server/index.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
@@ -39,7 +38,7 @@
     "react-router": "~0.11.6",
     "react-suitcss": "~1.0.3",
     "react-tween-state": "0.0.4",
-    "react-viewport": "git://github.com/parisleaf/react-viewport.git#ea26ac346ffb262d9242c212bdbb3f260ab34c10",
+    "react-viewport": "git://github.com/parisleaf/react-viewport.git#2026d2e338ce457d3e2d0de76bc941e02562f163",
     "superagent": "~0.21.0",
     "url-join": "0.0.1",
     "wordpress-rest-api": "~0.3.1"
