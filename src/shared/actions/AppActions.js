@@ -16,4 +16,8 @@ Flux.createActions({
     this.dispatchAction(AppConstants.APP_NAV_CLOSE);
   },
 
+  setNavTextColor(color) {
+    this.dispatchAction(AppConstants.APP_NAV_SET_TEXT_COLOR, color);
+  },
+
 });

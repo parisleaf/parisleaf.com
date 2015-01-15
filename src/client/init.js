@@ -10,3 +10,8 @@ attachFastClick(document.body);
 // Expose globally
 import React from 'react';
 window.React = React;
+
+import { mediaQueries } from '../shared/theme';
+import MediaMixin from 'react-media-mixin';
+
+MediaMixin.addMediaQueries(mediaQueries);

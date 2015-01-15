@@ -36,6 +36,7 @@
     "koa-views": "~2.1.2",
     "qs": "~2.3.3",
     "react": "~0.12.2",
+    "react-media-mixin": "~1.0.5",
     "react-router": "~0.11.6",
     "react-suitcss": "~1.0.3",
     "react-tween-state": "0.0.4",

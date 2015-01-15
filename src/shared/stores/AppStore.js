@@ -3,6 +3,8 @@
 import Flux from 'flummox';
 let AppConstants = Flux.getConstants('AppConstants');
 
+import { color } from '../theme';
+
 Flux.createStore({
   name: 'AppStore',
 
@@ -10,6 +12,7 @@ Flux.createStore({
     this.state = {
       nav: {
         open: false,
+        textColor: color('text'),
       },
     };
   },
@@ -22,6 +25,11 @@ Flux.createStore({
 
     [AppConstants.APP_NAV_OPEN, function() {
       this.state.nav.open = true;
+      this.emit('change');
+    }],
+
+    [AppConstants.APP_NAV_SET_TEXT_COLOR, function(color) {
+      this.state.nav.textColor = color;
       this.emit('change');
     }],
   ],

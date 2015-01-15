@@ -2,23 +2,27 @@
 
 import React from 'react';
 import Immutable from 'immutable';
+import MediaMixin from 'react-media-mixin';
 import tweenState from 'react-tween-state';
 import { Link } from 'react-router';
 import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
+import SiteContainer from './SiteContainer';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
 
+const transitionDuration = 250;
 const logoAspectRatio = 769.9 / 200;
+const fillTransition = `fill ease-in-out ${250}ms`;
 
 let style = {
   wrapper: {
     height: rhythm(navBarRhythmHeight),
   },
 
-  AppNav: {
+  _: {
     height: rhythm(navBarRhythmHeight),
     lineHeight: rhythm(navBarRhythmHeight),
     top: 0,
@@ -30,20 +34,19 @@ let style = {
   logoIcon: {
     height: rhythm(navBarRhythmHeight * 0.5),
     width: rhythm(navBarRhythmHeight * 0.5 * logoAspectRatio), // Use aspect ratio
-    transition: 'fill ease-in-out 200ms',
-    fill: color('yellow'),
+    transition: fillTransition,
   },
 
   toggleIcon: {
     width: rhythm(navBarRhythmHeight * 0.5),
     height: rhythm(navBarRhythmHeight * 0.5),
-    fill: color('yellow'),
+    transition: fillTransition,
   },
 };
 
 let AppNav = React.createClass({
 
-  mixins: [tweenState.Mixin],
+  mixins: [tweenState.Mixin, MediaMixin],
 
   getInitialState() {
     return {
@@ -75,7 +78,7 @@ let AppNav = React.createClass({
   updateVisibility() {
     this.tweenState('drawerVisibility', {
       endValue: this.props.open ? 1 : 0,
-      duration: 200,
+      duration: transitionDuration,
     });
 
     // Disable scrolling on body when nav is open
@@ -97,11 +100,21 @@ let AppNav = React.createClass({
 
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
-    }, style.AppNav);
+    }, style._);
 
     let logoIconStyle = Object.assign({
-      fill: this.props.open ? color('lightGray') : style.logoIcon.fill,
+      fill: this.props.open ? '#fff' : this.props.textColor,
     }, style.logoIcon);
+
+    let toggleIconStyle = Object.assign({
+      fill: this.props.open
+        ? (
+            this.state.media.l
+              ? color('gray')
+              : '#fff'
+          )
+        : this.props.textColor,
+    }, style.toggleIcon);
 
     return (
       <div onClick={this.onClick} style={style.wrapper}>
@@ -116,7 +129,7 @@ let AppNav = React.createClass({
             </div>
             <div className="AppNav-bar-toggle">
               <Button onClick={this.onToggleClick}>
-                <SvgIcon name="menu" style={style.toggleIcon} />
+                <SvgIcon name="menu" style={toggleIconStyle} />
               </Button>
             </div>
           </div>
@@ -129,7 +142,7 @@ let AppNav = React.createClass({
 });
 
 let drawerStyle = {
-  drawer: {
+  _: {
     height: '100%',
     width: '100%',
     position: 'fixed',
@@ -137,18 +150,29 @@ let drawerStyle = {
     paddingTop: rhythm(navBarRhythmHeight),
     top: 0,
     left: 0,
-    backgroundColor: color('gray'),
   },
 
   container: {
     position: 'absolute',
     top: rhythm(navBarRhythmHeight),
     left: 0, bottom: 0, right: 0,
+  },
+
+  sidebar: {
+    backgroundColor: color('darkGray'),
+    paddingTop: rhythm(navBarRhythmHeight),
+    marginTop: rhythm(-1 * navBarRhythmHeight),
+  },
+
+  content: {
+    backgroundColor: '#fff',
     overflow: 'auto',
   },
 }
 
 let AppNavDrawer = React.createClass({
+
+  mixins: [MediaMixin],
 
   getDefaultProps() {
     return {
@@ -162,15 +186,30 @@ let AppNavDrawer = React.createClass({
     let _style = Object.assign({
       transform: `translateX(${100 - (visibility * 100)}%)`,
       display: visibility === 0 ? 'none' : 'block',
-    }, drawerStyle.drawer);
+    }, drawerStyle._);
 
     _style.WebkitTransform = _style.transform;
     _style.msTransform = _style.transform;
 
+    let _contentStyle = drawerStyle.content;
+
+    if (this.state.media.l) {
+      _contentStyle = Object.assign({
+        paddingTop: drawerStyle.sidebar.paddingTop,
+        marginTop: drawerStyle.sidebar.marginTop,
+      }, _contentStyle);
+    }
+
+
     return (
       <div style={_style}>
-        <div style={drawerStyle.container}>
-          Menu content
+        <div style={drawerStyle.container} className="AppNavDrawer">
+          <section className="AppNavDrawer-sidebar" style={drawerStyle.sidebar}>
+            sidebar
+          </section>
+          <section className="AppNavDrawer-content" style={_contentStyle}>
+            content
+          </section>
         </div>
       </div>
     );

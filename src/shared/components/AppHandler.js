@@ -29,10 +29,14 @@ let MenuActions = Flux.getActions('MenuActions');
 
 import AppNav from './AppNav';
 
+import { color } from '../theme';
+
 let App = React.createClass({
 
   statics: {
     prepareForRun(state) {
+      AppActions.setNavTextColor(color('text'));
+
       // Make sure nav is dismissed on re-route
       AppActions.closeNav();
 
@@ -67,9 +71,11 @@ let App = React.createClass({
   },
 
   render() {
-    let appNav;
-
-    appNav = <AppNav primaryMenu={this.state.primaryMenu} open={this.state.nav.open} />;
+    let appNav =
+      <AppNav
+        primaryMenu={this.state.primaryMenu}
+        {...this.state.nav}
+      />;
 
     return (
       <div className="App">

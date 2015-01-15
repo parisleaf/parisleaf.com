@@ -5,13 +5,19 @@ import HomeFirstImpression from './HomeFirstImpression'
 
 import Flux from 'flummox';
 
+let AppActions = Flux.getActions('AppActions');
+
 let PageStore = Flux.getStore('PageStore');
 let PageActions = Flux.getActions('PageActions');
+
+import { color } from '../theme';
 
 let Home = React.createClass({
 
   statics: {
     prepareForRun() {
+      AppActions.setNavTextColor(color('yellow'));
+
       return PageActions.getPageBySlug('home');
     },
   },

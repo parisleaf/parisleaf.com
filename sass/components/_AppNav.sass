@@ -6,10 +6,37 @@
     display: flex
 
     &-logo
-      flex: 0 1 auto;
+      flex: 0 1 auto
 
     &-content
-      flex: 1 1 auto;
+      flex: 1 1 auto
 
     &-toggle
-      flex: 0 1 auto;
+      flex: 0 1 auto
+
+.AppNavDrawer
+  display: flex
+  flex-direction: column
+
+  &-sidebar, &-content
+    padding: rhythm(1)
+    width: 100%
+
+  &-sidebar
+    flex: 0 1 auto
+
+  &-content
+    flex: 1 1 auto
+
+  // Layout
+  +bp(l)
+    flex-direction: row
+
+    &-sidebar, &-content
+      width: auto
+
+    &-sidebar
+      flex: 1 1 auto
+
+    &-content
+      flex: 3 1 auto
