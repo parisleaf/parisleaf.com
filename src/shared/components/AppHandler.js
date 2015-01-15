@@ -21,6 +21,10 @@ import '../constants/MenuConstants';
 import '../actions/MenuActions';
 import '../stores/MenuStore';
 
+import '../constants/TwitterConstants';
+import '../actions/TwitterActions';
+import '../stores/TwitterStore';
+
 let AppStore = Flux.getStore('AppStore');
 let AppActions = Flux.getActions('AppActions');
 
