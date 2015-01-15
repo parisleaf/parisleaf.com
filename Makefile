@@ -47,6 +47,11 @@ watchify: src/client/app.js
 public/js/app.js: $(SRC_JS)
 	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js -o $@ $(BROWSERIFY_ARGS)
 
+styleguide: public/js/styleguide.js
+
+public/js/styleguide.js: $(SRC_JS)
+	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/styleguide.js -o $@ $(BROWSERIFY_ARGS)
+
 # Transpile JavaScript using 6to5
 js: $(LIB_JS)
 

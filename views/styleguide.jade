@@ -1,0 +1,23 @@
+doctype html
+html(class='no-js')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+                
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    if (env.NODE_ENV == 'development')
+      link(rel='stylesheet', href='/css/app.css')
+    else
+      link(rel='stylesheet', href='/css/app.min.css')
+          
+            
+  body
+    include icon-sprite.svg
+    #app!=appString
+    
+  if (env.NODE_ENV == 'development')
+    script(src='/js/styleguide.js', defer)
+  else
+    script(src='/js/styleguide.min.js', defer)
