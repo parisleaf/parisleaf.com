@@ -7,25 +7,6 @@
 
  let SvgIcon = React.createClass({
 
-  componentDidMount() {
-    this.replaceContents();
-  },
-
-  componentDidUpdate() {
-    this.replaceContents();
-  },
-
-  // Replace entire `<use>` element
-  replaceContents() {
-    let el = this.getDOMNode();
-
-    let use = document.createElementNS(SVGNS, 'use');
-    use.setAttributeNS(XLINKNS, 'href', `#${this.props.name}`);
-
-    el.innerHTML = '';
-    el.appendChild(use);
-  },
-
   render() {
 
     let style = Object.assign({
@@ -33,7 +14,7 @@
       display: 'inline-block',
     }, this.props.style);
 
-    let classes = ['SvgIcon'];
+    let classes = [];
 
     if (this.props.className) classes.push(this.props.className);
 
@@ -41,8 +22,6 @@
 
     return (
       <svg
-        width="100%"
-        height="100%"
         {...this.props}
         style={style}
         className={className}

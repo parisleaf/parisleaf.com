@@ -74,7 +74,9 @@ let App = React.createClass({
     return (
       <div className="App">
         {appNav}
-        <RouteHandler />
+        <div>
+          <RouteHandler />
+        </div>
       </div>
     );
   }
