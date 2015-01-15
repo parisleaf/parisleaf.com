@@ -34,6 +34,7 @@
     "koa-router": "~3.8.0",
     "koa-static": "~1.4.8",
     "koa-views": "~2.1.2",
+    "modular-scale": "~1.0.0",
     "qs": "~2.3.3",
     "react": "~0.12.2",
     "react-router": "~0.11.6",

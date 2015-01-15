@@ -46,7 +46,7 @@
         {...this.props}
         style={style}
         className={className}
-        dangerouslySetInnerHTML={{ __html: `<use href="#${this.props.name}"></use>` }}
+        dangerouslySetInnerHTML={{ __html: `<use xlink:href="#${this.props.name}"></use>` }}
       />
     );
   }

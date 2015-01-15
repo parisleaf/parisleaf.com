@@ -17,6 +17,5 @@ $base-font-size: font-size('text');
 $base-line-height: $base-font-size * 1.5;
 
 @mixin font-size($name, $args...) {
-  $font-size: font-size($name);
-  @include rhythm-font-size($font-size, $args...);
+  font-size: font-size($name);
 }

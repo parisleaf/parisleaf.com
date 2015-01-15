@@ -9,10 +9,13 @@
  * By convention, these values are exported inside objects prefixed with 'sass'.
  */
 
-export var colors = {
+var ms = require('modular-scale');
+
+var colors = {
   gray: '#4d4d4d',
   yellow: '#f7ee23',
   lightGray: '#f2f2f2',
+  darkGray: '#343844',
 
   blue: '#146cce',
   lightBlue: '#58a8fd',
@@ -21,6 +24,10 @@ export var colors = {
   pink: '#fb5382',
   orange: '#fd7450',
 };
+
+colors.text = colors.darkGray;
+
+export { colors };
 
 /**
  * Return a theme color
@@ -31,6 +38,7 @@ export function color(name) {
 
 export var fontFamilies = {
   alright: 'Alright Sans',
+  volkorm: 'Vollkorn',
 };
 
 fontFamilies.text = fontFamilies.alright;
@@ -45,19 +53,29 @@ export function fontFamily(name) {
   return fontFamilies[name];
 };
 
+var scale = ms(1.618, 20);
+var scale = scale.reduce((result, size, i) => {
+  var midpoint = Math.floor(scale.length / 2);
+  result[midpoint - i] = size;
+  return result;
+}, {});
+
+export function modularScale(n) {
+  return scale[n];
+}
+
 export var fontSizes = {
-  s:               '0.8rem',
-  text:            '1.0rem',
-  m:               '1.1rem',
-  l:               '1.5rem',
-  xl:              '1.7rem',
-  xxl:             '2.3rem',
-  xxxl:            '2.5rem',
-  xxxxl:           '3.0rem',
-  xxxxxl:          '3.4rem',
-  xxxxxxl:         '3.8rem',
-  xxxxxxxl:        '5.1rem',
-};
+  h1: `${modularScale(3)}rem`,
+  h2: `${modularScale(2)}rem`,
+  h3: `${modularScale(1)}rem`,
+  h4: `${modularScale(0)}rem`,
+  h5: `${modularScale(-1)}rem`,
+  h6: `${modularScale(-2)}rem`,
+
+  text: '1rem',
+  small: `${modularScale(-1)}rem`,
+  ms: scale,
+}
 
 /**
  * Return a theme font-size

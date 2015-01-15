@@ -16,7 +16,6 @@ const logoAspectRatio = 769.9 / 200;
 
 let style = {
   AppNav: {
-    color: color('gray'),
     height: rhythm(navBarRhythmHeight),
     lineHeight: rhythm(navBarRhythmHeight),
     position: 'relative',
@@ -32,28 +31,42 @@ let style = {
   toggleIcon: {
     width: rhythm(navBarRhythmHeight * 0.5),
     height: rhythm(navBarRhythmHeight * 0.5),
-    fill: color('gray'),
+    fill: color('text'),
   },
-
-  AppNavDrawer: {
-    height: '100%',
-    width: '100%',
-    position: 'fixed',
-    zIndex: zIndex('AppNav', -1),
-    backgroundColor: color('gray'),
-    paddingTop: rhythm(navBarRhythmHeight),
-    top: 0,
-    left: 0,
-  }
 };
 
 let AppNav = React.createClass({
+
+  mixins: [tweenState.Mixin],
+
+  getInitialState() {
+    return {
+      drawerVisibility: this.props.open ? 1 : 0,
+    };
+  },
 
   getDefaultProps() {
     return {
       open: false,
       primaryMenu: Immutable.Map(),
     };
+  },
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.shouldBeVisible() !== this.shouldBeVisible(prevProps)) {
+      this.updateVisibility();
+    }
+  },
+
+  shouldBeVisible(props = this.props) {
+    return props.open;
+  },
+
+  updateVisibility() {
+    this.tweenState('drawerVisibility', {
+      endValue: this.shouldBeVisible() ? 1 : 0,
+      duration: 200,
+    });
   },
 
   onToggleClick(event) {
@@ -67,6 +80,8 @@ let AppNav = React.createClass({
   },
 
   render() {
+    let drawerVisibility = this.getTweeningValue('drawerVisibility');
+
     let primaryMenuItems = this.props.primaryMenu.get('items') || Immutable.List();
 
     primaryMenuItems = primaryMenuItems
@@ -74,15 +89,15 @@ let AppNav = React.createClass({
       .toJS();
 
     let logoIconStyle = Object.assign({
-      fill: this.props.open ? color('lightGray') : color('gray'),
+      fill: this.props.open ? color('lightGray') : color('text'),
     }, style.logoIcon);
 
     return (
-      <span>
+      <span onClick={this.onClick}>
         <nav className="AppNav" style={style.AppNav}>
           <div className="AppNav-bar">
             <div className="AppNav-bar-logo">
-              <Button component={Link} to="/">
+              <Button component={Link} onClick={AppActions.closeNav} to="/">
                 <SvgIcon name="logo" style={logoIconStyle} />
               </Button>
             </div>
@@ -96,57 +111,57 @@ let AppNav = React.createClass({
             </div>
           </div>
         </nav>
-        <AppNavDrawer open={this.props.open} />
+        <AppNavDrawer visibility={drawerVisibility} />
       </span>
     );
   }
 
 });
 
-let AppNavDrawer = React.createClass({
-
-  mixins: [tweenState.Mixin],
-
-  getInitialState() {
-    return {
-      visibility: this.props.open ? 1 : 0,
-    };
+let drawerStyle = {
+  drawer: {
+    height: '100%',
+    width: '100%',
+    position: 'fixed',
+    zIndex: zIndex('AppNav', -1),
+    paddingTop: rhythm(navBarRhythmHeight),
+    top: 0,
+    left: 0,
+    backgroundColor: color('gray'),
   },
+
+  container: {
+    position: 'absolute',
+    top: rhythm(navBarRhythmHeight),
+    left: 0, bottom: 0, right: 0,
+    overflow: 'auto',
+  },
+}
+
+let AppNavDrawer = React.createClass({
 
   getDefaultProps() {
     return {
-      open: false,
+      visibility: 0,
     };
   },
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.shouldBeVisible() != this.shouldBeVisible(prevProps)) {
-      this.updateVisibility();
-    }
-  },
-
-  shouldBeVisible(props = this.props) {
-    return props.open;
-  },
-
-  updateVisibility() {
-    this.tweenState('visibility', {
-      endValue: this.shouldBeVisible() ? 1 : 0,
-      duration: 200,
-    });
-  },
-
   render() {
-    let visibility = this.getTweeningValue('visibility');
+    let visibility = this.props.visibility;
 
     let _style = Object.assign({
-      opacity: this.getTweeningValue('visibility'),
+      transform: `translateX(${100 - (visibility * 100)}%)`,
       display: visibility === 0 ? 'none' : 'block',
-    }, style.AppNavDrawer);
+    }, drawerStyle.drawer);
+
+    _style.WebkitTransform = _style.transform;
+    _style.msTransform = _style.transform;
 
     return (
       <div style={_style}>
-        Menu contents
+        <div style={drawerStyle.container}>
+          Menu content
+        </div>
       </div>
     );
   }

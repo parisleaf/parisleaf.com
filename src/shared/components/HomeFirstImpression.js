@@ -2,6 +2,7 @@
 
 import React from 'react';
 import SiteContainer from './SiteContainer';
+import Header from './Header'
 import { color, rhythm } from '../theme';
 
 let style = {
@@ -17,8 +18,8 @@ let HomeFirstImpression = React.createClass({
     return (
       <section className="HomeFirstImpression" style={style}>
         <SiteContainer>
-          <h1>Everyone has an ego.</h1>
-          <h2>We just hook ours to the bike rack on our way in.</h2>
+          <Header level={2}>Everyone has an ego.</Header>
+          <Header level={3}>We just hook ours to the bike rack on our way in.</Header>
         </SiteContainer>
       </section>
     );

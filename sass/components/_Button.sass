@@ -10,27 +10,34 @@
 // attaching a click handler to some other element like a `div`, which is bad
 // for accessibility.
 
-@mixin reset-button {
-  display: inline;
-  background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  text-decoration: none;
-  color: inherit;
-  text-align: start;
-  white-space: normal;
+@mixin reset-button
+  display: inline
+  background: transparent
+  -webkit-appearance: none
+  -moz-appearance: none
+  -webkit-tap-highlight-color: transparent
+  outline: none
+  border: none
+  padding: 0
+  margin: 0
+  overflow: visible
+  text-decoration: none
+  color: inherit
+  text-align: start
+  white-space: normal
 
-  &:hover {
+  &:hover
     cursor: pointer
-  }
-}
 
-.Button {
-  @include reset-button;
-}
+.Button
+  +reset-button
+
+  position: relative
+
+  &:after
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%

@@ -22,6 +22,7 @@ import '../actions/MenuActions';
 import '../stores/MenuStore';
 
 let AppStore = Flux.getStore('AppStore');
+let AppActions = Flux.getActions('AppActions');
 
 let MenuStore = Flux.getStore('MenuStore');
 let MenuActions = Flux.getActions('MenuActions');
@@ -32,6 +33,9 @@ let App = React.createClass({
 
   statics: {
     prepareForRun(state) {
+      // Make sure nav is dismissed on re-route
+      AppActions.closeNav();
+
       return MenuActions.getMenuBySlug('primary');
     }
   },
