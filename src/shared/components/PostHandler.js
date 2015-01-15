@@ -33,7 +33,7 @@ let PostHandler = React.createClass({
 
   postStoreDidChange() {
     this.setState({
-      posts: PostStore.getPostBySlug(this.getParams().slug),
+      post: PostStore.getPostBySlug(this.getParams().slug),
     });
   },
 
