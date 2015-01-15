@@ -35,10 +35,9 @@ let Home = React.createClass({
   },
 
   render() {
-
     return (
       <div>
-        <HomeFirstImpression />
+        <HomeFirstImpression page={this.state.page} />
       </div>
     );
   }

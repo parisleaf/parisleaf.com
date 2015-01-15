@@ -15,10 +15,15 @@ const navBarRhythmHeight = 3;
 const logoAspectRatio = 769.9 / 200;
 
 let style = {
+  wrapper: {
+    height: rhythm(navBarRhythmHeight),
+  },
+
   AppNav: {
     height: rhythm(navBarRhythmHeight),
     lineHeight: rhythm(navBarRhythmHeight),
-    position: 'relative',
+    top: 0,
+    width: '100%',
     zIndex: zIndex('AppNav'),
     padding: `0 ${rhythm(1)}`,
   },
@@ -26,6 +31,7 @@ let style = {
   logoIcon: {
     height: rhythm(navBarRhythmHeight * 0.5),
     width: rhythm(navBarRhythmHeight * 0.5 * logoAspectRatio), // Use aspect ratio
+    transition: 'fill ease-in-out 200ms',
   },
 
   toggleIcon: {
@@ -52,21 +58,28 @@ let AppNav = React.createClass({
     };
   },
 
+  componentDidMount() {
+    this.updateVisibility();
+  },
+
   componentDidUpdate(prevProps, prevState) {
-    if (this.shouldBeVisible() !== this.shouldBeVisible(prevProps)) {
+    if (this.props.open !== prevProps.open) {
       this.updateVisibility();
     }
   },
 
-  shouldBeVisible(props = this.props) {
+  drawerShouldBeVisible(props = this.props) {
     return props.open;
   },
 
   updateVisibility() {
     this.tweenState('drawerVisibility', {
-      endValue: this.shouldBeVisible() ? 1 : 0,
+      endValue: this.props.open ? 1 : 0,
       duration: 200,
     });
+
+    // Disable scrolling on body when nav is open
+    document.body.style.overflow = this.props.open ? 'hidden' : '';
   },
 
   onToggleClick(event) {
@@ -82,19 +95,17 @@ let AppNav = React.createClass({
   render() {
     let drawerVisibility = this.getTweeningValue('drawerVisibility');
 
-    let primaryMenuItems = this.props.primaryMenu.get('items') || Immutable.List();
-
-    primaryMenuItems = primaryMenuItems
-      .map(item => <a href={item.get('url')} key={item.get('ID')}>{item.get('title')}</a>)
-      .toJS();
+    let _style = Object.assign({
+      position: this.props.open ? 'fixed' : 'absolute',
+    }, style.AppNav);
 
     let logoIconStyle = Object.assign({
       fill: this.props.open ? color('lightGray') : color('text'),
     }, style.logoIcon);
 
     return (
-      <span onClick={this.onClick}>
-        <nav className="AppNav" style={style.AppNav}>
+      <div onClick={this.onClick} style={style.wrapper}>
+        <nav className="AppNav" style={_style}>
           <div className="AppNav-bar">
             <div className="AppNav-bar-logo">
               <Button component={Link} onClick={AppActions.closeNav} to="/">
@@ -102,7 +113,6 @@ let AppNav = React.createClass({
               </Button>
             </div>
             <div className="AppNav-bar-content">
-              {primaryMenuItems}
             </div>
             <div className="AppNav-bar-toggle">
               <Button onClick={this.onToggleClick}>
@@ -112,7 +122,7 @@ let AppNav = React.createClass({
           </div>
         </nav>
         <AppNavDrawer visibility={drawerVisibility} />
-      </span>
+      </div>
     );
   }
 
