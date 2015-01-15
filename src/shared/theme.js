@@ -13,7 +13,7 @@ var ms = require('modular-scale');
 
 var colors = {
   gray: '#4d4d4d',
-  yellow: '#f7ee23',
+  yellow: '#f5d23e',
   lightGray: '#f2f2f2',
   darkGray: '#343844',
 
@@ -38,7 +38,7 @@ export function color(name) {
 
 export var fontFamilies = {
   alright: 'Alright Sans',
-  volkorm: 'Vollkorn',
+  vollkorn: 'Vollkorn',
 };
 
 fontFamilies.text = fontFamilies.alright;
@@ -113,6 +113,8 @@ export var sassMediaQueries = mapObject(mediaQueries, mq => `'${mq}'`);
 export function rhythm(lines) {
   return `${(1.5 * lines)}rem`;
 }
+
+export var navBarRhythmHeight = 3;
 
 /**
  * Convert a pixel value to rems

@@ -4,14 +4,13 @@ import React from 'react';
 import Immutable from 'immutable';
 import tweenState from 'react-tween-state';
 import { Link } from 'react-router';
-import { color, rhythm, zIndex } from '../theme';
+import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
 
-const navBarRhythmHeight = 3;
 const logoAspectRatio = 769.9 / 200;
 
 let style = {
@@ -32,12 +31,13 @@ let style = {
     height: rhythm(navBarRhythmHeight * 0.5),
     width: rhythm(navBarRhythmHeight * 0.5 * logoAspectRatio), // Use aspect ratio
     transition: 'fill ease-in-out 200ms',
+    fill: color('yellow'),
   },
 
   toggleIcon: {
     width: rhythm(navBarRhythmHeight * 0.5),
     height: rhythm(navBarRhythmHeight * 0.5),
-    fill: color('text'),
+    fill: color('yellow'),
   },
 };
 
@@ -100,7 +100,7 @@ let AppNav = React.createClass({
     }, style.AppNav);
 
     let logoIconStyle = Object.assign({
-      fill: this.props.open ? color('lightGray') : color('text'),
+      fill: this.props.open ? color('lightGray') : style.logoIcon.fill,
     }, style.logoIcon);
 
     return (

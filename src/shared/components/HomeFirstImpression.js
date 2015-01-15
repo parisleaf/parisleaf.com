@@ -2,14 +2,51 @@
 
 import React from 'react';
 import SiteContainer from './SiteContainer';
-import Header from './Header'
-import { color, rhythm } from '../theme';
+import ViewportContainer from 'react-viewport';
+// import Header from './Header'
+import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../theme';
 
 let style = {
-  minHeight: rhythm(8),
-  paddingTop: rhythm(2),
-  marginTop: rhythm(-2),
-  background: '#fff',
+  _: {
+    paddingTop: rhythm(navBarRhythmHeight),
+    marginTop: rhythm(-1 * navBarRhythmHeight),
+    background: '#fff',
+    minHeight: '100vh',
+  },
+
+  helloZone: {
+    padding: `${rhythm(2)} 0`,
+  },
+
+  helloZoneContent: {
+    width: '100%',
+  },
+
+  text: {
+    // Yellow line
+    borderLeft: `${rhythm(1/4)} solid ${color('yellow')}`,
+    paddingLeft: `${rhythm(1)}`,
+  },
+
+  title: {
+    fontFamily: fontFamily('alright'),
+    margin: `0 0 ${rhythm(1/2)}`,
+    lineHeight: 1,
+    fontWeight: 800,
+    fontSize: fontSize('h2'),
+  },
+
+  subtitle: {
+    fontFamily: fontFamily('vollkorn'),
+    margin: 0,
+    lineHeight: 1.25,
+    fontSize: fontSize('h3'),
+  },
+
+  featuredZone: {
+    padding: `${rhythm(2)} 0`,
+    background: color('lightBlue'),
+  },
 };
 
 let HomeFirstImpression = React.createClass({
@@ -24,12 +61,20 @@ let HomeFirstImpression = React.createClass({
     }
 
     return (
-      <section className="HomeFirstImpression" style={style}>
-        <SiteContainer>
-          {title && <Header level={2}>{title}</Header>}
-          {subtitle && <Header level={3}>We just hook ours to the bike rack on our way in.</Header>}
-        </SiteContainer>
-      </section>
+      <ViewportContainer className="Home-firstImpression" style={style._}>
+        <section style={style.helloZone} className="Home-firstImpression-helloZone">
+          <div style={style.helloZoneContent}>
+            <SiteContainer>
+              <div style={style.text}>
+                {title && <h2 style={style.title}>{title}</h2>}
+                {subtitle && <h3 style={style.subtitle}>{subtitle}</h3>}
+              </div>
+            </SiteContainer>
+          </div>
+        </section>
+        <section style={style.featuredZone} className="Home-firstImpression-featuredZone">
+        </section>
+      </ViewportContainer>
     );
   }
 
