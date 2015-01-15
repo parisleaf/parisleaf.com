@@ -51,29 +51,37 @@ export var sassFontFamilies = mapObject(fontFamilies, wrapSassExpression);
  */
 export function fontFamily(name) {
   return fontFamilies[name];
-};
+}
 
-var scale = ms(1.618, 20);
-var scale = scale.reduce((result, size, i) => {
-  var midpoint = Math.floor(scale.length / 2);
-  result[midpoint - i] = size;
-  return result;
-}, {});
+// http://modularscale.com/scale/?px1=14&px2=20&ra1=1.5&ra2=0
+var scale = [
+  8.889,
+  9.333,
+  13.333,
+  14,
+  20,
+  21,
+  30,
+  31.5,
+  45,
+  47.5,
+  67.5,
+];
 
 export function modularScale(n) {
-  return scale[n];
+  return scale[n] / 14;
 }
 
 export var fontSizes = {
-  h1: `${modularScale(3)}rem`,
-  h2: `${modularScale(2)}rem`,
-  h3: `${modularScale(1)}rem`,
-  h4: `${modularScale(0)}rem`,
-  h5: `${modularScale(-1)}rem`,
-  h6: `${modularScale(-2)}rem`,
+  h1: `${modularScale(8)}rem`,
+  h2: `${modularScale(6)}rem`,
+  h3: `${modularScale(5)}rem`,
+  h4: `${modularScale(4)}rem`,
+  h5: `${modularScale(4)}rem`,
+  h6: `${modularScale(4)}rem`,
 
   text: '1rem',
-  small: `${modularScale(-1)}rem`,
+  small: `${modularScale(3)}rem`,
   ms: scale,
 }
 
@@ -99,9 +107,10 @@ export function zIndex(name, offset = 0) {
 };
 
 export var breakpoints = {
-  s:       768,
-  m:       1024,
-  l:       1200,
+  s:       500,
+  m:       768,
+  l:       1024,
+  xl:      1200,
 };
 
 export var mediaQueries = mapObject(breakpoints,
