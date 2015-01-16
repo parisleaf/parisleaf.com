@@ -46,12 +46,16 @@ let style = {
 
 let AppNav = React.createClass({
 
-  mixins: [tweenState.Mixin, MediaMixin],
+  mixins: [tweenState.Mixin],
 
   getInitialState() {
     return {
       drawerVisibility: this.props.open ? 1 : 0,
     };
+  },
+
+  contextTypes: {
+    media: React.PropTypes.object,
   },
 
   getDefaultProps() {
@@ -109,7 +113,7 @@ let AppNav = React.createClass({
     let toggleIconStyle = Object.assign({
       fill: this.props.open
         ? (
-            this.state.media.l
+            this.context.media.l
               ? color('gray')
               : '#fff'
           )
@@ -172,12 +176,14 @@ let drawerStyle = {
 
 let AppNavDrawer = React.createClass({
 
-  mixins: [MediaMixin],
-
   getDefaultProps() {
     return {
       visibility: 0,
     };
+  },
+
+  contextTypes: {
+    media: React.PropTypes.object,
   },
 
   render() {
@@ -193,13 +199,12 @@ let AppNavDrawer = React.createClass({
 
     let _contentStyle = drawerStyle.content;
 
-    if (this.state.media.l) {
+    if (this.context.media.l) {
       _contentStyle = Object.assign({
         paddingTop: drawerStyle.sidebar.paddingTop,
         marginTop: drawerStyle.sidebar.marginTop,
       }, _contentStyle);
     }
-
 
     return (
       <div style={_style}>

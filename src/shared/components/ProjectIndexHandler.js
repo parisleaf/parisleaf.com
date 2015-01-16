@@ -23,6 +23,10 @@ let ProjectIndexHandler = React.createClass({
     };
   },
 
+  contextTypes: {
+    media: React.PropTypes.object,
+  },
+
   componentDidMount() {
     ProjectStore.addListener('change', this.projectStoreDidChange);
   },
@@ -38,13 +42,9 @@ let ProjectIndexHandler = React.createClass({
   },
 
   render() {
-    // let projects = this.state.projects
-    //   .map(project => <ProjectIndexItem project={project} />)
-    //   .toJS();
-
     let projects = this.packProjects()
       .map(item =>
-        <ProjectIndexItem project={item.project} width={item.width} />
+        <ProjectIndexItem project={item.project} width={item.width} key={item.project.get('ID')} />
       );
 
     return <div className="ProjectIndex-itemContainer">{projects}</div>;
@@ -53,7 +53,7 @@ let ProjectIndexHandler = React.createClass({
   /**
    * Use a stupid/naive bin-packing algorithm to sort projects
    * @params {array} [projects] - Defaults to this.state.projects
-   * @returns {array} Array of objects, where each object has fields: project,
+   * @returns {array} Array of objects, where each object has fields project
    * and width. Width is relative.
    */
   packProjects(projects = this.state.projects) {
@@ -130,15 +130,22 @@ let ProjectIndexHandler = React.createClass({
   getProjectRelativeWidth(project) {
     let _isCaseStudy = isCaseStudy(project);
 
-    return _isCaseStudy ? 1 : 0.5;
+    if (this.context.media.l) {
+      return _isCaseStudy ? 0.5 : 0.25;
+    } else if (this.context.media.s) {
+      return _isCaseStudy ? 1 : 0.5;
+    } else {
+      return 1;
+    }
   },
 
 });
 
 let itemStyle = {
   _: {
-    background: 'gray',
+    backgroundColor: 'gray',
     backgroundSize: 'cover',
+    backgroundPosition: 'center',
     overflow: 'hidden',
     padding: rhythm(1),
     height: rhythm(8),
@@ -156,7 +163,7 @@ let ProjectIndexItem = React.createClass({
 
     if (project.get('featured_image')) {
       let imageUrl = project.get('featured_image').get('source');
-      _style.background = `url(${imageUrl})`;
+      _style.backgroundImage = `url(${imageUrl})`;
     }
 
     return (
