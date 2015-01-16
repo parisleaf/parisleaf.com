@@ -51,35 +51,36 @@ export function fontFamily(name) {
   return fontFamilies[name];
 }
 
-// http://modularscale.com/scale/?px1=14&px2=20&ra1=1.5&ra2=0
 var scale = [
-  8.889,
-  9.333,
-  13.333,
+  6,
+  9,
+  12,
   14,
   20,
-  21,
+  24,
   30,
-  31.5,
   45,
-  47.5,
-  67.5,
+  68,
+  100,
+  106,
+  150,
+  160,
 ];
 
 export function modularScale(n) {
-  return scale[n] / 14;
+  return `${scale[n] / 14}rem`;
 }
 
 export var fontSizes = {
-  h1: `${modularScale(8)}rem`,
-  h2: `${modularScale(6)}rem`,
-  h3: `${modularScale(5)}rem`,
-  h4: `${modularScale(4)}rem`,
-  h5: `${modularScale(4)}rem`,
-  h6: `${modularScale(4)}rem`,
+  h1: modularScale(8),
+  h2: modularScale(7),
+  h3: modularScale(7),
+  h4: modularScale(4),
+  h5: modularScale(4),
+  h6: modularScale(4),
 
   text: '1rem',
-  small: `${modularScale(3)}rem`,
+  small: modularScale(3),
   ms: scale,
 }
 
