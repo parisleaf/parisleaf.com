@@ -54,6 +54,31 @@ export async function getPageBySlug(slug, query = {}) {
 }
 
 /**
+ * Get list of projects
+ * @param {object} query - Query params
+ * @returns {Promise} Resolves to array of projects
+ */
+export async function getProjects(query = {}) {
+  let projects = await request.get(ensureIsomorphicUrl('/api/projects')).query(query).exec();
+  return projects.body;
+}
+
+/**
+ * Get a project by its slug
+ * @param {string} slug - project slug
+ * @param {object} [query] - Query params
+ * @returns {Promise} Resolves to project object
+ */
+export async function getProjectBySlug(slug, query = {}) {
+  if (typeof slug !== 'string') {
+    throw new Error('slug must be a string');
+  }
+
+  let projects = await request.get(ensureIsomorphicUrl(`/api/projects/${slug}`)).query(query).exec();
+  return projects.body[0];
+}
+
+/**
  * Get list of menus
  * @param {object} query - Query params
  * @returns {Promise} Resolves to array of menus

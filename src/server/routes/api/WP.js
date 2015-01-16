@@ -7,6 +7,8 @@ import request from 'superagent';
  * wordpress-rest-api interface to WP-API
  */
 let wp;
+
+
 if (process.env.NODE_ENV !== 'test') {
   wp = new WP({
     endpoint: process.env.WP_ENDPOINT,
@@ -18,6 +20,11 @@ if (process.env.NODE_ENV !== 'test') {
     endpoint: process.env.WP_ENDPOINT,
   });
 }
+
+/**
+ * Register custom post types
+ */
+wp.projects = wp.registerType('project');
 
 export default wp;
 
