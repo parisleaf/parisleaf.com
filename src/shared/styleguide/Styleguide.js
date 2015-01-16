@@ -19,7 +19,16 @@ let Styleguide = React.createClass({
       <div 
         title="Buttons"
         description="General buttons with modifiers"
-        //example="<Button />"
+        example='<Button to="/blog/hello-world" callToAction>
+  Call to action
+</Button>
+<Button to="/blog/hello-world" primaryMenuLink>
+  Primary Menu link
+</Button>
+<Button to="/blog/hello-world" secondaryMenuLink>
+  Secondary Menu link
+</Button>
+'
       >
         <Button to="/blog/hello-world" callToAction>
           Call to action
@@ -39,6 +48,11 @@ let Styleguide = React.createClass({
 
       <div
         title="Headers"
+        example="
+<Header level={1}>Header h1</Header>
+<Header level={2}>Header h2</Header>
+<Header level={3}>Header h3</Header>
+"
       >
         <Header level={1}>Header h1</Header>
         <Header level={2}>Header h2</Header>
