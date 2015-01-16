@@ -50,3 +50,22 @@
     text-align: center
     font-weight: bold
     border-bottom: rhythm(1/5) solid
+
+  &--primaryMenuLink, &--secondaryMenuLink
+    +font-family(alright)
+    +font-size(h1)
+    position: relative
+    text-transform: capitalize
+    font-weight: bold
+    color: theme-color(lightGray)
+    line-height: 1.125
+    &:hover
+      border-bottom: theme-color(yellow)
+      border-bottom-width: 10px
+      border-bottom-style: solid
+
+  &--secondaryMenuLink
+    +font-size(h2)
+    
+    
+  
