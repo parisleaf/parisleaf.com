@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Metadata from '../components/Metadata';
+import Excerpt from '../components/Excerpt';
 
 let Styleguide = React.createClass({
   render() {
@@ -31,7 +32,7 @@ let Styleguide = React.createClass({
         </div>
         <div style={{ backgroundColor: theme.color('darkGray'), marginTop: '2rem', padding: '2rem'}}>
           <Button to="/blog/hello-world" secondaryMenuLink>
-            Seconday Menu link
+            Secondary Menu link
           </Button>
         </div>
       </div>
@@ -46,8 +47,20 @@ let Styleguide = React.createClass({
 
       <div 
         title="Metadata"
+        description="A <span> wrapper for metadata.  Just wrap inline text with this component."
+        example="<Metadata>From projects, climate, news</Metadata>"
+      
       >
-        <Metadata>Metadata. Projects, Climate, News</Metadata>
+        <Metadata>From projects, climate, news</Metadata>
+      </div>
+
+      <div 
+        title="Excerpt"
+        description="A <span> wrapper for excerpts.  Just wrap inline text with this component."
+        example='<Excerpt>@iamdevloper "MVC? Lol." - every JavaScript framework author in 2015.</Excerpt>'
+      
+      >
+        <Excerpt>@iamdevloper "MVC? Lol." - every JavaScript framework author in 2015.</Excerpt>
       </div>
     </StyleguideComponent>
     );
