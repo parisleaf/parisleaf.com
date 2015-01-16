@@ -10,9 +10,9 @@
  */
 
 var colors = {
-  gray: '#4d4d4d',
+  gray: '#afbebf',
   yellow: '#f5d23e',
-  lightGray: '#f2f2f2',
+  lightGray: '#edf3f4',
   darkGray: '#343844',
 
   blue: '#146cce',
