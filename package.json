@@ -7,7 +7,7 @@
     "test": "make fast-js && make test",
     "start": "make fast-build && node --harmony lib/server/index.js",
     "start-dev": "make build && NODE_ENV=development node --harmony lib/server/index.js",
-    "watch": "make build && NODE_ENV=development nodemon --harmony lib/server/index.js"
+    "watch": "make build-dev && NODE_ENV=development nodemon --harmony lib/server/index.js"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",

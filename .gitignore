@@ -40,3 +40,5 @@ public/css/app.css
 public/css/app.min.css
 views/icon-sprite.svg
 sass/dependencies/_theme.scss
+
+public/js/styleguide.js

@@ -17,7 +17,9 @@ SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 # Build application
-build: js browserify uglify-js css icons
+build: js browserify uglify-js css minify-css icons
+
+build-dev: js browserify css icons
 
 # Test
 test: js
@@ -75,7 +77,9 @@ public/js/app.min.js: public/js/app.js
 	> public/js/app.min.js
 
 # Compile Sass
-css: public/css/app.css public/css/app.min.css
+css: public/css/app.css
+
+minify-css: css public/css/app.min.css
 
 public/css/app.css: sass/app.sass theme
 	mkdir -p $(dir $@) && $(SASS_CMD) -m $< | $(AUTOPREFIXER_CMD) > $@
@@ -102,5 +106,6 @@ ICON_SVGS = $(shell find icons -name "*.svg")
 views/icon-sprite.svg: $(ICON_SVGS)
 	$(SVG_SPRITE_CMD) --symbol --symbol-inline --symbol-dest=views --symbol-prefix="icon-" --symbol-sprite="./icon-sprite.svg" icons/*.svg
 
-.PHONY: test build fast-build watch clean browserify watchify js fast-js
-.PHONY: watch-js css watch-css icons
+.PHONY: build build-dev fast-build test watch clean browserify watchify js
+.PHONY: fast-js watch-js uglify-js css minify-css watch-css theme browser-sync
+.PHONY: icons
