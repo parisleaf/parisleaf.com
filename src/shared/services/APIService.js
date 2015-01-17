@@ -63,17 +63,3 @@ export async function getMenus(query = {}) {
   return menus.body;
 }
 
-/**
- * Get a menu by its slug
- * @param {string} slug - post slug
- * @param {object} [query] - Query params
- * @returns {Promise} Resolves to menu object
- */
-export async function getMenuBySlug(slug, query = {}) {
-  if (typeof slug !== 'string') {
-    throw new Error('slug must be a string');
-  }
-
-  let menu = await request.get(ensureIsomorphicUrl(`/api/menus/${slug}`)).query(query).exec();
-  return menu.body[0];
-}

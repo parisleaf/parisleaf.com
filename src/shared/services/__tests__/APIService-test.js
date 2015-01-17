@@ -65,36 +65,10 @@ describe('APIService', () => {
     }
 
     import { getMenus } from '../APIService';
-
     expect(getMenus()).to.eventually.deep.equal([
       { ID: 1 },
       { ID: 2 },
       { ID: 3 },
     ]).notify(done);
   });
-
-  describe('.getMenuBySlug()', () => {
-    import { getMenuBySlug } from '../APIService';
-
-    it('should return a single menu', (done) => {
-      if (isNode) {
-        nock(process.env.ROOT_URL)
-          .get('/api/menus/hello-world')
-          .reply(200, [
-            { slug: 'hello-world' }
-          ]);
-      }
-
-      expect(getMenuBySlug('hello-world')).to.eventually.deep.equal(
-        { slug: 'hello-world' }
-      ).notify(done);
-
-    });
-
-    it('should throw if slug is not a string', (done) => {
-      expect(getMenuBySlug(123)).to.be.rejectedWith('slug must be a string').notify(done);
-    });
-
-  });
-
 });

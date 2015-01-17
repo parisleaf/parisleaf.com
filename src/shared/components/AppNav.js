@@ -9,6 +9,7 @@ import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 import SiteContainer from './SiteContainer';
+import LinkUtils from '../utils/LinkUtils';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
@@ -42,6 +43,7 @@ let style = {
     height: rhythm(navBarRhythmHeight * 0.5),
     transition: fillTransition,
   },
+
 };
 
 let AppNav = React.createClass({
@@ -57,7 +59,7 @@ let AppNav = React.createClass({
   getDefaultProps() {
     return {
       open: false,
-      primaryMenu: Immutable.Map(),
+      menus: Immutable.Map(),
     };
   },
 
@@ -97,7 +99,6 @@ let AppNav = React.createClass({
 
   render() {
     let drawerVisibility = this.getTweeningValue('drawerVisibility');
-
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
     }, style._);
@@ -134,7 +135,7 @@ let AppNav = React.createClass({
             </div>
           </div>
         </nav>
-        <AppNavDrawer visibility={drawerVisibility} />
+        <AppNavDrawer visibility={drawerVisibility} menus={this.props.menus}  />
       </div>
     );
   }
@@ -168,6 +169,10 @@ let drawerStyle = {
     backgroundColor: '#fff',
     overflow: 'auto',
   },
+  
+  menuList: {
+    listStyleType: 'none',
+  }
 }
 
 let AppNavDrawer = React.createClass({
@@ -180,9 +185,43 @@ let AppNavDrawer = React.createClass({
     };
   },
 
+  listifyMenu(slug, isPrimary) {
+    let singleMenu = this.props.menus.filter(function(menu) { 
+      return menu.get('slug') === slug;
+    });
+
+    let items = singleMenu.get(0).get('items');
+    return items.map(function(item) {
+      if(isPrimary) {
+        return (
+          <li>
+            <Button to={LinkUtils.removeHost(item.get('url'))} primaryMenuLink >
+              {item.get('title')}
+            </Button>
+          </li>
+        );
+      } else {
+        return (
+          <li>
+            <Button to={LinkUtils.removeHost(item.get('url'))} secondaryMenuLink >
+              {item.get('title')}
+            </Button>
+          </li>
+        );
+      }
+    /* console.log(LinkUtils.removeHost(item.get('url'))); */
+    }).toJS();
+    
+  },
+
+  listifySecondaryMenu() {
+  },
+
+
+
   render() {
     let visibility = this.props.visibility;
-
+    this.listifySecondaryMenu();
     let _style = Object.assign({
       transform: `translateX(${100 - (visibility * 100)}%)`,
       display: visibility === 0 ? 'none' : 'block',
@@ -200,12 +239,14 @@ let AppNavDrawer = React.createClass({
       }, _contentStyle);
     }
 
-
     return (
       <div style={_style}>
         <div style={drawerStyle.container} className="AppNavDrawer">
           <section className="AppNavDrawer-sidebar" style={drawerStyle.sidebar}>
-            sidebar
+            <ul style={drawerStyle.menuList}>
+              { this.listifyMenu('primary', true) }
+              { this.listifyMenu('secondary', false) }
+            </ul>
           </section>
           <section className="AppNavDrawer-content" style={_contentStyle}>
             content

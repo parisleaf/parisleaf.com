@@ -25,22 +25,10 @@ Flux.createStore({
       this.emit('change');
     }],
 
-    [MenuConstants.MENU_GET_MENU_BY_SLUG_SUCCESS, function(menu) {
-      if (menu.slug) {
-        menu = Immutable.fromJS(menu);
-        this.menus = this.menus.set(menu.get('slug'), menu);
-      }
-
-      this.emit('change');
-    }],
   ],
 
   getMenus() {
     return this.menus.toList();
   },
-
-  getMenuBySlug(slug) {
-    return this.menus.get(slug);
-  }
 
 });

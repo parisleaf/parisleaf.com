@@ -14,9 +14,6 @@ Flux.createActions({
       return APIService.getMenus(...args);
     }],
 
-    getMenuBySlug: [MenuConstants.MENU_GET_MENU_BY_SLUG, function(...args) {
-      return APIService.getMenuBySlug(...args);
-    }],
   },
 
 });

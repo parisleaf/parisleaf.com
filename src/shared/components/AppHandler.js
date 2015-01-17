@@ -44,13 +44,15 @@ let App = React.createClass({
       // Make sure nav is dismissed on re-route
       AppActions.closeNav();
 
-      return MenuActions.getMenuBySlug('primary');
+      return Promise.all([
+        MenuActions.getMenus(),
+      ]);
     }
   },
 
   getInitialState() {
     return Object.assign({
-      primaryMenu: MenuStore.getMenuBySlug('primary'),
+      menus: MenuStore.getMenus(),
     }, AppStore.getState());
   },
 
@@ -70,14 +72,14 @@ let App = React.createClass({
 
   menuStoreDidChange() {
     this.setState({
-      primaryMenu: MenuStore.getMenuBySlug('primary'),
+      menus: MenuStore.getMenus(),
     });
   },
 
   render() {
     let appNav =
       <AppNav
-        primaryMenu={this.state.primaryMenu}
+        menus={this.state.menus}
         {...this.state.nav}
       />;
 
