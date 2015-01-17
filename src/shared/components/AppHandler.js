@@ -35,6 +35,9 @@ let AppActions = Flux.getActions('AppActions');
 let MenuStore = Flux.getStore('MenuStore');
 let MenuActions = Flux.getActions('MenuActions');
 
+let TwitterStore = Flux.getStore('TwitterStore');
+let TwitterActions = Flux.getActions('TwitterActions');
+
 import AppNav from './AppNav';
 
 import MediaMixin from 'react-media-mixin';
@@ -53,6 +56,7 @@ let App = React.createClass({
 
       return Promise.all([
         MenuActions.getMenus(),
+        TwitterActions.getTweets()
       ]);
     }
   },
@@ -60,6 +64,7 @@ let App = React.createClass({
   getInitialState() {
     return Object.assign({
       menus: MenuStore.getMenus(),
+      tweets: TwitterStore.getTweets()
     }, AppStore.getState());
   },
 
@@ -90,6 +95,7 @@ let App = React.createClass({
   menuStoreDidChange() {
     this.setState({
       menus: MenuStore.getMenus(),
+      tweets: TwitterStore.getTweets()
     });
   },
 
@@ -97,6 +103,7 @@ let App = React.createClass({
     let appNav =
       <AppNav
         menus={this.state.menus}
+        tweets={this.state.tweets}
         {...this.state.nav}
       />;
 

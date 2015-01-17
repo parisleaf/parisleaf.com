@@ -10,6 +10,7 @@ import Button from './Button';
 import SvgIcon from './SvgIcon';
 import SiteContainer from './SiteContainer';
 import LinkUtils from '../utils/LinkUtils';
+import Tweet from './Tweet';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
@@ -139,7 +140,7 @@ let AppNav = React.createClass({
             </div>
           </div>
         </nav>
-        <AppNavDrawer visibility={drawerVisibility} menus={this.props.menus}  />
+        <AppNavDrawer visibility={drawerVisibility} menus={this.props.menus}  tweets={this.props.tweets} />
       </div>
     );
   }
@@ -230,6 +231,8 @@ let AppNavDrawer = React.createClass({
       }, _contentStyle);
     }
 
+    console.log(this.props.tweets.get(0).toJS());
+
     return (
       <div style={_style}>
         <div style={drawerStyle.container} className="AppNavDrawer">
@@ -240,7 +243,8 @@ let AppNavDrawer = React.createClass({
             </ul>
           </section>
           <section className="AppNavDrawer-content" style={_contentStyle}>
-            content
+            <Tweet id={this.props.tweets.get(0).get('id_str')} />
+            <Tweet id={this.props.tweets.get(1).get('id_str')} />
           </section>
         </div>
       </div>

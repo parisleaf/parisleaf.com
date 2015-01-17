@@ -9,9 +9,6 @@ let TwitterStore = Flux.getStore('TwitterStore');
 
 
 let Tweet = React.createClass({ 
-  
-
-
   getInitialState() {
     return {
       tweet: TwitterStore.getTweetById(this.props.id),
