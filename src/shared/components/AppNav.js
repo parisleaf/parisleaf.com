@@ -199,23 +199,14 @@ let AppNavDrawer = React.createClass({
 
     let items = singleMenu.get(0).get('items');
     return items.map(function(item) {
-      if(isPrimary) {
-        return (
-          <li>
-            <Button to={LinkUtils.removeHost(item.get('url'))} primaryMenuLink >
-              {item.get('title')}
-            </Button>
-          </li>
-        );
-      } else {
-        return (
-          <li>
-            <Button to={LinkUtils.removeHost(item.get('url'))} secondaryMenuLink >
-              {item.get('title')}
-            </Button>
-          </li>
-        );
-      }
+      let modifierProp = isPrimary ? { primaryMenuLink: true } : { secondaryMenuLink: true };
+      return (
+        <li>
+          <Button to={LinkUtils.removeHost(item.get('url'))} {...modifierProp} >
+            {item.get('title')}
+          </Button>
+        </li>
+      );
     /* console.log(LinkUtils.removeHost(item.get('url'))); */
     }).toJS();   
   },
