@@ -43,29 +43,6 @@ describe('MenuStore', () => {
       ]);
     });
   });
-
-  describe('#getMenuBySlug', () => {
-    it('returns a menu', () => {
-      let menus = Immutable.fromJS({
-        foo: {
-          slug: 'foo',
-        },
-        bar: {
-          slug: 'bar',
-        },
-        baz: {
-          slug: 'baz',
-        },
-      });
-
-      MenuStore.menus = menus;
-
-      expect(MenuStore.getMenuBySlug('foo').toJS()).to.deep.equal({ slug: 'foo' });
-      expect(MenuStore.getMenuBySlug('bar').toJS()).to.deep.equal({ slug: 'bar' });
-      expect(MenuStore.getMenuBySlug('foobar')).to.be.undefined;
-    });
-  });
-
   describe('responds to Flux action', () => {
     it('MENU_GET_MENUS', () => {
       expect(MenuStore.getMenus().toJS()).to.deep.equal([]);
@@ -83,21 +60,6 @@ describe('MenuStore', () => {
         { slug: 'foo' },
         { slug: 'bar' },
         { slug: 'baz' },
-      ]);
-    });
-
-    it('MENU_GET_MENU_BY_SLUG', () => {
-      expect(MenuStore.getMenus().toJS()).to.deep.equal([]);
-
-      Flux.dispatch({
-        actionType: 'MENU_GET_MENU_BY_SLUG_SUCCESS',
-        body: {
-          slug: 'foo',
-        },
-      });
-
-      expect(MenuStore.getMenus().toJS()).to.deep.equal([
-        { slug: 'foo' },
       ]);
     });
   });
