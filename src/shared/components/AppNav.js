@@ -48,12 +48,16 @@ let style = {
 
 let AppNav = React.createClass({
 
-  mixins: [tweenState.Mixin, MediaMixin],
+  mixins: [tweenState.Mixin],
 
   getInitialState() {
     return {
       drawerVisibility: this.props.open ? 1 : 0,
     };
+  },
+
+  contextTypes: {
+    media: React.PropTypes.object,
   },
 
   getDefaultProps() {
@@ -110,7 +114,7 @@ let AppNav = React.createClass({
     let toggleIconStyle = Object.assign({
       fill: this.props.open
         ? (
-            this.state.media.l
+            this.context.media.l
               ? color('gray')
               : '#fff'
           )
@@ -177,13 +181,16 @@ let drawerStyle = {
 
 let AppNavDrawer = React.createClass({
 
-  mixins: [MediaMixin],
-
   getDefaultProps() {
     return {
       visibility: 0,
     };
   },
+ 
+  contextTypes: {
+    media: React.PropTypes.object,
+  },
+
 
   listifyMenu(slug, isPrimary) {
     let singleMenu = this.props.menus.filter(function(menu) { 
@@ -210,18 +217,11 @@ let AppNavDrawer = React.createClass({
         );
       }
     /* console.log(LinkUtils.removeHost(item.get('url'))); */
-    }).toJS();
-    
+    }).toJS();   
   },
-
-  listifySecondaryMenu() {
-  },
-
-
-
+  
   render() {
     let visibility = this.props.visibility;
-    this.listifySecondaryMenu();
     let _style = Object.assign({
       transform: `translateX(${100 - (visibility * 100)}%)`,
       display: visibility === 0 ? 'none' : 'block',
@@ -231,8 +231,8 @@ let AppNavDrawer = React.createClass({
     _style.msTransform = _style.transform;
 
     let _contentStyle = drawerStyle.content;
-
-    if (this.state.media.l) {
+    
+    if (this.context.media.l) {
       _contentStyle = Object.assign({
         paddingTop: drawerStyle.sidebar.paddingTop,
         marginTop: drawerStyle.sidebar.marginTop,

@@ -17,6 +17,10 @@ import '../constants/PageConstants';
 import '../actions/PageActions';
 import '../stores/PageStore';
 
+import '../constants/ProjectConstants';
+import '../actions/ProjectActions';
+import '../stores/ProjectStore';
+
 import '../constants/MenuConstants';
 import '../actions/MenuActions';
 import '../stores/MenuStore';
@@ -33,9 +37,12 @@ let MenuActions = Flux.getActions('MenuActions');
 
 import AppNav from './AppNav';
 
+import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
 
 let App = React.createClass({
+
+  mixins: [MediaMixin],
 
   statics: {
     prepareForRun(state) {
@@ -54,6 +61,16 @@ let App = React.createClass({
     return Object.assign({
       menus: MenuStore.getMenus(),
     }, AppStore.getState());
+  },
+
+  childContextTypes: {
+    media: React.PropTypes.object,
+  },
+
+  getChildContext() {
+    return {
+      media: this.state.media || {},
+    }
   },
 
   componentDidMount() {
