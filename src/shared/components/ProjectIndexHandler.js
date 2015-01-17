@@ -9,6 +9,12 @@ let ProjectStore = Flux.getStore('ProjectStore');
 import { isCaseStudy } from '../utils/ProjectUtils';
 import { rhythm } from '../theme';
 
+let style = {
+  _: {
+    position: 'relative',
+  },
+};
+
 let ProjectIndexHandler = React.createClass({
 
   statics: {
@@ -42,19 +48,39 @@ let ProjectIndexHandler = React.createClass({
   },
 
   render() {
-    let projects = this.packProjects()
+    let projectHeight = this.getProjectRhythmHeight();
+
+    let { projects, totalRows } = this.packProjects();
+
+    projects = projects
       .map(item =>
-        <ProjectIndexItem project={item.project} width={item.width} key={item.project.get('ID')} />
+        <ProjectIndexItem
+          project={item.project}
+          width={item.width}
+          height={projectHeight}
+          x={item.x}
+          y={item.y}
+          key={item.project.get('ID')}
+        />
       );
 
-    return <div className="ProjectIndex-itemContainer">{projects}</div>;
+    let _style = Object.assign({
+      height: rhythm(projectHeight * totalRows),
+    }, style._);
+
+    return (
+      <div className="ProjectIndex-itemContainer" style={style._}>
+        {projects}
+      </div>
+    );
   },
 
   /**
    * Use a stupid/naive bin-packing algorithm to sort projects
    * @params {array} [projects] - Defaults to this.state.projects
-   * @returns {array} Array of objects, where each object has fields project
-   * and width. Width is relative.
+   * @returns {object} Object describing result, with fields totalHeight and
+   *   projects. projects is an array of objects, where each object has fields:
+   *   project, width, x, and y.
    */
   packProjects(projects = this.state.projects) {
     let completeRows = new Set();
@@ -67,8 +93,10 @@ let ProjectIndexHandler = React.createClass({
         width: this.getProjectRelativeWidth(project),
       };
 
+      // If project width is 1, create row, add project, and mark as complete,
+      // then return
       if (project.width === 1) {
-        completeRows.add(createRow(project));
+        addProjectToRow(project, createRow());
         return;
       }
 
@@ -77,14 +105,7 @@ let ProjectIndexHandler = React.createClass({
 
         // Check if there's room on this row
         if (row.width + project.width <= 1) {
-          // Add to row
-          row.projects.push(project);
-          row.width += project.width;
-
-          if (row.width === 1) {
-            // Mark row as completed
-            markRowAsComplete(row);
-          }
+          addProjectToRow(project, row);
 
           // Finish
           return;
@@ -95,33 +116,49 @@ let ProjectIndexHandler = React.createClass({
       }
 
       // If no rows have room, create a new one
-      rows.add(createRow(project));
+      addProjectToRow(project, createRow());
     });
 
-    function createRow(project) {
-      return {
-        projects: [project],
-        width: project.width,
+    function createRow() {
+      let row = {
+        projects: [],
+        width: 0,
       };
+
+      rows.add(row);
+
+      return row;
     }
 
-    function markRowAsComplete(row) {
-      completeRows.add(row);
-      rows.delete(row);
+    function addProjectToRow(project, row) {
+      project.x = row.width;
+      row.width += project.width;
+      row.projects.push(project);
+
+      if (row.width === 1) {
+        // Mark row as completed
+        completeRows.add(row);
+        rows.delete(row);
+      }
     }
 
-    // Join projects as array
-    let projectsFromCompleteRows = Array.from(completeRows).reduce((result, row) => {
-      return result.concat(row.projects);
-    }, []);
 
-    let projectsFromIncompleteRows = Array.from(rows)
-      .sort((row1, row2) => row1.width - row2.width)
-      .reduce((result, row) => {
-        return result.concat(row.projects);
+    let completeRows = Array.from(completeRows)
+      // Now that there are no more projects to pack, mark leftover rows
+      // as complete
+      .concat(Array.from(rows).sort((row1, row2) => row1.width - row2.width))
+
+    let completeProjects = completeRows// Reduce to array of projects
+      .reduce((result, row, y) => {
+        row.projects.forEach(project => project.y = y);
+        result = result.concat(row.projects);
+        return result;
       }, []);
 
-    return projectsFromCompleteRows.concat(projectsFromIncompleteRows);
+    return {
+      projects: completeProjects,
+      totalRows: completeRows.length,
+    };
   },
 
   /**
@@ -139,26 +176,39 @@ let ProjectIndexHandler = React.createClass({
     }
   },
 
+  /**
+   * Get rhythm height of a project. Same for all projects, depends on
+   * window size.
+   */
+  getProjectRhythmHeight() {
+    return 8;
+  }
+
 });
 
 let itemStyle = {
   _: {
+    position: 'absolute',
     backgroundColor: 'gray',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     overflow: 'hidden',
     padding: rhythm(1),
-    height: rhythm(8),
+    transitionProperty: 'left, top',
+    transitionDuration: '500ms',
   },
 };
 
 let ProjectIndexItem = React.createClass({
 
   render() {
-    let { project } = this.props;
+    let { project, width, height, x, y } = this.props;
 
     let _style = Object.assign({
-      width: `${this.props.width * 100}%`,
+      height: rhythm(height),
+      width: `${width * 100}%`,
+      left: `${x * 100}%`,
+      top: rhythm(y * height),
     }, itemStyle._);
 
     if (project.get('featured_image')) {
