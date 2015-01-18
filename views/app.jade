@@ -12,7 +12,8 @@ html(class='no-js')
     if (env.NODE_ENV == 'development')
       link(rel='stylesheet', href='/css/app.css')
     else
-      link(rel='stylesheet', href='/css/app.min.css')
+      style
+        include ../public/css/app.min.css
           
             
   body

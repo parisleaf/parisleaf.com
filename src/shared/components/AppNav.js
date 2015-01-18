@@ -9,7 +9,7 @@ import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 import SiteContainer from './SiteContainer';
-import LinkUtils from '../utils/LinkUtils';
+import { normalizeUrl } from '../utils/LinkUtils';
 import Tweet from './Tweet';
 
 import Flux from 'flummox';
@@ -140,7 +140,12 @@ let AppNav = React.createClass({
             </div>
           </div>
         </nav>
-        <AppNavDrawer visibility={drawerVisibility} menus={this.props.menus}  tweets={this.props.tweets} />
+        <AppNavDrawer
+          visibility={drawerVisibility}
+          primaryMenu={this.props.primaryMenu}
+          secondaryMenu={this.props.secondaryMenu}
+          tweets={this.props.tweets}
+        />
       </div>
     );
   }
@@ -174,7 +179,7 @@ let drawerStyle = {
     backgroundColor: '#fff',
     overflow: 'auto',
   },
-  
+
   menuList: {
     listStyleType: 'none',
   }
@@ -187,31 +192,35 @@ let AppNavDrawer = React.createClass({
       visibility: 0,
     };
   },
- 
+
   contextTypes: {
     media: React.PropTypes.object,
   },
 
+  primaryMenu() {
+    let menu = this.props.primaryMenu;
 
-  listifyMenu(slug, isPrimary) {
-    let singleMenu = this.props.menus.filter(function(menu) { 
-      return menu.get('slug') === slug;
-    });
+    if (!menu) return null;
 
-    let items = singleMenu.get(0).get('items');
-    return items.map(function(item) {
-      let modifierProp = isPrimary ? { primaryMenuLink: true } : { secondaryMenuLink: true };
-      return (
-        <li>
-          <Button to={LinkUtils.removeHost(item.get('url'))} {...modifierProp} >
-            {item.get('title')}
-          </Button>
-        </li>
-      );
-    /* console.log(LinkUtils.removeHost(item.get('url'))); */
-    }).toJS();   
+    return menu.get('items').map(item =>
+      <Button component={'a'} href={normalizeUrl(item.get('url'))} primaryLink>
+        {item.get('title')}
+      </Button>
+    ).toJS();
   },
-  
+
+  secondaryMenu() {
+    let menu = this.props.secondaryMenu;
+
+    if (!menu) return null;
+
+    return menu.get('items').map(item =>
+      <Button component={'a'} href={normalizeUrl(item.get('url'))} secondaryLink>
+        {item.get('title')}
+      </Button>
+    ).toJS();
+  },
+
   render() {
     let visibility = this.props.visibility;
     let _style = Object.assign({
@@ -223,7 +232,7 @@ let AppNavDrawer = React.createClass({
     _style.msTransform = _style.transform;
 
     let _contentStyle = drawerStyle.content;
-    
+
     if (this.context.media.l) {
       _contentStyle = Object.assign({
         paddingTop: drawerStyle.sidebar.paddingTop,
@@ -231,16 +240,12 @@ let AppNavDrawer = React.createClass({
       }, _contentStyle);
     }
 
-    console.log(this.props.tweets.get(0).toJS());
-
     return (
       <div style={_style}>
         <div style={drawerStyle.container} className="AppNavDrawer">
           <section className="AppNavDrawer-sidebar" style={drawerStyle.sidebar}>
-            <ul style={drawerStyle.menuList}>
-              { this.listifyMenu('primary', true) }
-              { this.listifyMenu('secondary', false) }
-            </ul>
+            {this.primaryMenu()}
+            {this.secondaryMenu()}
           </section>
           <section className="AppNavDrawer-content" style={_contentStyle}>
             <Tweet id={this.props.tweets.get(0).get('id_str')} />

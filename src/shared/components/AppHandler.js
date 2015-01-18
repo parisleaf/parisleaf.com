@@ -56,14 +56,15 @@ let App = React.createClass({
 
       return Promise.all([
         MenuActions.getMenus(),
-        TwitterActions.getTweets()
+        TwitterActions.getTweets(),
       ]);
     }
   },
 
   getInitialState() {
     return Object.assign({
-      menus: MenuStore.getMenus(),
+      primaryMenu: MenuStore.getMenuBySlug('primary'),
+      secondaryMenu: MenuStore.getMenuBySlug('secondary'),
       tweets: TwitterStore.getTweets()
     }, AppStore.getState());
   },
@@ -94,7 +95,8 @@ let App = React.createClass({
 
   menuStoreDidChange() {
     this.setState({
-      menus: MenuStore.getMenus(),
+      primaryMenu: MenuStore.getMenuBySlug('primary'),
+      secondaryMenu: MenuStore.getMenuBySlug('secondary'),
       tweets: TwitterStore.getTweets()
     });
   },
@@ -102,7 +104,8 @@ let App = React.createClass({
   render() {
     let appNav =
       <AppNav
-        menus={this.state.menus}
+        primaryMenu={this.state.primaryMenu}
+        secondaryMenu={this.state.secondaryMenu}
         tweets={this.state.tweets}
         {...this.state.nav}
       />;

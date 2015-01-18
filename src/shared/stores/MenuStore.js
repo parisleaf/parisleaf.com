@@ -31,4 +31,8 @@ Flux.createStore({
     return this.menus.toList();
   },
 
+  getMenuBySlug(slug) {
+    return this.menus.find(menu => menu.get('slug') === slug);
+  },
+
 });

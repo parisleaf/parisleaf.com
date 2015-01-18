@@ -79,3 +79,16 @@ export function removeHost(url) {
 
   return urlObj.path;
 }
+
+/**
+ * If url is a WP url or local url, normalize by removing the host
+ * @param {string} url
+ * @return {string} Normalized url
+ */
+export function normalizeUrl(url) {
+  if (isLocalUrl(url) || isWPUrl(url)) {
+    return removeHost(url);
+  } else {
+    return url;
+  }
+}

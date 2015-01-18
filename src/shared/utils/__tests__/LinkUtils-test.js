@@ -104,4 +104,20 @@ describe('LinkUtils', () => {
     });
   });
 
+  describe('.normalizeUrl', () => {
+    import { normalizeUrl, rootUrl } from '../LinkUtils';
+
+    it('removes host from local urls', () => {
+      expect(normalizeUrl(`${rootUrl()}/foo/bar`)).to.equal('/foo/bar');
+    });
+
+    it('removes host from WP urls', () => {
+      expect(normalizeUrl(`http://${url.parse(process.env.WP_ENDPOINT).host}/foo/bar`)).to.equal('/foo/bar');
+    });
+
+    it('does nothing to external, non-WP urls', () => {
+      expect(normalizeUrl('http://google.com/foo/bar')).to.equal('http://google.com/foo/bar');
+    });
+  });
+
 });
