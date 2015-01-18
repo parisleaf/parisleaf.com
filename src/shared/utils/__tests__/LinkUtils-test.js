@@ -15,7 +15,7 @@ describe('LinkUtils', () => {
     });
 
     after(() => {
-      process.env.PORT = initialPort;
+      if (initialPort) process.env.PORT = initialPort;
     });
 
     if (isNode) {
@@ -45,7 +45,7 @@ describe('LinkUtils', () => {
 
         expect(rootUrl()).to.equal('http://localhost:1234');
 
-        process.env.PORT = initialPort;
+        if (initialPort) process.env.PORT = initialPort;
       });
 
       it('omits port if `process.env.PORT` is not set', () => {
@@ -54,7 +54,7 @@ describe('LinkUtils', () => {
 
         expect(rootUrl()).to.equal('http://localhost');
 
-        process.env.PORT = initialPort;
+        if (initialPort) process.env.PORT = initialPort;
       });
     }
   });

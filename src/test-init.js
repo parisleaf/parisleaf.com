@@ -5,11 +5,6 @@ require('./shared/init');
 import path from 'path'
 import isNode from 'detect-node';
 
-if(isNode) {
-  import dotenv from 'dotenv';
-  dotenv.load();
-}
-
 process.env.WP_ENDPOINT = 'http://wordpress.test/wp-json';
 
 if (isNode) {
