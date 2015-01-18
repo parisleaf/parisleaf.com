@@ -38,20 +38,23 @@ describe('LinkUtils', () => {
   describe('.rootUrl()', () => {
     import { rootUrl } from '../LinkUtils';
 
-    let initialPort;
-
-    before(() => {
-      initialPort = process.env.PORT;
-      process.env.PORT = 1234;
-    });
-
-    after(() => {
-      process.env.PORT = initialPort;
-    });
-
     if (isNode) {
       it('uses localhost and port to form url', () => {
+        let initialPort = process.env.PORT;
+        process.env.PORT = 1234;
+
         expect(rootUrl()).to.equal('http://localhost:1234');
+
+        process.env.PORT = initialPort;
+      });
+
+      it('omits port if `process.env.PORT` is not set', () => {
+        let initialPort = process.env.PORT;
+        delete process.env.PORT;
+
+        expect(rootUrl()).to.equal('http://localhost');
+
+        process.env.PORT = initialPort;
       });
     }
   });
@@ -92,7 +95,7 @@ describe('LinkUtils', () => {
       process.env.WP_ENDPOINT = undefined;
 
       expect(isWPUrl('/foo/bar')).to.be.false;
-      
+
       process.env.WP_ENDPOINT = initialEndpoint;
     });
 
