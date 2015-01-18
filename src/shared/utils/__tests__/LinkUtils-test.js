@@ -87,10 +87,20 @@ describe('LinkUtils', () => {
       expect(isWPUrl('https://google.com')).to.be.false;
     });
 
+    it('returns false if process.env.WP_ENDPOINT is undefined', () => {
+      let initialEndpoint = process.env.WP_ENDPOINT;
+      process.env.WP_ENDPOINT = undefined;
+
+      expect(isWPUrl('/foo/bar')).to.be.false;
+      
+      process.env.WP_ENDPOINT = initialEndpoint;
+    });
+
     it('returns false if url is inside `wp-content`', () => {
       expect(isWPUrl(`http://${url.parse(process.env.WP_ENDPOINT).host}/wp-content`)).to.be.false;
       expect(isWPUrl(`http://${url.parse(process.env.WP_ENDPOINT).host}/foo/bar/wp-content`)).to.be.true;
     });
+
   });
 
   describe('.removeHost()', () => {

@@ -18,7 +18,7 @@ html(class='no-js')
             
   body
     include icon-sprite.svg
-    #app!=appString
+    #app(data-wp-endpoint=env.WP_ENDPOINT)!=appString
     
   if (env.NODE_ENV == 'development')
     script(src='/js/app.js', defer)

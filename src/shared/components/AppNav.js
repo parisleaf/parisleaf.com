@@ -175,6 +175,14 @@ let drawerStyle = {
     marginTop: rhythm(-1 * navBarRhythmHeight),
   },
 
+  primaryMenuLink: {
+    display: 'block',
+  },
+
+  secondaryMenuLink: {
+    display: 'block',
+  },
+
   content: {
     backgroundColor: '#fff',
     overflow: 'auto',
@@ -203,7 +211,12 @@ let AppNavDrawer = React.createClass({
     if (!menu) return null;
 
     return menu.get('items').map(item =>
-      <Button component={'a'} href={normalizeUrl(item.get('url'))} primaryLink>
+      <Button
+        component={'a'}
+        href={normalizeUrl(item.get('url'))}
+        style={drawerStyle.primaryMenuLink}
+        primaryMenuLink
+      >
         {item.get('title')}
       </Button>
     ).toJS();
@@ -215,7 +228,12 @@ let AppNavDrawer = React.createClass({
     if (!menu) return null;
 
     return menu.get('items').map(item =>
-      <Button component={'a'} href={normalizeUrl(item.get('url'))} secondaryLink>
+      <Button
+        component={'a'}
+        href={normalizeUrl(item.get('url'))}
+        style={drawerStyle.secondaryMenuLink}
+        secondaryMenuLink
+      >
         {item.get('title')}
       </Button>
     ).toJS();

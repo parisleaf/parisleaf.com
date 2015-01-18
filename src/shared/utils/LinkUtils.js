@@ -49,6 +49,8 @@ export function isLocalUrl(url) {
  * @param {string} url
  */
 export function isWPUrl(url) {
+  if (typeof process.env.WP_ENDPOINT !== 'string') return false;
+
   let urlObj = _url.parse(url, false, true);
 
   let host = urlObj.host;
@@ -92,3 +94,5 @@ export function normalizeUrl(url) {
     return url;
   }
 }
+
+global.normalizeUrl = normalizeUrl;
