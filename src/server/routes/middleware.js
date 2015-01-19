@@ -40,7 +40,7 @@ export default function(app) {
   app.use(serve('public'));
 
   // Pretty-print JSON responses
-  app.use(json());
+  if (process.env.NODE_ENV === 'development') app.use(json());
 
   // Add nesting support to query strings
   qs(app);
