@@ -21,7 +21,7 @@ let style = {
   },
 };
 
-let ProjectIndexHandler = React.createClass({
+let PortfolioHandler = React.createClass({
 
   mixins: [MediaMixin],
 
@@ -273,7 +273,13 @@ let ProjectIndexItem = React.createClass({
     }, itemStyle._);
 
     if (project.get('featured_image')) {
-      let imageUrl = project.get('featured_image').get('source');
+      let imageUrl = project
+        .get('featured_image')
+        .get('attachment_meta')
+        .get('sizes')
+        .get('large')
+        .get('url');
+
       _style.backgroundImage = `url(${imageUrl})`;
     }
 
@@ -298,4 +304,4 @@ let ProjectIndexItem = React.createClass({
 
 });
 
-export default ProjectIndexHandler;
+export default PortfolioHandler;
