@@ -7,8 +7,6 @@ html(class='no-js')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Vollkorn:400italic,400')
-
     if (env.NODE_ENV == 'development')
       link(rel='stylesheet', href='/css/app.css')
     else
@@ -19,7 +17,24 @@ html(class='no-js')
   body
     include icon-sprite.svg
     #app(data-wp-endpoint=env.WP_ENDPOINT)!=appString
-    
+  
+  script.
+    WebFontConfig = {
+      google: {
+        families: [ 'Vollkorn:400italic', 'Vollkorn:400' ],
+      }
+    };
+
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1.5.6/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  
   if (env.NODE_ENV == 'development')
     script(src='/js/app.js', defer)
   else
