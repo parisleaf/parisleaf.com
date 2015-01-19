@@ -12,6 +12,7 @@ import SiteContainer from './SiteContainer';
 import { normalizeUrl } from '../utils/LinkUtils';
 import Tweet from './Tweet';
 
+
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
 
@@ -266,8 +267,10 @@ let AppNavDrawer = React.createClass({
             {this.secondaryMenu()}
           </section>
           <section className="AppNavDrawer-content" style={_contentStyle}>
-            <Tweet id={this.props.tweets.get(0).get('id_str')} />
-            <Tweet id={this.props.tweets.get(1).get('id_str')} />
+            <SiteContainer>
+              <Tweet id={this.props.tweets.get(0).get('id_str')} />
+              <Tweet id={this.props.tweets.get(1).get('id_str')} />
+            </SiteContainer>
           </section>
         </div>
       </div>

@@ -143,7 +143,7 @@ let ProjectIndexHandler = React.createClass({
     }
 
 
-    let completeRows = Array.from(completeRows)
+    completeRows = Array.from(completeRows)
       // Now that there are no more projects to pack, mark leftover rows
       // as complete
       .concat(Array.from(rows).sort((row1, row2) => row1.width - row2.width))
