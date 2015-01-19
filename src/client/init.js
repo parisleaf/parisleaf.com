@@ -17,4 +17,4 @@ import MediaMixin from 'react-media-mixin';
 // Add media queries
 MediaMixin.addMediaQueries(mediaQueries);
 
-process.env.WP_ENDPOINT = document.getElementById('app').dataset.wpEndpoint;
+process.env.WP_ENDPOINT = document.getElementById('app').getAttribute('data-wp-endpoint');
