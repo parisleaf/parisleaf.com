@@ -24,10 +24,15 @@
 
   &-sidebar
     flex: 0 1 auto
+    height: 100vh // TODO: make better for mobile
+    +bp(s)
+      height: auto
 
   &-content
     flex: 1 1 auto
-    
+    display: none
+    +bp(s)
+      display: block // TODO: make better for mobile
   // Layout
   +bp(l)
     flex-direction: row
