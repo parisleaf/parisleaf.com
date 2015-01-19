@@ -5,7 +5,7 @@ import SiteContainer from './SiteContainer';
 import ViewportContainer from 'react-viewport';
 import Header from './Header'
 import Button from './Button';
-import { Link } from 'react-router';
+import AppLink from './AppLink';
 import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../theme';
 
 let style = {
@@ -26,13 +26,15 @@ let style = {
 
   featuredZone: {
     padding: `${rhythm(2)} 0`,
-    backgroundColor: color('lightBlue'),
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     color: '#fff',
-    textAlign: 'center',
   },
 
   featuredZoneContent: {
     width: `100%`,
+    color: '#fff',
+    textAlign: 'center',
   },
 
   helloZoneText: {
@@ -46,12 +48,34 @@ let style = {
 let HomeFirstImpression = React.createClass({
 
   render() {
+    let { page, project } = this.props;
+
     let title, subtitle;
 
-    if (this.props.page) {
-      let meta = this.props.page.get('meta');
+    if (page) {
+      let meta = page.get('meta');
       title = meta.get('first_impression_title');
       subtitle = meta.get('first_impression_subtitle');
+    }
+
+    let projectTagline, projectFeaturedImage;
+
+    if (project) {
+      if (project.get('meta')) {
+        projectTagline = project.get('meta').get('tagline');
+      }
+
+      if (project.get('featured_image')) {
+        projectFeaturedImage = project.get('featured_image').get('source');
+      }
+    }
+
+    let featuredZoneStyle = style.featuredZone;
+
+    if (projectFeaturedImage) {
+      featuredZoneStyle = Object.assign({
+        backgroundImage: `url(${projectFeaturedImage})`,
+      }, featuredZoneStyle);
     }
 
     return (
@@ -66,11 +90,11 @@ let HomeFirstImpression = React.createClass({
             </SiteContainer>
           </div>
         </section>
-        <section style={style.featuredZone} className="Home-firstImpression-featuredZone">
+        <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
           <div style={style.featuredZoneContent}>
             <SiteContainer>
-              <Header level={2}>We helped Scality make the transition from human to cyborg mecha-horse all in the span of two weeks.</Header>
-              <Button component={Link} to="/blog/hello-world" callToAction>
+              {projectTagline && <Header level={2}>{projectTagline}</Header>}
+              <Button component={AppLink} to="/blog/hello-world" callToAction>
                 Find out more
               </Button>
             </SiteContainer>
