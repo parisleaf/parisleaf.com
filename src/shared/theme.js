@@ -34,13 +34,14 @@ export function color(name) {
   return colors[name];
 };
 
-export var fontFamilies = {
-  alright: 'Alright Sans',
-  vollkorn: 'Vollkorn',
+var fontFamilies = {
+  alrightLight: "'Alright Sans Light', sans-serif",
+  alrightBlack: "'Alright Sans Black', sans-serif",
+  vollkorn: 'Vollkorn, Georgia, serif',
 };
 
-fontFamilies.text = fontFamilies.alright;
-fontFamilies.header = fontFamilies.alright;
+fontFamilies.text = fontFamilies.alrightLight;
+fontFamilies.header = fontFamilies.alrightBlack;
 
 export var sassFontFamilies = mapObject(fontFamilies, wrapSassExpression);
 
