@@ -17,7 +17,7 @@ let AppLink = React.createClass({
     let {to, href, ...props} = this.props;
     to = to || href;
 
-    if (isLocalUrl(to) || isWPUrl(to)) {
+    if (to && (isLocalUrl(to) || isWPUrl(to))) {
       to = removeHost(to);
       return <Link {...props} to={to} />;
     } else {
