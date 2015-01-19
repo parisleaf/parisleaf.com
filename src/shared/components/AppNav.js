@@ -11,7 +11,9 @@ import SvgIcon from './SvgIcon';
 import SiteContainer from './SiteContainer';
 import { normalizeUrl } from '../utils/LinkUtils';
 import Tweet from './Tweet';
-
+import Metadata from './Metadata';
+import theme from '../theme';
+import SvgIcon from './SvgIcon';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
@@ -191,6 +193,35 @@ let drawerStyle = {
 
   menuList: {
     listStyleType: 'none',
+  },
+
+  menuPadding: {
+    paddingTop: theme.rhythm(1),
+    paddingLeft: theme.rhythm(1)
+  },
+  
+  contactInfo: {
+    display: 'block',
+  },
+
+  emailIcon: {
+    width: theme.rhythm(1),
+    height: theme.rhythm(1),
+    fill: theme.color('lightGray')
+  },
+
+  facebookIcon: {
+    width: theme.rhythm(1),
+    height: theme.rhythm(1),
+    fill: theme.color('lightGray'),
+    marginLeft: theme.rhythm(1)
+  },
+
+  twitterIcon: {
+    width: theme.rhythm(1),
+    height: theme.rhythm(1),
+    fill: theme.color('lightGray'),
+    marginLeft: theme.rhythm(1)
   }
 }
 
@@ -263,8 +294,23 @@ let AppNavDrawer = React.createClass({
       <div style={_style}>
         <div style={drawerStyle.container} className="AppNavDrawer">
           <section className="AppNavDrawer-sidebar" style={drawerStyle.sidebar}>
-            {this.primaryMenu()}
-            {this.secondaryMenu()}
+            <div className="AppNavDrawer-sidebar-menu">
+              <div style={drawerStyle.menuPadding}>
+                {this.primaryMenu()}
+              </div>
+              <div style={drawerStyle.menuPadding}>
+                {this.secondaryMenu()}
+              </div>
+            </div>
+            <div className="AppNavDrawer-sidebar-contact" style={drawerStyle.menuPadding}>
+              <Metadata style={drawerStyle.contactInfo}>107 SW 7th Street</Metadata>
+              <Metadata style={drawerStyle.contactInfo}>Gainesville, FL 32601</Metadata>
+            </div>
+            <div className="AppNavDrawer-sidebar-icons" style={drawerStyle.menuPadding}>
+               <SvgIcon name="email" style={drawerStyle.emailIcon}/>
+               <SvgIcon name="facebook-circle" style={drawerStyle.facebookIcon}/>
+               <SvgIcon name="twitter-circle" style={drawerStyle.twitterIcon}/>
+            </div>
           </section>
           <section className="AppNavDrawer-content" style={_contentStyle}>
             <SiteContainer>
