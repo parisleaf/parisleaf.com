@@ -36,6 +36,12 @@ let style = {
     padding: `0 ${rhythm(1)}`,
   },
 
+  resetList: {
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+  },
+
   logoIcon: {
     height: rhythm(navBarRhythmHeight * 0.5),
     width: rhythm(navBarRhythmHeight * 0.5 * logoAspectRatio), // Use aspect ratio
@@ -179,11 +185,11 @@ let drawerStyle = {
   },
 
   primaryMenuLink: {
-    display: 'block',
+    display: 'inline-block',
   },
 
   secondaryMenuLink: {
-    display: 'block',
+    display: 'inline-block',
   },
 
   content: {
@@ -242,16 +248,20 @@ let AppNavDrawer = React.createClass({
 
     if (!menu) return null;
 
-    return menu.get('items').map(item =>
-      <Button
-        component={Link}
-        href={normalizeUrl(item.get('url'))}
-        style={drawerStyle.primaryMenuLink}
-        primaryMenuLink
-      >
-        {item.get('title')}
-      </Button>
+    let items = menu.get('items').map(item =>
+      <li key={item.get('ID')}>
+        <Button
+          component={Link}
+          href={normalizeUrl(item.get('url'))}
+          style={drawerStyle.primaryMenuLink}
+          primaryMenuLink
+        >
+          {item.get('title')}
+        </Button>
+      </li>
     ).toJS();
+
+    return <ul style={style.resetList}>{items}</ul>;
   },
 
   secondaryMenu() {
@@ -259,16 +269,20 @@ let AppNavDrawer = React.createClass({
 
     if (!menu) return null;
 
-    return menu.get('items').map(item =>
-      <Button
-        component={Link}
-        href={normalizeUrl(item.get('url'))}
-        style={drawerStyle.secondaryMenuLink}
-        secondaryMenuLink
-      >
-        {item.get('title')}
-      </Button>
+    let items = menu.get('items').map(item =>
+      <li key={item.get('ID')}>
+        <Button
+          component={Link}
+          href={normalizeUrl(item.get('url'))}
+          style={drawerStyle.secondaryMenuLink}
+          secondaryMenuLink
+        >
+          {item.get('title')}
+        </Button>
+      </li>
     ).toJS();
+
+    return <ul style={style.resetList}>{items}</ul>;
   },
 
   render() {
