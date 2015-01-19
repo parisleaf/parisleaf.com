@@ -1,6 +1,21 @@
-.Tweet 
-  &-meta
+.TweetContainer
+  padding-bottom: rhythm(2)
+
+  .Tweet 
     display: flex
     flex-direction: row
-    justify-content: space-between
-    align-items: baseline
+
+    &-icon
+      padding-right: rhythm(1)
+
+    &-content
+      width: 100%
+      &-meta
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: baseline
+  &-retweet
+    text-align: center
+    padding-top: rhythm(1)
+    padding-bottom: rhythm(1)
