@@ -100,3 +100,6 @@ export function normalizeUrl(url) {
 }
 
 global.normalizeUrl = normalizeUrl;
+global.isLocalUrl = isLocalUrl;
+global.isWPUrl = isWPUrl;
+global.removeHost = removeHost;

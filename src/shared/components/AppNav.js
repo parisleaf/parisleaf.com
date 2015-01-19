@@ -4,7 +4,7 @@ import React from 'react';
 import Immutable from 'immutable';
 import MediaMixin from 'react-media-mixin';
 import tweenState from 'react-tween-state';
-import { Link } from 'react-router';
+import Link from './AppLink';
 import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
@@ -212,7 +212,7 @@ let AppNavDrawer = React.createClass({
 
     return menu.get('items').map(item =>
       <Button
-        component={'a'}
+        component={Link}
         href={normalizeUrl(item.get('url'))}
         style={drawerStyle.primaryMenuLink}
         primaryMenuLink
@@ -229,7 +229,7 @@ let AppNavDrawer = React.createClass({
 
     return menu.get('items').map(item =>
       <Button
-        component={'a'}
+        component={Link}
         href={normalizeUrl(item.get('url'))}
         style={drawerStyle.secondaryMenuLink}
         secondaryMenuLink
