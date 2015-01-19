@@ -74,7 +74,7 @@ export function modularScale(n) {
 export var fontSizes = {
   h1: modularScale(7),
   h2: modularScale(6),
-  h3: modularScale(6),
+  h3: modularScale(3),
   h4: modularScale(3),
   h5: modularScale(3),
   h6: modularScale(3),

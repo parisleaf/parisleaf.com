@@ -2,6 +2,7 @@
 
 import React from 'react';
 import theme from '../theme';
+import assign from 'react/lib/Object.assign';
 
 let style = {
   fontFamily: theme.fontFamily('Alright Sans'),
@@ -12,8 +13,16 @@ let style = {
 
 let Excerpt = React.createClass({
   render() {
+
+    let combinedStyle = assign({}, this.props.style, style);
+
     return (
-      <span className="Excerpt" style={style} >{ this.props.children }</span>
+      <span 
+        className="Excerpt" 
+        style={combinedStyle} 
+      >
+        { this.props.children }
+      </span>
     );
   }
 });
