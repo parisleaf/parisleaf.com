@@ -234,11 +234,8 @@ let PortfolioItem = React.createClass({
     if (project.get('featured_image')) {
       let imageUrl = project
         .get('featured_image')
-        .get('attachment_meta')
-        .get('sizes')
-        .get('large')
-        .get('url');
-
+        .get('source');
+        
       _style.backgroundImage = `url(${imageUrl})`;
     }
 
