@@ -23,8 +23,6 @@ let style = {
 
 let PortfolioHandler = React.createClass({
 
-  mixins: [MediaMixin],
-
   statics: {
     prepareForRun() {
       return ProjectActions.getProjects();
@@ -62,9 +60,8 @@ let PortfolioHandler = React.createClass({
 
     projects = projects
       .map(item =>
-        <ProjectIndexItem
+        <PortfolioItem
           project={item.project}
-          media={this.state.media}
           width={item.width}
           height={projectHeight}
           x={item.x}
@@ -206,45 +203,14 @@ let itemStyle = {
     transitionProperty: 'left, top',
     transitionDuration: '500ms',
   },
-
-  overlay: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    top: 0,
-    left: 0,
-    backgroundColor: 'rgba(0,0,0,0.8)',
-    color: '#fff',
-    padding: rhythm(1),
-    textAlign: 'center',
-  },
 };
 
-let ProjectIndexItem = React.createClass({
-
-  mixins: [tweenState.Mixin],
+let PortfolioItem = React.createClass({
 
   getInitialState() {
     return {
       hover: null,
-      overlayVisibility: null,
     };
-  },
-
-  componentDidMount() {
-    this.updateOverlayVisibility();
-  },
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.overlayShouldBeVisible() !== this.overlayShouldBeVisible(prevProps, prevState)) {
-      this.updateOverlayVisibility();
-    }
-  },
-
-  overlayShouldBeVisible(props = this.props, state = this.state) {
-    return !!(
-      state.hover
-    );
   },
 
   onMouseEnter() {
@@ -255,15 +221,8 @@ let ProjectIndexItem = React.createClass({
     this.setState({hover: false});
   },
 
-  updateOverlayVisibility() {
-    this.tweenState('overlayVisibility', {
-      endValue: this.overlayShouldBeVisible() ? 1 : 0,
-    });
-  },
-
   render() {
     let { project, width, height, x, y } = this.props;
-    let overlayVisibility = this.getTweeningValue('overlayVisibility');
 
     let _style = Object.assign({
       height: rhythm(height),
@@ -283,10 +242,6 @@ let ProjectIndexItem = React.createClass({
       _style.backgroundImage = `url(${imageUrl})`;
     }
 
-    let overlayStyle = Object.assign({
-      opacity: overlayVisibility,
-    }, itemStyle.overlay);
-
     return (
       <Button
         component={AppLink}
@@ -295,12 +250,43 @@ let ProjectIndexItem = React.createClass({
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
       >
-        <article style={overlayStyle}>
-          <Header level={2}>{project.get('title')}</Header>
-        </article>
+        <PortfolioItemOverlay project={project} visible={this.state.hover} />
       </Button>
     );
   },
+
+});
+
+let overlayStyle = {
+  _: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    left: 0,
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    color: '#fff',
+    padding: rhythm(1),
+    textAlign: 'center',
+    transition: '200ms opacity',
+  },
+};
+
+let PortfolioItemOverlay = React.createClass({
+
+  render() {
+    let { project } = this.props;
+
+    let _overlayStyle = Object.assign({
+      opacity: this.props.visible ? 1 : 0,
+    }, overlayStyle._);
+
+    return (
+      <article style={_overlayStyle}>
+        <Header level={2}>{project.get('title')}</Header>
+      </article>
+    );
+  }
 
 });
 
