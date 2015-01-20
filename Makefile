@@ -5,7 +5,7 @@ WATCHIFY_CMD = node_modules/.bin/watchify
 SASS_CMD = sassc
 WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
-SVG_SPRITE_CMD = node_modules/.bin/svg-sprite
+SVG_SPRITE_CMD = svg-sprite
 UGLIFY_CMD = node_modules/.bin/uglifyjs
 CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
@@ -17,9 +17,9 @@ SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 # Build application
-build: js browserify uglify-js css minify-css icons
+build: js browserify uglify-js css minify-css
 
-build-dev: js browserify css icons
+build-dev: js browserify css
 
 # Test
 test: js
@@ -38,7 +38,6 @@ clean:
 	rm -rf lib
 	rm -rf public/js/
 	rm -rf public/css/
-	rm -f views/icon-sprite.svg
 	rm -f sass/_theme.scss
 
 browserify: public/js/app.js
