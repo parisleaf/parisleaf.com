@@ -18,7 +18,7 @@ let style = {
   icon : {
     width: '2rem',
     height: '2rem',
-    fill: theme.color('yellow') 
+    fill: theme.color('yellow')
   },
   header: {
     marginTop: '0',
@@ -32,7 +32,7 @@ let style = {
   }
 }
 
-let Tweet = React.createClass({ 
+let Tweet = React.createClass({
   getInitialState() {
     return {
       tweet: TwitterStore.getTweetById(this.props.id),
@@ -43,7 +43,8 @@ let Tweet = React.createClass({
     TwitterActions.getTweetById(this.props.id);
     TwitterStore.addListener('change', this.twitterStoreDidChange);
   },
-  componentDidUnmount() {
+
+  componentWillUnmount() {
     TwitterStore.addListener('change', this.twitterStoreDidChange);
   },
 
@@ -52,9 +53,9 @@ let Tweet = React.createClass({
       tweet: TwitterStore.getTweetById(this.props.id)
     });
   },
-  
+
   formatDate(date) {
-    let tweetDate = moment(date, "dd MMM DD HH:mm:ss ZZ YYYY");
+    let tweetDate = moment(date, 'dd MMM DD HH:mm:ss ZZ YYYY');
     return tweetDate.format('MM.DD.YYYY');
   },
 
@@ -64,7 +65,6 @@ let Tweet = React.createClass({
       return <h1>Tweet not found</h1>;
     }
 
-    //console.log(this.state.tweet.toJS());
     return(
       <div className="TweetContainer">
       <div className="Tweet">
