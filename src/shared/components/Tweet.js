@@ -8,7 +8,7 @@ import Flux from 'flummox';
 let TwitterActions = Flux.getActions('TwitterActions');
 let TwitterStore = Flux.getStore('TwitterStore');
 
-import theme from '../theme';
+import { color } from '../theme';
 import Excerpt from './Excerpt';
 import Header from './Header';
 import Metadata from './Metadata';
@@ -18,7 +18,7 @@ let style = {
   icon : {
     width: '2rem',
     height: '2rem',
-    fill: theme.color('yellow')
+    fill: color('yellow'),
   },
   header: {
     marginTop: '0',
@@ -26,9 +26,6 @@ let style = {
   retweet: {
     width: '2rem',
     height: '2rem',
-  },
-  hr: {
-    color: theme.color('lightGray')
   }
 }
 
@@ -67,26 +64,25 @@ let Tweet = React.createClass({
 
     return(
       <div className="TweetContainer">
-      <div className="Tweet">
-        <div className="Tweet-icon">
-          <SvgIcon name="twitter" style={style.icon} />
-        </div>
-        <div className="Tweet-content">
-          <div className="Tweet-content-meta">
-            <Header level={2} className="Tweet-content-meta-user" style={style.header}>{this.state.tweet.get('user').get('name')} says:</Header>
-            <Metadata className="Tweet-content-meta-date">{this.formatDate(this.state.tweet.get('created_at'))}</Metadata>
+        <div className="Tweet">
+          <div className="Tweet-icon">
+            <SvgIcon name="twitter" style={style.icon} />
           </div>
-          <div className="Tweet-content-excerpt">
-            <Excerpt>{this.state.tweet.get('text')}</Excerpt>
+          <div className="Tweet-content">
+            <div className="Tweet-content-meta">
+              <Header level={2} className="Tweet-content-meta-user" style={style.header}>{this.state.tweet.get('user').get('name')} says:</Header>
+              <Metadata className="Tweet-content-meta-date">{this.formatDate(this.state.tweet.get('created_at'))}</Metadata>
+            </div>
+            <div className="Tweet-content-excerpt">
+              <Excerpt>{this.state.tweet.get('text')}</Excerpt>
+            </div>
           </div>
-        </div>
 
 
-      </div>
+        </div>
         <div className="TweetContainer-retweet">
           <SvgIcon name="retweet" style={style.retweet} />
         </div>
-        <hr style={style.hr} />
       </div>
     );
   }
