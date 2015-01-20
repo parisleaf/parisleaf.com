@@ -43,6 +43,7 @@
     "react-viewport": "git://github.com/parisleaf/react-viewport.git#2026d2e338ce457d3e2d0de76bc941e02562f163",
     "superagent": "~0.21.0",
     "url-join": "0.0.1",
+    "useragent": "~2.1.3",
     "wordpress-rest-api": "~0.3.1"
   },
   "devDependencies": {
