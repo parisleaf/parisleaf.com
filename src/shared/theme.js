@@ -11,12 +11,13 @@
 
 var colors = {
   gray: '#afbebf',
-  yellow: '#f5d23e',
-  lightGray: '#edf3f4',
+  yellow: '#ffce2e',
+  lightGray: '#e2eaf2',
   darkGray: '#343844',
 
   blue: '#146cce',
   lightBlue: '#58a8fd',
+  smoke: '#6c6846',
   green: '#89f7bf',
   aqua: '#2bd5d3',
   pink: '#fb5382',
