@@ -86,6 +86,7 @@ describe('LinkUtils', () => {
     it('returns true if host matches `process.env.WP_ENDPOINT`', () => {
       expect(isWPUrl('/foo/bar')).to.be.false;
       expect(isWPUrl(`${process.env.WP_ENDPOINT}/foo/bar`)).to.be.true;
+      expect(isWPUrl(`http://${url.parse(process.env.WP_ENDPOINT).host}`)).to.be.true;
       expect(isWPUrl(`http://${url.parse(process.env.WP_ENDPOINT).host}/foo/bar`)).to.be.true;
       expect(isWPUrl('https://google.com')).to.be.false;
     });
