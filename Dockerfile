@@ -5,6 +5,7 @@ RUN apt-get install -y build-essential curl git
 
 # Install nvm
 RUN git clone https://github.com/creationix/nvm.git#43a7d786936ef1fe5fd954c8eee2e41434718574 /.nvm
+RUN cd /.nvm && git checkout tags/v0.23.0
 RUN /bin/bash -c "source /.nvm/nvm.sh && nvm install iojs-v1.0.3 && \
     nvm default iojs-v1.0.3 && \
     ln -s /.nvm/versions/io.js/v1.0.3/bin/iojs /usr/bin/node && \
