@@ -38,30 +38,28 @@ let style = {
     paddingTop: rhythm(1),
     paddingLeft: rhythm(1)
   },
+  
+  metaPadding: {
+    paddingTop: rhythm(1),
+    paddingLeft: rhythm(2)
+  },
 
   contactInfo: {
     display: 'block',
   },
 
-  emailIcon: {
+   firstIcon: {
     width: rhythm(1),
     height: rhythm(1),
-    fill: color('lightGray')
+    fill: color('darkGray'),
   },
 
-  facebookIcon: {
+  extraIcon: {
     width: rhythm(1),
     height: rhythm(1),
-    fill: color('lightGray'),
+    fill: color('darkGray'),
     marginLeft: rhythm(1)
   },
-
-  twitterIcon: {
-    width: rhythm(1),
-    height: rhythm(1),
-    fill: color('lightGray'),
-    marginLeft: rhythm(1),
-  }
 };
 
 let AppNavSidebar = React.createClass({
@@ -129,14 +127,15 @@ let AppNavSidebar = React.createClass({
             {this.secondaryMenu()}
           </div>
         </div>
-        <div className="AppNavDrawer-sidebar-contact" style={style.menuPadding}>
+        <div className="AppNavDrawer-sidebar-contact" style={style.metaPadding}>
           <Metadata style={style.contactInfo}>107 SW 7th Street</Metadata>
           <Metadata style={style.contactInfo}>Gainesville, FL 32601</Metadata>
         </div>
-        <div className="AppNavDrawer-sidebar-icons" style={style.menuPadding}>
-           <SvgIcon name="email" style={style.emailIcon}/>
-           <SvgIcon name="facebook-circle" style={style.facebookIcon}/>
-           <SvgIcon name="twitter-circle" style={style.twitterIcon}/>
+        <div className="AppNavDrawer-sidebar-icons" style={style.metaPadding}>
+           <SvgIcon name="vimeo-circle" style={style.firstIcon}/>
+           <SvgIcon name="facebook-circle" style={style.extraIcon}/>
+           <SvgIcon name="twitter-circle" style={style.extraIcon}/>
+           <SvgIcon name="email" style={style.extraIcon}/>
         </div>
       </section>
     );

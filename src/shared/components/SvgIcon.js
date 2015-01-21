@@ -24,6 +24,7 @@
       <svg
         {...this.props}
         style={style}
+        key={this.props.name}
         className={className}
         dangerouslySetInnerHTML={{ __html: `<use xlink:href="#${this.props.name}"></use>` }}
       />

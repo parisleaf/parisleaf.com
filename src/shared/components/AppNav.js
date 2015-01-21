@@ -35,8 +35,8 @@ let style = {
   },
 
   toggleIcon: {
-    width: rhythm(navBarRhythmHeight * 0.5),
-    height: rhythm(navBarRhythmHeight * 0.5),
+    width: rhythm(navBarRhythmHeight * 0.4),
+    height: rhythm(navBarRhythmHeight * 0.4),
     transition: fillTransition,
   },
 
@@ -73,7 +73,7 @@ let AppNav = React.createClass({
     if(this.props.open) {
       return(<SvgIcon name="close" style={toggleIconStyle} />);
     } else {
-      return(<SvgIcon name="menu" style={toggleIconStyle} />);
+      return(<SvgIcon name="menu"  style={toggleIconStyle} />);
     }
   },
 
