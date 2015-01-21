@@ -62,6 +62,7 @@ var scale = [
   24,
   30,
   45,
+  48,
   68,
   100,
   106,
@@ -70,13 +71,13 @@ var scale = [
 ];
 
 export function modularScale(n) {
-  return `${scale[n] / 14}rem`;
+  return `${scale[n] / 16}rem`;
 }
 
 export var fontSizes = {
-  h1: modularScale(7),
+  h1: modularScale(8),
   h2: modularScale(6),
-  h3: modularScale(3),
+  h3: modularScale(5),
   h4: modularScale(3),
   h5: modularScale(3),
   h6: modularScale(3),

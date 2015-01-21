@@ -8,7 +8,7 @@ let style = {
   fontFamily: theme.fontFamily('vollkorn'),
   fontStyle: 'italic',
   color: theme.color('gray'),
-  fontSize: theme.fontSize('h3')
+  fontSize: theme.fontSize('h4')
 }
 
 let Metadata = React.createClass({

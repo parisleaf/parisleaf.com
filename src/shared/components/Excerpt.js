@@ -8,7 +8,7 @@ let style = {
   fontFamily: theme.fontFamily('Alright Sans'),
   fontStyle: 'italic',
   color: theme.color('darkGray'),
-  fontSize: theme.fontSize('h3')
+  fontSize: theme.fontSize('h4')
 }
 
 let Excerpt = React.createClass({
