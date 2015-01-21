@@ -53,7 +53,7 @@ export function isLocalUrl(url) {
  * @param {string} url
  */
 export function isWPUrl(url) {
-  let endpoint = process.env.WP_ENDPOINT || window.WP_ENDPOINT;
+  let endpoint = process.env.WP_ENDPOINT || global.WP_ENDPOINT;
 
   if (!endpoint) return false;
 
