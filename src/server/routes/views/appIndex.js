@@ -31,6 +31,7 @@ export default function(app) {
     yield this.render('app', {
       appString,
       env: process.env,
+      initialMediaState: JSON.stringify(initialMediaState),
     });
 
     initialMediaState = {};

@@ -39,6 +39,7 @@ let TwitterStore = Flux.getStore('TwitterStore');
 let TwitterActions = Flux.getActions('TwitterActions');
 
 import AppNav from './AppNav';
+import AppOverlay from './AppOverlay';
 
 import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
@@ -113,6 +114,7 @@ let App = React.createClass({
     return (
       <div className="App">
         {appNav}
+        <AppOverlay active={this.state.isTransitioning} />
         <div>
           <RouteHandler />
         </div>
