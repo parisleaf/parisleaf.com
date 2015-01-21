@@ -53,12 +53,14 @@ export function isLocalUrl(url) {
  * @param {string} url
  */
 export function isWPUrl(url) {
-  if (typeof process.env.WP_ENDPOINT !== 'string') return false;
+  let endpoint = process.env.WP_ENDPOINT || global.WP_ENDPOINT;
+
+  if (!endpoint) return false;
 
   let urlObj = _url.parse(url, false, true);
 
   let host = urlObj.host;
-  let wpHost = _url.parse(process.env.WP_ENDPOINT).host;
+  let wpHost = _url.parse(endpoint).host;
 
   if (!host) {
     return false;
