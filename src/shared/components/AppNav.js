@@ -35,8 +35,8 @@ let style = {
   },
 
   toggleIcon: {
-    width: rhythm(navBarRhythmHeight * 0.5),
-    height: rhythm(navBarRhythmHeight * 0.5),
+    width: rhythm(navBarRhythmHeight * 0.4),
+    height: rhythm(navBarRhythmHeight * 0.4),
     transition: fillTransition,
   },
 
