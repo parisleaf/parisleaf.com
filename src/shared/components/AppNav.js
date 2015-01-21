@@ -73,7 +73,7 @@ let AppNav = React.createClass({
     if(this.props.open) {
       return(<SvgIcon name="close" style={toggleIconStyle} />);
     } else {
-      return(<SvgIcon name="menu" style={toggleIconStyle} />);
+      return(<SvgIcon name="menu"  style={toggleIconStyle} />);
     }
   },
 
