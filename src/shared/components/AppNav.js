@@ -65,6 +65,18 @@ let AppNav = React.createClass({
     }
   },
 
+  toggleMenuIcon() {
+    let toggleIconStyle = Object.assign({
+      fill: this.props.textColor,
+    }, style.toggleIcon);
+
+    if(this.props.open) {
+      return(<SvgIcon name="close" style={toggleIconStyle} />);
+    } else {
+      return(<SvgIcon name="menu" style={toggleIconStyle} />);
+    }
+  },
+
   render() {
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
@@ -73,10 +85,6 @@ let AppNav = React.createClass({
     let logoIconStyle = Object.assign({
       fill: this.props.textColor,
     }, style.logoIcon);
-
-    let toggleIconStyle = Object.assign({
-      fill: this.props.textColor,
-    }, style.toggleIcon);
 
     return (
       <div onClick={this.onClick} style={style.wrapper}>
@@ -91,7 +99,7 @@ let AppNav = React.createClass({
             </div>
             <div className="AppNav-bar-toggle">
               <Button onClick={this.onToggleClick}>
-                <SvgIcon name="menu" style={toggleIconStyle} />
+                { this.toggleMenuIcon() }
               </Button>
             </div>
           </div>
