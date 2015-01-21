@@ -86,12 +86,21 @@ export function removeHost(url) {
   return urlObj.path;
 }
 
+export function removeBackslash(url) {
+  if (typeof url !== 'undefined') {
+    if (url.endsWith('/')) {
+      return url.substring(0, url.length-1);
+    }
+  }
+}
+
 /**
  * If url is a WP url or local url, normalize by removing the host
  * @param {string} url
  * @return {string} Normalized url
  */
 export function normalizeUrl(url) {
+  url = removeBackslash(url);
   if (isLocalUrl(url) || isWPUrl(url)) {
     return removeHost(url);
   } else {
