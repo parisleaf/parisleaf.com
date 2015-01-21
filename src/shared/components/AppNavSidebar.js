@@ -113,7 +113,11 @@ let AppNavSidebar = React.createClass({
 
     let _style = Object.assign({
       transform: `translateX(${(1 - visibility) * -100}%)`,
+      visibility: visibility > 0 ? 'visible' : 'hidden',
     }, style._);
+
+    _style.webkitTransform = _style.transform;
+    _style.MsTransform = _style.transform;
 
     return (
       <section className="AppNavDrawer-sidebar" style={_style}>
