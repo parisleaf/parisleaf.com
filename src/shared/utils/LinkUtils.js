@@ -92,6 +92,8 @@ export function removeBackslash(url) {
   if (typeof url !== 'undefined') {
     if (url.endsWith('/')) {
       return url.substring(0, url.length-1);
+    } else {
+      return url;
     }
   }
 }
@@ -102,7 +104,7 @@ export function removeBackslash(url) {
  * @return {string} Normalized url
  */
 export function normalizeUrl(url) {
-  url = removeBackslash(url);
+//  url = removeBackslash(url);
   if (isLocalUrl(url) || isWPUrl(url)) {
     return removeHost(url);
   } else {
