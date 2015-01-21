@@ -109,8 +109,14 @@ let AppNavSidebar = React.createClass({
   },
 
   render() {
+    let { visibility } = this.props;
+
+    let _style = Object.assign({
+      transform: `translateX(${(1 - visibility) * -100}%)`,
+    }, style._);
+
     return (
-      <section className="AppNavDrawer-sidebar" style={style._}>
+      <section className="AppNavDrawer-sidebar" style={_style}>
         <div className="AppNavDrawer-sidebar-menu">
           <div style={style.menuPadding}>
             {this.primaryMenu()}

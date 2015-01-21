@@ -8,27 +8,19 @@ import { color, rhythm, navBarRhythmHeight } from '../theme';
 
 let style = {
   _: {
-    backgroundColor: color('gray'),
     overflow: 'auto',
   }
 };
 
 let AppNavContent = React.createClass({
 
-  contextTypes: {
-    media: React.PropTypes.object,
-  },
-
   render() {
 
-    let _style = style._;
+    let { visibility } = this.props;
 
-    if (this.context.media.l) {
-      _style = Object.assign({
-        paddingTop: rhythm(navBarRhythmHeight),
-        marginTop: rhythm(navBarRhythmHeight * -1),
-      }, _style);
-    }
+    let _style = Object.assign({
+      opacity: visibility,
+    }, style._);
 
     return (
       <section className="AppNavDrawer-content" style={_style}>

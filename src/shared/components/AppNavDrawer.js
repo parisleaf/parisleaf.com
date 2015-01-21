@@ -7,7 +7,19 @@ import AppNavContent from './AppNavContent';
 
 import { color, rhythm, zIndex, navBarRhythmHeight } from '../theme';
 
-const transitionDuration = 250;
+const transition = {
+  duration: 250,
+};
+
+const sidebarTransition = {
+  duration: 150,
+  delay: 200,
+};
+
+const contentTransition = {
+  duration: 600,
+  delay: 0,
+};
 
 let style = {
   _: {
@@ -16,6 +28,7 @@ let style = {
     position: 'fixed',
     zIndex: zIndex('AppNav', -1),
     paddingTop: rhythm(navBarRhythmHeight),
+    backgroundColor: color('lightGray'),
     top: 0,
     left: 0,
   },
@@ -39,12 +52,8 @@ let AppNavDrawer = React.createClass({
   getInitialState() {
     return {
       visibility: this.props.open ? 1 : 0,
-    };
-  },
-
-  getDefaultProps() {
-    return {
-      visibility: 0,
+      sidebarVisibility: this.props.open ? 1 : 0,
+      contentVisibility: this.props.open ? 1 : 0,
     };
   },
 
@@ -62,18 +71,60 @@ let AppNavDrawer = React.createClass({
     return props.open;
   },
 
-  updateVisibility() {
-    this.tweenState('visibility', {
-      endValue: this.props.open ? 1 : 0,
-      duration: transitionDuration,
-    });
+  async updateVisibility() {
 
     // Disable scrolling on body when nav is open
     document.body.style.overflow = this.props.open ? 'hidden' : '';
+
+    let steps = [
+      this.tweenStateImmediate.bind(this, 'visibility', {
+        endValue: this.props.open ? 1 : 0,
+        duration: transition.duration,
+      }),
+
+      wait.bind(this, sidebarTransition.delay),
+
+      this.tweenStateImmediate.bind(this, 'sidebarVisibility', {
+        endValue: this.props.open ? 1 : 0,
+        duration: sidebarTransition.duration,
+      }),
+
+      wait.bind(this, contentTransition.delay),
+
+      this.tweenStateImmediate.bind(this, 'contentVisibility', {
+        endValue: this.props.open ? 1 : 0,
+        duration: contentTransition.duration,
+      }),
+    ];
+
+    if (!this.props.open) steps.reverse();
+
+    for (let step of steps) {
+      await step();
+    }
+  },
+
+  tweenStateAsync(stateNameString, config = {}) {
+    return new Promise((resolve, reject) => {
+      let _config = Object.assign({
+        onEnd: resolve,
+      }, config);
+
+      this.tweenState(stateNameString, _config);
+    });
+  },
+
+  tweenStateImmediate(stateNameString, config = {}) {
+    return new Promise((resolve, reject) => {
+      resolve();
+      this.tweenState(stateNameString, config);
+    });
   },
 
   render() {
     let visibility = this.getTweeningValue('visibility');
+    let sidebarVisibility = this.getTweeningValue('sidebarVisibility');
+    let contentVisibility = this.getTweeningValue('contentVisibility');
 
     let _style = Object.assign({
       opacity: visibility,
@@ -83,16 +134,17 @@ let AppNavDrawer = React.createClass({
     _style.WebkitTransform = _style.transform;
     _style.msTransform = _style.transform;
 
-
     return (
       <div style={_style}>
         <div style={style.container} className="AppNavDrawer">
           <AppNavSidebar
             primaryMenu={this.props.primaryMenu}
             secondaryMenu={this.props.secondaryMenu}
+            visibility={sidebarVisibility}
           />
           <AppNavContent
             tweets={this.props.tweets}
+            visibility={contentVisibility}
           />
         </div>
       </div>
@@ -100,5 +152,9 @@ let AppNavDrawer = React.createClass({
   }
 
 });
+
+function wait(duration) {
+  return new Promise((resolve, reject) => setTimeout(resolve, duration));
+}
 
 export default AppNavDrawer;
