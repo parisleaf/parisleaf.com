@@ -20,4 +20,12 @@ Flux.createActions({
     this.dispatchAction(AppConstants.APP_NAV_SET_TEXT_COLOR, color);
   },
 
+  routeTransitionBegin(state) {
+    this.dispatchAction(AppConstants.APP_ROUTE_TRANSITION_BEGIN, state);
+  },
+
+  routeTransitionEnd(state) {
+    this.dispatchAction(AppConstants.APP_ROUTE_TRANSITION_END, state);
+  },
+
 });

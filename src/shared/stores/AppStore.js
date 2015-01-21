@@ -14,6 +14,7 @@ Flux.createStore({
         open: false,
         textColor: color('text'),
       },
+      isTransitioning: false,
     };
   },
 
@@ -30,6 +31,16 @@ Flux.createStore({
 
     [AppConstants.APP_NAV_SET_TEXT_COLOR, function(color) {
       this.state.nav.textColor = color;
+      this.emit('change');
+    }],
+
+    [AppConstants.APP_ROUTE_TRANSITION_BEGIN, function() {
+      this.state.isTransitioning = true;
+      this.emit('change');
+    }],
+
+    [AppConstants.APP_ROUTE_TRANSITION_END, function() {
+      this.state.isTransitioning = false;
       this.emit('change');
     }],
   ],
