@@ -17,6 +17,7 @@ let style = {
 
   hero: {
     paddingTop: rhythm(navBarRhythmHeight),
+    backgroundColor: color('darkGray'),
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: '#fff',

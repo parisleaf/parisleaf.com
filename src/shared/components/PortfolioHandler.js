@@ -12,6 +12,7 @@ import Button from './Button';
 import Header from './Header';
 import AppLink from './AppLink';
 
+import { nestedGet } from '../utils/ImmutableUtils';
 import { isCaseStudy } from '../utils/ProjectUtils';
 import { rhythm } from '../theme';
 
@@ -231,12 +232,10 @@ let PortfolioItem = React.createClass({
       top: rhythm(y * height),
     }, itemStyle._);
 
-    if (project.get('featured_image')) {
-      let imageUrl = project
-        .get('featured_image')
-        .get('source');
-        
-      _style.backgroundImage = `url(${imageUrl})`;
+    let featuredImageUrl = nestedGet(project, 'featured_image', 'source');
+
+    if (featuredImageUrl) {
+      _style.backgroundImage = `url(${featuredImageUrl})`;
     }
 
     return (
@@ -246,6 +245,7 @@ let PortfolioItem = React.createClass({
         style={_style}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
+        to={project.get('link')}
       >
         <PortfolioItemOverlay project={project} visible={this.state.hover} />
       </Button>
