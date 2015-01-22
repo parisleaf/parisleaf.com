@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Metadata from '../components/Metadata';
 import Excerpt from '../components/Excerpt';
+import Blockquote from '../components/Blockquote';
 
 let Styleguide = React.createClass({
   render() {
@@ -75,6 +76,20 @@ let Styleguide = React.createClass({
       
       >
         <Excerpt>@iamdevloper "MVC? Lol." - every JavaScript framework author in 2015.</Excerpt>
+      </div>
+
+      <div 
+        title="Blockquote"
+        description="Blockquote example"
+        example='<Blockquote 
+  quote="This is an example of a blockquote" 
+  speaker="Jerome Lecat, Scality Founder"
+/>'
+      >
+        <Blockquote 
+          quote="This is an example of a blockquote Vollkorn Bold Italic" 
+          speaker="Jerome Lecat, Scality Founder"
+        />
       </div>
     </StyleguideComponent>
     );
