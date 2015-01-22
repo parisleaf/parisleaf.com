@@ -88,26 +88,29 @@ export function removeHost(url) {
   return urlObj.path;
 }
 
-export function removeBackslash(url) {
-  if (typeof url !== 'undefined') {
-    if (url.endsWith('/')) {
-      return url.substring(0, url.length-1);
-    } else {
-      return url;
-    }
+export function removeTrailingSlash(url) {
+  if (url.endsWith('/')) {
+    return url.substring(0, url.length - 1);
+  } else {
+    return url;
   }
 }
 
+export function hasLeadingSlash(url) {
+  return url.startsWith('/');
+}
+
 /**
- * If url is a WP url or local url, normalize by removing the host
+ * If url is a WP url or local url, normalize by removing the host.
+ * Also ensure that it has a leading slash, and no trailing slash
  * @param {string} url
  * @return {string} Normalized url
  */
 export function normalizeUrl(url) {
-//  url = removeBackslash(url);
   if (isLocalUrl(url) || isWPUrl(url)) {
-    return removeHost(url);
-  } else {
-    return url;
+    url = removeHost(url);
+    url = removeTrailingSlash(url);
   }
+
+  return url;
 }

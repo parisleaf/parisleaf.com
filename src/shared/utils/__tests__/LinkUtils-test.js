@@ -132,6 +132,12 @@ describe('LinkUtils', () => {
     it('does nothing to external, non-WP urls', () => {
       expect(normalizeUrl('http://google.com/foo/bar')).to.equal('http://google.com/foo/bar');
     });
+
+    it('ensures local links have no trailing slash', () => {
+      expect(normalizeUrl('/foo/bar')).to.equal('/foo/bar');
+      expect(normalizeUrl(`${rootUrl()}/foo/bar/`)).to.equal('/foo/bar');
+      expect(normalizeUrl('http://google.com/')).to.equal('http://google.com/');
+    });
   });
 
 });

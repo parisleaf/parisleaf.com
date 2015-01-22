@@ -1,0 +1,31 @@
+'use strict';
+
+import Immutable from 'immutable';
+
+describe('ImmutableUtils', () => {
+
+  describe('nestedGet', () => {
+    import { nestedGet } from '../ImmutableUtils';
+
+    let m = Immutable.fromJS({
+      foo: {
+        bar: {
+          baz: 'foo',
+        }
+      },
+    });
+
+    it('returns a nested value', () => {
+      expect(nestedGet(m, 'foo', 'bar', 'baz')).to.equal('foo');
+      expect(nestedGet(m, 'foo', 'baz', 'bar')).to.be.undefined;
+    });
+
+    it('returns undefined if value isn\'t an Immutable collection', () => {
+      expect(nestedGet(undefined, 'foo', 'bar')).to.be.undefined;
+      expect(nestedGet(null, 'foo', 'bar')).to.be.undefined;
+      expect(nestedGet({}, 'foo', 'bar')).to.be.undefined;
+    });
+
+  });
+
+});

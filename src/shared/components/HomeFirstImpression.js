@@ -7,6 +7,7 @@ import Header from './Header'
 import Button from './Button';
 import AppLink from './AppLink';
 import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../theme';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let style = {
   _: {
@@ -50,25 +51,12 @@ let HomeFirstImpression = React.createClass({
   render() {
     let { page, project } = this.props;
 
-    let title, subtitle;
+    let title = nestedGet(page, 'meta', 'first_impression_title');
+    let subtitle = nestedGet(page, 'meta', 'first_impression_subtitle');
 
-    if (page) {
-      let meta = page.get('meta');
-      title = meta.get('first_impression_title');
-      subtitle = meta.get('first_impression_subtitle');
-    }
-
-    let projectTagline, projectFeaturedImage;
-
-    if (project) {
-      if (project.get('meta')) {
-        projectTagline = project.get('meta').get('tagline');
-      }
-
-      if (project.get('featured_image')) {
-        projectFeaturedImage = project.get('featured_image').get('source');
-      }
-    }
+    let projectTagline = nestedGet(project, 'meta', 'tagline');
+    let projectFeaturedImage = nestedGet(project, 'featured_image', 'source');
+    let projectUrl = nestedGet(project, 'link');
 
     let featuredZoneStyle = style.featuredZone;
 
@@ -94,7 +82,7 @@ let HomeFirstImpression = React.createClass({
           <div style={style.featuredZoneContent}>
             <SiteContainer>
               {projectTagline && <Header level={2}>{projectTagline}</Header>}
-              <Button component={AppLink} to="/blog/hello-world" callToAction>
+              <Button component={AppLink} to={projectUrl} callToAction>
                 Find out more
               </Button>
             </SiteContainer>

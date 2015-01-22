@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { isLocalUrl, isWPUrl, removeHost, removeBackslash } from '../utils/LinkUtils';
+import { isLocalUrl, isWPUrl, normalizeUrl, hasLeadingSlash } from '../utils/LinkUtils';
 
 let AppLink = React.createClass({
 
@@ -17,14 +17,13 @@ let AppLink = React.createClass({
     let {to, href, ...props} = this.props;
     to = to || href;
 
-    if (to && (isLocalUrl(to) || isWPUrl(to)) && removeBackslash(to)){
-      if(removeBackslash(to))
-        to = removeBackslash(to);
-      to = removeHost(to);
-      return <Link {...props} to={to} />;
-    } else {
-      return <a href={to} {...this.props} />;
+    if (to && (isLocalUrl(to) || isWPUrl(to))){
+      to = normalizeUrl(to);
+
+      if (hasLeadingSlash(to)) return <Link {...props} to={to} />;
     }
+
+    return <a href={to} {...this.props} />;
   }
 
 });
