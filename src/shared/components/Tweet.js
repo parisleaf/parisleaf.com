@@ -13,6 +13,8 @@ import Excerpt from './Excerpt';
 import Header from './Header';
 import Metadata from './Metadata';
 import SvgIcon from './SvgIcon';
+import Button from './Button';
+import AppLink from './AppLink';
 
 let style = {
   icon : {
@@ -55,6 +57,12 @@ let Tweet = React.createClass({
     let tweetDate = moment(date, 'dd MMM DD HH:mm:ss ZZ YYYY');
     return tweetDate.format('MM.DD.YYYY');
   },
+  
+  getRetweetUrl() {
+    let id_str = this.state.tweet.get('id_str');
+    let RETWEET_URL = 'https://twitter.com/intent/retweet?tweet_id=';
+    return RETWEET_URL + id_str;
+  },
 
   render() {
 
@@ -81,7 +89,9 @@ let Tweet = React.createClass({
 
         </div>
         <div className="TweetContainer-retweet">
-          <SvgIcon name="retweet" style={style.retweet} />
+          <Button component='a' href={this.getRetweetUrl()}>
+            <SvgIcon name="retweet" style={style.retweet} />
+          </Button>
         </div>
       </div>
     );
