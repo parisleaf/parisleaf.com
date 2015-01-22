@@ -8,7 +8,6 @@ let style = {
   fontFamily: theme.fontFamily('vollkorn'),
   fontStyle: 'italic',
   color: theme.color('gray'),
-  fontSize: theme.fontSize('h4')
 }
 
 let Metadata = React.createClass({
@@ -16,10 +15,10 @@ let Metadata = React.createClass({
 
     let combinedStyle = assign({}, this.props.style, style);
     return (
-      <span 
+      <span
         {...this.props}
-        className="Metadata" 
-        style={combinedStyle} 
+        className="Metadata"
+        style={combinedStyle}
       >
         { this.props.children }
       </span>

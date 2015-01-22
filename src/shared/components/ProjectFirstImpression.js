@@ -4,16 +4,19 @@ import React from 'react';
 import ViewportContainer from 'react-viewport';
 import SiteContainer from './SiteContainer';
 import Header from './Header';
+import Metadata from './Metadata';
 import { nestedGet } from '../utils/ImmutableUtils';
-import { color, rhythm, navBarRhythmHeight } from '../theme';
+import { getServices } from '../utils/ProjectUtils';
+import { color, rhythm, navBarRhythmHeight, fontFamily } from '../theme';
 
 let style = {
   _: {
-    height: '100vh',
+    minHeight: '100vh',
     marginTop: rhythm(-1 * navBarRhythmHeight),
   },
 
   hero: {
+    paddingTop: rhythm(navBarRhythmHeight),
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: '#fff',
@@ -23,9 +26,15 @@ let style = {
     width: '100%',
   },
 
+  services: {
+    fontFamily: fontFamily('alrightBlack'),
+    marginLeft: '0.5em',
+  },
+
   footer: {
-    padding: `${rhythm(1)} 0`,
+    padding: `${rhythm(1.5)} 0`,
     textAlign: 'center',
+    backgroundColor: color('lightGray'),
   },
 };
 
@@ -58,12 +67,26 @@ let ProjectFirstImpression = React.createClass({
         </div>
         <div style={style.footer} className="ProjectFirstImpression-footer">
           <SiteContainer>
-            asldkfjasldf
+            {this.serviceMeta()}
           </SiteContainer>
         </div>
       </ViewportContainer>
     );
   },
+
+  serviceMeta() {
+    let { project } = this.props;
+    let services = getServices(project);
+
+    if (!services.length) return null;
+
+    return (
+      <p>
+        <Metadata>Services: </Metadata>
+        <span style={style.services}>{services.join(', ')}</span>
+      </p>
+    );
+  }
 
 });
 

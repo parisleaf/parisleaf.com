@@ -1,18 +1,33 @@
 'use strict';
 
+import Immutable from 'immutable';
+import { nestedGet } from './ImmutableUtils';
+
 /**
  * Determine if project is a case study or not
  * @param {object} project
  * @returns {boolean}
  */
 export function isCaseStudy(project) {
-  let terms = project.get('terms');
+  let projectTags = nestedGet(project, 'terms', 'project_tag');
 
-  if (!terms) return false;
+  if (!Immutable.List.isList(projectTags)) return false;
 
-  let projectTags = terms.get('project_tag');
+  return projectTags
+    .some(term => term.get('slug') === 'case-study');
+}
 
-  if (!projectTags) return false;
+/**
+ * Return an array of the project's service names
+ * @param {object} project
+ * @returns {array}
+ */
+export function getServices(project) {
+  let services = nestedGet(project, 'terms', 'project_service');
 
-  return projectTags.some(term => term.get('slug') === 'case-study');
+  if (!Immutable.List.isList(services)) return [];
+
+  return services
+    .map(term => term.get('name'))
+    .toJS();
 }
