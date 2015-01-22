@@ -88,6 +88,11 @@ export function removeHost(url) {
   return urlObj.path;
 }
 
+/**
+  * If url has a trailing slash, then remove it. 
+  * @param {string} url
+  * @return {string} url without trailing slash
+  */
 export function removeTrailingSlash(url) {
   if (url === '/') return url;
 

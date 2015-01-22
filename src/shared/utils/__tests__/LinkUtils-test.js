@@ -118,6 +118,18 @@ describe('LinkUtils', () => {
     });
   });
 
+  describe('.removeTrailingSlash', () => {
+    import { removeTrailingSlash } from '../LinkUtils';
+    
+    it('removes the trailing slash from the end of urls iff it exists', () => {
+      expect(removeTrailingSlash('https://google.com/work')).to.equal('https://google.com/work');
+      expect(removeTrailingSlash('https://google.com/work/')).to.equal('https://google.com/work');
+      expect(removeTrailingSlash('/foo?bar=baz')).to.equal('/foo?bar=baz');
+      expect(removeTrailingSlash('/')).to.equal('/');
+
+    });
+  });
+
   describe('.normalizeUrl', () => {
     import { normalizeUrl, rootUrl } from '../LinkUtils';
 
