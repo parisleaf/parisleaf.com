@@ -28,4 +28,4 @@ if (!process.env.ROOT_URL) {
  * Start server
  */
 import app from './server/app';
-global.server = app.listen(process.env.PORT || 3000);
+global.server = app.listen(process.env.PORT || 4000);
