@@ -25,17 +25,28 @@
   &-sidebar
     flex: 0 1 auto
     height: 100vh // TODO: make better for mobile
-    +bp(s)
+    +bp(l)
       height: auto
 
     &-menu
       .Button
         display: inline-block
 
+    &-contact
+      display: none
+      +bp(l)
+        display: block
+
+    &-icons
+      display: flex
+      justify-content: space-between
+      +bp(s)
+        display: block
+
   &-content
     flex: 1 1 auto
     display: none
-    +bp(s)
+    +bp(l)
       display: block // TODO: make better for mobile
   // Layout
   +bp(l)
