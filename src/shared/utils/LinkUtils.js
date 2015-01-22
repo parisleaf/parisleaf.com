@@ -89,6 +89,8 @@ export function removeHost(url) {
 }
 
 export function removeTrailingSlash(url) {
+  if (url === '/') return url;
+
   if (url.endsWith('/')) {
     return url.substring(0, url.length - 1);
   } else {
