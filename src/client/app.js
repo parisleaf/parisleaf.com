@@ -26,15 +26,21 @@ import prepareForRun from '../shared/prepareForRun';
 
 let isInitialRender = true;
 
-Router.run(routes, Router.HistoryLocation, async function(Handler, state) {
-  if (!isInitialRender) {
-    AppActions.routeTransitionBegin(state);
-  } else {
-    isInitialRender = false;
+Router.run(routes, Router.HistoryLocation, function(Handler, state) {
+  async function run() {
+    if (!isInitialRender) {
+      AppActions.routeTransitionBegin(state);
+    } else {
+      isInitialRender = false;
+    }
+
+
+    await prepareForRun(state);
+    React.render(<Handler />, document.getElementById('app'));
+
+    AppActions.routeTransitionEnd(state);
   }
 
-  await prepareForRun(state);
-  React.render(<Handler />, document.getElementById('app'));
-
-  AppActions.routeTransitionEnd(state);
+  run()
+    .catch(error => console.log(error));
 });
