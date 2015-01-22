@@ -4,9 +4,13 @@ import React from 'react';
 import { State, Navigation } from 'react-router';
 
 import Flux from 'flummox';
+
 let ProjectActions = Flux.getActions('ProjectActions');
 let ProjectStore = Flux.getStore('ProjectStore');
 
+let AppActions = Flux.getActions('AppActions');
+
+import ProjectFirstImpression from './ProjectFirstImpression';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
 
@@ -16,6 +20,8 @@ let ProjectHandler = React.createClass({
 
   statics: {
     prepareForRun(state) {
+      AppActions.setNavTextColor('#fff');
+
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
   },
@@ -60,7 +66,9 @@ let ProjectHandler = React.createClass({
     if (!project) return null;
 
     return (
-      <h1>{project.get('title')}</h1>
+      <div>
+        <ProjectFirstImpression project={project} />
+      </div>
     );
 
   },

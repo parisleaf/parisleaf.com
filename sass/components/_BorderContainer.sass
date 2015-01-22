@@ -1,0 +1,8 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding);
+
+.BorderContainer
+  border-left: rhythm(1/4) solid
+  padding-left: rhythm($site-container-rhythm-padding - 1/4)
+
+  +bp(m)
+    margin-left: rhythm(-1 * $site-container-rhythm-padding)
