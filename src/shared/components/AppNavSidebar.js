@@ -35,13 +35,13 @@ let style = {
   },
 
   menuPadding: {
-    paddingTop: rhythm(1),
     paddingLeft: rhythm(1)
   },
   
   metaPadding: {
     paddingTop: rhythm(1),
-    paddingLeft: rhythm(2)
+    paddingLeft: rhythm(1),
+    paddingRight: rhythm(1)
   },
 
   contactInfo: {
@@ -49,14 +49,14 @@ let style = {
   },
 
    firstIcon: {
-    width: rhythm(1),
-    height: rhythm(1),
+    width: rhythm(3/2),
+    height: rhythm(3/2),
     fill: color('darkGray'),
   },
 
   extraIcon: {
-    width: rhythm(1),
-    height: rhythm(1),
+    width: rhythm(3/2),
+    height: rhythm(3/2),
     fill: color('darkGray'),
     marginLeft: rhythm(1)
   },
