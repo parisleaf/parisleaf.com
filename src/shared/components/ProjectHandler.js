@@ -11,6 +11,7 @@ let ProjectStore = Flux.getStore('ProjectStore');
 let AppActions = Flux.getActions('AppActions');
 
 import ProjectFirstImpression from './ProjectFirstImpression';
+import ProjectContent from './ProjectContent';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
 
@@ -68,6 +69,7 @@ let ProjectHandler = React.createClass({
     return (
       <div>
         <ProjectFirstImpression project={project} />
+        <ProjectContent project={project} />
       </div>
     );
 

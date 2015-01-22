@@ -16,6 +16,7 @@
   "dependencies": {
     "101": "~0.8.2",
     "browsernizr": "~1.0.2",
+    "chroma-js": "~0.6.3",
     "co": "~4.1.0",
     "detect-node": "~2.0.3",
     "dotenv": "~0.4.0",
