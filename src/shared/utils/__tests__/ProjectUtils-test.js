@@ -2,7 +2,7 @@
 
 import Immutable from 'immutable';
 
-describe('ProjectUtils', ()=> {
+describe('ProjectUtils', () => {
 
   describe('.isCaseStudy()', () => {
     import { isCaseStudy } from '../ProjectUtils';
@@ -27,9 +27,43 @@ describe('ProjectUtils', ()=> {
         }
       });
 
-      // expect(isCaseStudy(p2)).to.be.false;
+      expect(isCaseStudy(p2)).to.be.false;
 
     });
+  });
+
+  describe('.getServices', () => {
+    import { getServices } from '../ProjectUtils';
+
+    it('returns an array of service names', () => {
+
+      let p1 = Immutable.fromJS({
+        terms: {
+          project_service: [
+            { name: 'foo' },
+            { name: 'bar' },
+            { name: 'baz' },
+          ],
+        }
+      });
+
+      expect(getServices(p1)).to.deep.equal([
+        'foo',
+        'bar',
+        'baz',
+      ]);
+    });
+
+    it('returns empty array if project has no services', () => {
+
+      let p1 = Immutable.fromJS({
+        terms: {},
+      })
+
+      expect(getServices(p1)).to.deep.equal([]);
+
+    });
+
   });
 
 });

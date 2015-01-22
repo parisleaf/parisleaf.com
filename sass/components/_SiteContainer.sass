@@ -1,6 +1,8 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding);
+
 .SiteContainer
   margin: 0 auto
-  padding: 0 rhythm(1)
+  padding: 0 rhythm($site-container-rhythm-padding)
 
   @each $name, $breakpoint in map-get($theme, 'breakpoints')
     @include bp($name)

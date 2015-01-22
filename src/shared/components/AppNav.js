@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Immutable from 'immutable';
-import Link from './AppLink';
+import AppLink from './AppLink';
 import { rhythm, zIndex, navBarRhythmHeight } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
@@ -91,7 +91,7 @@ let AppNav = React.createClass({
         <nav className="AppNav" style={_style}>
           <div className="AppNav-bar">
             <div className="AppNav-bar-logo">
-              <Button component={Link} onClick={AppActions.closeNav} to="/">
+              <Button component={AppLink} onClick={AppActions.closeNav} to="/">
                 <SvgIcon name="logo" style={logoIconStyle} />
               </Button>
             </div>
