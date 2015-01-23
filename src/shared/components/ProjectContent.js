@@ -4,6 +4,7 @@ import React from 'react';
 import { nestedGet } from '../utils/ImmutableUtils';
 import chroma from 'chroma-js';
 import { color } from '../theme';
+import { getPrimaryColor } from '../utils/ProjectUtils';
 
 let ProjectContainer = React.createClass({
 
@@ -12,7 +13,7 @@ let ProjectContainer = React.createClass({
 
     if (!project) return null;
 
-    let primaryColor = nestedGet(project, 'meta', 'primary_color') || color('darkGray');
+    let primaryColor = getPrimaryColor(project);
     let primaryTextColor = chroma(primaryColor).luminance() < 0.5
       ? color('lightGray')
       : color('text');

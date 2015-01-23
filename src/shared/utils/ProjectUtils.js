@@ -31,3 +31,12 @@ export function getServices(project) {
     .map(term => term.get('name'))
     .toJS();
 }
+
+/**
+ * Return the primary color for a project, with a fallback.
+ * @param {object} project
+ * @returns {string} color
+ */
+export function getPrimaryColor(project) {
+  return nestedGet(project, 'meta', 'primary_color') || color('pink');
+}

@@ -6,12 +6,12 @@ import SiteContainer from './SiteContainer';
 import Header from './Header';
 import Metadata from './Metadata';
 import { nestedGet } from '../utils/ImmutableUtils';
-import { getServices } from '../utils/ProjectUtils';
+import { getServices, getPrimaryColor } from '../utils/ProjectUtils';
 import { color, rhythm, navBarRhythmHeight, fontFamily } from '../theme';
 
 let style = {
   _: {
-    minHeight: '100vh',
+    height: '100vh',
     marginTop: rhythm(-1 * navBarRhythmHeight),
   },
 
@@ -47,13 +47,14 @@ let ProjectFirstImpression = React.createClass({
     let projectMeta = nestedGet(project, 'meta');
     let heroImageUrl = nestedGet(projectMeta, 'hero_image', 'sizes', 'large')
       || nestedGet(projectMeta, 'hero_image', 'url');
+    let primaryColor = getPrimaryColor(project);
 
     let heroStyle = Object.assign({
       backgroundImage: `url(${heroImageUrl})`,
     }, style.hero);
 
     let heroHeaderContainerStyle = {
-      borderLeftColor: color('pink'),
+      borderLeftColor: primaryColor,
     };
 
     return (
