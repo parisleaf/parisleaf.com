@@ -14,7 +14,6 @@ let style = {
     paddingTop: rhythm(navBarRhythmHeight),
     marginTop: rhythm(-1 * navBarRhythmHeight),
     background: '#fff',
-    minHeight: '100vh',
   },
 
   helloZone: {
@@ -48,6 +47,10 @@ let style = {
 
 let HomeFirstImpression = React.createClass({
 
+  contextTypes: {
+    media: React.PropTypes.object,
+  },
+
   render() {
     let { page, project } = this.props;
 
@@ -58,6 +61,9 @@ let HomeFirstImpression = React.createClass({
     let projectFeaturedImage = nestedGet(project, 'featured_image', 'source');
     let projectUrl = nestedGet(project, 'link');
 
+    let _style = Object.assign({}, style._);
+    _style[this.context.media.m ? 'height': 'minHeight'] = '100vh';
+
     let featuredZoneStyle = style.featuredZone;
 
     if (projectFeaturedImage) {
@@ -67,7 +73,7 @@ let HomeFirstImpression = React.createClass({
     }
 
     return (
-      <ViewportContainer className="Home-firstImpression" style={style._}>
+      <ViewportContainer className="Home-firstImpression" style={_style}>
         <section style={style.helloZone} className="Home-firstImpression-helloZone">
           <div style={style.helloZoneContent}>
             <SiteContainer>
