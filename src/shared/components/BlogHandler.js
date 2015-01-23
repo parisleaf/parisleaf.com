@@ -10,7 +10,6 @@ import moment from 'moment';
 import { nestedGet } from '../utils/ImmutableUtils';
 import { getTermNames } from '../utils/PostUtils';
 import { rhythm, color, siteContainerRhythmPadding } from '../theme';
-import Ellipsis from 'ftellipsis';
 
 import Header from './Header';
 import SiteContainer from './SiteContainer';
@@ -103,6 +102,7 @@ let BlogPost = React.createClass({
 
   componentDidMount() {
     // Truncate multi-line excerpt
+    import Ellipsis from 'ftellipsis';
     this.ellipsis = new Ellipsis(this.refs.excerpt.getDOMNode());
 
     this.ellipsis.calc();
