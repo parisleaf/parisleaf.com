@@ -6,14 +6,17 @@ import AppHandler from './components/AppHandler';
 import HomeHandler from './components/HomeHandler';
 import PostHandler from './components/PostHandler';
 import PortfolioHandler from './components/PortfolioHandler';
+import BlogHandler from './components/BlogHandler';
 import ProjectHandler from './components/ProjectHandler';
 
 let Routes = (
   <Route name="app" path="/" handler={AppHandler}>
-    <Route name="work" path="/work" handler={PortfolioHandler} />
-    <Route name="project" path="/work/:slug" handler={ProjectHandler} />
-    <Route name="projectByClient" path="/work/:client/:slug" handler={ProjectHandler} />
-    <Route name="post" path="/blog/:slug" handler={PostHandler} />
+    <Route path="/work" name="work" handler={PortfolioHandler} />
+    <Route path="/work/:slug" name="project" handler={ProjectHandler} />
+    <Route path="/work/*/:slug" handler={ProjectHandler} />
+    <Route path="/blog/:slug" name="post" handler={PostHandler} />
+    <Route path="/blog/*/:slug" handler={PostHandler} />
+    <Route path="/blog" name="blog" handler={BlogHandler} />
     <DefaultRoute name="home" handler={HomeHandler} />
     <NotFoundRoute name="404" handler={HomeHandler} />
   </Route>

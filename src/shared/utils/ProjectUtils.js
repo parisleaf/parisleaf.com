@@ -2,6 +2,7 @@
 
 import Immutable from 'immutable';
 import { nestedGet } from './ImmutableUtils';
+import { getTermNames } from './PostUtils';
 
 /**
  * Determine if project is a case study or not
@@ -23,13 +24,7 @@ export function isCaseStudy(project) {
  * @returns {array}
  */
 export function getServices(project) {
-  let services = nestedGet(project, 'terms', 'project_service');
-
-  if (!Immutable.List.isList(services)) return [];
-
-  return services
-    .map(term => term.get('name'))
-    .toJS();
+  return getTermNames(project, 'project_service');
 }
 
 /**
