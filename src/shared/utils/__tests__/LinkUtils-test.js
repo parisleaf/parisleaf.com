@@ -21,6 +21,7 @@ describe('LinkUtils', () => {
     if (isNode) {
       it('uses localhost as hostname, if none given', () => {
         expect(ensureIsomorphicUrl('/foo/bar')).to.equal('http://localhost:1234/foo/bar');
+        expect(ensureIsomorphicUrl('/foo/bar?baz=foo')).to.equal('http://localhost:1234/foo/bar?baz=foo');
         expect(ensureIsomorphicUrl('http://baz.com/foo/bar')).to.equal('http://baz.com/foo/bar');
       });
 

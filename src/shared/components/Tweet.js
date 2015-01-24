@@ -32,41 +32,23 @@ let style = {
 }
 
 let Tweet = React.createClass({
-  getInitialState() {
-    return {
-      tweet: TwitterStore.getTweetById(this.props.id),
-    };
-  },
-
-  componentDidMount() {
-    TwitterActions.getTweetById(this.props.id);
-    TwitterStore.addListener('change', this.twitterStoreDidChange);
-  },
-
-  componentWillUnmount() {
-    TwitterStore.addListener('change', this.twitterStoreDidChange);
-  },
-
-  twitterStoreDidChange() {
-    this.setState({
-      tweet: TwitterStore.getTweetById(this.props.id)
-    });
-  },
 
   formatDate(date) {
     let tweetDate = moment(date, 'dd MMM DD HH:mm:ss ZZ YYYY');
     return tweetDate.format('MM.DD.YYYY');
   },
-  
+
   getRetweetUrl() {
-    let id_str = this.state.tweet.get('id_str');
+    let { tweet } = this.props;
+    let id_str = tweet.get('id_str');
     let RETWEET_URL = 'https://twitter.com/intent/retweet?tweet_id=';
     return RETWEET_URL + id_str;
   },
 
   render() {
+    let { tweet } = this.props;
 
-    if(!this.state.tweet) {
+    if(!tweet) {
       return <h1>Tweet not found</h1>;
     }
 
@@ -78,11 +60,11 @@ let Tweet = React.createClass({
           </div>
           <div className="Tweet-content">
             <div className="Tweet-content-meta">
-              <Header level={2} className="Tweet-content-meta-user" style={style.header}>{this.state.tweet.get('user').get('name')} says:</Header>
-              <Metadata className="Tweet-content-meta-date">{this.formatDate(this.state.tweet.get('created_at'))}</Metadata>
+              <Header level={2} className="Tweet-content-meta-user" style={style.header}>{tweet.get('user').get('name')} says:</Header>
+              <Metadata className="Tweet-content-meta-date">{this.formatDate(tweet.get('created_at'))}</Metadata>
             </div>
             <div className="Tweet-content-excerpt">
-              <Excerpt>{this.state.tweet.get('text')}</Excerpt>
+              <Excerpt>{tweet.get('text')}</Excerpt>
             </div>
           </div>
 

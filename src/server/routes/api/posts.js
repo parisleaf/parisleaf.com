@@ -3,7 +3,9 @@
 import wp from './WP';
 import whitelist from '101/pick';
 
-const acceptedPostFilters = [];
+const acceptedPostFilters = [
+  'category_name',
+];
 
 export default function(app) {
 

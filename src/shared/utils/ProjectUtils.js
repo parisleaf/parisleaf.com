@@ -3,6 +3,7 @@
 import Immutable from 'immutable';
 import { nestedGet } from './ImmutableUtils';
 import { getTermNames } from './PostUtils';
+import { color } from '../theme';
 
 /**
  * Determine if project is a case study or not

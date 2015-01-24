@@ -20,10 +20,14 @@ let ProjectHandler = React.createClass({
   mixins: [State, Navigation],
 
   statics: {
-    prepareForRun(state) {
-      AppActions.setNavTextColor('#fff');
+    willTransitionTo(transition, params) {
+      transition.wait(
+        ProjectActions.getProjectBySlug(params.slug)
+      );
+    },
 
-      return ProjectActions.getProjectBySlug(state.params.slug);
+    routerWillRun(state) {
+      AppActions.setNavTextColor('#fff');
     },
   },
 

@@ -25,8 +25,8 @@ let AppNavContent = React.createClass({
     return (
       <section className="AppNavDrawer-content" style={_style}>
         <SiteContainer>
-          <Tweet id={this.props.tweets.get(0).get('id_str')} />
-          <Tweet id={this.props.tweets.get(1).get('id_str')} />
+          <Tweet tweet={this.props.tweets.get(0)} />
+          <Tweet tweet={this.props.tweets.get(1)} />
         </SiteContainer>
       </section>
     );

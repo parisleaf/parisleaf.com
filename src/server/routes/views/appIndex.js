@@ -10,7 +10,7 @@ MediaMixin.getInitialState = function () {
 import React from 'react';
 import Router from 'react-router';
 import routes from '../../../shared/routes';
-import prepareForRun from '../../../shared/prepareForRun';
+import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
 
 import userAgentToMediaState from '../../userAgentToMediaState';
 
@@ -21,10 +21,10 @@ export default function(app) {
     initialMediaState = userAgentToMediaState(this.headers['user-agent']);
 
     let { Handler, state } = yield new Promise((resolve, reject) => {
-      Router.run(routes, this.path, (Handler, state) => resolve({ Handler, state }));
+      Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
 
-    yield prepareForRun(state);
+    yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
     let appString = React.renderToString(<Handler />);
 

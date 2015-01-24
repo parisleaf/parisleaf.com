@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import HomeFirstImpression from './HomeFirstImpression'
+import HomeFirstImpression from './HomeFirstImpression';
 
 import Flux from 'flummox';
 
@@ -18,16 +18,20 @@ import { color } from '../theme';
 let Home = React.createClass({
 
   statics: {
-    prepareForRun: async function prepareForRun() {
+    willTransitionTo(transition) {
+      transition.wait(async function() {
+        await PageActions.getPageBySlug('home');
+        let homePage = PageStore.getPageBySlug('home');
+
+        if (homePage) {
+          // Fetch first-impression project
+          await ProjectActions.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
+        }
+      }());
+    },
+
+    routerWillRun() {
       AppActions.setNavTextColor(color('yellow'));
-
-      await PageActions.getPageBySlug('home');
-      let homePage = PageStore.getPageBySlug('home');
-
-      if (homePage) {
-        // Fetch first-impression project
-        await ProjectActions.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
-      }
     },
   },
 

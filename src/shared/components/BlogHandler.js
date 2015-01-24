@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-
+import { State, Link } from 'react-router';
 import Flux from 'flummox';
 let PostActions = Flux.getActions('PostActions');
 let PostStore = Flux.getStore('PostStore');
@@ -40,29 +40,37 @@ let style = {
 
 let BlogHandler = React.createClass({
 
+  mixins: [State],
+
   statics: {
-    prepareForRun() {
-      return PostActions.getPosts();
+    willTransitionTo(transition, params, query) {
+      return transition.wait(
+        PostActions.getPosts(query)
+      );
     },
+
+    routerDidRun(state) {
+      return PostActions.getPosts(state.query);
+    }
   },
 
   getInitialState() {
     return {
-      posts: PostStore.getPosts(),
+      posts: PostStore.getPosts(this.getQuery()),
     };
   },
 
   componentDidMount() {
-    PostStore.addListener('change', this.postStoreDidChange);
+    PostStore.addListener('change', this.updatePosts);
   },
 
   componentWillUnmount() {
-    PostStore.removeListener('change', this.postStoreDidChange);
+    PostStore.removeListener('change', this.updatePosts);
   },
 
-  postStoreDidChange() {
+  updatePosts() {
     this.setState({
-      posts: PostStore.getPosts(),
+      posts: PostStore.getPosts(this.getQuery()),
     });
   },
 
@@ -85,6 +93,8 @@ let BlogHandler = React.createClass({
           <div className="BorderContainer BorderContainer--noHang">
             <Header level={1}>Blog</Header>
             <Header level={2}>Sometimes we talk about News, Events, Inspriation, and Education.</Header>
+            <Link to="blog" query={{ category_name: 'events' }}>Events</Link>
+            <Link to="blog" query={{ category_name: 'uncategorized' }}>Uncategorized</Link>
           </div>
         </SiteContainer>
         <div style={postContainerStyle}>

@@ -14,7 +14,7 @@ Flux.createActions({
       return TwitterService.getTweets(...args);
     }],
 
-    getTweetById: [TwitterConstants.TWITTER_GET_TWEET_BY_ID, function(...args) { 
+    getTweetById: [TwitterConstants.TWITTER_GET_TWEET_BY_ID, function(...args) {
       return TwitterService.getTweetById(...args);
     }],
   },

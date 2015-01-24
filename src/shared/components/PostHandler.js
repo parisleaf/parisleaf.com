@@ -12,8 +12,10 @@ let PostHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    prepareForRun(state) {
-      return PostActions.getPostBySlug(state.params.slug);
+    willTransitionTo(transition, params, query) {
+      return transition.wait(
+        PostActions.getPostBySlug(params.slug)
+      );
     }
   },
 

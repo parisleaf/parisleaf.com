@@ -17,4 +17,3 @@ export async function getTweetById(id, query = {}) {
   let tweets = await request.get(ensureIsomorphicUrl(`/api/tweets/${id}`)).query(query).exec();
   return tweets.body;
 }
-

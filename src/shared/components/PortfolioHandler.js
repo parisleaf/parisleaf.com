@@ -25,8 +25,10 @@ let style = {
 let PortfolioHandler = React.createClass({
 
   statics: {
-    prepareForRun() {
-      return ProjectActions.getProjects();
+    willTransitionTo(transition) {
+      return transition.wait(
+        ProjectActions.getProjects()
+      );
     },
   },
 

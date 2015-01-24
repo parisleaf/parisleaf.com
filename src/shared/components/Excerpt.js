@@ -7,6 +7,7 @@ let Excerpt = React.createClass({
   render() {
     return (
       <span
+        {...this.props}
         className="Excerpt"
       />
     );

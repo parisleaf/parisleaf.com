@@ -49,16 +49,18 @@ let App = React.createClass({
   mixins: [MediaMixin],
 
   statics: {
-    prepareForRun(state) {
+    willTransitionTo(transition) {
+      return transition.wait(Promise.all([
+        MenuActions.getMenus(),
+        TwitterActions.getTweets(),
+      ]));
+    },
+
+    routerWillRun(state) {
       AppActions.setNavTextColor(color('text'));
 
       // Make sure nav is dismissed on re-route
       AppActions.closeNav();
-
-      return Promise.all([
-        MenuActions.getMenus(),
-        TwitterActions.getTweets(),
-      ]);
     }
   },
 
