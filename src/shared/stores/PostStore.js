@@ -16,7 +16,7 @@ Flux.createStore({
   actions: [
     [PostConstants.POST_GET_POSTS_SUCCESS, function(result) {
       let { posts, query } = result;
-      
+
       posts = Immutable.fromJS(posts.reduce((result, post) => {
         if (post.slug) {
           result[post.slug] = post;
@@ -48,6 +48,10 @@ Flux.createStore({
     return slugs
       ? slugs.map(slug => this.posts.get(slug))
       : Immutable.List([]);
+  },
+
+  getAllPosts() {
+    return this.posts.toList();
   },
 
   getPostBySlug(slug) {

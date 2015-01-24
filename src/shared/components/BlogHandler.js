@@ -8,7 +8,7 @@ let PostStore = Flux.getStore('PostStore');
 
 import moment from 'moment';
 import { nestedGet } from '../utils/ImmutableUtils';
-import { getTermNames } from '../utils/PostUtils';
+import { getTermNames, filter as filterPosts } from '../utils/PostUtils';
 import { rhythm, color, siteContainerRhythmPadding } from '../theme';
 
 import Header from './Header';
@@ -70,12 +70,12 @@ let BlogHandler = React.createClass({
 
   updatePosts() {
     this.setState({
-      posts: PostStore.getPosts(this.getQuery()),
+      posts: PostStore.getAllPosts(),
     });
   },
 
   render() {
-    let { posts } = this.state;
+    let posts = filterPosts(this.state.posts, this.getQuery());
 
     posts = posts
       .map(post =>
@@ -93,8 +93,8 @@ let BlogHandler = React.createClass({
           <div className="BorderContainer BorderContainer--noHang">
             <Header level={1}>Blog</Header>
             <Header level={2}>Sometimes we talk about News, Events, Inspriation, and Education.</Header>
-            <Link to="blog" query={{ category_name: 'events' }}>Events</Link>
-            <Link to="blog" query={{ category_name: 'uncategorized' }}>Uncategorized</Link>
+            <Link to="blog" query={{ category: 'events' }}>Events</Link>
+            <Link to="blog" query={{ category: 'uncategorized' }}>Uncategorized</Link>
           </div>
         </SiteContainer>
         <div style={postContainerStyle}>

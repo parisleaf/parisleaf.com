@@ -24,11 +24,7 @@ import Flux from 'flummox';
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
 
 Router.run(routes, Router.HistoryLocation, function(Handler, state) {
-  async function run() {
-    await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-    React.render(<Handler />, document.getElementById('app'));
-    await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
-  }
-
-  run();
+  performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+  React.render(<Handler />, document.getElementById('app'));
+  performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
 });

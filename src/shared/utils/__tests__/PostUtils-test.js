@@ -4,22 +4,22 @@ import Immutable from 'immutable';
 
 describe('PostUtils', () => {
 
-  describe('.getTermNames', () => {
-    import { getTermNames } from '../PostUtils';
+  describe('.getTermSlugs', () => {
+    import { getTermSlugs } from '../PostUtils';
 
-    it('returns an array of term names', () => {
+    it('returns an array of term slugs', () => {
 
       let p1 = Immutable.fromJS({
         terms: {
           foobar_tag: [
-            { name: 'foo' },
-            { name: 'bar' },
-            { name: 'baz' },
+            { slug: 'foo' },
+            { slug: 'bar' },
+            { slug: 'baz' },
           ],
         }
       });
 
-      expect(getTermNames(p1, 'foobar_tag')).to.deep.equal([
+      expect(getTermSlugs(p1, 'foobar_tag')).to.deep.equal([
         'foo',
         'bar',
         'baz',
@@ -32,7 +32,46 @@ describe('PostUtils', () => {
         terms: {},
       })
 
-      expect(getTermNames(p1, 'foobar_tag')).to.deep.equal([]);
+      expect(getTermSlugs(p1, 'foobar_tag')).to.deep.equal([]);
+
+    });
+
+  });
+
+  describe('hasTerm', () => {
+    import { hasTerm } from '../PostUtils';
+
+    it('returns true if post has term', () => {
+      let p1 = Immutable.fromJS({
+        terms: {
+          foobar_tag: [
+            { slug: 'foo' },
+            { slug: 'bar' },
+            { slug: 'baz' },
+          ],
+        }
+      });
+
+      expect(hasTerm(p1, 'foo', 'foobar_tag')).to.be.true;
+      expect(hasTerm(p1, 'foo', 'barbaz_tag')).to.be.false;
+      expect(hasTerm(p1, 'foobar', 'foobar_tag')).to.be.false;
+    });
+
+  });
+
+  describe('.filter', () => {
+    import { filter } from '../PostUtils';
+
+    it('filters by category', () => {
+      let p1 = { terms: { category: [ { slug: 'foo' }, { slug: 'bar' } ] } };
+      let p2 = { terms: { category: [ { slug: 'foo' }, { slug: 'baz' } ] } };
+
+      let posts = Immutable.fromJS([ p1, p2 ]);
+
+      expect(filter(posts, {category: 'foo'}).toJS()).to.deep.equal([ p1, p2 ]);
+      expect(filter(posts, {category: 'bar'}).toJS()).to.deep.equal([ p1 ]);
+      expect(filter(posts, {category: 'baz'}).toJS()).to.deep.equal([ p2 ]);
+      expect(filter(posts, {category: 'foobar'}).toJS()).to.deep.equal([]);
 
     });
 

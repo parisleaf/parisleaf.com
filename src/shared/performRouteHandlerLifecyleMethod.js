@@ -1,12 +1,11 @@
 'use strict';
 
-async function performRouteHandlerLifecyleMethod(routes, methodName, ...args) {
-  let responses = routes
-    .map(route => route.handler[methodName])
-    .filter(method => typeof method === 'function')
-    .map(method => method(...args));
+function performRouteHandlerLifecyleMethod(routes, methodName, ...args) {
+  for (let route of routes) {
+    let method = route.handler[methodName];
 
-  await Promise.all(responses);
+    if (typeof method === 'function') method(...args);
+  }
 }
 
 export default performRouteHandlerLifecyleMethod;
