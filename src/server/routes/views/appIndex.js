@@ -10,6 +10,10 @@ MediaMixin.getInitialState = function () {
 import React from 'react';
 import Router from 'react-router';
 import routes from '../../../shared/routes';
+
+import Flux from 'flummox';
+let RouterActions = Flux.getActions('RouterActions');
+
 import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
 
 import userAgentToMediaState from '../../userAgentToMediaState';
@@ -24,6 +28,7 @@ export default function(app) {
       Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
 
+    RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
     let appString = React.renderToString(<Handler />);

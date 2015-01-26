@@ -9,6 +9,10 @@ import '../constants/AppConstants';
 import '../actions/AppActions';
 import '../stores/AppStore';
 
+import '../constants/RouterConstants';
+import '../actions/RouterActions';
+import '../stores/RouterStore';
+
 import '../constants/PostConstants';
 import '../actions/PostActions';
 import '../stores/PostStore';
@@ -49,18 +53,16 @@ let App = React.createClass({
   mixins: [MediaMixin],
 
   statics: {
-    willTransitionTo(transition) {
-      return transition.wait(Promise.all([
-        MenuActions.getMenus(),
-        TwitterActions.getTweets(),
-      ]));
-    },
-
     routerWillRun(state) {
       AppActions.setNavTextColor(color('text'));
 
       // Make sure nav is dismissed on re-route
       AppActions.closeNav();
+
+      return Promise.all([
+        MenuActions.getMenus(),
+        TwitterActions.getTweets(),
+      ]);
     }
   },
 

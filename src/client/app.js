@@ -20,17 +20,19 @@ import Router from 'react-router';
 import routes from '../shared/routes';
 
 import Flux from 'flummox';
+let RouterActions = Flux.getActions('RouterActions');
 
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
 import { didInitialRender } from '../shared/isInitialRender';
 
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   async function run() {
+    RouterActions.routerWillRun(state);
     await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
     React.render(<Handler />, document.getElementById('app'));
     didInitialRender();
     await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
   }
 
-  run();
+  run().catch(error => console.log(error));
 });

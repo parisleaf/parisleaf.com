@@ -25,10 +25,8 @@ let style = {
 let PortfolioHandler = React.createClass({
 
   statics: {
-    willTransitionTo(transition) {
-      return transition.wait(
-        ProjectActions.getProjects()
-      );
+    routerWillRun() {
+      return ProjectActions.getProjects();
     },
   },
 

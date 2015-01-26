@@ -5,6 +5,7 @@ import { State, Link } from 'react-router';
 import Flux from 'flummox';
 let PostActions = Flux.getActions('PostActions');
 let PostStore = Flux.getStore('PostStore');
+let RouterStore = Flux.getStore('RouterStore');
 
 import moment from 'moment';
 import { nestedGet } from '../utils/ImmutableUtils';
@@ -43,25 +44,26 @@ let BlogHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    willTransitionTo(transition, params, query) {
-      return transition.wait(
-        PostActions.getPosts(query)
-      );
+    routerWillRun(state) {
+      return PostActions.getPosts(state.query);
     },
   },
 
   getInitialState() {
     return {
-      posts: PostStore.getPosts(this.getQuery()),
+      query: RouterStore.getQuery(),
+      posts: PostStore.getPosts(RouterStore.getQuery()),
     };
   },
 
   componentDidMount() {
     PostStore.addListener('change', this.updatePosts);
+    RouterStore.addListener('routerWillRun', this.updateQuery);
   },
 
   componentWillUnmount() {
     PostStore.removeListener('change', this.updatePosts);
+    RouterStore.removeListener('routerWillRun', this.updateQuery);
   },
 
   updatePosts() {
@@ -70,8 +72,14 @@ let BlogHandler = React.createClass({
     });
   },
 
+  updateQuery() {
+    this.setState({
+      query: RouterStore.getQuery(),
+    })
+  },
+
   render() {
-    let posts = filterPosts(this.state.posts, this.getQuery());
+    let posts = filterPosts(this.state.posts, this.state.query);
 
     posts = posts
       .map(post =>

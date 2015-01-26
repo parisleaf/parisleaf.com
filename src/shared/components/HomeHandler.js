@@ -18,20 +18,16 @@ import { color } from '../theme';
 let Home = React.createClass({
 
   statics: {
-    willTransitionTo(transition) {
-      transition.wait(async function() {
-        await PageActions.getPageBySlug('home');
-        let homePage = PageStore.getPageBySlug('home');
-
-        if (homePage) {
-          // Fetch first-impression project
-          await ProjectActions.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
-        }
-      }());
-    },
-
-    routerWillRun() {
+    routerWillRun: async function routerWillRun() {
       AppActions.setNavTextColor(color('yellow'));
+
+      await PageActions.getPageBySlug('home');
+      let homePage = PageStore.getPageBySlug('home');
+
+      if (homePage) {
+        // Fetch first-impression project
+        await ProjectActions.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
+      }
     },
   },
 
