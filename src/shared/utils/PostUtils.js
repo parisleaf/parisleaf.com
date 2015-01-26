@@ -2,6 +2,7 @@
 
 import Immutable from 'immutable';
 import { nestedGet } from './ImmutableUtils';
+import { color } from '../theme';
 
 /**
  * Return an array of term slugs for a given taxonomy.
@@ -62,4 +63,15 @@ export function filter(posts, query) {
 
     return true;
   });
+}
+
+export function getCardColor(post, query) {
+  if (hasTerm(post, 'events', 'category')) return color('blue');
+  if (hasTerm(post, 'inspiration', 'category')) return color('green');
+
+  return color('yellow');
+}
+
+export function getFeaturedImage(post) {
+  return nestedGet(post, 'featured_image', 'source');
 }
