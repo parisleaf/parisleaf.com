@@ -19,7 +19,7 @@ let Button = React.createClass({
         {...props}
         componentName="Button"
         element={component}
-        modifiers={['block', 'callToAction', 'primaryMenuLink', 'secondaryMenuLink']}
+        modifiers={['block', 'callToAction', 'callToAction', 'primaryMenuLink', 'secondaryMenuLink']}
       />
     );
   }

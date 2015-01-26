@@ -71,6 +71,7 @@
     "supertest": "~0.15.0",
     "twit": "~1.1.19",
     "uglify-js": "~2.4.16",
+    "velocity-animate": "~1.2.1",
     "watch": "~0.13.0",
     "watchify": "~2.2.1",
     "webdriverio": "~2.4.2"

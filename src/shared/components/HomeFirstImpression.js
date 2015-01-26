@@ -8,6 +8,9 @@ import Button from './Button';
 import AppLink from './AppLink';
 import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
+import theme from '../theme';
+import Slider from './Slider';
+import ProjectSlide from './ProjectSlide';
 
 let style = {
   _: {
@@ -16,25 +19,22 @@ let style = {
     background: '#fff',
   },
 
-  helloZone: {
-    padding: `${rhythm(2)} 0`,
-  },
-
   helloZoneContent: {
     width: '100%',
   },
 
   featuredZone: {
-    padding: `${rhythm(2)} 0`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: '#fff',
+    position: 'relative'
   },
 
   featuredZoneContent: {
     width: `100%`,
     color: '#fff',
-    textAlign: 'center',
+    position: 'absolute',
+    height: '100%'
   },
 
   helloZoneText: {
@@ -49,6 +49,12 @@ let HomeFirstImpression = React.createClass({
 
   contextTypes: {
     media: React.PropTypes.object,
+  },
+
+  // Adjust slider to next position
+  sliderClick() {
+    let projectSlider = this.refs.projectSlider;
+    projectSlider.next();
   },
 
   render() {
@@ -66,12 +72,13 @@ let HomeFirstImpression = React.createClass({
 
     let featuredZoneStyle = style.featuredZone;
 
-    if (projectFeaturedImage) {
-      featuredZoneStyle = Object.assign({
-        backgroundImage: `url(${projectFeaturedImage})`,
-      }, featuredZoneStyle);
-    }
-
+    // how to apply the featured background image to the featured zone
+    /* if (projectFeaturedImage) {
+       featuredZoneStyle = Object.assign({
+       backgroundImage: `url(${projectFeaturedImage})`,
+       }, featuredZoneStyle);
+       } */
+    
     return (
       <ViewportContainer className="Home-firstImpression" style={_style}>
         <section style={style.helloZone} className="Home-firstImpression-helloZone">
@@ -85,13 +92,12 @@ let HomeFirstImpression = React.createClass({
           </div>
         </section>
         <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          <div style={style.featuredZoneContent}>
-            <SiteContainer>
-              {projectTagline && <Header level={2}>{projectTagline}</Header>}
-              <Button component={AppLink} to={projectUrl} callToAction>
-                Find out more
-              </Button>
-            </SiteContainer>
+          <div style={style.featuredZoneContent} onClick={this.sliderClick}>
+            <Slider className="ProjectSlider" ref="projectSlider">
+                <ProjectSlide project={project} />
+                <ProjectSlide project={project} />
+                <ProjectSlide project={project} />
+            </Slider>
           </div>
         </section>
       </ViewportContainer>
