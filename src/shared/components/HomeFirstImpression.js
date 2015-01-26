@@ -57,15 +57,16 @@ let HomeFirstImpression = React.createClass({
     projectSlider.next();
   },
 
-  render() {
-    let { page, project } = this.props;
+  projectSlides() {
+    return this.props.projects.map(function(project) {
+      return (<ProjectSlide project={project} />);
+    });
+  },
 
+  render() {
+    let { page } = this.props;
     let title = nestedGet(page, 'meta', 'first_impression_title');
     let subtitle = nestedGet(page, 'meta', 'first_impression_subtitle');
-
-    let projectTagline = nestedGet(project, 'meta', 'tagline');
-    let projectFeaturedImage = nestedGet(project, 'featured_image', 'source');
-    let projectUrl = nestedGet(project, 'link');
 
     let _style = Object.assign({}, style._);
     _style[this.context.media.m ? 'height': 'minHeight'] = '100vh';
@@ -94,9 +95,7 @@ let HomeFirstImpression = React.createClass({
         <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
           <div style={style.featuredZoneContent} onClick={this.sliderClick}>
             <Slider className="ProjectSlider" ref="projectSlider">
-                <ProjectSlide project={project} />
-                <ProjectSlide project={project} />
-                <ProjectSlide project={project} />
+              {this.projectSlides()}
             </Slider>
           </div>
         </section>

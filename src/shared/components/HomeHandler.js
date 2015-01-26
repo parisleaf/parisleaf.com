@@ -27,7 +27,9 @@ let Home = React.createClass({
 
       if (homePage) {
         // Fetch first-impression project
-        await ProjectActions.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
+        await Promise.all(getFirstImpressionProjectSlugs(homePage).map(function(slug) {
+          ProjectActions.getProjectBySlug(slug);
+        }));
       }
     },
   },
@@ -35,17 +37,17 @@ let Home = React.createClass({
   getInitialState() {
     return {
       page: PageStore.getPageBySlug('home'),
-      firstImpressionProject: this.getFirstImpressionProject(),
+      firstImpressionProjects: this.getFirstImpressionProjects()
     };
   },
 
-  getFirstImpressionProject() {
+  getFirstImpressionProjects() {
     let homePage = PageStore.getPageBySlug('home');
-    let firstImpressionProject;
-
-    if (homePage) {
-      // Fetch first-impression project
-      return ProjectStore.getProjectBySlug(getFirstImpressionProjectSlug(homePage));
+    
+    if(homePage) {
+      return getFirstImpressionProjectSlugs(homePage).map(function(slug) {
+        return ProjectStore.getProjectBySlug(slug);
+      });
     }
   },
 
@@ -62,13 +64,13 @@ let Home = React.createClass({
   pageStoreDidChange() {
     this.setState({
       page: PageStore.getPageBySlug('home'),
-      firstImpressionProject: this.getFirstImpressionProject(),
+      firstImpressionProjects: this.getFirstImpressionProjects()
     });
   },
 
   projectStoreDidChange() {
     this.setState({
-      firstImpressionProject: this.getFirstImpressionProject(),
+      firstImpressionProjects: this.getFirstImpressionProjects()
     })
   },
 
@@ -78,6 +80,7 @@ let Home = React.createClass({
         <HomeFirstImpression
           page={this.state.page}
           project={this.state.firstImpressionProject}
+          projects={this.state.firstImpressionProjects}
         />
         <HomeProcessSection
           page={this.state.page}
@@ -99,6 +102,25 @@ function getFirstImpressionProjectSlug(homePage) {
     if (firstImpressionProject.get('post_name')) {
       return firstImpressionProject.get('post_name');
     }
+  }
+}
+
+/**
+ * Get the slugs of the first impression projects
+ * @param {object} homePage - Home page object
+ */
+function getFirstImpressionProjectSlugs(homePage) {
+  if(homePage.get('meta') && homePage.get('meta').get('featured_projects')) { 
+    let firstImpressionProjects = homePage.get('meta').get('featured_projects');
+
+    let slugs = [];
+
+    firstImpressionProjects.map(function(project) {
+      slugs.push(project.get('featured_project').get('post_name'));
+    });
+
+    //console.log(slugs);
+    return slugs;
   }
 }
 
