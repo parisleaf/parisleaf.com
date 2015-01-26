@@ -2,6 +2,7 @@
 
 import React from 'react';
 import HomeFirstImpression from './HomeFirstImpression';
+import HomeProcessSection from './HomeProcessSection';
 
 import Flux from 'flummox';
 
@@ -77,6 +78,9 @@ let Home = React.createClass({
         <HomeFirstImpression
           page={this.state.page}
           project={this.state.firstImpressionProject}
+        />
+        <HomeProcessSection
+          page={this.state.page}
         />
       </div>
     );
