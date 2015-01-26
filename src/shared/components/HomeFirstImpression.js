@@ -86,8 +86,8 @@ let HomeFirstImpression = React.createClass({
           <div style={style.helloZoneContent}>
             <SiteContainer>
               <div style={style.helloZoneText}>
-                {title && <Header level={1}>{title}</Header>}
-                {subtitle && <Header level={2}>{subtitle}</Header>}
+                {title && <Header level={3}>{title}</Header>}
+                {subtitle && <Header level={4}>{subtitle}</Header>}
               </div>
             </SiteContainer>
           </div>
