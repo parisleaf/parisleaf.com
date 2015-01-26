@@ -22,9 +22,15 @@ import routes from '../shared/routes';
 import Flux from 'flummox';
 
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
+import { didInitialRender } from '../shared/isInitialRender';
 
-Router.run(routes, Router.HistoryLocation, function(Handler, state) {
-  performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-  React.render(<Handler />, document.getElementById('app'));
-  performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
+Router.run(routes, Router.HistoryLocation, (Handler, state) => {
+  async function run() {
+    await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+    React.render(<Handler />, document.getElementById('app'));
+    didInitialRender();
+    await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
+  }
+
+  run();
 });

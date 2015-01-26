@@ -48,10 +48,6 @@ let BlogHandler = React.createClass({
         PostActions.getPosts(query)
       );
     },
-
-    routerDidRun(state) {
-      return PostActions.getPosts(state.query);
-    }
   },
 
   getInitialState() {

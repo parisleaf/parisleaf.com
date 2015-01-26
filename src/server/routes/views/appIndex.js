@@ -24,7 +24,7 @@ export default function(app) {
       Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
 
-    performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+    yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
     let appString = React.renderToString(<Handler />);
 
