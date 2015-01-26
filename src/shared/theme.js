@@ -78,12 +78,12 @@ export var fontSizes = {
   h1: modularScale(8),
   h2: modularScale(6),
   h3: modularScale(5),
-  h4: modularScale(3),
+  h4: modularScale(5),
   h5: modularScale(3),
   h6: modularScale(3),
 
   text: '1rem',
-  small: modularScale(1),
+  small: modularScale(2),
   ms: scale,
 }
 

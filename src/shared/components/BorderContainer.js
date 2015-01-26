@@ -6,13 +6,23 @@ import SuitCSS from 'react-suitcss';
 let BorderContainer = React.createClass({
 
   render() {
+
+    let { style, borderColor } = this.props;
+
+    if (borderColor) {
+      style = Object.assign({
+        borderColor,
+      }, style);
+    }
+
     return (
       <SuitCSS
         {...this.props}
-        componentName="SiteContainer"
+        style={style}
+        componentName="BorderContainer"
         element="div"
         modifiers={[
-          'hang'
+          'noHang'
         ]}
       />
     );

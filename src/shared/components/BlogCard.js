@@ -38,7 +38,7 @@ let BlogCard = React.createClass({
 
   getDefaultProps() {
     return {
-      expanded: true,
+      expanded: false,
     };
   },
 
@@ -81,14 +81,17 @@ let BlogCard = React.createClass({
       });
     }
 
+    let titleClasses = ['Header'];
+
+    titleClasses.push(this.expanded ? 'Header--blogCardLarge' : 'Header--blogCard');
+
     return (
       <Button component={AppLink} to={post.get('link')} onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}>
         <article style={_style} className="Blog-post">
           <header className="Blog-post-header">
             {this.shouldShowImage() && <BlogCardImage post={post} overlay={this.state.hover} overlayColor={cardColor} />}
-            <Header
-              component="h1"
-              level={this.props.expanded ? 4 : 3}
+            <h1
+              className={titleClasses.join(' ')}
               style={style.title}
               dangerouslySetInnerHTML={{ __html: post.get('title') }}
             />
