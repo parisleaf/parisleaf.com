@@ -7,3 +7,6 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding);
   @each $name, $breakpoint in map-get($theme, 'breakpoints')
     @include bp($name)
       max-width: $breakpoint * 1px
+
+  &--hang
+    padding: 0

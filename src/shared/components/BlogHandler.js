@@ -11,6 +11,7 @@ import { filter as filterPosts } from '../utils/PostUtils';
 import { rhythm, color } from '../theme';
 
 import Header from './Header';
+import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
 import BlogCard from './BlogCard';
 
@@ -84,15 +85,16 @@ let BlogHandler = React.createClass({
     return (
       <div>
         <SiteContainer>
-          <div className="BorderContainer BorderContainer--noHang">
-            <Header level={1}>Blog</Header>
-            <Header level={2}>Sometimes we talk about News, Events, Inspriation, and Education.</Header>
+          <PageHeader
+            title="Blog"
+            subtitle="Sometimes we talk about News, Events, Inspriation, and Education."
+          >
             <Link to="blog" query={{ category: 'events' }}>Events</Link>
             <Link to="blog" query={{ category: 'uncategorized' }}>Uncategorized</Link>
-          </div>
+          </PageHeader>
         </SiteContainer>
         <div style={postContainerStyle}>
-          <SiteContainer>
+          <SiteContainer hang>
             {cards}
           </SiteContainer>
         </div>

@@ -31,6 +31,8 @@ let Header = React.createClass({
           '4',
           '5',
           '6',
+          'blogCard',
+          'blogCardLarge',
         ]}
       />
     );
