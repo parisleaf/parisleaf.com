@@ -47,12 +47,12 @@ let ProjectSlide = React.createClass({
           </VerticalCenter>
           <div className="ProjectSlide-buttonContainer">
             <div className="ProjectSlide-buttonContainer-project">
-              <Button component={AppLink} to={url} callToAction>
+              <Button component={AppLink} to={url} primaryLight>
                 Read the Case Study
               </Button>
             </div>
             <div className="ProjectSlide-buttonContainer-all">
-              <Button component={AppLink} to={'/work'} callToAction>
+              <Button component={AppLink} to={'/work'} secondaryLight>
                 See All Work
               </Button>
             </div>

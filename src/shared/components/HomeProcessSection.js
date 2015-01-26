@@ -7,7 +7,7 @@ import theme from '../theme';
 
 let style = {
   _: {
-    paddingTop: theme.rhythm(1)
+    paddingTop: theme.rhythm(2)
   }
 };
 
