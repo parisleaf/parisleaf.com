@@ -4,7 +4,7 @@ import React from 'react';
 
 import moment from 'moment';
 import { nestedGet } from '../utils/ImmutableUtils';
-import { getTermNames, getCardColor } from '../utils/PostUtils';
+import { getTermNames, getCardColor, getFeaturedImage } from '../utils/PostUtils';
 import { rhythm, color, siteContainerRhythmPadding } from '../theme';
 
 import AppLink from './AppLink';
@@ -58,14 +58,21 @@ let BlogCard = React.createClass({
     this.setState({hover: false});
   },
 
+  shouldShowImage() {
+    return !!(this.props.expanded && getFeaturedImage(this.props.post));
+  },
+
   render() {
     let { post } = this.props;
     let cardColor = getCardColor(post);
+    let shouldShowImage = this.shouldShowImage();
 
     let _style = Object.assign({
-      height: this.props.expanded ? rhythm(12) : rhythm(6),
+      height: this.props.expanded ? rhythm(20) : rhythm(6),
       borderLeft: `${rhythm(1/4)} ${cardColor} solid`,
     }, style._);
+
+    let imageStyle = style.image;
 
     if (this.state.hover) {
       _style = Object.assign(_style, {
@@ -78,14 +85,66 @@ let BlogCard = React.createClass({
       <Button component={AppLink} to={post.get('link')} onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}>
         <article style={_style} className="Blog-post">
           <header className="Blog-post-header">
-            <Header component="h1" level={4} style={style.title} dangerouslySetInnerHTML={{ __html: post.get('title') }}/>
-            <PostMeta post={post} />
+            {this.shouldShowImage() && <BlogCardImage post={post} overlay={this.state.hover} overlayColor={cardColor} />}
+            <Header
+              component="h1"
+              level={this.props.expanded ? 4 : 3}
+              style={style.title}
+              dangerouslySetInnerHTML={{ __html: post.get('title') }}
+            />
+            <PostMeta post={post} hover={this.state.hover} />
           </header>
           {this.props.expanded && <BlogCardExcerpt post={post} ref="excerpt"/>}
         </article>
       </Button>
     );
   },
+
+});
+
+let imageStyle = {
+  _: {
+    position: 'relative',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: rhythm(6),
+    margin: rhythm(-1 * siteContainerRhythmPadding),
+    marginBottom: rhythm(1),
+  },
+
+  overlay: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    top: 0,
+    left: 0,
+  },
+};
+
+let BlogCardImage = React.createClass({
+
+  render() {
+    let { post } = this.props;
+
+    let _style = Object.assign({
+      backgroundImage: `url(${getFeaturedImage(post)})`,
+    }, imageStyle._);
+
+    let overlayStyle = imageStyle.overlay;
+
+    if (this.props.overlay) {
+      overlayStyle = Object.assign({
+        backgroundColor: this.props.overlayColor,
+        opacity: 0.4,
+      }, overlayStyle);
+    }
+
+    return (
+      <div style={_style}>
+        <div style={overlayStyle} />
+      </div>
+    );
+  }
 
 });
 
@@ -119,6 +178,7 @@ let BlogCardExcerpt = React.createClass({
       <div
         className="Excerpt Blog-post-excerpt"
         dangerouslySetInnerHTML={{ __html: post.get('excerpt') }}
+        style={{ overflow: 'hidden' }}
       />
     );
   }
@@ -134,8 +194,12 @@ let PostMeta = React.createClass({
     let dateline = `on ${this.dateString()}`;
     let categoryList = this.categoryList();
 
+    let classes = ['Metadata'];
+
+    if (this.props.hover) classes.push('Metadata--noColor');
+
     return (
-      <p className="Metadata" style={style.metadata}>
+      <p className={classes.join(' ')} style={style.metadata}>
         <span>{byline}</span> <span>{dateline}</span>
         { categoryList }
       </p>

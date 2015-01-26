@@ -71,3 +71,7 @@ export function getCardColor(post, query) {
 
   return color('yellow');
 }
+
+export function getFeaturedImage(post) {
+  return nestedGet(post, 'featured_image', 'source');
+}
