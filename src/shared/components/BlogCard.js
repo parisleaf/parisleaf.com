@@ -2,14 +2,12 @@
 
 import React from 'react';
 
-import moment from 'moment';
-import { nestedGet } from '../utils/ImmutableUtils';
-import { getTermNames, getCardColor, getFeaturedImage } from '../utils/PostUtils';
-import { rhythm, color, siteContainerRhythmPadding } from '../theme';
+import { getCardColor, getFeaturedImage } from '../utils/PostUtils';
+import { rhythm, siteContainerRhythmPadding } from '../theme';
 
 import AppLink from './AppLink';
-import Header from './Header';
 import Button from './Button';
+import PostMeta from './PostMeta';
 
 let style = {
   _: {
@@ -21,10 +19,6 @@ let style = {
 
   title: {
     margin: 0,
-  },
-
-  metadata: {
-    marginTop: 0,
   },
 }
 
@@ -72,8 +66,6 @@ let BlogCard = React.createClass({
       borderLeft: `${rhythm(1/4)} ${cardColor} solid`,
     }, style._);
 
-    let imageStyle = style.image;
-
     if (this.state.hover) {
       _style = Object.assign(_style, {
         backgroundColor: cardColor,
@@ -89,7 +81,7 @@ let BlogCard = React.createClass({
       <Button component={AppLink} to={post.get('link')} onMouseOver={this.onMouseOver} onMouseLeave={this.onMouseLeave}>
         <article style={_style} className="Blog-post">
           <header className="Blog-post-header">
-            {this.shouldShowImage() && <BlogCardImage post={post} overlay={this.state.hover} overlayColor={cardColor} />}
+            {shouldShowImage && <BlogCardImage post={post} overlay={this.state.hover} overlayColor={cardColor} />}
             <h1
               className={titleClasses.join(' ')}
               style={style.title}
@@ -183,49 +175,6 @@ let BlogCardExcerpt = React.createClass({
         dangerouslySetInnerHTML={{ __html: post.get('excerpt') }}
         style={{ overflow: 'hidden' }}
       />
-    );
-  }
-
-});
-
-let PostMeta = React.createClass({
-
-  render() {
-    let { post } = this.props;
-
-    let byline = `By ${nestedGet(post, 'author', 'name')}`
-    let dateline = `on ${this.dateString()}`;
-    let categoryList = this.categoryList();
-
-    let classes = ['Metadata'];
-
-    if (this.props.hover) classes.push('Metadata--noColor');
-
-    return (
-      <p className={classes.join(' ')} style={style.metadata}>
-        <span>{byline}</span> <span>{dateline}</span>
-        { categoryList }
-      </p>
-    );
-  },
-
-  dateString() {
-    let date = new Date(this.props.post.get('date'));
-
-    if (date.getFullYear() !== new Date().getFullYear()) {
-      return moment(date).format('MMM DD');
-    } else {
-      return moment(date).format('MMM DD YYYY');
-    }
-  },
-
-  categoryList() {
-    let categories = getTermNames(this.props.post, 'category');
-
-    if (!categories.length) return null;
-
-    return (
-      <span> from {categories.join(' ,')}</span>
     );
   }
 
