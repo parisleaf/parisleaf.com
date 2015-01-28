@@ -34,7 +34,8 @@ let style = {
     width: `100%`,
     color: '#fff',
     position: 'absolute',
-    height: '100%'
+    height: '100%',
+    cursor: 'pointer'
   },
 
   helloZoneText: {
@@ -52,15 +53,18 @@ let HomeFirstImpression = React.createClass({
   },
 
   // Adjust slider to next position
-  sliderClick() {
-    let projectSlider = this.refs.projectSlider;
-    projectSlider.next();
+  sliderClick(event) {
+    let clickedClass = event.target.getAttribute("class").split(" ")[0];
+    if(clickedClass !== 'Button') {
+      let projectSlider = this.refs.projectSlider;
+      projectSlider.next();
+    }
   },
 
   projectSlides() {
     if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
       return this.props.projects.map(function(project) {
-        return (<ProjectSlide project={project} />);
+        return (<ProjectSlide ref="projectSlide" project={project} />);
       });
     }
   },
@@ -70,7 +74,7 @@ let HomeFirstImpression = React.createClass({
     if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
       return(
         <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          <div style={style.featuredZoneContent} onClick={this.sliderClick}>
+          <div style={style.featuredZoneContent} ref="projectSliderContainer" onClick={this.sliderClick}>
             <Slider className="ProjectSlider" ref="projectSlider">
               {this.projectSlides()}
             </Slider>

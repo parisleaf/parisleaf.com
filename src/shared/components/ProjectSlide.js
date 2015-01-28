@@ -7,6 +7,7 @@ import AppLink from './AppLink';
 import SiteContainer from './SiteContainer';
 import { nestedGet } from '../utils/ImmutableUtils';
 import VerticalCenter from './VerticalCenter';
+import theme from '../theme';
 
 let style = {
   _: {
@@ -17,6 +18,10 @@ let style = {
   
   container: {
     height: '100%', // for VerticalCenter
+  },
+
+  header: {
+    marginTop: theme.rhythm(-2),
   }
 };
 
@@ -41,7 +46,7 @@ let ProjectSlide = React.createClass({
       <div className="ProjectSlide" style={style._}>
         <SiteContainer style={style.container}>
           <VerticalCenter style={style.container}>
-            <div className="ProjectSlide-header">
+            <div className="ProjectSlide-header" style={style.header}>
               <Header level={1}>{tagline}</Header>
             </div>
           </VerticalCenter>
