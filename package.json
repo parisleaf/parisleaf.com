@@ -40,7 +40,7 @@
     "react": "~0.12.2",
     "react-media-mixin": "~1.0.5",
     "react-router": "~0.11.6",
-    "react-suitcss": "~1.0.3",
+    "react-suitcss": "~1.0.4",
     "react-tween-state": "0.0.4",
     "react-viewport": "1.0.6",
     "superagent": "~0.21.0",
