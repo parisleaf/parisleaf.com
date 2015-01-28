@@ -3,6 +3,7 @@
 import React from 'react';
 import HomeFirstImpression from './HomeFirstImpression';
 import HomeProcessSection from './HomeProcessSection';
+import MoreFromBlog from './MoreFromBlog';
 
 import Flux from 'flummox';
 
@@ -13,6 +14,9 @@ let PageActions = Flux.getActions('PageActions');
 
 let ProjectStore = Flux.getStore('ProjectStore');
 let ProjectActions = Flux.getActions('ProjectActions');
+
+let PostStore = Flux.getStore('PostStore');
+let PostActions = Flux.getActions('PostActions');
 
 import { color } from '../theme';
 
@@ -35,6 +39,7 @@ let Home = React.createClass({
   },
 
   getInitialState() {
+
     return {
       page: PageStore.getPageBySlug('home'),
       firstImpressionProjects: this.getFirstImpressionProjects()
@@ -51,9 +56,36 @@ let Home = React.createClass({
     }
   },
 
+  fetchFirstImpressionPosts: async function fetchFirstImpressionPosts() {
+    let homePage = PageStore.getPageBySlug('home');
+
+    if(homePage) {
+      let slugs = await Promise.resolve(getFirstImpressionPostSlugs(homePage)).then(function(slugs) {
+        return slugs;
+      });
+    
+      // Put the posts in the store
+      await Promise.all(
+        slugs.map(function(slug) {
+          return PostActions.getPostBySlug(slug);
+        }));
+
+      let posts = slugs.map((slug) => PostStore.getPostBySlug(slug));
+
+      this.setState({firstImpressionPosts: posts});
+
+    }
+  },
+
+  
+
   componentDidMount() {
     PageStore.addListener('change', this.pageStoreDidChange);
     ProjectStore.addListener('change', this.projectStoreDidChange);
+    
+    this.fetchFirstImpressionPosts();
+    //this.setState({ firstImpressionPosts: PostStore.getPosts() });
+    //console.log(this.state.firstImpressionPosts);
   },
 
   componentWillUnmount() {
@@ -71,7 +103,7 @@ let Home = React.createClass({
   projectStoreDidChange() {
     this.setState({
       firstImpressionProjects: this.getFirstImpressionProjects()
-    })
+    });
   },
 
   render() {
@@ -84,6 +116,9 @@ let Home = React.createClass({
         />
         <HomeProcessSection
           page={this.state.page}
+        />
+        <MoreFromBlog 
+          posts={this.state.firstImpressionPosts}
         />
       </div>
     );
@@ -122,6 +157,23 @@ function getFirstImpressionProjectSlugs(homePage) {
     //console.log(slugs);
     return slugs;
   }
+}
+
+/**
+ * Get the slugs of the first impression blog posts from the More From Blog
+ * @param {object} homePage - Home page object
+ */
+async function getFirstImpressionPostSlugs(homePage) {
+  let slugs = [];
+  if(homePage.get('meta') && homePage.get('meta').get('more_from_blog_posts')) { 
+    let firstImpressionPosts = homePage.get('meta').get('more_from_blog_posts');
+    
+    firstImpressionPosts.map(function(post) {
+      slugs.push(post.get('blog_post').get('post_name'));
+    });
+  }
+
+  return slugs;
 }
 
 export default Home;

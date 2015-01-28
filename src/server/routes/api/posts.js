@@ -5,6 +5,8 @@ import whitelist from '101/pick';
 
 const acceptedPostFilters = [
   'category_name',
+  'category',
+  'count', //check
 ];
 
 export default function(app) {
