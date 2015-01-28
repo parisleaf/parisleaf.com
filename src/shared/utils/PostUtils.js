@@ -75,3 +75,9 @@ export function getCardColor(post, query) {
 export function getFeaturedImage(post) {
   return nestedGet(post, 'featured_image', 'source');
 }
+
+export function getHeroImage(post) {
+  return nestedGet(post, 'meta', 'hero_image', 'sizes', 'large')
+    || nestedGet(post, 'meta', 'hero_image', 'url')
+    || nestedGet(post, 'featured_image', 'source');
+}

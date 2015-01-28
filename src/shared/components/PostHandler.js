@@ -4,8 +4,12 @@ import React from 'react';
 import { State } from 'react-router';
 
 import Flux from 'flummox';
+let AppActions = Flux.getActions('AppActions');
 let PostActions = Flux.getActions('PostActions');
 let PostStore = Flux.getStore('PostStore');
+
+import PostFirstImpression from './PostFirstImpression';
+import SiteContainer from './SiteContainer';
 
 let PostHandler = React.createClass({
 
@@ -13,6 +17,7 @@ let PostHandler = React.createClass({
 
   statics: {
     routerWillRun(state) {
+      AppActions.setNavTextColor('#fff');
       return PostActions.getPostBySlug(state.params.slug);
     }
   },
@@ -46,8 +51,10 @@ let PostHandler = React.createClass({
 
     return (
       <div>
-        <h1>{ post.get('title') }</h1>
-        <article dangerouslySetInnerHTML={{ __html: post.get('content') }} />
+        <PostFirstImpression post={post} />
+        <SiteContainer>
+          <article dangerouslySetInnerHTML={{ __html: post.get('content') }} />
+        </SiteContainer>
       </div>
     );
 
