@@ -18,7 +18,7 @@ let style = {
   _: {
     backgroundColor: theme.color('lightGray'),
     paddingTop: theme.rhythm(1),
-    paddingBottom: theme.rhythm(1)
+    paddingBottom: theme.rhythm(2)
   },
   
   header: {
@@ -32,7 +32,11 @@ let MoreFromBlog = React.createClass({
    
     if(!(typeof posts === 'undefined')) {
       let cards = posts.map(function(post) {
-        return(<BlogCard post={post} />);
+        return(
+          <div className="Blog-postContainer-item">
+            <BlogCard post={post} expanded />
+          </div>
+        );
       });
 
       return(
