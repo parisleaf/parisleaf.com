@@ -58,9 +58,26 @@ let HomeFirstImpression = React.createClass({
   },
 
   projectSlides() {
-    return this.props.projects.map(function(project) {
-      return (<ProjectSlide project={project} />);
-    });
+    if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
+      return this.props.projects.map(function(project) {
+        return (<ProjectSlide project={project} />);
+      });
+    }
+  },
+
+  featuredZone() {
+    let featuredZoneStyle = style.featuredZone;
+    if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
+      return(
+        <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
+          <div style={style.featuredZoneContent} onClick={this.sliderClick}>
+            <Slider className="ProjectSlider" ref="projectSlider">
+              {this.projectSlides()}
+            </Slider>
+          </div>
+        </section>
+      );
+    }
   },
 
   render() {
@@ -92,13 +109,7 @@ let HomeFirstImpression = React.createClass({
             </SiteContainer>
           </div>
         </section>
-        <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          <div style={style.featuredZoneContent} onClick={this.sliderClick}>
-            <Slider className="ProjectSlider" ref="projectSlider">
-              {this.projectSlides()}
-            </Slider>
-          </div>
-        </section>
+        { this.featuredZone() }
       </ViewportContainer>
     );
   }
