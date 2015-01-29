@@ -53,7 +53,7 @@ describe('APIService', () => {
 
   });
 
-  describe('.getMenus()', (done) => {
+  describe('.getMenus()', () => {
     if (isNode) {
       nock(process.env.ROOT_URL)
         .get('/api/menus')
@@ -65,10 +65,34 @@ describe('APIService', () => {
     }
 
     import { getMenus } from '../APIService';
-    expect(getMenus()).to.eventually.deep.equal([
-      { ID: 1 },
-      { ID: 2 },
-      { ID: 3 },
-    ]).notify(done);
+    it('should retreive all menus', (done) => {
+      expect(getMenus()).to.eventually.deep.equal([
+        { ID: 1 },
+        { ID: 2 },
+        { ID: 3 },
+      ]).notify(done);
+    });
+  });
+
+  describe('.getOptions()', (done) => {
+    if (isNode) {
+      nock(process.env.ROOT_URL)
+        .get('/api/options')
+        .reply(200, [
+          { ID: 1 },
+          { ID: 2 },
+          { ID: 3 },
+        ]);
+    }
+
+    import { getOptions } from '../APIService';
+    
+    it('should retreive all acf options', (done) => {
+      expect(getOptions()).to.eventually.deep.equal([
+        { ID: 1 },
+        { ID: 2 },
+        { ID: 3 },
+      ]).notify(done);
+    });
   });
 });

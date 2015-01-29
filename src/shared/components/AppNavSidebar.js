@@ -58,7 +58,7 @@ let style = {
     width: rhythm(3/2),
     height: rhythm(3/2),
     fill: color('darkGray'),
-    marginLeft: rhythm(1)
+    marginLeft: rhythm(1/2)
   },
 };
 

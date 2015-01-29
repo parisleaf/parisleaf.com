@@ -2,6 +2,7 @@
 
 import Flux from 'flummox';
 
+import APIService from '../services/APIService';
 let AppConstants = Flux.getConstants('AppConstants');
 
 Flux.createActions({
@@ -28,4 +29,9 @@ Flux.createActions({
     this.dispatchAction(AppConstants.APP_ROUTE_TRANSITION_END, state);
   },
 
+  serviceActions: {
+    getOptions: [AppConstants.APP_GET_OPTIONS, function(...args) {
+      return APIService.getOptions(...args);
+    }],
+  }
 });

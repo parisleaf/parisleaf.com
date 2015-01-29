@@ -56,12 +56,14 @@ let App = React.createClass({
     routerWillRun(state) {
       AppActions.setNavTextColor(color('text'));
 
+      // TESTING
+      //AppActions.getOptions();
       // Make sure nav is dismissed on re-route
       AppActions.closeNav();
-
       return Promise.all([
         MenuActions.getMenus(),
         TwitterActions.getTweets(),
+        AppActions.getOptions()
       ]);
     }
   },

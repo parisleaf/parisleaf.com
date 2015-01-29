@@ -2,6 +2,7 @@
 
 import Flux from 'flummox';
 let AppConstants = Flux.getConstants('AppConstants');
+import Immutable from 'immutable';
 
 import { color } from '../theme';
 
@@ -16,6 +17,8 @@ Flux.createStore({
       },
       isTransitioning: false,
     };
+
+    this.options = Immutable.Map();
   },
 
   actions: [
@@ -43,10 +46,19 @@ Flux.createStore({
       this.state.isTransitioning = false;
       this.emit('change');
     }],
+    
+    [AppConstants.APP_GET_OPTIONS_SUCCESS, function(options) {
+      this.options = Immutable.fromJS(options); // Convert to immutable data structure
+      this.emit('change');
+    }],
   ],
 
   getState() {
     return this.state;
   },
+
+  getOptions() {
+    return this.options;
+  }
 
 });

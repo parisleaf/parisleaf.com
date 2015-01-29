@@ -88,3 +88,13 @@ export async function getMenus(query = {}) {
   return menus.body;
 }
 
+/**
+ * Get list of acf option items 
+ * @param {object} query - Query params
+ * @returns {Promise} Resolves to array of menus
+ */
+export async function getOptions(query = {}) {
+  let options = await request.get(ensureIsomorphicUrl('/api/options')).query(query).exec();
+  return options.body;
+}
+

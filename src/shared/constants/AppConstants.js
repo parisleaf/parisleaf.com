@@ -14,4 +14,7 @@ Flux.createConstants({
     'APP_ROUTE_TRANSITION_END',
   ],
 
+  serviceActionTypes: [
+    'APP_GET_OPTIONS',
+  ],
 });
