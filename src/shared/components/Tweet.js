@@ -8,7 +8,7 @@ import Flux from 'flummox';
 let TwitterActions = Flux.getActions('TwitterActions');
 let TwitterStore = Flux.getStore('TwitterStore');
 
-import { color } from '../theme';
+import { rhythm, siteContainerRhythmPadding, color} from '../theme';
 import Excerpt from './Excerpt';
 import Header from './Header';
 import Metadata from './Metadata';
@@ -17,6 +17,13 @@ import Button from './Button';
 import AppLink from './AppLink';
 
 let style = {
+  _: {
+    padding: rhythm(siteContainerRhythmPadding - 1/4),
+    margin: `${rhythm(1/2)} 0`,
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+    borderLeft: `${rhythm(1/4)} ${color('twitterBlue')} solid`,
+  },
   icon : {
     width: '2rem',
     height: '2rem',
@@ -53,16 +60,19 @@ let Tweet = React.createClass({
     }
 
     return(
-      <div className="TweetContainer">
+      <div className="TweetContainer" style={style._}>
         <div className="Tweet">
-          <div className="Tweet-icon">
+ {/*         <div className="Tweet-icon">
             <SvgIcon name="twitter" style={style.icon} />
           </div>
+*/}
           <div className="Tweet-content">
+{/*
             <div className="Tweet-content-meta">
               <Header level={2} className="Tweet-content-meta-user" style={style.header}>{tweet.get('user').get('name')} says:</Header>
               <Metadata className="Tweet-content-meta-date">{this.formatDate(tweet.get('created_at'))}</Metadata>
             </div>
+*/}
             <div className="Tweet-content-excerpt">
               <Excerpt>{tweet.get('text')}</Excerpt>
             </div>

@@ -11,6 +11,10 @@ import { color, rhythm, navBarRhythmHeight } from '../theme';
 let style = {
   _: {
     overflow: 'auto',
+  },
+
+  paddingBottom: {
+    paddingBottom: rhythm(1)
   }
 };
 
@@ -54,12 +58,12 @@ let AppNavContent = React.createClass({
     return (
       <section className="AppNavDrawer-content" style={_style}>
         <SiteContainer>
-          <div className="AppNavDrawer-content-tweets">
+          <div className="AppNavDrawer-content-tweets" style={style.paddingBottom}>
             <Metadata>Parisleaf Tweets: </Metadata>
             <Tweet tweet={this.props.tweets.get(0)} />
           </div>
         
-          <div className="AppNavDrawer-content-featured">
+          <div className="AppNavDrawer-content-featured" style={style.paddingBottom}>
             <Metadata>Parisleaf Blogs: </Metadata>
             {this.featuredBlogPost()}
           </div>

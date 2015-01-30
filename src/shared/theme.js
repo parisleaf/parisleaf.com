@@ -22,6 +22,8 @@ var colors = {
   aqua:         '#2bd5d3',
   pink:         '#fb5382',
   orange:       '#fd7450',
+
+  twitterBlue:  '#4099ff',
 };
 
 colors.text = colors.darkGray;
