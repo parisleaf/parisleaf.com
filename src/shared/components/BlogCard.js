@@ -58,6 +58,7 @@ let BlogCard = React.createClass({
 
   render() {
     let { post } = this.props;
+    //console.log(post.toJS());
     let cardColor = getCardColor(post);
     let shouldShowImage = this.shouldShowImage();
 

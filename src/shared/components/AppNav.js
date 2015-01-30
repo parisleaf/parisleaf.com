@@ -109,6 +109,7 @@ let AppNav = React.createClass({
           primaryMenu={this.props.primaryMenu}
           secondaryMenu={this.props.secondaryMenu}
           tweets={this.props.tweets}
+          options={this.props.options}
         />
       </div>
     );

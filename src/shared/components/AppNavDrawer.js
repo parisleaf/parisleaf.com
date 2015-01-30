@@ -145,6 +145,7 @@ let AppNavDrawer = React.createClass({
           <AppNavContent
             tweets={this.props.tweets}
             visibility={contentVisibility}
+            options={this.props.options}
           />
         </div>
       </div>

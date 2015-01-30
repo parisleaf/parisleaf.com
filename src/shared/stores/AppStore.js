@@ -48,7 +48,12 @@ Flux.createStore({
     }],
     
     [AppConstants.APP_GET_OPTIONS_SUCCESS, function(options) {
-      this.options = Immutable.fromJS(options); // Convert to immutable data structure
+      let self = this;
+      options.map(function(option) {
+        let key = Object.keys(option)[0];
+        let value = option[key][0];
+        self.options = self.options.set(key, Immutable.fromJS(value));
+      });
       this.emit('change');
     }],
   ],

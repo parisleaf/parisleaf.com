@@ -72,7 +72,8 @@ let App = React.createClass({
     return Object.assign({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
       secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-      tweets: TwitterStore.getTweets()
+      tweets: TwitterStore.getTweets(),
+      options: AppStore.getOptions(),
     }, AppStore.getState());
   },
 
@@ -114,6 +115,7 @@ let App = React.createClass({
         primaryMenu={this.state.primaryMenu}
         secondaryMenu={this.state.secondaryMenu}
         tweets={this.state.tweets}
+        options={this.state.options}
         {...this.state.nav}
       />;
 

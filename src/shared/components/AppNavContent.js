@@ -3,6 +3,7 @@
 import React from 'react';
 import SiteContainer from './SiteContainer';
 import Tweet from './Tweet';
+import BlogCard from './BlogCard';
 
 import { color, rhythm, navBarRhythmHeight } from '../theme';
 
@@ -14,8 +15,14 @@ let style = {
 
 let AppNavContent = React.createClass({
 
-  render() {
+  featuredBlogPost() {
+    let post = this.props.options.get('nav_featured_blog_post');
+    if(typeof post !== 'undefined') {
+      return(<BlogCard post={post} />);
+    }
+  },
 
+  render() {
     let { visibility } = this.props;
 
     let _style = Object.assign({
@@ -27,6 +34,7 @@ let AppNavContent = React.createClass({
         <SiteContainer>
           <Tweet tweet={this.props.tweets.get(0)} />
           <Tweet tweet={this.props.tweets.get(1)} />
+          {this.featuredBlogPost()}
         </SiteContainer>
       </section>
     );
