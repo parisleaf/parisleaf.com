@@ -34,10 +34,15 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   async function run() {
     RouterActions.routerWillRun(state);
     await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-    React.render(<Handler />, document.getElementById('app'));
+    React.withContext(
+      { flux },
+      () => React.render(<Handler />, document.getElementById('app'))
+    );
     didInitialRender();
     await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
   }
 
-  run().catch(error => console.log(error));
+  run().catch(error => {
+    throw error;
+  });
 });

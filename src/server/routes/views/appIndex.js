@@ -30,12 +30,16 @@ export default function(app) {
       Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
 
-    state.flux = new Flux2();
+    let flux = new Flux2();
+    state.flux = flux;
 
     RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
-    let appString = React.renderToString(<Handler />);
+    let appString = React.withContext(
+      { flux },
+      () => React.renderToString(<Handler />)
+    );
 
     yield this.render('app', {
       appString,

@@ -5,8 +5,6 @@ import { State } from 'react-router';
 
 import Flux from 'flummox';
 let AppActions = Flux.getActions('AppActions');
-let PostActions = Flux.getActions('PostActions');
-let PostStore = Flux.getStore('PostStore');
 
 import PostFirstImpression from './PostFirstImpression';
 import SiteContainer from './SiteContainer';
@@ -17,26 +15,41 @@ let PostHandler = React.createClass({
 
   statics: {
     routerWillRun(state) {
+      let { flux, params } = state;
+      let PostActions = flux.getActions('posts');
+
       AppActions.setNavTextColor('#fff');
       return PostActions.getPostBySlug(state.params.slug);
     }
   },
 
+  contextTypes: {
+    flux: React.PropTypes.any.isRequired,
+  },
+
   getInitialState() {
+    let PostStore = this.context.flux.getStore('posts');
+
     return {
       post: PostStore.getPostBySlug(this.getParams().slug),
     };
   },
 
   componentDidMount() {
+    let PostStore = this.context.flux.getStore('posts');
+
     PostStore.addListener('change', this.postStoreDidChange);
   },
 
   componentWillUnmount() {
+    let PostStore = this.context.flux.getStore('posts');
+
     PostStore.removeListener('change', this.postStoreDidChange);
   },
 
   postStoreDidChange() {
+    let PostStore = this.context.flux.getStore('posts');
+
     this.setState({
       post: PostStore.getPostBySlug(this.getParams().slug),
     });

@@ -15,9 +15,6 @@ let PageActions = Flux.getActions('PageActions');
 let ProjectStore = Flux.getStore('ProjectStore');
 let ProjectActions = Flux.getActions('ProjectActions');
 
-let PostStore = Flux.getStore('PostStore');
-let PostActions = Flux.getActions('PostActions');
-
 import { color } from '../theme';
 
 let Home = React.createClass({
@@ -36,6 +33,10 @@ let Home = React.createClass({
         }));
       }
     },
+  },
+
+  contextTypes: {
+    flux: React.PropTypes.any.isRequired,
   },
 
   getInitialState() {
@@ -57,6 +58,8 @@ let Home = React.createClass({
   },
 
   fetchFirstImpressionPosts: async function fetchFirstImpressionPosts() {
+    let PostStore = this.context.flux.getStore('posts');
+    let PostActions = this.context.flux.getActions('posts');
     let homePage = PageStore.getPageBySlug('home');
 
     if(homePage) {
@@ -152,7 +155,6 @@ function getFirstImpressionProjectSlugs(homePage) {
       slugs.push(project.get('featured_project').get('post_name'));
     });
 
-    //console.log(slugs);
     return slugs;
   }
 }

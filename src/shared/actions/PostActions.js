@@ -1,28 +1,17 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Actions } from 'flummox2';
 import APIService from '../services/APIService';
 
-let PostConstants = Flux.getConstants('PostConstants');
+export default class PostActions extends Actions {
 
-Flux.createActions({
+  async getPosts(query = {}) {
+    let posts = await APIService.getPosts(query);
+    return { posts, query };
+  }
 
-  name: 'PostActions',
+  async getPostBySlug(slug) {
+    return await APIService.getPostBySlug(slug);
+  }
 
-  serviceActions: {
-    getPosts: [PostConstants.POST_GET_POSTS, function(query = {}) {
-      return APIService.getPosts(query)
-        .then((posts) => {
-          return {
-            posts,
-            query,
-          }
-        });
-    }],
-
-    getPostBySlug: [PostConstants.POST_GET_POST_BY_SLUG, function(...args) {
-      return APIService.getPostBySlug(...args);
-    }],
-  },
-
-});
+}

@@ -1,61 +1,68 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Store } from 'flummox2';
 import Immutable from 'immutable';
 import Qs from 'qs';
-let PostConstants = Flux.getConstants('PostConstants');
 
-Flux.createStore({
-  name: 'PostStore',
+export default class PostStore extends Store {
 
-  initialize() {
-    this.posts = Immutable.Map();
-    this.queries = Immutable.Map();
-  },
+  constructor(flux) {
+    super();
 
-  actions: [
-    [PostConstants.POST_GET_POSTS_SUCCESS, function(result) {
-      let { posts, query } = result;
+    this.state = {
+      posts: Immutable.Map(),
+      queries: Immutable.Map(),
+    };
 
-      posts = Immutable.fromJS(posts.reduce((result, post) => {
-        if (post.slug) {
-          result[post.slug] = post;
-        }
+    let postActionIds = flux.getActionIds('posts');
 
-        return result;
-      }, {}));
-
-      query = Qs.stringify(query);
-
-      this.posts = this.posts.merge(posts);
-      this.queries = this.queries.set(query, posts.toList().map(post => post.get('slug')));
-      this.emit('change');
-    }],
-
-    [PostConstants.POST_GET_POST_BY_SLUG_SUCCESS, function(post) {
-      if (post.slug) {
-        post = Immutable.fromJS(post);
-        this.posts = this.posts.set(post.get('slug'), post);
-      }
-
-      this.emit('change');
-    }],
-  ],
-
-  getPosts(query = {}) {
-    let slugs = this.queries.get(Qs.stringify(query));
-
-    return slugs
-      ? slugs.map(slug => this.posts.get(slug))
-      : Immutable.List([]);
-  },
-
-  getAllPosts() {
-    return this.posts.toList();
-  },
-
-  getPostBySlug(slug) {
-    return this.posts.get(slug);
+    this.register(postActionIds.getPosts, this.handleGetPosts);
+    this.register(postActionIds.getPostBySlug, this.handleGetSinglePost);
   }
 
-});
+  handleGetPosts(body) {
+    let { posts: newPosts, query: newQuery } = body;
+
+    newQuery = Qs.stringify(newQuery);
+
+    newPosts = Immutable.fromJS(newPosts.reduce((result, post) => {
+      if (!post) return;
+
+      result[post.slug] = post;
+
+      return result;
+    }, {}));
+
+    this.setState({
+      posts: this.state.posts.merge(newPosts),
+      queries: this.state.queries.set(newQuery, newPosts.toList().map(post => post.get('slug'))),
+    })
+  }
+
+  handleGetSinglePost(newPost) {
+    if (!newPost) return;
+
+    newPost = Immutable.fromJS(newPost);
+
+    this.setState({
+      posts: this.state.posts.set(newPost.get('slug'), newPost),
+    });
+  }
+
+  getPosts(query = {}) {
+    let slugs = this.state.queries.get(Qs.stringify(query));
+
+    return slugs
+      ? slugs.map(slug => this.state.posts.get(slug))
+      : Immutable.List([]);
+  }
+
+  getAllPosts() {
+    return this.state.posts.toList();
+  }
+
+  getPostBySlug(slug) {
+    return this.state.posts.get(slug);
+  }
+
+}

@@ -13,10 +13,6 @@ import '../constants/RouterConstants';
 import '../actions/RouterActions';
 import '../stores/RouterStore';
 
-import '../constants/PostConstants';
-import '../actions/PostActions';
-import '../stores/PostStore';
-
 import '../constants/PageConstants';
 import '../actions/PageActions';
 import '../stores/PageStore';

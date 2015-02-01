@@ -2,8 +2,8 @@
 
 import Flummox from 'flummox2';
 
-import PostActions from './actions/PostActions2';
-import PostStore from './stores/PostStore2';
+import PostActions from './actions/PostActions';
+import PostStore from './stores/PostStore';
 
 export default class Flux extends Flummox {
 
