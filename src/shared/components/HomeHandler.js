@@ -48,7 +48,7 @@ let Home = React.createClass({
 
   getFirstImpressionProjects() {
     let homePage = PageStore.getPageBySlug('home');
-    
+
     if(homePage) {
       return getFirstImpressionProjectSlugs(homePage).map(function(slug) {
         return ProjectStore.getProjectBySlug(slug);
@@ -63,7 +63,7 @@ let Home = React.createClass({
       let slugs = await Promise.resolve(getFirstImpressionPostSlugs(homePage)).then(function(slugs) {
         return slugs;
       });
-    
+
       // Put the posts in the store
       await Promise.all(
         slugs.map(function(slug) {
@@ -77,15 +77,13 @@ let Home = React.createClass({
     }
   },
 
-  
+
 
   componentDidMount() {
     PageStore.addListener('change', this.pageStoreDidChange);
     ProjectStore.addListener('change', this.projectStoreDidChange);
-    
+
     this.fetchFirstImpressionPosts();
-    //this.setState({ firstImpressionPosts: PostStore.getPosts() });
-    //console.log(this.state.firstImpressionPosts);
   },
 
   componentWillUnmount() {
@@ -117,7 +115,7 @@ let Home = React.createClass({
         <HomeProcessSection
           page={this.state.page}
         />
-        <MoreFromBlog 
+        <MoreFromBlog
           posts={this.state.firstImpressionPosts}
         />
       </div>
@@ -145,7 +143,7 @@ function getFirstImpressionProjectSlug(homePage) {
  * @param {object} homePage - Home page object
  */
 function getFirstImpressionProjectSlugs(homePage) {
-  if(homePage.get('meta') && homePage.get('meta').get('featured_projects')) { 
+  if(homePage.get('meta') && homePage.get('meta').get('featured_projects')) {
     let firstImpressionProjects = homePage.get('meta').get('featured_projects');
 
     let slugs = [];
@@ -165,9 +163,9 @@ function getFirstImpressionProjectSlugs(homePage) {
  */
 async function getFirstImpressionPostSlugs(homePage) {
   let slugs = [];
-  if(homePage.get('meta') && homePage.get('meta').get('more_from_blog_posts')) { 
+  if(homePage.get('meta') && homePage.get('meta').get('more_from_blog_posts')) {
     let firstImpressionPosts = homePage.get('meta').get('more_from_blog_posts');
-    
+
     firstImpressionPosts.map(function(post) {
       slugs.push(post.get('blog_post').get('post_name'));
     });
