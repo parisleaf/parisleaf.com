@@ -4,7 +4,7 @@
 
 'use strict';
 
-var React = require('react');
+import React from 'react';
 
 var Slider = React.createClass({
   getInitialState: function() {
