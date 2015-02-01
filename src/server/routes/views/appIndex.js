@@ -18,6 +18,8 @@ import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandl
 
 import userAgentToMediaState from '../../userAgentToMediaState';
 
+import Flux2 from '../../../shared/Flux';
+
 export default function(app) {
   app.get(/.*/, function *() {
 
@@ -27,6 +29,8 @@ export default function(app) {
     let { Handler, state } = yield new Promise((resolve, reject) => {
       Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
+
+    state.flux = new Flux2();
 
     RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);

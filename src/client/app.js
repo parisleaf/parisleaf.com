@@ -25,7 +25,12 @@ let RouterActions = Flux.getActions('RouterActions');
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
 import { didInitialRender } from '../shared/isInitialRender';
 
+import Flux2 from '../shared/Flux';
+let flux = new Flux2();
+
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
+  state.flux = flux;
+
   async function run() {
     RouterActions.routerWillRun(state);
     await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
