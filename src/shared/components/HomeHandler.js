@@ -7,8 +7,6 @@ import MoreFromBlog from './MoreFromBlog';
 
 import Flux from 'flummox';
 
-let AppActions = Flux.getActions('AppActions');
-
 let PageStore = Flux.getStore('PageStore');
 let PageActions = Flux.getActions('PageActions');
 
@@ -20,7 +18,8 @@ import { color } from '../theme';
 let Home = React.createClass({
 
   statics: {
-    routerWillRun: async function routerWillRun() {
+    routerWillRun: async function routerWillRun(state) {
+      let AppActions = state.flux.getActions('app');
       AppActions.setNavTextColor(color('yellow'));
 
       await PageActions.getPageBySlug('home');

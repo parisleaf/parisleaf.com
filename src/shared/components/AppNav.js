@@ -8,9 +8,6 @@ import Button from './Button';
 import SvgIcon from './SvgIcon';
 import AppNavDrawer from './AppNavDrawer';
 
-import Flux from 'flummox';
-let AppActions = Flux.getActions('AppActions');
-
 const logoAspectRatio = 769.9 / 200;
 const fillTransition = `fill ease-in-out ${250}ms`;
 
@@ -45,6 +42,7 @@ let style = {
 let AppNav = React.createClass({
 
   contextTypes: {
+    flux: React.PropTypes.any.isRequired,
     media: React.PropTypes.object,
   },
 
@@ -56,13 +54,11 @@ let AppNav = React.createClass({
   },
 
   onToggleClick(event) {
+    let AppActions = this.context.flux.getActions('app');
+
     event.preventDefault();
 
-    if (this.props.open) {
-      AppActions.closeNav();
-    } else {
-      AppActions.openNav();
-    }
+    AppActions.setNavOpen(!this.props.open);
   },
 
   toggleMenuIcon() {
@@ -78,6 +74,8 @@ let AppNav = React.createClass({
   },
 
   render() {
+    let AppActions = this.context.flux.getActions('app');
+
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
     }, style._);

@@ -16,9 +16,8 @@ export default function(app) {
       if(options[key].post_type === 'post') {
         let slug = options[key].post_name;
         let post = await wp.posts().slug(slug).get(); // fetch correct formatted version of data
-        return {[key] : post};
+        return {[key] : post[0]};
       } else {
-        //console.log('NOT POST');
         return options[key];
       }
     });

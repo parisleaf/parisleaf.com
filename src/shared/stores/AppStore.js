@@ -1,69 +1,55 @@
 'use strict';
 
-import Flux from 'flummox';
-let AppConstants = Flux.getConstants('AppConstants');
+import { Store } from 'flummox2';
 import Immutable from 'immutable';
 
 import { color } from '../theme';
 
-Flux.createStore({
-  name: 'AppStore',
+export default class AppStore extends Store {
 
-  initialize() {
+  constructor(flux) {
+    super();
+
     this.state = {
-      nav: {
-        open: false,
-        textColor: color('text'),
-      },
+      navOpen: false,
+      navTextColor: color('text'),
       isTransitioning: false,
+      options: Immutable.Map(),
     };
 
-    this.options = Immutable.Map();
-  },
+    let appActionIds = flux.getActionIds('app');
 
-  actions: [
-    [AppConstants.APP_NAV_CLOSE, function() {
-      this.state.nav.open = false;
-      this.emit('change');
-    }],
-
-    [AppConstants.APP_NAV_OPEN, function() {
-      this.state.nav.open = true;
-      this.emit('change');
-    }],
-
-    [AppConstants.APP_NAV_SET_TEXT_COLOR, function(color) {
-      this.state.nav.textColor = color;
-      this.emit('change');
-    }],
-
-    [AppConstants.APP_ROUTE_TRANSITION_BEGIN, function() {
-      this.state.isTransitioning = true;
-      this.emit('change');
-    }],
-
-    [AppConstants.APP_ROUTE_TRANSITION_END, function() {
-      this.state.isTransitioning = false;
-      this.emit('change');
-    }],
-    
-    [AppConstants.APP_GET_OPTIONS_SUCCESS, function(options) {
-      let self = this;
-      options.map(function(option) {
-        let key = Object.keys(option)[0];
-        let value = option[key][0];
-        self.options = self.options.set(key, Immutable.fromJS(value));
-      });
-      this.emit('change');
-    }],
-  ],
-
-  getState() {
-    return this.state;
-  },
-
-  getOptions() {
-    return this.options;
+    this.register(appActionIds.setNavOpen, this.handleSetNavOpen);
+    this.register(appActionIds.setNavTextColor, this.handleSetNavTextColor);
+    this.register(appActionIds.routeTransitionStart, this.handleRouteTransitionStart);
+    this.register(appActionIds.routeTransitionEnd, this.handleRouteTransitionEnd);
+    this.register(appActionIds.getOptions, this.handleGetOptions);
   }
 
-});
+  handleSetNavOpen(navOpen) {
+    this.setState({ navOpen });
+  }
+
+  handleSetNavTextColor(navTextColor) {
+    this.setState({ navTextColor });
+  }
+
+  handleRouteTransitionStart() {
+    this.setState({ isTransitioning: true });
+  }
+
+  handleRouteTransitionEnd() {
+    this.setState({ isTransitioning: false });
+  }
+
+  handleGetOptions(newOptions) {
+    let options = this.state.options;
+
+    for (let option of newOptions) {
+      option = Immutable.fromJS(option);
+      options = options.merge(option);
+    }
+
+    this.setState({ options });
+  }
+}

@@ -8,8 +8,6 @@ import Flux from 'flummox';
 let ProjectActions = Flux.getActions('ProjectActions');
 let ProjectStore = Flux.getStore('ProjectStore');
 
-let AppActions = Flux.getActions('AppActions');
-
 import ProjectFirstImpression from './ProjectFirstImpression';
 import ProjectContent from './ProjectContent';
 import Header from './Header';
@@ -21,6 +19,8 @@ let ProjectHandler = React.createClass({
 
   statics: {
     routerWillRun(state) {
+      let AppActions = state.flux.getActions('app');
+
       AppActions.setNavTextColor('#fff');
       return ProjectActions.getProjectBySlug(state.params.slug);
     },

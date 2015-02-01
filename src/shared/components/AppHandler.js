@@ -5,10 +5,6 @@ import { RouteHandler, Link } from 'react-router';
 
 import Flux from 'flummox';
 
-import '../constants/AppConstants';
-import '../actions/AppActions';
-import '../stores/AppStore';
-
 import '../constants/RouterConstants';
 import '../actions/RouterActions';
 import '../stores/RouterStore';
@@ -29,9 +25,6 @@ import '../constants/TwitterConstants';
 import '../actions/TwitterActions';
 import '../stores/TwitterStore';
 
-let AppStore = Flux.getStore('AppStore');
-let AppActions = Flux.getActions('AppActions');
-
 let MenuStore = Flux.getStore('MenuStore');
 let MenuActions = Flux.getActions('MenuActions');
 
@@ -50,27 +43,33 @@ let App = React.createClass({
 
   statics: {
     routerWillRun(state) {
+      let AppActions = state.flux.getActions('app');
+
       AppActions.setNavTextColor(color('text'));
 
-      // TESTING
-      //AppActions.getOptions();
       // Make sure nav is dismissed on re-route
-      AppActions.closeNav();
+      AppActions.setNavOpen(false);
+
       return Promise.all([
         MenuActions.getMenus(),
         TwitterActions.getTweets(),
-        AppActions.getOptions()
+        AppActions.getOptions(),
       ]);
     }
   },
 
+  contextTypes: {
+    flux: React.PropTypes.any.isRequired,
+  },
+
   getInitialState() {
+    let AppStore = this.context.flux.getStore('app');
+
     return Object.assign({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
       secondaryMenu: MenuStore.getMenuBySlug('secondary'),
       tweets: TwitterStore.getTweets(),
-      options: AppStore.getOptions(),
-    }, AppStore.getState());
+    }, AppStore.state);
   },
 
   childContextTypes: {
@@ -84,16 +83,22 @@ let App = React.createClass({
   },
 
   componentDidMount() {
+    let AppStore = this.context.flux.getStore('app');
+
     AppStore.addListener('change', this.appStoreDidChange);
     MenuStore.addListener('change', this.menuStoreDidChange);
   },
 
   componentWillUnmount() {
+    let AppStore = this.context.flux.getStore('app');
+
     AppStore.removeListener('change', this.appStoreDidChange);
     MenuStore.removeListener('change', this.menuStoreDidChange);
   },
 
   appStoreDidChange() {
+    let AppStore = this.context.flux.getStore('app');
+
     this.setState(AppStore.getState());
   },
 
@@ -111,8 +116,9 @@ let App = React.createClass({
         primaryMenu={this.state.primaryMenu}
         secondaryMenu={this.state.secondaryMenu}
         tweets={this.state.tweets}
+        open={this.state.navOpen}
+        textColor={this.state.navTextColor}
         options={this.state.options}
-        {...this.state.nav}
       />;
 
     return (

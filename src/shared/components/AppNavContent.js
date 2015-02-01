@@ -22,8 +22,9 @@ let AppNavContent = React.createClass({
 
   featuredBlogPost() {
     let post = this.props.options.get('nav_featured_blog_post');
-    if(typeof post !== 'undefined') {
-      return(<BlogCard post={post} />);
+
+    if (typeof post !== 'undefined') {
+      return <BlogCard post={post} />;
     }
   },
 
@@ -62,14 +63,14 @@ let AppNavContent = React.createClass({
             <Metadata>Parisleaf Tweets: </Metadata>
             <Tweet tweet={this.props.tweets.get(0)} />
           </div>
-        
+
           <div className="AppNavDrawer-content-featured" style={style.paddingBottom}>
             <Metadata>Parisleaf Blogs: </Metadata>
             {this.featuredBlogPost()}
           </div>
 
           {this.relatedBlog()}
-        
+
         </SiteContainer>
       </section>
     );
