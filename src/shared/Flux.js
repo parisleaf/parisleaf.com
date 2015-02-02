@@ -8,6 +8,9 @@ import PostStore from './stores/PostStore';
 import AppActions from './actions/AppActions';
 import AppStore from './stores/AppStore';
 
+import RouterActions from './actions/RouterActions';
+import RouterStore from './stores/RouterStore';
+
 export default class Flux extends Flummox {
 
   constructor() {
@@ -18,6 +21,9 @@ export default class Flux extends Flummox {
 
     this.createActions('app', AppActions);
     this.createStore('app', AppStore, this);
+
+    this.createActions('router', RouterActions);
+    this.createStore('router', RouterStore, this);
   }
 
 }

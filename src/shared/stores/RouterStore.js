@@ -1,29 +1,26 @@
 'use strict';
 
-import Flux from 'flummox';
-let RouterConstants = Flux.getConstants('RouterConstants');
+import { Store } from 'flummox2';
 
-Flux.createStore({
-  name: 'RouterStore',
+export default class RouterStore extends Store {
 
-  initialize() {
-    this.state = null;
-  },
+  constructor(flux) {
+    super();
 
-  actions: [
-    [RouterConstants.ROUTER_WILL_RUN, function(state) {
-      this.state = state;
-      this.emit('routerWillRun');
-      this.emit('change');
-    }],
-  ],
+    let routerActionIds = flux.getActionIds('router');
 
-  getState() {
-    return this.state;
-  },
+    this.register(routerActionIds.routerWillRun, this.handleRouterWillRun);
+  }
+
+  handleRouterWillRun(state) {
+    this.setState({
+      query: state.query,
+      pathname: state.pathname,
+    });
+  }
 
   getQuery() {
     return this.state.query;
   }
 
-});
+}

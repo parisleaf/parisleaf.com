@@ -19,14 +19,12 @@ import React from 'react';
 import Router from 'react-router';
 import routes from '../shared/routes';
 
-import Flux from 'flummox';
-let RouterActions = Flux.getActions('RouterActions');
-
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
 import { didInitialRender } from '../shared/isInitialRender';
 
-import Flux2 from '../shared/Flux';
-let flux = new Flux2();
+import Flux from '../shared/Flux';
+let flux = new Flux();
+let RouterActions = flux.getActions('router');
 
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   state.flux = flux;

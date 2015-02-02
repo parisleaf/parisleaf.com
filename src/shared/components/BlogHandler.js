@@ -3,7 +3,6 @@
 import React from 'react';
 import { State, Link } from 'react-router';
 import Flux from 'flummox';
-let RouterStore = Flux.getStore('RouterStore');
 
 import { filter as filterPosts } from '../utils/PostUtils';
 import { rhythm, color } from '../theme';
@@ -18,7 +17,7 @@ let style = {
     backgroundColor: color('lightGray'),
     padding: `${rhythm(1)} 0`,
   },
-}
+};
 
 let BlogHandler = React.createClass({
 
@@ -38,6 +37,7 @@ let BlogHandler = React.createClass({
 
   getInitialState() {
     let PostStore = this.context.flux.getStore('posts');
+    let RouterStore = this.context.flux.getStore('router');
 
     return {
       query: RouterStore.getQuery(),
@@ -47,16 +47,18 @@ let BlogHandler = React.createClass({
 
   componentDidMount() {
     let PostStore = this.context.flux.getStore('posts');
+    let RouterStore = this.context.flux.getStore('router');
 
     PostStore.addListener('change', this.updatePosts);
-    RouterStore.addListener('routerWillRun', this.updateQuery);
+    RouterStore.addListener('change', this.updateQuery);
   },
 
   componentWillUnmount() {
     let PostStore = this.context.flux.getStore('posts');
+    let RouterStore = this.context.flux.getStore('router');
 
     PostStore.removeListener('change', this.updatePosts);
-    RouterStore.removeListener('routerWillRun', this.updateQuery);
+    RouterStore.removeListener('change', this.updateQuery);
   },
 
   updatePosts() {
@@ -68,13 +70,12 @@ let BlogHandler = React.createClass({
   },
 
   updateQuery() {
+    let RouterStore = this.context.flux.getStore('router');
     let { query, pathname } = RouterStore.getState();
 
     if (pathname !== '/blog') return;
 
-    this.setState({
-      query: RouterStore.getQuery(),
-    })
+    this.setState({ query });
   },
 
   render() {

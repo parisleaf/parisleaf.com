@@ -1,15 +1,11 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Actions } from 'flummox2';
 
-let RouterConstants = Flux.getConstants('RouterConstants');
-
-Flux.createActions({
-
-  name: 'RouterActions',
+export default class RouterActions extends Actions {
 
   routerWillRun(state) {
-    this.dispatchAction(RouterConstants.ROUTER_WILL_RUN, state);
+    return state;
   }
 
-});
+}

@@ -36,7 +36,7 @@ export default class PostStore extends Store {
     this.setState({
       posts: this.state.posts.merge(newPosts),
       queries: this.state.queries.set(newQuery, newPosts.toList().map(post => post.get('slug'))),
-    })
+    });
   }
 
   handleGetSinglePost(newPost) {

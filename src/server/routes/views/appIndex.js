@@ -11,14 +11,11 @@ import React from 'react';
 import Router from 'react-router';
 import routes from '../../../shared/routes';
 
-import Flux from 'flummox';
-let RouterActions = Flux.getActions('RouterActions');
-
 import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
 
 import userAgentToMediaState from '../../userAgentToMediaState';
 
-import Flux2 from '../../../shared/Flux';
+import Flux from '../../../shared/Flux';
 
 export default function(app) {
   app.get(/.*/, function *() {
@@ -30,7 +27,8 @@ export default function(app) {
       Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
     });
 
-    let flux = new Flux2();
+    let flux = new Flux();
+    let RouterActions = flux.getActions('router');
     state.flux = flux;
 
     RouterActions.routerWillRun(state);
