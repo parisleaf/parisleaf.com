@@ -11,11 +11,24 @@ dotenv.load();
 
 import app from './app';
 
-let winston = require('winston');
-winston.add(winston.transports.File, { filename: 'parisleaf.com.log' });
+import bunyan from 'bunyan';
+
+let log = bunyan.createLogger({
+  name: 'parisleaf',
+  streams: [
+    {
+      level: 'info',
+      stream: process.stdout            // log INFO and above to stdout
+    },
+    {
+      level: 'error',
+      path: 'parisleaf-error.log'  // log ERROR and above to a file
+    }
+  ]
+});
 
 app.on('error', (e) => {
-  winston.error(e.message);
+  log.info(e);
 });
 
 // Start listening
