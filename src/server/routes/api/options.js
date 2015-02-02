@@ -8,6 +8,8 @@ import request from 'superagent';
 
 export default function(app) {
   app.get('/api/options', function *() {
+    this.set('Cache-Control', 'max-age=2400');
+
     let options = yield wpRequest('/acf/options').exec();
 
     // go fetch actual post data iff post_type == post

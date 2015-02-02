@@ -3,7 +3,7 @@
 import React from 'react';
 import Immutable from 'immutable';
 import AppLink from './AppLink';
-import { rhythm, zIndex, navBarRhythmHeight } from '../theme';
+import { rhythm, zIndex, navBarRhythmHeight, color } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 import AppNavDrawer from './AppNavDrawer';
@@ -63,7 +63,7 @@ let AppNav = React.createClass({
 
   toggleMenuIcon() {
     let toggleIconStyle = Object.assign({
-      fill: this.props.textColor,
+      fill: this.props.open ? color('text') : this.props.textColor,
     }, style.toggleIcon);
 
     if(this.props.open) {
@@ -81,7 +81,7 @@ let AppNav = React.createClass({
     }, style._);
 
     let logoIconStyle = Object.assign({
-      fill: this.props.textColor,
+      fill: this.props.open ? color('text') : this.props.textColor,
     }, style.logoIcon);
 
     return (

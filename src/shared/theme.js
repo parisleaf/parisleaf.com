@@ -100,6 +100,7 @@ export function fontSize(name) {
 export var zIndices = {
   AppNav:              9999,
   AppOverlay:           999,
+  AppTransition:         99,
 };
 
 /**

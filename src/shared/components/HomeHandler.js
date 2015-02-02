@@ -12,13 +12,10 @@ import { color } from '../theme';
 let Home = React.createClass({
 
   statics: {
-    routerWillRun: async function routerWillRun(state) {
-      let AppActions = state.flux.getActions('app');
+    async routerWillRun(state) {
       let PageActions = state.flux.getActions('pages');
       let ProjectActions = state.flux.getActions('projects');
       let PageStore = state.flux.getStore('pages');
-
-      AppActions.setNavTextColor(color('yellow'));
 
       await PageActions.getPageBySlug('home');
       let homePage = PageStore.getPageBySlug('home');
@@ -30,6 +27,12 @@ let Home = React.createClass({
         }));
       }
     },
+
+    routerDidRun(state) {
+      let AppActions = state.flux.getActions('app');
+      
+      AppActions.setNavTextColor(color('yellow'));
+    }
   },
 
   contextTypes: {
@@ -58,7 +61,7 @@ let Home = React.createClass({
     }
   },
 
-  fetchFirstImpressionPosts: async function fetchFirstImpressionPosts() {
+  async fetchFirstImpressionPosts() {
     let PostStore = this.context.flux.getStore('posts');
     let PostActions = this.context.flux.getActions('posts');
     let PageStore = this.context.flux.getStore('pages');

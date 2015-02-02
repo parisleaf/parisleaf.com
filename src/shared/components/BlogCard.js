@@ -1,6 +1,7 @@
 'use strict';
 
-import React from 'react';
+import React from 'react/addons';
+let { PureRenderMixin } = React.addons;
 
 import { getCardColor, getFeaturedImage } from '../utils/PostUtils';
 import { rhythm, siteContainerRhythmPadding } from '../theme';
@@ -23,6 +24,8 @@ let style = {
 }
 
 let BlogCard = React.createClass({
+
+  mixins: [PureRenderMixin],
 
   getInitialState() {
     return {
