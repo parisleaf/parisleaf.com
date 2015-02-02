@@ -1,9 +1,11 @@
 'use strict';
 
-import React from 'react';
-import { State } from 'react-router';
+import React from 'react/addons';
 
+import { State } from 'react-router';
 import Flux from 'flummox';
+
+let { PureRenderMixin } = React.addons;
 
 import ProjectFirstImpression from './ProjectFirstImpression';
 import ProjectContent from './ProjectContent';
@@ -12,7 +14,7 @@ import { nestedGet } from '../utils/ImmutableUtils';
 
 let ProjectHandler = React.createClass({
 
-  mixins: [State],
+  mixins: [State, PureRenderMixin],
 
   statics: {
     routerWillRun(state) {

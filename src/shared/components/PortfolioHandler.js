@@ -4,8 +4,6 @@ import React from 'react';
 import tweenState from 'react-tween-state';
 import MediaMixin from 'react-media-mixin';
 
-import Flux from 'flummox';
-
 import Button from './Button';
 import Header from './Header';
 import AppLink from './AppLink';
@@ -21,6 +19,8 @@ let style = {
 };
 
 let PortfolioHandler = React.createClass({
+
+  mixins: [MediaMixin],
 
   statics: {
     routerWillRun(state) {
@@ -40,7 +40,6 @@ let PortfolioHandler = React.createClass({
 
   contextTypes: {
     flux: React.PropTypes.any.isRequired,
-    media: React.PropTypes.object,
   },
 
   componentDidMount() {
@@ -183,9 +182,9 @@ let PortfolioHandler = React.createClass({
   getProjectRelativeWidth(project) {
     let _isCaseStudy = isCaseStudy(project);
 
-    if (this.context.media.l) {
+    if (this.state.media.l) {
       return _isCaseStudy ? 0.5 : 0.25;
-    } else if (this.context.media.s) {
+    } else if (this.state.media.s) {
       return _isCaseStudy ? 1 : 0.5;
     } else {
       return 1;
