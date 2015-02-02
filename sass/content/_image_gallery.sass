@@ -1,0 +1,16 @@
+.image_gallery
+  width: 100%
+  display: flex
+  padding: 0
+  margin: 0
+  flex-flow: row wrap
+  font-size: 0
+
+  &-image
+    flex: auto
+    width: 100%
+    +bp(s)
+      width: 50%
+
+    > img
+      width: 100%
