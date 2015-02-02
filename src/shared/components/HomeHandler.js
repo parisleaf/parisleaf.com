@@ -7,9 +7,6 @@ import MoreFromBlog from './MoreFromBlog';
 
 import Flux from 'flummox';
 
-let PageStore = Flux.getStore('PageStore');
-let PageActions = Flux.getActions('PageActions');
-
 let ProjectStore = Flux.getStore('ProjectStore');
 let ProjectActions = Flux.getActions('ProjectActions');
 
@@ -20,6 +17,9 @@ let Home = React.createClass({
   statics: {
     routerWillRun: async function routerWillRun(state) {
       let AppActions = state.flux.getActions('app');
+      let PageActions = state.flux.getActions('pages');
+      let PageStore = state.flux.getStore('pages');
+
       AppActions.setNavTextColor(color('yellow'));
 
       await PageActions.getPageBySlug('home');
@@ -39,6 +39,7 @@ let Home = React.createClass({
   },
 
   getInitialState() {
+    let PageStore = this.context.flux.getStore('pages');
 
     return {
       page: PageStore.getPageBySlug('home'),
@@ -47,6 +48,7 @@ let Home = React.createClass({
   },
 
   getFirstImpressionProjects() {
+    let PageStore = this.context.flux.getStore('pages');
     let homePage = PageStore.getPageBySlug('home');
 
     if(homePage) {
@@ -59,6 +61,7 @@ let Home = React.createClass({
   fetchFirstImpressionPosts: async function fetchFirstImpressionPosts() {
     let PostStore = this.context.flux.getStore('posts');
     let PostActions = this.context.flux.getActions('posts');
+    let PageStore = this.context.flux.getStore('pages');
     let homePage = PageStore.getPageBySlug('home');
 
     if(homePage) {
@@ -82,6 +85,8 @@ let Home = React.createClass({
 
 
   componentDidMount() {
+    let PageStore = this.context.flux.getStore('pages');
+
     PageStore.addListener('change', this.pageStoreDidChange);
     ProjectStore.addListener('change', this.projectStoreDidChange);
 
@@ -89,11 +94,15 @@ let Home = React.createClass({
   },
 
   componentWillUnmount() {
+    let PageStore = this.context.flux.getStore('pages');
+
     PageStore.removeListener('change', this.pageStoreDidChange);
     ProjectStore.removeListener('change', this.projectStoreDidChange);
   },
 
   pageStoreDidChange() {
+    let PageStore = this.context.flux.getStore('pages');
+
     this.setState({
       page: PageStore.getPageBySlug('home'),
       firstImpressionProjects: this.getFirstImpressionProjects()

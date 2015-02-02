@@ -1,46 +1,33 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Store } from 'flummox2';
 import Immutable from 'immutable';
-let PageConstants = Flux.getConstants('PageConstants');
 
-Flux.createStore({
-  name: 'PageStore',
+export default class PageStore extends Store {
 
-  initialize() {
-    this.pages = Immutable.Map();
-  },
+  constructor(flux) {
+    super();
 
-  actions: [
-    [PageConstants.PAGE_GET_PAGES_SUCCESS, function(pages) {
-      pages = pages.reduce((result, page) => {
-        if (page.slug) {
-          result[page.slug] = page;
-        }
+    this.state = {
+      pages: Immutable.Map(),
+    };
 
-        return result;
-      }, {});
+    let pageActionIds = flux.getActionIds('pages');
 
-      this.pages = this.pages.merge(pages);
-      this.emit('change');
-    }],
-
-    [PageConstants.PAGE_GET_PAGE_BY_SLUG_SUCCESS, function(page) {
-      if (page.slug) {
-        page = Immutable.fromJS(page);
-        this.pages = this.pages.set(page.get('slug'), page);
-      }
-
-      this.emit('change');
-    }],
-  ],
-
-  getPages() {
-    return this.pages.toList();
-  },
-
-  getPageBySlug(slug) {
-    return this.pages.get(slug);
+    this.register(pageActionIds.getPageBySlug, this.handleGetPageBySlug);
   }
 
-});
+  handleGetPageBySlug(newPage) {
+    if (!newPage) return;
+
+    newPage = Immutable.fromJS(newPage);
+
+    this.setState({
+      pages: this.state.pages.set(newPage.get('slug'), newPage),
+    });
+  }
+
+  getPageBySlug(slug) {
+    return this.state.pages.get(slug);
+  }
+}

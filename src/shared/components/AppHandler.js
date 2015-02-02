@@ -5,10 +5,6 @@ import { RouteHandler, Link } from 'react-router';
 
 import Flux from 'flummox';
 
-import '../constants/PageConstants';
-import '../actions/PageActions';
-import '../stores/PageStore';
-
 import '../constants/ProjectConstants';
 import '../actions/ProjectActions';
 import '../stores/ProjectStore';

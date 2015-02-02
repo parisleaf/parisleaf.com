@@ -1,22 +1,16 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Actions } from 'flummox2';
 import APIService from '../services/APIService';
 
-let PageConstants = Flux.getConstants('PageConstants');
+export default class PostActions extends Actions {
 
-Flux.createActions({
+  async getPages(...args) {
+    return await APIService.getPages(...args);
+  }
 
-  name: 'PageActions',
+  async getPageBySlug(...args) {
+    return await APIService.getPageBySlug(...args);
+  }
 
-  serviceActions: {
-    getPages: [PageConstants.PAGE_GET_PAGES, function(...args) {
-      return APIService.getPages(...args);
-    }],
-
-    getPageBySlug: [PageConstants.PAGE_GET_PAGE_BY_SLUG, function(...args) {
-      return APIService.getPageBySlug(...args);
-    }],
-  },
-
-});
+}
