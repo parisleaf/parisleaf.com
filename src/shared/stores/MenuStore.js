@@ -1,38 +1,41 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Store } from 'flummox2';
 import Immutable from 'immutable';
-let MenuConstants = Flux.getConstants('MenuConstants');
 
-Flux.createStore({
-  name: 'MenuStore',
+export default class MenuStore extends Store {
 
-  initialize() {
-    this.menus = Immutable.Map();
-  },
+  constructor(flux) {
+    super();
 
-  actions: [
-    [MenuConstants.MENU_GET_MENUS_SUCCESS, function(menus) {
-      menus = menus.reduce((result, menu) => {
-        if (menu.slug) {
-          result[menu.slug] = menu;
-        }
+    this.state = {
+      menus: Immutable.Map(),
+    };
 
-        return result;
-      }, {});
+    let menuActionIds = flux.getActionIds('menus');
 
-      this.menus = this.menus.merge(menus);
-      this.emit('change');
-    }],
+    this.register(menuActionIds.getMenus, this.handleGetMenus);
+  }
 
-  ],
+  handleGetMenus(newMenus) {
+    newMenus = newMenus.reduce((result, menu) => {
+      if (menu.slug) {
+        result[menu.slug] = menu;
+      }
+
+      return result;
+    }, {});
+
+    this.setState({
+      menus: this.state.menus.merge(newMenus),
+    });
+  }
 
   getMenus() {
-    return this.menus.toList();
-  },
+    return this.state.menus.toList();
+  }
 
   getMenuBySlug(slug) {
-    return this.menus.find(menu => menu.get('slug') === slug);
-  },
-
-});
+    return this.state.menus.get(slug);
+  }
+}

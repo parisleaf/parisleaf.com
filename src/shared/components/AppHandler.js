@@ -5,16 +5,9 @@ import { RouteHandler, Link } from 'react-router';
 
 import Flux from 'flummox';
 
-import '../constants/MenuConstants';
-import '../actions/MenuActions';
-import '../stores/MenuStore';
-
 import '../constants/TwitterConstants';
 import '../actions/TwitterActions';
 import '../stores/TwitterStore';
-
-let MenuStore = Flux.getStore('MenuStore');
-let MenuActions = Flux.getActions('MenuActions');
 
 let TwitterStore = Flux.getStore('TwitterStore');
 let TwitterActions = Flux.getActions('TwitterActions');
@@ -32,6 +25,7 @@ let App = React.createClass({
   statics: {
     routerWillRun(state) {
       let AppActions = state.flux.getActions('app');
+      let MenuActions = state.flux.getActions('menus');
 
       AppActions.setNavTextColor(color('text'));
 
@@ -52,6 +46,8 @@ let App = React.createClass({
 
   getInitialState() {
     let AppStore = this.context.flux.getStore('app');
+    let MenuStore = this.context.flux.getStore('menus');
+
 
     return Object.assign({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
@@ -72,6 +68,7 @@ let App = React.createClass({
 
   componentDidMount() {
     let AppStore = this.context.flux.getStore('app');
+    let MenuStore = this.context.flux.getStore('menus');
 
     AppStore.addListener('change', this.appStoreDidChange);
     MenuStore.addListener('change', this.menuStoreDidChange);
@@ -79,6 +76,7 @@ let App = React.createClass({
 
   componentWillUnmount() {
     let AppStore = this.context.flux.getStore('app');
+    let MenuStore = this.context.flux.getStore('menus');
 
     AppStore.removeListener('change', this.appStoreDidChange);
     MenuStore.removeListener('change', this.menuStoreDidChange);
@@ -91,10 +89,12 @@ let App = React.createClass({
   },
 
   menuStoreDidChange() {
+    let MenuStore = this.context.flux.getStore('menus');
+
     this.setState({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
       secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-      tweets: TwitterStore.getTweets()
+      tweets: TwitterStore.getTweets(),
     });
   },
 

@@ -38,7 +38,7 @@ export default class ProjectStore extends Store {
     }, {}));
 
     this.setState({
-      projects: this.state.projects.merge(this.state.projects, newProjects),
+      projects: this.state.projects.merge(newProjects),
     });
   }
 

@@ -1,19 +1,12 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Actions } from 'flummox2';
 import APIService from '../services/APIService';
 
-let MenuConstants = Flux.getConstants('MenuConstants');
+export default class MenuActions extends Actions {
 
-Flux.createActions({
+  async getMenus(...args) {
+    return await APIService.getMenus(...args);
+  }
 
-  name: 'MenuActions',
-
-  serviceActions: {
-    getMenus: [MenuConstants.MENU_GET_MENUS, function(...args) {
-      return APIService.getMenus(...args);
-    }],
-
-  },
-
-});
+}
