@@ -7,9 +7,6 @@ import MoreFromBlog from './MoreFromBlog';
 
 import Flux from 'flummox';
 
-let ProjectStore = Flux.getStore('ProjectStore');
-let ProjectActions = Flux.getActions('ProjectActions');
-
 import { color } from '../theme';
 
 let Home = React.createClass({
@@ -18,6 +15,7 @@ let Home = React.createClass({
     routerWillRun: async function routerWillRun(state) {
       let AppActions = state.flux.getActions('app');
       let PageActions = state.flux.getActions('pages');
+      let ProjectActions = state.flux.getActions('projects');
       let PageStore = state.flux.getStore('pages');
 
       AppActions.setNavTextColor(color('yellow'));
@@ -49,10 +47,12 @@ let Home = React.createClass({
 
   getFirstImpressionProjects() {
     let PageStore = this.context.flux.getStore('pages');
+    let ProjectStore = this.context.flux.getStore('projects');
     let homePage = PageStore.getPageBySlug('home');
 
     if(homePage) {
       return getFirstImpressionProjectSlugs(homePage).map(function(slug) {
+        return ProjectStore.getProjectBySlug(slug);
         return ProjectStore.getProjectBySlug(slug);
       });
     }
@@ -86,6 +86,7 @@ let Home = React.createClass({
 
   componentDidMount() {
     let PageStore = this.context.flux.getStore('pages');
+    let ProjectStore = this.context.flux.getStore('projects');
 
     PageStore.addListener('change', this.pageStoreDidChange);
     ProjectStore.addListener('change', this.projectStoreDidChange);
@@ -95,6 +96,7 @@ let Home = React.createClass({
 
   componentWillUnmount() {
     let PageStore = this.context.flux.getStore('pages');
+    let ProjectStore = this.context.flux.getStore('projects');
 
     PageStore.removeListener('change', this.pageStoreDidChange);
     ProjectStore.removeListener('change', this.projectStoreDidChange);

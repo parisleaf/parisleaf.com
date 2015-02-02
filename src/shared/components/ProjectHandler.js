@@ -5,9 +5,6 @@ import { State, Navigation } from 'react-router';
 
 import Flux from 'flummox';
 
-let ProjectActions = Flux.getActions('ProjectActions');
-let ProjectStore = Flux.getStore('ProjectStore');
-
 import ProjectFirstImpression from './ProjectFirstImpression';
 import ProjectContent from './ProjectContent';
 import Header from './Header';
@@ -20,19 +17,28 @@ let ProjectHandler = React.createClass({
   statics: {
     routerWillRun(state) {
       let AppActions = state.flux.getActions('app');
+      let ProjectActions = state.flux.getActions('projects');
 
       AppActions.setNavTextColor('#fff');
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
   },
 
+  contextTypes: {
+    flux: React.PropTypes.any.isRequired,
+  },
+
   getInitialState() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     return {
       project: ProjectStore.getProjectBySlug(this.getParams().slug),
     };
   },
 
   componentDidMount() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     if (!this.state.project) this.replaceWith('home');
 
     let canonicalPath = this.canonicalPath();
@@ -51,10 +57,14 @@ let ProjectHandler = React.createClass({
   },
 
   componentWillUnmount() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     ProjectStore.removeListener('change', this.projectStoreDidChange);
   },
 
   projectStoreDidChange() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     this.setState({
       project: ProjectStore.getProjectBySlug(this.getParams().slug),
     });

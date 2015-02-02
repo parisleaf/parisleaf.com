@@ -1,46 +1,52 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Store } from 'flummox2';
 import Immutable from 'immutable';
-let ProjectConstants = Flux.getConstants('ProjectConstants');
 
-Flux.createStore({
-  name: 'ProjectStore',
+export default class ProjectStore extends Store {
 
-  initialize() {
-    this.projects = Immutable.Map();
-  },
+  constructor(flux) {
+    super();
 
-  actions: [
-    [ProjectConstants.PROJECT_GET_PROJECTS_SUCCESS, function(projects) {
-      projects = projects.reduce((result, project) => {
-        if (project.slug) {
-          result[project.slug] = project;
-        }
+    this.state = {
+      projects: Immutable.Map(),
+    };
 
-        return result;
-      }, {});
+    let projectActionIds = flux.getActionIds('projects');
 
-      this.projects = this.projects.merge(projects);
-      this.emit('change');
-    }],
-
-    [ProjectConstants.PROJECT_GET_PROJECT_BY_SLUG_SUCCESS, function(project) {
-      if (project.slug) {
-        project = Immutable.fromJS(project);
-        this.projects = this.projects.set(project.get('slug'), project);
-      }
-
-      this.emit('change');
-    }],
-  ],
-
-  getProjects() {
-    return this.projects.toList();
-  },
-
-  getProjectBySlug(slug) {
-    return this.projects.get(slug);
+    this.register(projectActionIds.getProjectBySlug, this.handleGetSingleProject);
+    this.register(projectActionIds.getProjects, this.handleGetProjects);
   }
 
-});
+  handleGetSingleProject(newProject) {
+    if (!newProject) return;
+
+    newProject = Immutable.fromJS(newProject);
+
+    this.setState({
+      projects: this.state.projects.set(newProject.get('slug'), newProject),
+    });
+  }
+
+  handleGetProjects(newProjects) {
+    newProjects = Immutable.fromJS(newProjects.reduce((result, project) => {
+      if (!project) return;
+
+      result[project.slug] = project;
+
+      return result;
+    }, {}));
+
+    this.setState({
+      projects: this.state.projects.merge(this.state.projects, newProjects),
+    });
+  }
+
+  getProjectBySlug(slug) {
+    return this.state.projects.get(slug);
+  }
+
+  getProjects() {
+    return this.state.projects.toList();
+  }
+}

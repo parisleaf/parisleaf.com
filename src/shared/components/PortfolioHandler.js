@@ -5,8 +5,6 @@ import tweenState from 'react-tween-state';
 import MediaMixin from 'react-media-mixin';
 
 import Flux from 'flummox';
-let ProjectActions = Flux.getActions('ProjectActions');
-let ProjectStore = Flux.getStore('ProjectStore');
 
 import Button from './Button';
 import Header from './Header';
@@ -25,30 +23,41 @@ let style = {
 let PortfolioHandler = React.createClass({
 
   statics: {
-    routerWillRun() {
+    routerWillRun(state) {
+      let ProjectActions = state.flux.getActions('projects');
+
       return ProjectActions.getProjects();
     },
   },
 
   getInitialState() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     return {
       projects: ProjectStore.getProjects(),
     };
   },
 
   contextTypes: {
+    flux: React.PropTypes.any.isRequired,
     media: React.PropTypes.object,
   },
 
   componentDidMount() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     ProjectStore.addListener('change', this.projectStoreDidChange);
   },
 
   componentWillUnmount() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     ProjectStore.removeListener('change', this.projectStoreDidChange);
   },
 
   projectStoreDidChange() {
+    let ProjectStore = this.context.flux.getStore('projects');
+
     this.setState({
       projects: ProjectStore.getProjects(),
     });

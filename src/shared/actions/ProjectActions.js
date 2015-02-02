@@ -1,22 +1,16 @@
 'use strict';
 
-import Flux from 'flummox';
+import { Actions } from 'flummox2';
 import APIService from '../services/APIService';
 
-let ProjectConstants = Flux.getConstants('ProjectConstants');
+export default class ProjectActions extends Actions {
 
-Flux.createActions({
+  async getProjects(...args) {
+    return await APIService.getProjects(...args);
+  }
 
-  name: 'ProjectActions',
+  async getProjectBySlug(...args) {
+    return await APIService.getProjectBySlug(...args);
+  }
 
-  serviceActions: {
-    getProjects: [ProjectConstants.PROJECT_GET_PROJECTS, function(...args) {
-      return APIService.getProjects(...args);
-    }],
-
-    getProjectBySlug: [ProjectConstants.PROJECT_GET_PROJECT_BY_SLUG, function(...args) {
-      return APIService.getProjectBySlug(...args);
-    }],
-  },
-
-});
+}
