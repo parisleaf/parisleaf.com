@@ -1,6 +1,6 @@
 'use strict';
 
-import { Store } from 'flummox2';
+import { Store } from 'flummox';
 import Immutable from 'immutable';
 
 export default class PageStore extends Store {

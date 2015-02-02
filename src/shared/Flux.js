@@ -1,6 +1,6 @@
 'use strict';
 
-import Flummox from 'flummox2';
+import Flummox from 'flummox';
 
 import PostActions from './actions/PostActions';
 import PostStore from './stores/PostStore';

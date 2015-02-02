@@ -1,6 +1,6 @@
 'use strict';
 
-import { Store } from 'flummox2';
+import { Store } from 'flummox';
 import Immutable from 'immutable';
 import Qs from 'qs';
 

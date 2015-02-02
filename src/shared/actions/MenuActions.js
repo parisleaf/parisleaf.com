@@ -1,6 +1,6 @@
 'use strict';
 
-import { Actions } from 'flummox2';
+import { Actions } from 'flummox';
 import APIService from '../services/APIService';
 
 export default class MenuActions extends Actions {

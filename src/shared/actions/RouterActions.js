@@ -1,6 +1,6 @@
 'use strict';
 
-import { Actions } from 'flummox2';
+import { Actions } from 'flummox';
 
 export default class RouterActions extends Actions {
 
