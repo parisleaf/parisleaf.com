@@ -5,13 +5,6 @@ import { RouteHandler, Link } from 'react-router';
 
 import Flux from 'flummox';
 
-import '../constants/TwitterConstants';
-import '../actions/TwitterActions';
-import '../stores/TwitterStore';
-
-let TwitterStore = Flux.getStore('TwitterStore');
-let TwitterActions = Flux.getActions('TwitterActions');
-
 import AppNav from './AppNav';
 import AppOverlay from './AppOverlay';
 
@@ -26,6 +19,7 @@ let App = React.createClass({
     routerWillRun(state) {
       let AppActions = state.flux.getActions('app');
       let MenuActions = state.flux.getActions('menus');
+      let TweetActions = state.flux.getActions('tweets');
 
       AppActions.setNavTextColor(color('text'));
 
@@ -34,7 +28,7 @@ let App = React.createClass({
 
       return Promise.all([
         MenuActions.getMenus(),
-        TwitterActions.getTweets(),
+        TweetActions.getTweets(),
         AppActions.getOptions(),
       ]);
     }
@@ -47,12 +41,13 @@ let App = React.createClass({
   getInitialState() {
     let AppStore = this.context.flux.getStore('app');
     let MenuStore = this.context.flux.getStore('menus');
+    let TweetStore = this.context.flux.getStore('tweets');
 
 
     return Object.assign({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
       secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-      tweets: TwitterStore.getTweets(),
+      tweets: TweetStore.getTweets(),
     }, AppStore.state);
   },
 
@@ -94,7 +89,6 @@ let App = React.createClass({
     this.setState({
       primaryMenu: MenuStore.getMenuBySlug('primary'),
       secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-      tweets: TwitterStore.getTweets(),
     });
   },
 

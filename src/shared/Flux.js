@@ -14,6 +14,9 @@ import ProjectStore from './stores/ProjectStore';
 import MenuActions from './actions/MenuActions';
 import MenuStore from './stores/MenuStore';
 
+import TweetActions from './actions/TweetActions';
+import TweetStore from './stores/TweetStore';
+
 import AppActions from './actions/AppActions';
 import AppStore from './stores/AppStore';
 
@@ -36,6 +39,9 @@ export default class Flux extends Flummox {
 
     this.createActions('menus', MenuActions);
     this.createStore('menus', MenuStore, this);
+
+    this.createActions('tweets', TweetActions);
+    this.createStore('tweets', TweetStore, this);
 
     this.createActions('app', AppActions);
     this.createStore('app', AppStore, this);

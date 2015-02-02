@@ -4,10 +4,6 @@ import React from 'react';
 import { State } from 'react-router';
 import moment from 'moment';
 
-import Flux from 'flummox';
-let TwitterActions = Flux.getActions('TwitterActions');
-let TwitterStore = Flux.getStore('TwitterStore');
-
 import { rhythm, siteContainerRhythmPadding, color} from '../theme';
 import Excerpt from './Excerpt';
 import Header from './Header';
@@ -35,8 +31,8 @@ let style = {
   retweet: {
     width: '2rem',
     height: '2rem',
-  }
-}
+  },
+};
 
 let Tweet = React.createClass({
 
@@ -62,17 +58,7 @@ let Tweet = React.createClass({
     return(
       <div className="TweetContainer" style={style._}>
         <div className="Tweet">
- {/*         <div className="Tweet-icon">
-            <SvgIcon name="twitter" style={style.icon} />
-          </div>
-*/}
           <div className="Tweet-content">
-{/*
-            <div className="Tweet-content-meta">
-              <Header level={2} className="Tweet-content-meta-user" style={style.header}>{tweet.get('user').get('name')} says:</Header>
-              <Metadata className="Tweet-content-meta-date">{this.formatDate(tweet.get('created_at'))}</Metadata>
-            </div>
-*/}
             <div className="Tweet-content-excerpt">
               <Excerpt>{tweet.get('text')}</Excerpt>
             </div>
