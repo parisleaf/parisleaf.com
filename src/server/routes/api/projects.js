@@ -13,6 +13,7 @@ export default function(app) {
       .type( 'project' )
       .filter(filter)
       .get();
+    console.log(projects);
     this.body = projects;
   });
 
