@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { RouteHandler, Link } from 'react-router';
+import { RouteHandler, Link, State } from 'react-router';
 
 import Flux from 'flummox';
 
@@ -13,7 +13,7 @@ import { color } from '../theme';
 
 let App = React.createClass({
 
-  mixins: [MediaMixin],
+  mixins: [State, MediaMixin],
 
   statics: {
     routerWillRun(state) {
@@ -21,16 +21,20 @@ let App = React.createClass({
       let MenuActions = state.flux.getActions('menus');
       let TweetActions = state.flux.getActions('tweets');
 
-      AppActions.setNavTextColor(color('text'));
-
-      // Make sure nav is dismissed on re-route
-      AppActions.setNavOpen(false);
-
       return Promise.all([
         MenuActions.getMenus(),
         TweetActions.getTweets(),
         AppActions.getOptions(),
       ]);
+    },
+
+    routerDidRun(state) {
+      let AppActions = state.flux.getActions('app');
+
+      AppActions.setNavTextColor(color('text'));
+
+      // Make sure nav is dismissed on re-route
+      AppActions.setNavOpen(false);
     }
   },
 
@@ -93,6 +97,7 @@ let App = React.createClass({
   },
 
   render() {
+
     let appNav =
       <AppNav
         primaryMenu={this.state.primaryMenu}

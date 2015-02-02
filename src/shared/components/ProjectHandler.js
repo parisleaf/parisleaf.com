@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { State, Navigation } from 'react-router';
+import { State } from 'react-router';
 
 import Flux from 'flummox';
 
@@ -12,16 +12,20 @@ import { nestedGet } from '../utils/ImmutableUtils';
 
 let ProjectHandler = React.createClass({
 
-  mixins: [State, Navigation],
+  mixins: [State],
 
   statics: {
     routerWillRun(state) {
-      let AppActions = state.flux.getActions('app');
       let ProjectActions = state.flux.getActions('projects');
 
-      AppActions.setNavTextColor('#fff');
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
+
+    routerDidRun(state) {
+      let AppActions = state.flux.getActions('app');
+
+      AppActions.setNavTextColor('#fff');
+    }
   },
 
   contextTypes: {
@@ -39,21 +43,7 @@ let ProjectHandler = React.createClass({
   componentDidMount() {
     let ProjectStore = this.context.flux.getStore('projects');
 
-    if (!this.state.project) this.replaceWith('home');
-
-    let canonicalPath = this.canonicalPath();
-
-    if (this.getPathname() !== canonicalPath) {
-      this.replaceWith(canonicalPath, this.getParams(), this.getQuery());
-    }
-
     ProjectStore.addListener('change', this.projectStoreDidChange);
-  },
-
-  canonicalPath() {
-    if (!this.state.project) return null;
-
-    return `/work/${this.state.project.get('slug')}`;
   },
 
   componentWillUnmount() {

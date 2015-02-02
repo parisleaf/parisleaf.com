@@ -41,3 +41,5 @@ public/css/app.min.css
 sass/dependencies/_theme.scss
 
 public/js/styleguide.js
+
+bower_components

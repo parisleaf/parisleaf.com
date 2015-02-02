@@ -16,10 +16,15 @@ let PostHandler = React.createClass({
     routerWillRun(state) {
       let { flux, params } = state;
       let PostActions = flux.getActions('posts');
-      let AppActions = flux.getActions('app');
+      return PostActions.getPostBySlug(state.params.slug);
+    },
+
+    routerDidRun(state) {
+      let AppActions = state.flux.getActions('app');
+
+      console.log('routerDidRun');
 
       AppActions.setNavTextColor('#fff');
-      return PostActions.getPostBySlug(state.params.slug);
     }
   },
 
