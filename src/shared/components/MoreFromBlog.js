@@ -7,6 +7,7 @@ import theme from '../theme';
 import AppLink from './AppLink';
 import BlogCard from './BlogCard';
 import SiteContainer from './SiteContainer';
+import RevealOnScroll from './RevealOnScroll';
 
 // Component that will most definitely be used on home page
 // Says more from blog
@@ -20,7 +21,7 @@ let style = {
     paddingTop: theme.rhythm(1),
     paddingBottom: theme.rhythm(2)
   },
-  
+
   header: {
   }
 }
@@ -29,12 +30,14 @@ let MoreFromBlog = React.createClass({
 
   displayPosts() {
     let posts = this.props.posts;
-   
+
     if(!(typeof posts === 'undefined')) {
       let cards = posts.map(function(post) {
         return(
-          <div className="Blog-postContainer-item">
-            <BlogCard post={post} expanded />
+          <div className="Blog-postContainer-item" key={post.get('id_str')}>
+            <RevealOnScroll>
+              <BlogCard post={post} expanded/>
+            </RevealOnScroll>
           </div>
         );
       });
@@ -63,7 +66,7 @@ let MoreFromBlog = React.createClass({
         </SiteContainer>
       </div>
     );
-  } 
+  }
 });
 
 export default MoreFromBlog;

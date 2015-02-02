@@ -44,6 +44,7 @@
     "react-suitcss": "~1.0.4",
     "react-tween-state": "0.0.4",
     "react-viewport": "1.0.6",
+    "react-waypoint": "~0.3.0",
     "superagent": "~0.21.0",
     "url-join": "0.0.1",
     "useragent": "~2.1.3",
