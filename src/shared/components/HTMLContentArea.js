@@ -4,9 +4,11 @@ import React from 'react';
 import chroma from 'chroma-js';
 import { color } from '../theme';
 import PLSlider from './PLSlider';
+import Video from './Video';
 
 let HTMLContentArea = React.createClass({
-  componentDidMount() {
+
+  renderSliders() {
     // query selector
     let slidersObject = document.querySelectorAll('.Slider'); // Scoped correctly?
 
@@ -27,13 +29,23 @@ let HTMLContentArea = React.createClass({
       , slider);
      
     });
+  },
 
-    //React.render(<Slider />, slider);
-    //sliders.map(function(slider) {
-      // create react component
-      // render to element
-    //  React.render(<Slider />, slider);
-    //});
+  renderVideos() {
+    let videos = Array.from(document.querySelectorAll('div.video-shortcode'));
+    // for each
+    videos.map(function(video) {
+      React.render(
+        <Video src={video.dataset.src} content={video.dataset.content} />,
+        video      
+      );
+    });
+    
+  },
+
+  componentDidMount() {
+    this.renderSliders();
+    this.renderVideos();
   },
 
   render() {
