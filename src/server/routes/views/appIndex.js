@@ -11,6 +11,8 @@ import React from 'react';
 import Router from 'react-router';
 import routes from '../../../shared/routes';
 
+import DocumentTitle from 'react-document-title';
+
 import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
 
 import userAgentToMediaState from '../../userAgentToMediaState';
@@ -39,7 +41,10 @@ export default function(app) {
       () => React.renderToString(<Handler />)
     );
 
+    let title = DocumentTitle.rewind();
+
     yield this.render('app', {
+      title,
       appString,
       env: process.env,
       initialMediaState: JSON.stringify(initialMediaState),
