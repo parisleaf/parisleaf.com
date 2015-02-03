@@ -9,6 +9,7 @@ import PageHandler from './components/PageHandler';
 import PortfolioHandler from './components/PortfolioHandler';
 import BlogHandler from './components/BlogHandler';
 import ProjectHandler from './components/ProjectHandler';
+import NotFoundHandler from './components/NotFoundHandler';
 
 let Routes = (
   <Route name="app" path="/" handler={AppHandler}>
@@ -20,7 +21,7 @@ let Routes = (
     <Route path="/blog" name="blog" handler={BlogHandler} />
     <Route path="/:slug" name="page" handler={PageHandler} />
     <DefaultRoute name="home" handler={HomeHandler} />
-    <NotFoundRoute name="404" handler={HomeHandler} />
+    <NotFoundRoute name="404" handler={NotFoundHandler} />
   </Route>
 );
 
