@@ -97,15 +97,13 @@ let BlogHandler = React.createClass({
 
     return (
       <div>
-        <SiteContainer>
-          <PageHeader
-            title="Blog"
-            subtitle="Sometimes we talk about News, Events, Inspriation, and Education."
-          >
-            <Link to="blog" query={{ category: 'events' }}>Events</Link>
-            <Link to="blog" query={{ category: 'uncategorized' }}>Uncategorized</Link>
-          </PageHeader>
-        </SiteContainer>
+        <PageHeader
+          title="Blog"
+          subtitle="Sometimes we talk about News, Events, Inspriation, and Education."
+        >
+          <Link to="blog" query={{ category: 'events' }}>Events</Link>
+          <Link to="blog" query={{ category: 'uncategorized' }}>Uncategorized</Link>
+        </PageHeader>
         <div style={postContainerStyle}>
           <SiteContainer hang>
             {cards}

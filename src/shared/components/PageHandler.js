@@ -5,6 +5,9 @@ import { State } from 'react-router';
 
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
+import PageHeader from './PageHeader';
+
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let PageHandler = React.createClass({
 
@@ -58,8 +61,15 @@ let PageHandler = React.createClass({
       return <div>Page not found</div>;
     }
 
+    let title = page.get('title');
+    let subtitle = nestedGet(page, 'meta', 'subtitle');
+
     return (
       <div>
+        <PageHeader
+          title={title}
+          subtitle={subtitle}
+        />
         <article>
           <SiteContainer>
             <HTMLContentArea html={page.get('content')} />
