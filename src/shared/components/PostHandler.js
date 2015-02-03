@@ -3,10 +3,9 @@
 import React from 'react';
 import { State } from 'react-router';
 
-import Flux from 'flummox';
-
 import PostFirstImpression from './PostFirstImpression';
 import SiteContainer from './SiteContainer';
+import HTMLContentArea from './HTMLContentArea';
 
 let PostHandler = React.createClass({
 
@@ -16,13 +15,11 @@ let PostHandler = React.createClass({
     routerWillRun(state) {
       let { flux, params } = state;
       let PostActions = flux.getActions('posts');
-      return PostActions.getPostBySlug(state.params.slug);
+      return PostActions.getPostBySlug(params.slug);
     },
 
     routerDidRun(state) {
       let AppActions = state.flux.getActions('app');
-
-      console.log('routerDidRun');
 
       AppActions.setNavTextColor('#fff');
     }
@@ -61,7 +58,8 @@ let PostHandler = React.createClass({
   },
 
   render() {
-    let post = this.state.post;
+    // TODO: better not-found message
+    let { post } = this.state;
 
     if (!post) {
       return <div>Post not found</div>;
@@ -70,9 +68,11 @@ let PostHandler = React.createClass({
     return (
       <div>
         <PostFirstImpression post={post} />
-        <SiteContainer>
-          <article dangerouslySetInnerHTML={{ __html: post.get('content') }} />
-        </SiteContainer>
+        <article>
+          <SiteContainer>
+            <HTMLContentArea html={post.get('content')} />
+          </SiteContainer>
+        </article>
       </div>
     );
 
