@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { RouteHandler, Link, State } from 'react-router';
+import DocumentTitle from 'react-document-title';
 
 import Flux from 'flummox';
 
@@ -109,13 +110,15 @@ let App = React.createClass({
       />;
 
     return (
-      <div className="App">
-        {appNav}
-        <AppOverlay active={this.state.isTransitioning} />
-        <div>
-          <RouteHandler />
+      <DocumentTitle title="Parisleaf">
+        <div className="App">
+          {appNav}
+          <AppOverlay active={this.state.isTransitioning} />
+          <div>
+            <RouteHandler />
+          </div>
         </div>
-      </div>
+      </DocumentTitle>
     );
   }
 });
