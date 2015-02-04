@@ -11,7 +11,7 @@ let style = {
     padding: `${rhythm(1)} 0`,
     borderBottom: `1px ${color('lightGray')} solid`,
   },
-}
+};
 
 let PageHeader = React.createClass({
 
