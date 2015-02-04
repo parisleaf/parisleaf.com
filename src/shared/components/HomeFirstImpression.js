@@ -10,6 +10,7 @@ import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../them
 import { nestedGet } from '../utils/ImmutableUtils';
 import theme from '../theme';
 import Slider from './Slider';
+import PLSlider from './PLSlider';
 import ProjectSlide from './ProjectSlide';
 
 let style = {
@@ -74,10 +75,10 @@ let HomeFirstImpression = React.createClass({
     if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
       return(
         <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          <div style={style.featuredZoneContent} ref="projectSliderContainer" onClick={this.sliderClick}>
-            <Slider className="ProjectSlider" ref="projectSlider">
+          <div style={style.featuredZoneContent} ref="projectSliderContainer">
+            <PLSlider className="ProjectSlider" ref="projectSlider">
               {this.projectSlides()}
-            </Slider>
+            </PLSlider>
           </div>
         </section>
       );
