@@ -7,7 +7,7 @@
     "test": "make fast-js && make test",
     "start": "make fast-build && node lib/server/index.js",
     "start-dev": "make build && NODE_ENV=development node lib/server/index.js",
-    "watch": "make build-dev && NODE_ENV=development nodemon lib/server/index.js"
+    "watch": "make build-dev && NODE_ENV=development nodemon lib/server/index.js | bunyan"
   },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
@@ -40,6 +40,7 @@
     "qs": "~2.3.3",
     "react": "~0.12.2",
     "react-document-title": "~0.1.3",
+    "react-magic-move": "~0.1.0",
     "react-media-mixin": "~1.0.5",
     "react-router": "~0.11.6",
     "react-suitcss": "~1.0.4",
