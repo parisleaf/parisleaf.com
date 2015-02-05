@@ -58,7 +58,7 @@ let HTMLContentArea = React.createClass({
     return (
       <div>
         <style>{`
-          .CopyContainer--primary {
+          .HTMLContentArea--primary {
             background-color: ${primaryColor || 'none'};
             color: ${primaryTextColor}
           }
