@@ -6,7 +6,6 @@ import MediaMixin from 'react-media-mixin';
 import PortfolioItem from './PortfolioItem';
 
 import { isCaseStudy } from '../utils/ProjectUtils';
-import { rhythm } from '../theme';
 
 let style = {
   _: {
@@ -59,142 +58,107 @@ let PortfolioHandler = React.createClass({
   },
 
   render() {
-    let projectHeight = this.getProjectRhythmHeight();
 
-    let { projects, totalRows } = this.packProjects();
+    let itemsPerRow = this.itemsPerRow();
+    let itemsPerCaseStudyRow = this.itemsPerCaseStudyRow();
 
-    projects = projects
-      .map(item =>
-        <PortfolioItem
-          project={item.project}
-          width={item.width}
-          height={projectHeight}
-          x={item.x}
-          y={item.y}
-          key={item.project.get('ID')}
-        />
-      );
+    let items = this.rows()
+      .reduce((result, row) => {
+        let items = row.map(project => {
+          let _itemsPerRow = isCaseStudy(project)
+            ? itemsPerCaseStudyRow
+            : itemsPerRow;
 
-    let _style = Object.assign({
-      height: rhythm(projectHeight * totalRows),
-    }, style._);
+          return (
+            <PortfolioItem
+              project={project}
+              width={`${100 / _itemsPerRow}%`}
+              key={project.get('ID')}
+            />
+          );
+        });
+
+        return result.concat(items);
+      }, []);
 
     return (
-      <div className="ProjectIndex-itemContainer" style={style._}>
-        {projects}
+      <div className="Portfolio-itemContainer" style={style._}>
+        {items}
       </div>
     );
   },
 
   /**
-   * Use a stupid/naive bin-packing algorithm to sort projects
-   * @params {array} [projects] - Defaults to this.state.projects
-   * @returns {object} Object describing result, with fields totalHeight and
-   *   projects. projects is an array of objects, where each object has fields:
-   *   project, width, x, and y.
+   * Organize projects into rows
    */
-  packProjects(projects = this.state.projects) {
-    let completeRows = new Set();
-    let rows = new Set();
+  rows() {
+    let projects = this.state.projects.toArray();
+    let itemsPerRow = this.itemsPerRow();
+    let itemsPerCaseStudyRow = this.itemsPerCaseStudyRow();
 
-    projects.forEach(project => {
+    let caseStudyRows = [];
+    let normalRows = [];
 
-      project = {
-        project,
-        width: this.getProjectRelativeWidth(project),
-      };
+    let caseStudyRow = [];
+    let normalRow = [];
 
-      // If project width is 1, create row, add project, and mark as complete,
-      // then return
-      if (project.width === 1) {
-        addProjectToRow(project, createRow());
-        return;
-      }
+    for (let project of projects) {
+      let _isCaseStudy = isCaseStudy(project);
+      let maxLength = _isCaseStudy ? itemsPerCaseStudyRow : itemsPerRow;
+      let row = _isCaseStudy ? caseStudyRow : normalRow;
 
-      // Check if existing rows have room
-      for (let row of rows) {
+      row.push(project);
 
-        // Check if there's room on this row
-        if (row.width + project.width <= 1) {
-          addProjectToRow(project, row);
-
-          // Finish
-          return;
+      if (row.length === maxLength) {
+        if (_isCaseStudy) {
+          caseStudyRows.push(caseStudyRow);
+          caseStudyRow = [];
+        } else {
+          normalRows.push(normalRow);
+          normalRow = [];
         }
-
-        // Else keep going
-        continue;
-      }
-
-      // If no rows have room, create a new one
-      addProjectToRow(project, createRow());
-    });
-
-    function createRow() {
-      let row = {
-        projects: [],
-        width: 0,
-      };
-
-      rows.add(row);
-
-      return row;
-    }
-
-    function addProjectToRow(project, row) {
-      project.x = row.width;
-      row.width += project.width;
-      row.projects.push(project);
-
-      if (row.width === 1) {
-        // Mark row as completed
-        completeRows.add(row);
-        rows.delete(row);
       }
     }
 
+    if (caseStudyRow.length) caseStudyRows.push(caseStudyRow);
+    if (normalRow.length) normalRows.push(normalRow);
 
-    completeRows = Array.from(completeRows)
-      // Now that there are no more projects to pack, mark leftover rows
-      // as complete
-      .concat(Array.from(rows).sort((row1, row2) => row1.width - row2.width))
-
-    let completeProjects = completeRows// Reduce to array of projects
-      .reduce((result, row, y) => {
-        row.projects.forEach(project => project.y = y);
-        result = result.concat(row.projects);
-        return result;
-      }, []);
-
-    return {
-      projects: completeProjects,
-      totalRows: completeRows.length,
-    };
+    return interleave(caseStudyRows, normalRows);
   },
 
-  /**
-   * Get the relative width of a project, where a row is width = 1
-   */
-  getProjectRelativeWidth(project) {
-    let _isCaseStudy = isCaseStudy(project);
-
-    if (this.state.media.l) {
-      return _isCaseStudy ? 0.5 : 0.25;
-    } else if (this.state.media.s) {
-      return _isCaseStudy ? 1 : 0.5;
+  itemsPerRow() {
+    if (this.state.media.xl) {
+      return 4;
+    } else if (this.state.media.l) {
+      return 2;
     } else {
       return 1;
     }
   },
 
-  /**
-   * Get rhythm height of a project. Same for all projects, depends on
-   * window size.
-   */
-  getProjectRhythmHeight() {
-    return 10;
-  }
+  itemsPerCaseStudyRow() {
+    if (this.state.media.xl) {
+      return 2;
+    } else if (this.state.media.l) {
+      return 1;
+    } else {
+      return 1;
+    }
+  },
 
 });
+
+function interleave(arr1, arr2) {
+  let result = [];
+  let maxLength = arr1.length > arr2.length ? arr1.length : arr2.length;
+
+  for (let i = 0; i < maxLength; i++) {
+    let n = i + 1;
+    if (n <= arr1.length) result.push(arr1[i]);
+    if (n <= arr2.length) result.push(arr2[i]);
+  }
+
+  return result;
+}
 
 export default PortfolioHandler;

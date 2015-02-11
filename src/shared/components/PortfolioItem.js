@@ -11,12 +11,13 @@ import { nestedGet } from '../utils/ImmutableUtils';
 
 let style = {
   _: {
-    position: 'absolute',
+    display: 'block',
     backgroundColor: 'gray',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     overflow: 'hidden',
     padding: rhythm(1),
+    height: rhythm(10),
     transitionProperty: 'left, top',
     transitionDuration: '500ms',
   },
@@ -42,10 +43,7 @@ let PortfolioItem = React.createClass({
     let { project, width, height, x, y } = this.props;
 
     let _style = Object.assign({
-      height: rhythm(height),
-      width: `${width * 100}%`,
-      left: `${x * 100}%`,
-      top: rhythm(y * height),
+      width,
     }, style._);
 
     let featuredImageUrl = nestedGet(project, 'featured_image', 'source');
@@ -54,14 +52,16 @@ let PortfolioItem = React.createClass({
       _style.backgroundImage = `url(${featuredImageUrl})`;
     }
 
+    let classes = [ 'Portfolio-item' ];
+
     return (
       <Button
-        component={AppLink}
-        className="ProjectIndex-itemContainer-item"
+        component='a'
+        className={classes.join(' ')}
         style={_style}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        to={project.get('link')}
+        href={project.get('link')}
       >
         <PortfolioItemOverlay project={project} visible={this.state.hover} />
       </Button>
