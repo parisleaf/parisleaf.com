@@ -1,10 +1,10 @@
 'use strict';
 
 import React from 'react';
-import { RouteHandler, Link, State } from 'react-router';
+import { RouteHandler, State } from 'react-router';
 import DocumentTitle from 'react-document-title';
 
-import Flux from 'flummox';
+import FluxComponent from 'flummox/component';
 
 import AppNav from './AppNav';
 import AppOverlay from './AppOverlay';
@@ -32,28 +32,10 @@ let App = React.createClass({
     routerDidRun(state) {
       let AppActions = state.flux.getActions('app');
 
-      AppActions.setNavTextColor(color('text'));
-
       // Make sure nav is dismissed on re-route
       AppActions.setNavOpen(false);
+      AppActions.setNavTextColor(color('text'));
     }
-  },
-
-  contextTypes: {
-    flux: React.PropTypes.any.isRequired,
-  },
-
-  getInitialState() {
-    let AppStore = this.context.flux.getStore('app');
-    let MenuStore = this.context.flux.getStore('menus');
-    let TweetStore = this.context.flux.getStore('tweets');
-
-
-    return Object.assign({
-      primaryMenu: MenuStore.getMenuBySlug('primary'),
-      secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-      tweets: TweetStore.getTweets(),
-    }, AppStore.state);
   },
 
   childContextTypes: {
@@ -66,54 +48,24 @@ let App = React.createClass({
     }
   },
 
-  componentDidMount() {
-    let AppStore = this.context.flux.getStore('app');
-    let MenuStore = this.context.flux.getStore('menus');
-
-    AppStore.addListener('change', this.appStoreDidChange);
-    MenuStore.addListener('change', this.menuStoreDidChange);
-  },
-
-  componentWillUnmount() {
-    let AppStore = this.context.flux.getStore('app');
-    let MenuStore = this.context.flux.getStore('menus');
-
-    AppStore.removeListener('change', this.appStoreDidChange);
-    MenuStore.removeListener('change', this.menuStoreDidChange);
-  },
-
-  appStoreDidChange() {
-    let AppStore = this.context.flux.getStore('app');
-
-    this.setState(AppStore.getState());
-  },
-
-  menuStoreDidChange() {
-    let MenuStore = this.context.flux.getStore('menus');
-
-    this.setState({
-      primaryMenu: MenuStore.getMenuBySlug('primary'),
-      secondaryMenu: MenuStore.getMenuBySlug('secondary'),
-    });
-  },
-
   render() {
 
     let appNav =
-      <AppNav
-        primaryMenu={this.state.primaryMenu}
-        secondaryMenu={this.state.secondaryMenu}
-        tweets={this.state.tweets}
-        open={this.state.navOpen}
-        textColor={this.state.navTextColor}
-        options={this.state.options}
-      />;
+      <FluxComponent connectToStores={{
+        app: store => ({
+          open: store.state.navOpen,
+          textColor: store.state.navTextColor,
+          options: store.state.options,
+        })
+      }}>
+        <AppNav />
+      </FluxComponent>
 
     return (
       <DocumentTitle title="Parisleaf">
         <div className="App">
           {appNav}
-          <AppOverlay active={this.state.isTransitioning} />
+          <AppOverlay />
           <div>
             <RouteHandler />
           </div>

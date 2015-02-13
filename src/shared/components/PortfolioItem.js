@@ -56,7 +56,7 @@ let PortfolioItem = React.createClass({
 
     return (
       <Button
-        component='a'
+        component={AppLink}
         className={classes.join(' ')}
         style={_style}
         onMouseEnter={this.onMouseEnter}

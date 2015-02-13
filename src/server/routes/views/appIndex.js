@@ -17,6 +17,7 @@ import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandl
 
 import userAgentToMediaState from '../../userAgentToMediaState';
 
+import FluxComponent from 'flummox/component';
 import Flux from '../../../shared/Flux';
 
 export default function(app) {
@@ -36,9 +37,10 @@ export default function(app) {
     RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
-    let appString = React.withContext(
-      { flux },
-      () => React.renderToString(<Handler />)
+    let appString = React.renderToString(
+      <FluxComponent flux={flux}>
+        <Handler />
+      </FluxComponent>
     );
 
     let title = DocumentTitle.rewind();

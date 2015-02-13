@@ -16,7 +16,7 @@ export default class PostStore extends Store {
 
     let postActionIds = flux.getActionIds('posts');
 
-    this.register(postActionIds.getPosts, this.handleGetPosts);
+    this.registerAsync(postActionIds.getPosts, null, this.handleGetPosts, null);
     this.register(postActionIds.getPostBySlug, this.handleGetSinglePost);
   }
 

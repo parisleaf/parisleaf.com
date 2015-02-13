@@ -22,7 +22,7 @@
     "detect-node": "~2.0.3",
     "dotenv": "~0.4.0",
     "fastclick": "~1.0.3",
-    "flummox": "~2.0.2",
+    "flummox": "~2.6.1",
     "ftellipsis": "~0.2.3",
     "immutable": "~3.5.0",
     "jade": "~1.8.2",

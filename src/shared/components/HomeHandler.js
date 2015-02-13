@@ -30,7 +30,6 @@ let Home = React.createClass({
 
     routerDidRun(state) {
       let AppActions = state.flux.getActions('app');
-      
       AppActions.setNavTextColor(color('yellow'));
     }
   },

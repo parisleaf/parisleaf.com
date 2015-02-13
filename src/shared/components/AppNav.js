@@ -1,12 +1,14 @@
 'use strict';
 
 import React from 'react';
+import FluxComponent from 'flummox/component';
 import Immutable from 'immutable';
 import AppLink from './AppLink';
 import { rhythm, zIndex, navBarRhythmHeight, color } from '../theme';
 import Button from './Button';
 import SvgIcon from './SvgIcon';
 import AppNavDrawer from './AppNavDrawer';
+
 
 const logoAspectRatio = 769.9 / 200;
 const fillTransition = `fill ease-in-out ${250}ms`;
@@ -42,7 +44,6 @@ let style = {
 let AppNav = React.createClass({
 
   contextTypes: {
-    flux: React.PropTypes.any.isRequired,
     media: React.PropTypes.object,
   },
 
@@ -54,7 +55,7 @@ let AppNav = React.createClass({
   },
 
   onToggleClick(event) {
-    let AppActions = this.context.flux.getActions('app');
+    let AppActions = this.props.flux.getActions('app');
 
     event.preventDefault();
 
@@ -74,7 +75,7 @@ let AppNav = React.createClass({
   },
 
   render() {
-    let AppActions = this.context.flux.getActions('app');
+    let AppActions = this.props.flux.getActions('app');
 
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
@@ -102,13 +103,17 @@ let AppNav = React.createClass({
             </div>
           </div>
         </nav>
-        <AppNavDrawer
-          open={this.props.open}
-          primaryMenu={this.props.primaryMenu}
-          secondaryMenu={this.props.secondaryMenu}
-          tweets={this.props.tweets}
-          options={this.props.options}
-        />
+        <FluxComponent connectToStores={{
+          tweets: store => ({
+            tweets: store.getTweets(),
+          }),
+          menus: store => ({
+            primaryMenu: store.getMenuBySlug('primary'),
+            secondaryMenu: store.getMenuBySlug('secondary'),
+          }),
+        }}>
+          <AppNavDrawer open={this.props.open} options={this.props.options} />
+        </FluxComponent>
       </div>
     );
   }

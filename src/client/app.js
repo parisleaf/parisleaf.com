@@ -22,6 +22,7 @@ import routes from '../shared/routes';
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
 import { didInitialRender } from '../shared/isInitialRender';
 
+import FluxComponent from 'flummox/component';
 import Flux from '../shared/Flux';
 let flux = new Flux();
 let RouterActions = flux.getActions('router');
@@ -32,10 +33,13 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   async function run() {
     RouterActions.routerWillRun(state);
     await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-    React.withContext(
-      { flux },
-      () => React.render(<Handler />, document.getElementById('app'))
-    );
+
+    React.render(
+      <FluxComponent flux={flux}>
+        <Handler />
+      </FluxComponent>
+    , document.getElementById('app'))
+
     didInitialRender();
     await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
   }
