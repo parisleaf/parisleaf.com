@@ -48,3 +48,5 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     throw error;
   });
 });
+
+global.flux = flux;
