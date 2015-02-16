@@ -19,6 +19,7 @@ html(class='no-js')
   body
     include icon-sprite.svg
     #app(data-wp-endpoint=env.WP_ENDPOINT)!=appString
+    script#initial-app-state(type='application/json')!=initialAppState
     script#initial-media-state(type='application/json')!=initialMediaState
   
   script.

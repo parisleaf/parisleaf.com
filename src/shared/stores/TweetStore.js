@@ -1,9 +1,9 @@
 'use strict';
 
-import { Store } from 'flummox';
+import ImmutableStore from './ImmutableStore';
 import Immutable from 'immutable';
 
-export default class TweetStore extends Store {
+export default class TweetStore extends ImmutableStore {
 
   constructor(flux) {
     super();

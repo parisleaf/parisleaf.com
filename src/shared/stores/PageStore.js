@@ -1,9 +1,9 @@
 'use strict';
 
-import { Store } from 'flummox';
+import ImmutableStore from './ImmutableStore';
 import Immutable from 'immutable';
 
-export default class PageStore extends Store {
+export default class PageStore extends ImmutableStore {
 
   constructor(flux) {
     super();

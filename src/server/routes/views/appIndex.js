@@ -45,10 +45,13 @@ export default function(app) {
 
     let title = DocumentTitle.rewind();
 
+    let initialAppState = flux.serialize();
+
     yield this.render('app', {
       title,
       appString,
       env: process.env,
+      initialAppState,
       initialMediaState: JSON.stringify(initialMediaState),
     });
 

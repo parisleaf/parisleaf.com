@@ -1,11 +1,11 @@
 'use strict';
 
-import { Store } from 'flummox';
+import ImmutableStore from './ImmutableStore';
 import Immutable from 'immutable';
 
 import { color } from '../theme';
 
-export default class AppStore extends Store {
+export default class AppStore extends ImmutableStore {
 
   constructor(flux) {
     super();
