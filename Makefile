@@ -1,4 +1,4 @@
-BABEL_CMD = node_modules/.bin/Babel
+BABEL_CMD = node_modules/.bin/babel
 MOCHA_CMD = node_modules/.bin/mocha
 WEBPACK_CMD = node_modules/.bin/webpack
 SASS_CMD = sassc
