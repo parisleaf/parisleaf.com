@@ -9,45 +9,37 @@ import BlogCard from './BlogCard';
 import SiteContainer from './SiteContainer';
 import RevealOnScroll from './RevealOnScroll';
 
-// Component that will most definitely be used on home page
-// Says more from blog
-// Has two blogs that can be given or are the two most recent
-// Will need to be a shortcode
-// Should supply slugs [moreFromBlog slug1='hello' slug2='world'] so can be used anywhere
 
 let style = {
   _: {
     backgroundColor: color('lightGray'),
     paddingTop: rhythm(1),
     paddingBottom: rhythm(2)
-  },
-
-  header: {
   }
-}
+};
 
 let MoreFromBlog = React.createClass({
 
-  displayPosts() {
+  cards() {
     let posts = this.props.posts;
 
-    if(!(typeof posts === 'undefined')) {
-      let cards = posts.map(function(post) {
-        return(
-          <div className="Blog-postContainer-item" key={post.get('id_str')}>
-            <RevealOnScroll>
-              <BlogCard post={post} expanded/>
-            </RevealOnScroll>
-          </div>
-        );
-      });
+    if (!posts) return null;
 
+    let cards = posts.toArray().map(function(post) {
       return(
-        <div className="MoreFromBlog-cards">
-          {cards}
+        <div className="Blog-postContainer-item" key={post.get('id_str')}>
+          <RevealOnScroll>
+            <BlogCard post={post} expanded/>
+          </RevealOnScroll>
         </div>
-     );
-    }
+      );
+    });
+
+    return(
+      <div className="MoreFromBlog-cards">
+        {cards}
+      </div>
+   );
   },
 
   render() {
@@ -57,7 +49,7 @@ let MoreFromBlog = React.createClass({
         <div className="MoreFromBlog-header" style={style.header}>
           <Header level={3}>From the Parisleaf blog:</Header>
         </div>
-        {this.displayPosts() }
+        {this.cards()}
         <div className="MoreFromBlog-visitBlog">
           <Button component={AppLink} to='/blog' secondaryDark>
             Check out the blog

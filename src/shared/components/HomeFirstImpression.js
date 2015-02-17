@@ -95,13 +95,6 @@ let HomeFirstImpression = React.createClass({
 
     let featuredZoneStyle = style.featuredZone;
 
-    // how to apply the featured background image to the featured zone
-    /* if (projectFeaturedImage) {
-       featuredZoneStyle = Object.assign({
-       backgroundImage: `url(${projectFeaturedImage})`,
-       }, featuredZoneStyle);
-       } */
-    
     return (
       <ViewportContainer className="Home-firstImpression" style={_style}>
         <section style={style.helloZone} className="Home-firstImpression-helloZone">
