@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import Flux from 'flummox/component';
 import { State } from 'react-router';
 
 import PostFirstImpression from './PostFirstImpression';
@@ -25,57 +26,41 @@ let PostHandler = React.createClass({
     }
   },
 
-  contextTypes: {
-    flux: React.PropTypes.any.isRequired,
-  },
+  render() {
+    let { slug } = this.getParams();
 
-  getInitialState() {
-    let PostStore = this.context.flux.getStore('posts');
+    return (
+      <Flux key={slug} connectToStores={{
+        posts: store => ({
+          post: store.getPostBySlug(slug)
+        })
+      }}>
+        <SinglePost />
+      </Flux>
+    );
 
-    return {
-      post: PostStore.getPostBySlug(this.getParams().slug),
-    };
-  },
+  }
 
-  componentDidMount() {
-    let PostStore = this.context.flux.getStore('posts');
+});
 
-    PostStore.addListener('change', this.postStoreDidChange);
-  },
-
-  componentWillUnmount() {
-    let PostStore = this.context.flux.getStore('posts');
-
-    PostStore.removeListener('change', this.postStoreDidChange);
-  },
-
-  postStoreDidChange() {
-    let PostStore = this.context.flux.getStore('posts');
-
-    this.setState({
-      post: PostStore.getPostBySlug(this.getParams().slug),
-    });
-  },
+let SinglePost = React.createClass({
 
   render() {
-    // TODO: better not-found message
-    let { post } = this.state;
+    let { post } = this.props;
 
+    // TODO: better not-found message
     if (!post) {
       return <div>Post not found</div>;
     }
 
     return (
-      <div>
+      <article>
         <PostFirstImpression post={post} />
-        <article>
-          <SiteContainer>
-            <HTMLContentArea html={post.get('content')} />
-          </SiteContainer>
-        </article>
-      </div>
+        <SiteContainer>
+          <HTMLContentArea html={post.get('content')} />
+        </SiteContainer>
+      </article>
     );
-
   }
 
 });

@@ -3,7 +3,7 @@
 import React from 'react/addons';
 
 import { State } from 'react-router';
-import Flux from 'flummox';
+import Flux from 'flummox/component';
 
 let { PureRenderMixin } = React.addons;
 
@@ -30,52 +30,36 @@ let ProjectHandler = React.createClass({
     }
   },
 
-  contextTypes: {
-    flux: React.PropTypes.any.isRequired,
-  },
-
-  getInitialState() {
-    let ProjectStore = this.context.flux.getStore('projects');
-
-    return {
-      project: ProjectStore.getProjectBySlug(this.getParams().slug),
-    };
-  },
-
-  componentDidMount() {
-    let ProjectStore = this.context.flux.getStore('projects');
-
-    ProjectStore.addListener('change', this.projectStoreDidChange);
-  },
-
-  componentWillUnmount() {
-    let ProjectStore = this.context.flux.getStore('projects');
-
-    ProjectStore.removeListener('change', this.projectStoreDidChange);
-  },
-
-  projectStoreDidChange() {
-    let ProjectStore = this.context.flux.getStore('projects');
-
-    this.setState({
-      project: ProjectStore.getProjectBySlug(this.getParams().slug),
-    });
-  },
-
   render() {
-    let { project } = this.state;
-
-    if (!project) return null;
+    let { slug } = this.getParams();
 
     return (
-      <div>
-        <ProjectFirstImpression project={project} />
-        <ProjectContent project={project} />
-      </div>
+      <Flux key={slug} connectToStores={{
+        projects: store => ({
+          project: store.getProjectBySlug(slug)
+        })
+      }}>
+        <SingleProject />
+      </Flux>
     );
 
   },
 
+});
+
+let SingleProject = React.createClass({
+  render() {
+    let { project } = this.props;
+
+    if (!project) return null;
+
+    return (
+      <article>
+        <ProjectFirstImpression project={project} />
+        <ProjectContent project={project} />
+      </article>
+    );
+  }
 });
 
 

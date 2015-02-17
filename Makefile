@@ -32,7 +32,7 @@ watch: minify-css
 	@NODE_ENV=development $(MAKE) -j3 dev-server watch-css watch-js
 
 dev-server:
-	node ./lib/server/watch
+	node ./lib/server/watch | bunyan
 
 # Clean up
 clean:

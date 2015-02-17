@@ -18,6 +18,8 @@ export default class MenuStore extends ImmutableStore {
   }
 
   handleGetMenus(newMenus) {
+    if (!newMenus) return;
+
     newMenus = newMenus.reduce((result, menu) => {
       if (menu.slug) {
         result[menu.slug] = menu;

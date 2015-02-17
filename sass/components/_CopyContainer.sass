@@ -1,2 +1,18 @@
 .CopyContainer
-  padding: rhythm(1) 0
+  +clearfix-contain
+
+  &-inner, &-imageSplit-text-inner
+    @extend .SiteContainer
+    padding: rhythm(1)
+
+  &-imageSplit
+    +bp(m)
+
+      display: flex
+
+      &-text, &-image
+        width: 50%
+        
+    &-image
+      img
+        display: block

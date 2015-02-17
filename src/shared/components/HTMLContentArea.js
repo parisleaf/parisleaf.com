@@ -17,17 +17,17 @@ let HTMLContentArea = React.createClass({
     // loop thru sliders
     sliders.map(function(slider) {
       let images = Array.from(slider.querySelectorAll(':scope > img'));
-      
+
       images = images.map(function(image) {
         return (<div><img style={{maxWidth: '100%'}} src={image.src} /></div>);
       });
-      
+
       React.render(
         <PLSlider>
           { images }
         </PLSlider>
       , slider);
-     
+
     });
   },
 
@@ -37,10 +37,10 @@ let HTMLContentArea = React.createClass({
     videos.map(function(video) {
       React.render(
         <Video src={video.dataset.src} content={video.dataset.content} />,
-        video      
+        video
       );
     });
-    
+
   },
 
   componentDidMount() {
@@ -58,7 +58,7 @@ let HTMLContentArea = React.createClass({
     return (
       <div>
         <style>{`
-          .HTMLContentArea--primary {
+          .CopyContainer--primary {
             background-color: ${primaryColor || 'none'};
             color: ${primaryTextColor}
           }
