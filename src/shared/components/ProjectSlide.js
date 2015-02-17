@@ -7,7 +7,7 @@ import AppLink from './AppLink';
 import SiteContainer from './SiteContainer';
 import { nestedGet } from '../utils/ImmutableUtils';
 import VerticalCenter from './VerticalCenter';
-import theme from '../theme';
+import { rhythm } from '../theme';
 
 let style = {
   _: {
@@ -15,20 +15,20 @@ let style = {
     backgroundSize: 'cover',
 
   },
-  
+
   container: {
     height: '100%', // for VerticalCenter
   },
 
   header: {
-    marginTop: theme.rhythm(-2),
+    marginTop: rhythm(-2),
   }
 };
 
 // Need the background image as prop, the tagline, url to the project
 // Just pass in a project
 
-let ProjectSlide = React.createClass({ 
+let ProjectSlide = React.createClass({
   render() {
 
     let tagline = nestedGet(this.props.project, 'meta', 'tagline');
@@ -65,7 +65,7 @@ let ProjectSlide = React.createClass({
         </SiteContainer>
       </div>
     );
-  } 
+  }
 });
 
 export default ProjectSlide;

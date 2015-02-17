@@ -7,10 +7,8 @@ import isNode from 'detect-node';
 
 process.env.WP_ENDPOINT = 'http://wordpress.test/wp-json';
 
-if (isNode) {
-  import sourceMapSupport from 'source-map-support';
-  sourceMapSupport.install();
-}
+import sourceMapSupport from 'source-map-support';
+if (isNode) sourceMapSupport.install();
 
 import chai from 'chai';
 

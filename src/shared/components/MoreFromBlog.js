@@ -3,7 +3,7 @@
 import React from 'react';
 import Header from './Header';
 import Button from './Button';
-import theme from '../theme';
+import { color, rhythm } from '../theme';
 import AppLink from './AppLink';
 import BlogCard from './BlogCard';
 import SiteContainer from './SiteContainer';
@@ -17,9 +17,9 @@ import RevealOnScroll from './RevealOnScroll';
 
 let style = {
   _: {
-    backgroundColor: theme.color('lightGray'),
-    paddingTop: theme.rhythm(1),
-    paddingBottom: theme.rhythm(2)
+    backgroundColor: color('lightGray'),
+    paddingTop: rhythm(1),
+    paddingBottom: rhythm(2)
   },
 
   header: {

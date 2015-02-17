@@ -1,11 +1,13 @@
 'use strict';
+
+import LinkUtils from '../LinkUtils';
 import isNode from 'detect-node';
 import url from 'url';
 
 describe('LinkUtils', () => {
 
   describe('.ensureIsomorphicUrl()', () => {
-    import { ensureIsomorphicUrl } from '../LinkUtils';
+    let { ensureIsomorphicUrl } = LinkUtils;
 
     let initialPort;
 
@@ -37,7 +39,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.rootUrl()', () => {
-    import { rootUrl } from '../LinkUtils';
+    let { rootUrl } = LinkUtils;
 
     if (isNode) {
       it('uses localhost and port to form url', () => {
@@ -61,7 +63,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.isLocalUrl()', () => {
-    import { isLocalUrl } from '../LinkUtils';
+    let { isLocalUrl } = LinkUtils;
 
     it('returns true if url does not contain a host', () => {
       expect(isLocalUrl('/foo/bar')).to.be.true;
@@ -71,8 +73,7 @@ describe('LinkUtils', () => {
     });
 
     it('returns true if host matches rootUrl', () => {
-      import { rootUrl } from '../LinkUtils';
-      import { rootUrl } from '../LinkUtils';
+      let { rootUrl } = LinkUtils;
 
       expect(isLocalUrl(`${rootUrl()}/foo/bar`)).to.be.true;
       expect(isLocalUrl(`http://${url.parse(rootUrl()).host}/foo/bar`)).to.be.true;
@@ -82,7 +83,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.isWPUrl()', () => {
-    import { isWPUrl } from '../LinkUtils';
+    let { isWPUrl } = LinkUtils;
 
     it('returns true if host matches `process.env.WP_ENDPOINT`', () => {
       expect(isWPUrl('/foo/bar')).to.be.false;
@@ -109,7 +110,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.removeHost()', () => {
-    import { removeHost } from '../LinkUtils';
+    let { removeHost } = LinkUtils;
 
     it('removes host from url', () => {
       expect(removeHost('https://google.com/foo?bar=baz')).to.equal('/foo?bar=baz');
@@ -120,7 +121,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.removeTrailingSlash', () => {
-    import { removeTrailingSlash } from '../LinkUtils';
+    let { removeTrailingSlash } = LinkUtils;
 
     it('removes the trailing slash from the end of urls if it exists', () => {
       expect(removeTrailingSlash('https://google.com/work')).to.equal('https://google.com/work');
@@ -132,7 +133,7 @@ describe('LinkUtils', () => {
   });
 
   describe('.normalizeUrl', () => {
-    import { normalizeUrl, rootUrl } from '../LinkUtils';
+    let { normalizeUrl, rootUrl } = LinkUtils;
 
     it('removes host from local urls', () => {
       expect(normalizeUrl(`${rootUrl()}/foo/bar`)).to.equal('/foo/bar');

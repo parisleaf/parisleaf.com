@@ -151,7 +151,7 @@ let BlogCardExcerpt = React.createClass({
 
   componentDidMount() {
     // Truncate multi-line excerpt
-    import Ellipsis from 'ftellipsis';
+    let Ellipsis = require('ftellipsis');
     this.ellipsis = new Ellipsis(this.getDOMNode());
 
     this.ellipsis.calc();

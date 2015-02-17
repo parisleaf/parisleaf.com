@@ -4,12 +4,13 @@
 require('../shared/init');
 import './init';
 
+import MediaMixin from 'react-media-mixin';
+
 let initialMediaStateEl = document.getElementById('initial-media-state');
 
 if (initialMediaStateEl) {
   let initialMediaState = JSON.parse(initialMediaStateEl.innerHTML);
 
-  import MediaMixin from 'react-media-mixin';
   MediaMixin.getInitialState = function () {
     return { media: initialMediaState };
   };

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Actions } from 'flummox';
-import TwitterService from '../services/TwitterService';
+import * as TwitterService from '../services/TwitterService';
 
 export default class TweetActions extends Actions {
 

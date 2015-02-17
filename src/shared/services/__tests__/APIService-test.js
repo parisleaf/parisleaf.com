@@ -3,6 +3,8 @@
 import nock from 'nock';
 import isNode from 'detect-node';
 
+import APIService from '../APIService';
+
 describe('APIService', () => {
 
   describe('.getPosts()', () => {
@@ -18,7 +20,7 @@ describe('APIService', () => {
           ]);
       }
 
-      import { getPosts } from '../APIService';
+      let { getPosts } = APIService;
 
       expect(getPosts()).to.eventually.deep.equal([
         { ID: 1 },
@@ -30,7 +32,7 @@ describe('APIService', () => {
   });
 
   describe('.getPostBySlug()', () => {
-    import { getPostBySlug } from '../APIService';
+    let { getPostBySlug } = APIService;
 
     it('should return a single post', (done) => {
       if (isNode) {
@@ -64,7 +66,7 @@ describe('APIService', () => {
         ]);
     }
 
-    import { getMenus } from '../APIService';
+    let { getMenus } = APIService;
     it('should retreive all menus', (done) => {
       expect(getMenus()).to.eventually.deep.equal([
         { ID: 1 },
@@ -85,8 +87,8 @@ describe('APIService', () => {
         ]);
     }
 
-    import { getOptions } from '../APIService';
-    
+    let { getOptions } = APIService;
+
     it('should retreive all acf options', (done) => {
       expect(getOptions()).to.eventually.deep.equal([
         { ID: 1 },

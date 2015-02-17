@@ -3,17 +3,17 @@
 import React from 'react';
 import { nestedGet } from '../utils/ImmutableUtils';
 import SiteContainer from './SiteContainer';
-import theme from '../theme';
+import { rhythm } from '../theme';
 
 let style = {
   _: {
-    paddingTop: theme.rhythm(2),
-    paddingBottom: theme.rhythm(2)
+    paddingTop: rhythm(2),
+    paddingBottom: rhythm(2)
   }
 };
 
-let HomeProcessSection = React.createClass({ 
-  
+let HomeProcessSection = React.createClass({
+
   render() {
     let page = this.props.page;
     let processCopy = nestedGet(page, 'meta', 'parisleaf_description');
@@ -25,7 +25,7 @@ let HomeProcessSection = React.createClass({
         </SiteContainer>
       </div>
     );
-  } 
+  }
 });
 
 export default HomeProcessSection;

@@ -1,11 +1,12 @@
 'use strict';
 
 import Immutable from 'immutable';
+import ProjectUtils from '../ProjectUtils';
 
 describe('ProjectUtils', () => {
 
   describe('.isCaseStudy()', () => {
-    import { isCaseStudy } from '../ProjectUtils';
+    let { isCaseStudy } = ProjectUtils;
 
     it('returns true if case study has a project tag with slug "case-study"', () => {
 
@@ -33,7 +34,7 @@ describe('ProjectUtils', () => {
   });
 
   describe('.getServices', () => {
-    import { getServices } from '../ProjectUtils';
+    let { getServices } = ProjectUtils;
 
     it('returns an array of service names', () => {
 

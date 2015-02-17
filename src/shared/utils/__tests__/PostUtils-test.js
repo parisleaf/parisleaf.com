@@ -1,11 +1,12 @@
 'use strict';
 
+import PostUtils from '../PostUtils'
 import Immutable from 'immutable';
 
 describe('PostUtils', () => {
 
   describe('.getTermSlugs', () => {
-    import { getTermSlugs } from '../PostUtils';
+    let { getTermSlugs } = PostUtils;
 
     it('returns an array of term slugs', () => {
 
@@ -39,7 +40,7 @@ describe('PostUtils', () => {
   });
 
   describe('hasTerm', () => {
-    import { hasTerm } from '../PostUtils';
+    let { hasTerm } = PostUtils;
 
     it('returns true if post has term', () => {
       let p1 = Immutable.fromJS({
@@ -60,7 +61,7 @@ describe('PostUtils', () => {
   });
 
   describe('.filter', () => {
-    import { filter } from '../PostUtils';
+    let { filter } = PostUtils;
 
     it('filters by category', () => {
       let p1 = { terms: { category: [ { slug: 'foo' }, { slug: 'bar' } ] } };

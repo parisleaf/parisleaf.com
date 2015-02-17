@@ -1,11 +1,12 @@
 'use strict';
 
 import Immutable from 'immutable';
+import ImmutableUtils from '../ImmutableUtils';
 
 describe('ImmutableUtils', () => {
 
   describe('nestedGet', () => {
-    import { nestedGet } from '../ImmutableUtils';
+    let { nestedGet } = ImmutableUtils;
 
     let m = Immutable.fromJS({
       foo: {

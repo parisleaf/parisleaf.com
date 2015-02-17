@@ -1,25 +1,23 @@
-6TO5_CMD = node_modules/.bin/6to5
+BABEL_CMD = node_modules/.bin/Babel
 MOCHA_CMD = node_modules/.bin/mocha
-BROWSERIFY_CMD = node_modules/.bin/browserify
-WATCHIFY_CMD = node_modules/.bin/watchify
+WEBPACK_CMD = node_modules/.bin/webpack
 SASS_CMD = sassc
 WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 SVG_SPRITE_CMD = svg-sprite
-UGLIFY_CMD = node_modules/.bin/uglifyjs
 CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
 
-6TO5_ARGS = --experimental --source-maps-inline --runtime
-BROWSERIFY_ARGS = -t [ 6to5ify $(6TO5_ARGS) ] -t envify
+BABEL_ARGS = --experimental --external-helpers --source-maps-inline --blacklist regenerator,es6.blockScoping --optional asyncToGenerator
+BROWSERIFY_ARGS = -t [ babelify $(BABEL_ARGS) ] -t envify
 
 SRC_JS = $(shell find src -name "*.js")
 LIB_JS = $(patsubst src/%.js,lib/%.js,$(SRC_JS))
 
 # Build application
-build: js browserify uglify-js css minify-css
+build: build-dev minify-css
 
-build-dev: js browserify css
+build-dev: js webpack css
 
 # Test
 test: js
@@ -31,7 +29,7 @@ fast-build: fast-js build
 
 # Watch for changes
 watch:
-	@NODE_ENV=development $(MAKE) -j4 watch-css watch-js watchify browser-sync
+	@NODE_ENV=development $(MAKE) -j3 watch-css watch-js webpack-dev
 
 # Clean up
 clean:
@@ -42,38 +40,30 @@ clean:
 
 browserify: public/js/app.js
 
-watchify: src/client/app.js
-	mkdir -p $(dir $@) && $(WATCHIFY_CMD) $< -o public/js/app.js $(BROWSERIFY_ARGS) --debug
+webpack: public/js/app.js
+
+webpack-dev: $(LIB_JS)
+	node ./lib/server/webpack
 
 public/js/app.js: $(SRC_JS)
-	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/app.js -o $@ $(BROWSERIFY_ARGS)
+	$(WEBPACK_CMD)
 
 styleguide: public/js/styleguide.js
 
 public/js/styleguide.js: $(SRC_JS)
 	@NODE_ENV=production mkdir -p $(dir $@) && $(BROWSERIFY_CMD) src/client/styleguide.js -o $@ $(BROWSERIFY_ARGS)
 
-# Transpile JavaScript using 6to5
+# Transpile JavaScript using Babel
 js: $(LIB_JS)
 
 $(LIB_JS): lib/%.js: src/%.js
-	mkdir -p $(dir $@) && $(6TO5_CMD) $< -o $@ $(6TO5_ARGS) --blacklist generators,letScoping --optional asyncToGenerator
+	mkdir -p $(dir $@) && $(BABEL_CMD) $< -o $@ $(BABEL_ARGS)
 
 fast-js:
-	$(6TO5_CMD) src -d lib $(6TO5_ARGS)
+	$(BABEL_CMD) src -d lib $(BABEL_ARGS)
 
 watch-js:
-	$(6TO5_CMD) src -d lib $(6TO5_ARGS) -w
-
-uglify-js: public/js/app.min.js
-
-public/js/app.min.js: public/js/app.js
-	mkdir -p public/js
-	$(UGLIFY_CMD) public/js/app.js \
-	--compress=dead_code,sequences,unused,conditionals,booleans,if_return,drop_console \
-	--mangle \
-	--screw-ie8 \
-	> public/js/app.min.js
+	$(BABEL_CMD) src -d lib $(BABEL_ARGS) -w
 
 # Compile Sass
 css: public/css/app.css
@@ -95,9 +85,6 @@ sass/dependencies/_theme.scss: lib/shared/theme.js
 	mkdir -p $(dir $@) && $(JSON_SASS_CMD) -i $< \
 	| sed '1s/^/$$theme: /' \
 	> $@
-
-browser-sync:
-	browser-sync start --config "bs-config.js"
 
 icons: views/icon-sprite.svg
 

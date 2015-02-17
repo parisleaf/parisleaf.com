@@ -1,7 +1,7 @@
 'use strict';
 
 import { Actions } from 'flummox';
-import APIService from '../services/APIService';
+import * as APIService from '../services/APIService';
 
 export default class PostActions extends Actions {
 

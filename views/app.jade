@@ -37,6 +37,6 @@ html(class='no-js')
   script(src='//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js', async, defer)
   
   if (env.NODE_ENV == 'development')
-    script(src='/js/app.js', defer)
+    script(src='http://0.0.0.0:8080/js/app.js', defer)
   else
     script(src='/js/app.min.js', defer)
