@@ -1,6 +1,6 @@
 'use strict';
 
-import LinkUtils from '../LinkUtils';
+import * as LinkUtils from '../LinkUtils';
 import isNode from 'detect-node';
 import url from 'url';
 

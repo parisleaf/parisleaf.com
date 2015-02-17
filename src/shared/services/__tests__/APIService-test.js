@@ -3,7 +3,7 @@
 import nock from 'nock';
 import isNode from 'detect-node';
 
-import APIService from '../APIService';
+import * as APIService from '../APIService';
 
 describe('APIService', () => {
 

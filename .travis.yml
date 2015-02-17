@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '0.11'
+- iojs-v1.2.0
 after_success:
 - chmod +x .travis/after_success.sh
 - ".travis/after_success.sh"

@@ -1,7 +1,7 @@
 'use strict';
 
 import Immutable from 'immutable';
-import ImmutableUtils from '../ImmutableUtils';
+import * as ImmutableUtils from '../ImmutableUtils';
 
 describe('ImmutableUtils', () => {
 

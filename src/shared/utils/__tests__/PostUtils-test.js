@@ -1,6 +1,6 @@
 'use strict';
 
-import PostUtils from '../PostUtils'
+import * as PostUtils from '../PostUtils'
 import Immutable from 'immutable';
 
 describe('PostUtils', () => {
