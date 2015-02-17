@@ -37,7 +37,7 @@ let style = {
   menuPadding: {
     paddingLeft: rhythm(1)
   },
-  
+
   metaPadding: {
     paddingTop: rhythm(1),
     paddingLeft: rhythm(1),

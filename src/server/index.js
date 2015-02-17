@@ -18,7 +18,7 @@ let log = bunyan.createLogger({
   streams: [
     {
       level: 'info',
-      stream: process.stdout            // log INFO and above to stdout
+      stream: process.stdout       // log INFO and above to stdout
     },
     {
       level: 'error',

@@ -28,8 +28,11 @@ test: js
 fast-build: fast-js build
 
 # Watch for changes
-watch:
-	@NODE_ENV=development $(MAKE) -j3 watch-css watch-js webpack-dev
+watch: minify-css
+	@NODE_ENV=development $(MAKE) -j3 dev-server watch-css watch-js
+
+dev-server:
+	node ./lib/server/watch
 
 # Clean up
 clean:
@@ -41,9 +44,6 @@ clean:
 browserify: public/js/app.js
 
 webpack: public/js/app.js
-
-webpack-dev: $(LIB_JS)
-	node ./lib/server/webpack
 
 public/js/app.js: $(SRC_JS)
 	$(WEBPACK_CMD)
