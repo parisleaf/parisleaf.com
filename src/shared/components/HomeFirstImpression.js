@@ -15,9 +15,13 @@ import ProjectSlide from './ProjectSlide';
 
 let style = {
   _: {
+    background: '#fff',
+  },
+
+  helloZone: {
     paddingTop: rhythm(navBarRhythmHeight),
     marginTop: rhythm(-1 * navBarRhythmHeight),
-    background: '#fff',
+    height: '33vh',
   },
 
   helloZoneContent: {
@@ -28,7 +32,8 @@ let style = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: '#fff',
-    position: 'relative'
+    position: 'relative',
+    height: '67vh',
   },
 
   featuredZoneContent: {
@@ -71,16 +76,13 @@ let HomeFirstImpression = React.createClass({
   },
 
   featuredZone() {
-    let featuredZoneStyle = style.featuredZone;
     if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
       return(
-        <section style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          <div style={style.featuredZoneContent} ref="projectSliderContainer">
-            <PLSlider className="ProjectSlider" ref="projectSlider">
-              {this.projectSlides()}
-            </PLSlider>
-          </div>
-        </section>
+        <div style={style.featuredZoneContent} ref="projectSliderContainer">
+          <PLSlider className="ProjectSlider" ref="projectSlider">
+            {this.projectSlides()}
+          </PLSlider>
+        </div>
       );
     }
   },
@@ -90,14 +92,11 @@ let HomeFirstImpression = React.createClass({
     let title = nestedGet(page, 'meta', 'first_impression_title');
     let subtitle = nestedGet(page, 'meta', 'first_impression_subtitle');
 
-    let _style = Object.assign({}, style._);
-    _style[this.context.media.m ? 'height': 'minHeight'] = '100vh';
-
     let featuredZoneStyle = style.featuredZone;
 
     return (
-      <ViewportContainer className="Home-firstImpression" style={_style}>
-        <section style={style.helloZone} className="Home-firstImpression-helloZone">
+      <div className="Home-firstImpression" style={style._}>
+        <ViewportContainer style={style.helloZone} className="Home-firstImpression-helloZone">
           <div style={style.helloZoneContent}>
             <SiteContainer>
               <div style={style.helloZoneText}>
@@ -106,9 +105,11 @@ let HomeFirstImpression = React.createClass({
               </div>
             </SiteContainer>
           </div>
-        </section>
-        { this.featuredZone() }
-      </ViewportContainer>
+        </ViewportContainer>
+        <ViewportContainer style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
+          { this.featuredZone() }
+        </ViewportContainer>
+      </div>
     );
   }
 

@@ -21,7 +21,6 @@ import Router from 'react-router';
 import routes from '../shared/routes';
 
 import performRouteHandlerLifecyleMethod from '../shared/performRouteHandlerLifecyleMethod';
-import { didInitialRender } from '../shared/isInitialRender';
 
 import FluxComponent from 'flummox/component';
 import Flux from '../shared/Flux';
@@ -35,6 +34,7 @@ let initialMediaState;
 try {
   let initialAppStateEl = document.getElementById('initial-app-state');
   initialMediaState = JSON.parse(initialAppStateEl.innerHTML);
+
   flux.deserialize(initialMediaState);
 } catch (error) {}
 
@@ -44,20 +44,16 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   async function run() {
     RouterActions.routerWillRun(state);
 
-    if (!initialRun) {
-      await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-    } else {
-      performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
-      initialRun = false;
-    }
+    await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
 
+    let begin = Date.now();
     React.render(
       <FluxComponent flux={flux}>
         <Handler />
       </FluxComponent>
-    , document.getElementById('app'))
+      , document.getElementById('app')
+    );
 
-    didInitialRender();
     await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
   }
 

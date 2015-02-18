@@ -1,7 +1,6 @@
 'use strict';
 
-// Start main app
-require('./');
+require('../shared/init');
 
 // Start webpack server
 import webpack from 'webpack';

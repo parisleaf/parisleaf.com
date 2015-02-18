@@ -22,6 +22,7 @@
     "fastclick": "~1.0.6",
     "flummox": "~2.6.1",
     "ftellipsis": "~0.2.3",
+    "htmlescape": "~1.0.0",
     "immutable": "~3.5.0",
     "jade": "~1.8.2",
     "koa": "~0.14.0",

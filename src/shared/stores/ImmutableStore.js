@@ -2,11 +2,12 @@
 
 import { Store } from 'flummox';
 import Immutable from 'immutable';
+import htmlescape from 'htmlescape';
 
 export default class AppStore extends Store {
 
   static serialize(state) {
-    return JSON.stringify(state);
+    return htmlescape(state);
   }
 
   static deserialize(string) {
@@ -20,5 +21,5 @@ export default class AppStore extends Store {
 
     return state;
   }
-  
+
 }
