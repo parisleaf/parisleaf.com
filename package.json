@@ -47,6 +47,7 @@
     "react-viewport": "1.0.6",
     "react-waypoint": "~0.3.0",
     "superagent": "~0.21.0",
+    "swiper": "~3.0.1",
     "url-join": "0.0.1",
     "useragent": "~2.1.3",
     "wordpress-rest-api": "~0.3.1"

@@ -14,8 +14,10 @@ html(class='no-js')
     else
       style
         include ../public/css/app.min.css
-          
-            
+
+    style
+      include ../node_modules/swiper/dist/css/swiper.min.css
+
   body
     include icon-sprite.svg
     #app(data-wp-endpoint=env.WP_ENDPOINT)!=appString

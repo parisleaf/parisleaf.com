@@ -9,8 +9,7 @@ import AppLink from './AppLink';
 import { color, rhythm, fontFamily, fontSize, navBarRhythmHeight } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
 import theme from '../theme';
-import Slider from './Slider';
-import PLSlider from './PLSlider';
+import Slider from './Slider2';
 import ProjectSlide from './ProjectSlide';
 
 let style = {
@@ -24,24 +23,8 @@ let style = {
     height: '33vh',
   },
 
-  helloZoneContent: {
-    width: '100%',
-  },
-
   featuredZone: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    color: '#fff',
-    position: 'relative',
     height: '67vh',
-  },
-
-  featuredZoneContent: {
-    width: `100%`,
-    color: '#fff',
-    position: 'absolute',
-    height: '100%',
-    cursor: 'pointer'
   },
 
   helloZoneText: {
@@ -54,45 +37,10 @@ let style = {
 
 let HomeFirstImpression = React.createClass({
 
-  contextTypes: {
-    media: React.PropTypes.object,
-  },
-
-  // Adjust slider to next position
-  sliderClick(event) {
-    let clickedClass = event.target.getAttribute("class").split(" ")[0];
-    if(clickedClass !== 'Button') {
-      let projectSlider = this.refs.projectSlider;
-      projectSlider.next();
-    }
-  },
-
-  projectSlides() {
-    if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
-      return this.props.projects.map(function(project) {
-        return (<ProjectSlide ref="projectSlide" project={project} />);
-      });
-    }
-  },
-
-  featuredZone() {
-    if(typeof this.props.projects !== 'undefined' && this.props.projects.length > 0) {
-      return(
-        <div style={style.featuredZoneContent} ref="projectSliderContainer">
-          <PLSlider className="ProjectSlider" ref="projectSlider">
-            {this.projectSlides()}
-          </PLSlider>
-        </div>
-      );
-    }
-  },
-
   render() {
     let { page } = this.props;
     let title = nestedGet(page, 'meta', 'first_impression_title');
     let subtitle = nestedGet(page, 'meta', 'first_impression_subtitle');
-
-    let featuredZoneStyle = style.featuredZone;
 
     return (
       <div className="Home-firstImpression" style={style._}>
@@ -106,10 +54,26 @@ let HomeFirstImpression = React.createClass({
             </SiteContainer>
           </div>
         </ViewportContainer>
-        <ViewportContainer style={featuredZoneStyle} className="Home-firstImpression-featuredZone">
-          { this.featuredZone() }
-        </ViewportContainer>
+        <HomeProjectSlider projects={this.props.projects} />
       </div>
+    );
+  }
+
+});
+
+let HomeProjectSlider = React.createClass({
+
+  render() {
+    let slides = this.props.projects.map(project => {
+      return <ProjectSlide project={project} style={{ position: 'absolute', height: '100%', width: '100%' }}/>;
+    });
+
+    return (
+      <ViewportContainer style={style.featuredZone} className="Home-firstImpression-featuredZone">
+        <Slider className="ProjectSlider" ref="projectSlider" style={{ height: '100%' }}>
+          {slides}
+        </Slider>
+      </ViewportContainer>
     );
   }
 
