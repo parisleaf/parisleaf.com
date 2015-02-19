@@ -5,16 +5,15 @@ import React from 'react/addons';
 import { State } from 'react-router';
 import Flux from 'flummox/component';
 
-let { PureRenderMixin } = React.addons;
-
 import ProjectFirstImpression from './ProjectFirstImpression';
+import NavBarColor from './NavBarColor';
 import ProjectContent from './ProjectContent';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
 
 let ProjectHandler = React.createClass({
 
-  mixins: [State, PureRenderMixin],
+  mixins: [State],
 
   statics: {
     routerWillRun(state) {
@@ -22,12 +21,6 @@ let ProjectHandler = React.createClass({
 
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
-
-    routerDidRun(state) {
-      let AppActions = state.flux.getActions('app');
-
-      AppActions.setNavTextColor('#fff');
-    }
   },
 
   render() {
@@ -55,6 +48,7 @@ let SingleProject = React.createClass({
 
     return (
       <article>
+        <NavBarColor color="#fff" />
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
       </article>

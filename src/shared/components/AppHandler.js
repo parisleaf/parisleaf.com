@@ -3,6 +3,7 @@
 import React from 'react';
 import { RouteHandler, State } from 'react-router';
 import DocumentTitle from 'react-document-title';
+import NavBarColor from './NavBarColor';
 
 import FluxComponent from 'flummox/component';
 
@@ -34,7 +35,6 @@ let App = React.createClass({
 
       // Make sure nav is dismissed on re-route
       AppActions.setNavOpen(false);
-      AppActions.setNavTextColor(color('text'));
     }
   },
 
@@ -62,15 +62,15 @@ let App = React.createClass({
       </FluxComponent>
 
     return (
-      <DocumentTitle title="Parisleaf">
-        <div className="App">
-          {appNav}
-          <AppOverlay />
-          <div>
-            <RouteHandler />
-          </div>
+      <div className="App">
+        <DocumentTitle title="Parisleaf" />
+        <NavBarColor color={color('text')} />
+        {appNav}
+        <AppOverlay />
+        <div>
+          <RouteHandler />
         </div>
-      </DocumentTitle>
+      </div>
     );
   }
 });

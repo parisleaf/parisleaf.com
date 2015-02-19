@@ -9,7 +9,6 @@ import Button from './Button';
 import SvgIcon from './SvgIcon';
 import AppNavDrawer from './AppNavDrawer';
 
-
 const logoAspectRatio = 769.9 / 200;
 const fillTransition = `fill ease-in-out ${250}ms`;
 
@@ -80,7 +79,7 @@ let AppNav = React.createClass({
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
     }, style._);
-
+    
     let logoIconStyle = Object.assign({
       fill: this.props.open ? color('text') : this.props.textColor,
     }, style.logoIcon);

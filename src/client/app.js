@@ -28,25 +28,33 @@ let flux = new Flux();
 let RouterActions = flux.getActions('router');
 
 // Bootstrap
+let bootstrapSuccess = false;
 let initialRun = true;
 let initialMediaState;
 
 try {
   let initialAppStateEl = document.getElementById('initial-app-state');
-  initialMediaState = JSON.parse(initialAppStateEl.innerHTML);
-
+  initialMediaState = initialAppStateEl.innerHTML;
   flux.deserialize(initialMediaState);
-} catch (error) {}
+  bootstrapSuccess = true;
+} catch (error) {
+  console.warn(error);
+}
 
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
   state.flux = flux;
 
   async function run() {
+
     RouterActions.routerWillRun(state);
 
-    await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+    if (initialRun && bootstrapSuccess) {
+      performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+      initialRun = false;
+    } else {
+      await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+    }
 
-    let begin = Date.now();
     React.render(
       <FluxComponent flux={flux}>
         <Handler />

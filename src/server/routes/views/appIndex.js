@@ -20,6 +20,8 @@ import userAgentToMediaState from '../../userAgentToMediaState';
 import FluxComponent from 'flummox/component';
 import Flux from '../../../shared/Flux';
 
+import NavBarColor from '../../../shared/components/NavBarColor';
+
 export default function(app) {
   app.get(/.*/, function *() {
 
@@ -44,8 +46,10 @@ export default function(app) {
     );
 
     let title = DocumentTitle.rewind();
+    NavBarColor.dispose();
 
     let initialAppState = flux.serialize();
+
 
     yield this.render('app', {
       title,
