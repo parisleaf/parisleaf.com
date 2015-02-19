@@ -1,41 +1,86 @@
 'use strict';
 
 import React from 'react';
+import Swiper from './Swiper';
+import Button from './Button';
+import SvgIcon from './SvgIcon';
+import { color, rhythm } from '../theme';
+
+let { assign } = Object;
+
+let style = {
+  swiper: {
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+  },
+
+  arrowButton: {
+    position: 'absolute',
+    bottom: rhythm(1),
+    zIndex: 9999999999, // FIXME: move to theme
+  },
+
+  leftArrowButton: {
+    left: rhythm(1),
+  },
+
+  rightArrowButton: {
+    right: rhythm(1),
+  },
+
+  arrow: {
+    fill: '#fff',
+    width: rhythm(2),
+    height: rhythm(2),
+  }
+};
 
 let Slider = React.createClass({
 
   componentDidMount() {
-    let Swiper = require('swiper');
-
-    let { children, ...props } = this.props;
-
-    this.swiper = new Swiper(this.getDOMNode(), props);
+    this.swiper = this.refs.swiper.swiper;
   },
 
-  componentDidUpdate() {
-    this.swiper.update();
+  nextSlide(e) {
+    e.preventDefault(e);
+    this.swiper.slideNext();
   },
 
-  componentWillUnmount() {
-    this.swiper.destroy();
+  previousSlide(e) {
+    e.preventDefault();
+    this.swiper.slidePrev();
   },
 
   render() {
-    let { children, ...props } = this.props;
+    let { style: wrapperStyle, ...props } = this.props;
 
-    let slides = React.Children.map(this.props.children, child => {
-      return <div className="swiper-slide">{child}</div>;
-    });
+    wrapperStyle = assign({}, style.wrapper, wrapperStyle);
+
+    let leftArrowStyle = assign({}, style.arrow);
+    let rightArrowStyle = assign({}, style.arrow);
 
     return (
-      <div {...props} className="swiper-container">
-        <div className="swiper-wrapper">
-          {slides}
-        </div>
+      <div style={wrapperStyle} onClick={this.handleSlidePositionChange}>
+        <Swiper {...props} style={style.swiper} ref="swiper" />
+        <Button
+          style={assign({}, style.arrowButton, style.leftArrowButton)}
+          onClick={this.previousSlide}
+        >
+          <SvgIcon name="left-arrow" style={leftArrowStyle} />
+        </Button>
+        <Button
+          style={assign({}, style.arrowButton, style.rightArrowButton)}
+          onClick={this.nextSlide}
+        >
+          <SvgIcon name="right-arrow" style={rightArrowStyle} />
+        </Button>
       </div>
     );
   }
 
 });
+
+function noop() {}
 
 export default Slider;

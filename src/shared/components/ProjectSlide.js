@@ -12,7 +12,17 @@ import { rhythm } from '../theme';
 let style = {
   slider: {
     color: '#fff',
-  }
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+
+  primaryButton: {
+    float: 'left',
+  },
+
+  secondaryButton: {
+    float: 'right',
+  },
 };
 
 let ProjectSlide = React.createClass({
@@ -30,9 +40,14 @@ let ProjectSlide = React.createClass({
       <VerticalCenter style={sliderStyle}>
         <SiteContainer>
           <Header level={1} style={{ marginBottom: rhythm(2) }}>{tagline}</Header>
-          <Button component={AppLink} to={url} primaryLight>
-            Read the case study
-          </Button>
+          <footer>
+            <Button component={AppLink} to={url} primaryLight style={style.primaryButton}>
+              Read the case study
+            </Button>
+            <Button component={AppLink} to={url} secondaryLight style={style.secondaryButton}>
+              See All Work
+            </Button>
+          </footer>
         </SiteContainer>
       </VerticalCenter>
     );

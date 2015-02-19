@@ -13,7 +13,7 @@ import Slider from './Slider2';
 import ProjectSlide from './ProjectSlide';
 
 let style = {
-  _: {
+  firstImpression: {
     background: '#fff',
   },
 
@@ -25,6 +25,7 @@ let style = {
 
   featuredZone: {
     height: '67vh',
+    position: 'relative',
   },
 
   helloZoneText: {
@@ -43,7 +44,7 @@ let HomeFirstImpression = React.createClass({
     let subtitle = nestedGet(page, 'meta', 'first_impression_subtitle');
 
     return (
-      <div className="Home-firstImpression" style={style._}>
+      <div className="Home-firstImpression" style={style.firstImpression}>
         <ViewportContainer style={style.helloZone} className="Home-firstImpression-helloZone">
           <div style={style.helloZoneContent}>
             <SiteContainer>
@@ -70,7 +71,7 @@ let HomeProjectSlider = React.createClass({
 
     return (
       <ViewportContainer style={style.featuredZone} className="Home-firstImpression-featuredZone">
-        <Slider className="ProjectSlider" ref="projectSlider" style={{ height: '100%' }}>
+        <Slider className="ProjectSlider" ref="projectSlider" style={{ height: '100%', width: '100%', position: 'absolute' }}>
           {slides}
         </Slider>
       </ViewportContainer>
