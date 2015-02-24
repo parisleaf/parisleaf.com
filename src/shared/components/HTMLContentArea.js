@@ -49,7 +49,11 @@ let HTMLContentArea = React.createClass({
   },
 
   render() {
-    let { html, primaryColor } = this.props;
+    let { html, primaryColor, className } = this.props;
+
+    let classes = [ 'HTMLContentArea' ];
+
+    if (className) classes.push(className);
 
     let primaryTextColor = chroma(primaryColor).luminance() < 0.5
       ? color('lightGray')
@@ -58,12 +62,15 @@ let HTMLContentArea = React.createClass({
     return (
       <div>
         <style>{`
-          .CopyContainer--primary {
+          .HTMLContentArea .CopyContainer--primary {
             background-color: ${primaryColor || 'none'};
             color: ${primaryTextColor}
           }
         `}</style>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          className={classes.join(' ')}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
     );
   }

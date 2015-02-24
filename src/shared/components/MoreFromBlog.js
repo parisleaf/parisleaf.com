@@ -28,9 +28,7 @@ let MoreFromBlog = React.createClass({
     let cards = posts.toArray().map(function(post) {
       return(
         <div className="Blog-postContainer-item" key={post.get('id_str')}>
-          <RevealOnScroll>
-            <BlogCard post={post} expanded/>
-          </RevealOnScroll>
+          <BlogCard post={post} expanded/>
         </div>
       );
     });

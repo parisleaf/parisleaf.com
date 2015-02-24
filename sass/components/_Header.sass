@@ -1,10 +1,14 @@
 .Header
 
   &--1
+    font-size: 2.2rem
+
+    +bp(m)
+      +font-size(h1)
+
     +font-family(header)
-    +font-size(h1)
     margin: 0 0 rhythm(1/2)
-    line-height: 1.5
+    line-height: 1.25
 
   &--2
     +font-size(h2)

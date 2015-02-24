@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { nestedGet } from '../utils/ImmutableUtils';
+import HTMLContentArea from './HTMLContentArea';
 import SiteContainer from './SiteContainer';
 import { rhythm } from '../theme';
 
@@ -21,7 +22,7 @@ let HomeProcessSection = React.createClass({
     return(
       <div className="HomeProcessSection" style={style._}>
         <SiteContainer>
-          <div className="HomeProcessSection-copy" dangerouslySetInnerHTML={{__html: processCopy}} />
+          <HTMLContentArea html={processCopy} />
         </SiteContainer>
       </div>
     );

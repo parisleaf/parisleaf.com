@@ -12,7 +12,13 @@
 
       &-text, &-image
         width: 50%
-        
+        display: flex
+        align-items: center
+
+    +bp(l)
+      &-text
+        padding: 5%
+
     &-image
       img
         display: block

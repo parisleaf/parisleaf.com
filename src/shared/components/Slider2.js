@@ -9,37 +9,37 @@ import { color, rhythm } from '../theme';
 let { assign } = Object;
 
 let style = {
-  swiper: {
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
+  wrapper: {
+    transition: `height 150ms ease-in-out`,
   },
-
-  arrowButton: {
-    position: 'absolute',
-    bottom: rhythm(1),
-    zIndex: 9999999999, // FIXME: move to theme
-  },
-
-  leftArrowButton: {
-    left: rhythm(1),
-  },
-
-  rightArrowButton: {
-    right: rhythm(1),
-  },
-
-  arrow: {
-    fill: '#fff',
-    width: rhythm(2),
-    height: rhythm(2),
-  }
 };
 
 let Slider = React.createClass({
 
+  getDefaultProps() {
+    return {
+      loop: true,
+    };
+  },
+
+  getInitialState() {
+    return {
+      hasNext: false,
+      hasPrevious: false,
+      currentSlideHeight: null,
+    };
+  },
+
   componentDidMount() {
     this.swiper = this.refs.swiper.swiper;
+
+    window.addEventListener('resize', this.updateSlideHeight);
+
+    this.onSlideChangeStart();
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateSlideHeight);
   },
 
   nextSlide(e) {
@@ -52,29 +52,43 @@ let Slider = React.createClass({
     this.swiper.slidePrev();
   },
 
+  onSlideChangeStart() {
+    this.setState({
+      hasNext: !this.swiper.isEnd,
+      hasPrevious: !this.swiper.isBeginning,
+    });
+  },
+
+  currentSlide() {
+    return this.swiper.slides[this.swiper.activeIndex];
+  },
+
+  onSlideChangeEnd() {
+    this.updateSlideHeight();
+  },
+
+  updateSlideHeight() {
+    this.setState({
+      currentSlideHeight: this.currentSlide().offsetHeight,
+    });
+  },
+
   render() {
-    let { style: wrapperStyle, ...props } = this.props;
+    let { style: wrapperStyle,  ...props } = this.props;
 
-    wrapperStyle = assign({}, style.wrapper, wrapperStyle);
-
-    let leftArrowStyle = assign({}, style.arrow);
-    let rightArrowStyle = assign({}, style.arrow);
+    wrapperStyle = assign({
+      height: this.state.currentSlideHeight,
+    }, style.wrapper, wrapperStyle);
 
     return (
       <div style={wrapperStyle} onClick={this.handleSlidePositionChange}>
-        <Swiper {...props} style={style.swiper} ref="swiper" />
-        <Button
-          style={assign({}, style.arrowButton, style.leftArrowButton)}
-          onClick={this.previousSlide}
-        >
-          <SvgIcon name="left-arrow" style={leftArrowStyle} />
-        </Button>
-        <Button
-          style={assign({}, style.arrowButton, style.rightArrowButton)}
-          onClick={this.nextSlide}
-        >
-          <SvgIcon name="right-arrow" style={rightArrowStyle} />
-        </Button>
+        <Swiper
+          {...props}
+          style={style.swiper}
+          ref="swiper"
+          onSlideChangeStart={this.onSlideChangeStart}
+          onSlideChangeEnd={this.onSlideChangeEnd}
+        />
       </div>
     );
   }

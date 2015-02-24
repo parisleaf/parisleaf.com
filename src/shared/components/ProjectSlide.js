@@ -14,14 +14,21 @@ let style = {
     color: '#fff',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    position: 'relative',
+    minHeight: rhythm(20),
   },
 
-  primaryButton: {
-    float: 'left',
+  content: {
+    paddingTop: rhythm(2.5),
+    overflow: 'hidden',
   },
 
-  secondaryButton: {
-    float: 'right',
+  footer: {
+    paddingBottom: rhythm(2.5),
+  },
+
+  buttonWrapper: {
+    padding: `${rhythm(1/2)} 0`,
   },
 };
 
@@ -37,19 +44,42 @@ let ProjectSlide = React.createClass({
     }, style.slider, this.props.style);
 
     return(
-      <VerticalCenter style={sliderStyle}>
-        <SiteContainer>
-          <Header level={1} style={{ marginBottom: rhythm(2) }}>{tagline}</Header>
-          <footer>
-            <Button component={AppLink} to={url} primaryLight style={style.primaryButton}>
-              Read the case study
-            </Button>
-            <Button component={AppLink} to={url} secondaryLight style={style.secondaryButton}>
-              See All Work
-            </Button>
-          </footer>
-        </SiteContainer>
-      </VerticalCenter>
+      <div style={sliderStyle} className="ProjectSlide">
+        <div />
+        <section className="ProjectSlide-content" style={style.content}>
+          <SiteContainer>
+            <Header level={1} style={{ marginBottom: rhythm(2) }}>
+              {tagline}
+            </Header>
+          </SiteContainer>
+        </section>
+        <footer className="ProjectSlide-footer" style={style.footer}>
+          <SiteContainer>
+            <div className="ProjectSlide-buttonContainer">
+              <div style={style.buttonWrapper}>
+                <Button
+                  component={AppLink}
+                  to={url}
+                  primaryLight
+                  style={style.primaryButton}
+                >
+                  Read the case study
+                </Button>
+              </div>
+              <div style={style.buttonWrapper}>
+                <Button
+                  component={AppLink}
+                  to={url}
+                  secondaryLight
+                  style={style.secondaryButton}
+                >
+                  See All Work
+                </Button>
+              </div>
+            </div>
+          </SiteContainer>
+        </footer>
+      </div>
     );
   }
 });

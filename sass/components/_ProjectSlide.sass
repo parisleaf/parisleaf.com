@@ -1,13 +1,12 @@
 .ProjectSlide
-  padding: rhythm(2) 0
-  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &-footer
+    justify-content: center
 
   &-buttonContainer
-    bottom: rhythm(3)
-    position: relative
     +bp(m)
       display: flex
       justify-content: space-between
-
-    &-project
-      margin-bottom: rhythm(1)

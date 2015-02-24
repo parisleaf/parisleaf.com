@@ -21,14 +21,18 @@ let Swiper = React.createClass({
   },
 
   render() {
-    let { children, ...props } = this.props;
+    let { children, className, ...props } = this.props;
 
     let slides = React.Children.map(this.props.children, child => {
       return <div className="swiper-slide">{child}</div>;
     });
 
+    let classes = ['swiper-container'];
+
+    if (className) classes.push(className);
+
     return (
-      <div {...props} className="swiper-container">
+      <div {...props} className={classes.join(' ')}>
         <div className="swiper-wrapper">
           {slides}
         </div>

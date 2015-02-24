@@ -12,20 +12,17 @@ import theme from '../theme';
 import Slider from './Slider2';
 import ProjectSlide from './ProjectSlide';
 
+let { assign } = Object;
+
 let style = {
   firstImpression: {
+    position: 'relative',
     background: '#fff',
   },
 
   helloZone: {
     paddingTop: rhythm(navBarRhythmHeight),
     marginTop: rhythm(-1 * navBarRhythmHeight),
-    height: '33vh',
-  },
-
-  featuredZone: {
-    height: '67vh',
-    position: 'relative',
   },
 
   helloZoneText: {
@@ -34,6 +31,10 @@ let style = {
     paddingLeft: `${rhythm(1)}`,
   },
 
+  helloZoneContent: {
+    width: '100%',
+    padding: `${rhythm(2)} 0`,
+  },
 };
 
 let HomeFirstImpression = React.createClass({
@@ -45,7 +46,7 @@ let HomeFirstImpression = React.createClass({
 
     return (
       <div className="Home-firstImpression" style={style.firstImpression}>
-        <ViewportContainer style={style.helloZone} className="Home-firstImpression-helloZone">
+        <section style={style.helloZone} className="Home-firstImpression-helloZone">
           <div style={style.helloZoneContent}>
             <SiteContainer>
               <div style={style.helloZoneText}>
@@ -54,7 +55,7 @@ let HomeFirstImpression = React.createClass({
               </div>
             </SiteContainer>
           </div>
-        </ViewportContainer>
+        </section>
         <HomeProjectSlider projects={this.props.projects} />
       </div>
     );
@@ -66,15 +67,17 @@ let HomeProjectSlider = React.createClass({
 
   render() {
     let slides = this.props.projects.map(project => {
-      return <ProjectSlide project={project} style={{ position: 'absolute', height: '100%', width: '100%' }}/>;
+      return <ProjectSlide project={project} />;
     });
 
     return (
-      <ViewportContainer style={style.featuredZone} className="Home-firstImpression-featuredZone">
-        <Slider className="ProjectSlider" ref="projectSlider" style={{ height: '100%', width: '100%', position: 'absolute' }}>
-          {slides}
-        </Slider>
-      </ViewportContainer>
+      <Slider
+        className="Home-firstImpression-slider"
+        ref="projectSlider"
+        autoplay={5000}
+      >
+        {slides}
+      </Slider>
     );
   }
 

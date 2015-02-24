@@ -5,6 +5,9 @@ import React from 'react';
 import Button from './Button';
 import AppLink from './AppLink';
 import Header from './Header';
+import ViewportContainer from 'react-viewport';
+
+import MediaMixin from 'react-media-mixin';
 
 import { rhythm } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
@@ -17,13 +20,15 @@ let style = {
     backgroundPosition: 'center',
     overflow: 'hidden',
     padding: rhythm(1),
-    height: rhythm(10),
+    height: rhythm(12),
     transitionProperty: 'left, top',
     transitionDuration: '500ms',
   },
 };
 
 let PortfolioItem = React.createClass({
+
+  mixins: [MediaMixin],
 
   getInitialState() {
     return {
@@ -50,6 +55,10 @@ let PortfolioItem = React.createClass({
 
     if (featuredImageUrl) {
       _style.backgroundImage = `url(${featuredImageUrl})`;
+    }
+
+    if (this.state.media.l) {
+      _style.height = '20vw';
     }
 
     let classes = [ 'Portfolio-item' ];
@@ -95,9 +104,9 @@ let PortfolioItemOverlay = React.createClass({
     }, overlayStyle._);
 
     return (
-      <article style={_overlayStyle}>
+      <ViewportContainer style={_overlayStyle}>
         <Header level={2}>{project.get('title')}</Header>
-      </article>
+      </ViewportContainer>
     );
   }
 
