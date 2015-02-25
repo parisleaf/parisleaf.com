@@ -28,7 +28,7 @@ let style = {
   },
 
   buttonWrapper: {
-    padding: `${rhythm(1/2)} 0`,
+    padding: `${rhythm(1.5)} 0`,
   },
 };
 

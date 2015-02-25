@@ -13,10 +13,14 @@ let Swiper = React.createClass({
   },
 
   componentDidUpdate() {
+    if (!this.swiper) return;
+
     this.swiper.update();
   },
 
   componentWillUnmount() {
+    if (!this.swiper) return;
+
     this.swiper.destroy();
   },
 

@@ -43,16 +43,22 @@ let Slider = React.createClass({
   },
 
   nextSlide(e) {
+    if (!this.swiper) return;
+
     e.preventDefault(e);
     this.swiper.slideNext();
   },
 
   previousSlide(e) {
+    if (!this.swiper) return;
+
     e.preventDefault();
     this.swiper.slidePrev();
   },
 
   onSlideChangeStart() {
+    if (!this.swiper) return;
+
     this.setState({
       hasNext: !this.swiper.isEnd,
       hasPrevious: !this.swiper.isBeginning,
@@ -60,6 +66,8 @@ let Slider = React.createClass({
   },
 
   currentSlide() {
+    if (!this.swiper) return;
+
     return this.swiper.slides[this.swiper.activeIndex];
   },
 
@@ -68,6 +76,8 @@ let Slider = React.createClass({
   },
 
   updateSlideHeight() {
+    if (!this.swiper) return;
+
     this.setState({
       currentSlideHeight: this.currentSlide().offsetHeight,
     });
