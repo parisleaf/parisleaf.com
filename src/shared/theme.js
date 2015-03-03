@@ -116,7 +116,7 @@ export var breakpoints = {
   s:       500,
   m:       768,
   l:       1024,
-  xl:      1400,
+  xl:      1200,
 };
 
 export var mediaQueries = mapObject(breakpoints,

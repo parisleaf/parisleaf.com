@@ -30,7 +30,7 @@ let PageHeader = React.createClass({
             <Header component="h1" level={3}>
               {this.props.title}
             </Header>
-            <Header component="h2" level={4}>
+            <Header component="h2" level={2}>
               {this.props.subtitle}
             </Header>
             {this.props.children}

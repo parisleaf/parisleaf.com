@@ -59,7 +59,10 @@ let ProjectSlide = React.createClass({
         <div />
         <section className="ProjectSlide-content" style={style.content}>
           <SiteContainer>
-            <Header level={1} style={{ marginBottom: rhythm(2) }}>
+            <Header level={1} style={{
+              marginBottom: rhythm(2),
+              fontSize: '48px'
+            }}>
               {tagline}
             </Header>
           </SiteContainer>
