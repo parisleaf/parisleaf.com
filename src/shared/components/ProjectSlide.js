@@ -10,7 +10,7 @@ import VerticalCenter from './VerticalCenter';
 import { rhythm } from '../theme';
 
 let style = {
-  slider: {
+  slide: {
     color: '#fff',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -18,7 +18,17 @@ let style = {
     minHeight: rhythm(20),
   },
 
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.25)',
+  },
+
   content: {
+    position: 'relative',
     paddingTop: rhythm(2.5),
     overflow: 'hidden',
   },
@@ -39,12 +49,13 @@ let ProjectSlide = React.createClass({
     let backgroundImage = nestedGet(this.props.project, 'featured_image', 'source');
     let url = nestedGet(this.props.project, 'link');
 
-    let sliderStyle = Object.assign({
+    let slideStyle = Object.assign({
       backgroundImage: `url(${backgroundImage})`,
-    }, style.slider, this.props.style);
+    }, style.slide, this.props.style);
 
     return(
-      <div style={sliderStyle} className="ProjectSlide">
+      <div style={slideStyle} className="ProjectSlide">
+        <div style={style.overlay} />
         <div />
         <section className="ProjectSlide-content" style={style.content}>
           <SiteContainer>

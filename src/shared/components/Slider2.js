@@ -16,12 +16,6 @@ let style = {
 
 let Slider = React.createClass({
 
-  getDefaultProps() {
-    return {
-      loop: true,
-    };
-  },
-
   getInitialState() {
     return {
       hasNext: false,
