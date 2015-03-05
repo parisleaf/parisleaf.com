@@ -31,10 +31,10 @@ let App = React.createClass({
     },
 
     routerDidRun(state) {
-      let AppActions = state.flux.getActions('app');
+      let NavActions = state.flux.getActions('nav');
 
       // Make sure nav is dismissed on re-route
-      AppActions.setNavOpen(false);
+      NavActions.setOpen(false);
     }
   },
 
@@ -52,9 +52,11 @@ let App = React.createClass({
 
     let appNav =
       <FluxComponent connectToStores={{
+        nav: store => ({
+          open: store.state.open,
+          textColor: store.state.color.get('text'),
+        }),
         app: store => ({
-          open: store.state.navOpen,
-          textColor: store.state.navTextColor,
           options: store.state.options,
         })
       }}>
@@ -64,7 +66,7 @@ let App = React.createClass({
     return (
       <div className="App">
         <DocumentTitle title="Parisleaf" />
-        <NavBarColor color={color('text')} />
+        <NavBarColor textColor={color('text')} backgroundColor={'#fff'} />
         {appNav}
         <AppOverlay />
         <div>

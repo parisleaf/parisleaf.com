@@ -1,21 +1,19 @@
-'use strict';
-
 import React from 'react';
 import Header from './Header';
 import Button from './Button';
+import ProjectCard from './ProjectCard';
 import AppLink from './AppLink';
 import SiteContainer from './SiteContainer';
 import { nestedGet } from '../utils/ImmutableUtils';
 import VerticalCenter from './VerticalCenter';
 import { rhythm } from '../theme';
+import MediaMixin from 'react-media-mixin';
 
 let style = {
   slide: {
-    color: '#fff',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'relative',
-    minHeight: rhythm(20),
   },
 
   overlay: {
@@ -34,66 +32,76 @@ let style = {
   },
 
   footer: {
+    color: '#fff',
     paddingBottom: rhythm(2.5),
   },
 
   buttonWrapper: {
-    padding: `${rhythm(1.5)} 0`,
+    margin: `${rhythm(1.5)} 0`,
   },
 };
 
 let ProjectSlide = React.createClass({
+  mixins: [MediaMixin],
+
   render() {
 
-    let tagline = nestedGet(this.props.project, 'meta', 'tagline');
     let backgroundImage = nestedGet(this.props.project, 'featured_image', 'source');
-    let url = nestedGet(this.props.project, 'link');
 
     let slideStyle = Object.assign({
       backgroundImage: `url(${backgroundImage})`,
+      minHeight: !this.state.media.s ? rhythm(12) : rhythm(20),
     }, style.slide, this.props.style);
+
+    if (!this.state.media.s) {
+      slideStyle.paddingTop = rhythm(2);
+    }
 
     return(
       <div style={slideStyle} className="ProjectSlide">
         <div style={style.overlay} />
-        <div />
         <section className="ProjectSlide-content" style={style.content}>
-          <SiteContainer>
-            <Header level={1} style={{
-              marginBottom: rhythm(2),
-              fontSize: '48px'
-            }}>
-              {tagline}
-            </Header>
+          <SiteContainer className="ProjectSlide-cardContainer">
+            <ProjectCard className="ProjectSlide-card" project={this.props.project} />
           </SiteContainer>
         </section>
-        <footer className="ProjectSlide-footer" style={style.footer}>
-          <SiteContainer>
-            <div className="ProjectSlide-buttonContainer">
-              <div style={style.buttonWrapper}>
-                <Button
-                  component={AppLink}
-                  to={url}
-                  primaryLight
-                  style={style.primaryButton}
-                >
-                  Read the case study
-                </Button>
-              </div>
-              <div style={style.buttonWrapper}>
-                <Button
-                  component={AppLink}
-                  to={url}
-                  secondaryLight
-                  style={style.secondaryButton}
-                >
-                  See All Work
-                </Button>
-              </div>
-            </div>
-          </SiteContainer>
-        </footer>
+        {this.footer()}
       </div>
+    );
+  },
+
+  footer() {
+    if (!this.state.media.s) return null;
+
+    let url = nestedGet(this.props.project, 'link');
+
+    return (
+      <footer className="ProjectSlide-footer" style={style.footer}>
+        <SiteContainer>
+          <div className="ProjectSlide-buttonContainer">
+            <div style={style.buttonWrapper}>
+              <Button
+                component={AppLink}
+                to={url}
+                primaryLight
+                style={style.primaryButton}
+              >
+                Check it out
+              </Button>
+            </div>
+            <div style={style.buttonWrapper}>
+              <Button
+                component={AppLink}
+                to={url}
+                secondaryLight
+                style={style.secondaryButton}
+              >
+                See All Work
+              </Button>
+            </div>
+          </div>
+        </SiteContainer>
+      </footer>
     );
   }
 });

@@ -48,7 +48,7 @@ let SingleProject = React.createClass({
 
     return (
       <article>
-        <NavBarColor color="#fff" />
+        <NavBarColor textColor="#fff" backgroundColor="rgba(0,0,0,0)" />
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
       </article>

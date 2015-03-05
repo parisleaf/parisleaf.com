@@ -8,6 +8,8 @@ import PostFirstImpression from './PostFirstImpression';
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 
+import { rhythm } from '../theme';
+
 let PostHandler = React.createClass({
 
   mixins: [State],
@@ -57,7 +59,9 @@ let SinglePost = React.createClass({
       <article>
         <PostFirstImpression post={post} />
         <SiteContainer>
-          <HTMLContentArea html={post.get('content')} />
+          <HTMLContentArea html={post.get('content')} style={{
+            padding: `${rhythm(2)} 0`
+          }}/>
         </SiteContainer>
       </article>
     );

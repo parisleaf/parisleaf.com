@@ -11,6 +11,7 @@ import { nestedGet } from '../utils/ImmutableUtils';
 import theme from '../theme';
 import Slider from './Slider2';
 import ProjectSlide from './ProjectSlide';
+import PageHeader from './PageHeader';
 
 let { assign } = Object;
 
@@ -23,18 +24,10 @@ let style = {
   helloZone: {
     paddingTop: rhythm(navBarRhythmHeight),
     marginTop: rhythm(-1 * navBarRhythmHeight),
-    // marginLeft: rhythm(-1 - 1/4),
-  },
-
-  helloZoneText: {
-    // Yellow line
-    borderLeft: `${rhythm(1/4)} solid ${color('yellow')}`,
-    paddingLeft: `${rhythm(1)}`,
   },
 
   helloZoneContent: {
     width: '100%',
-    padding: `${rhythm(2)} 0`,
   },
 };
 
@@ -49,12 +42,7 @@ let HomeFirstImpression = React.createClass({
       <div className="Home-firstImpression" style={style.firstImpression}>
         <section style={style.helloZone} className="Home-firstImpression-helloZone">
           <div style={style.helloZoneContent}>
-            <SiteContainer>
-              <div style={style.helloZoneText}>
-                {title && <Header level={1}>{title}</Header>}
-                {subtitle && <Header level={2}>{subtitle}</Header>}
-              </div>
-            </SiteContainer>
+            <PageHeader title={title} subtitle={subtitle} noBorder />
           </div>
         </section>
         <HomeProjectSlider projects={this.props.projects} />

@@ -58,7 +58,7 @@
     text-transform: uppercase
     background-color: white
     color: theme-color(text)
-    padding: rhythm(1/2) rhythm(1)
+    padding: rhythm(1/2)
 
     &:hover
       background-color:theme-color(yellow)
@@ -92,15 +92,15 @@
     position: relative
     text-transform: capitalize
     line-height: 1.125
-    border-top: 10px solid transparent
-    border-bottom: 10px solid transparent
     margin: 0 rhythm(-1/2)
     margin-bottom: rhythm(1/4)
-    padding: 0 rhythm(1/2)
+    padding: 0 rhythm(1/4)
     padding-top: rhythm(1/4)
+    border-left: rhythm(1/2) solid transparent
+    border-right: rhythm(1/2) solid transparent
 
     &.active
-      border-bottom: 10px solid theme-color(yellow)
+      border-left: rhythm(1/2) solid theme-color(yellow)
     &:hover
       background-color: theme-color(yellow)
       color: white

@@ -9,7 +9,7 @@ import ViewportContainer from 'react-viewport';
 
 import MediaMixin from 'react-media-mixin';
 
-import { rhythm } from '../theme';
+import { rhythm, navBarRhythmHeight } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
 
 let style = {
@@ -58,7 +58,7 @@ let PortfolioItem = React.createClass({
     }
 
     if (this.state.media.l) {
-      _style.height = '20vw';
+      _style.height = `calc((100vh - ${rhythm(navBarRhythmHeight)}) / 2)`;
     }
 
     let classes = [ 'Portfolio-item' ];

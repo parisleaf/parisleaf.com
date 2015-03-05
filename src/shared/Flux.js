@@ -20,6 +20,9 @@ import TweetStore from './stores/TweetStore';
 import AppActions from './actions/AppActions';
 import AppStore from './stores/AppStore';
 
+import NavActions from './actions/NavActions';
+import NavStore from './stores/NavStore';
+
 import RouterActions from './actions/RouterActions';
 import RouterStore from './stores/RouterStore';
 
@@ -45,6 +48,9 @@ export default class Flux extends Flummox {
 
     this.createActions('app', AppActions);
     this.createStore('app', AppStore, this);
+
+    this.createActions('nav', NavActions);
+    this.createStore('nav', NavStore, this);
 
     this.createActions('router', RouterActions);
     this.createStore('router', RouterStore, this);

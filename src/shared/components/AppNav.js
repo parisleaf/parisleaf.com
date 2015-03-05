@@ -54,11 +54,11 @@ let AppNav = React.createClass({
   },
 
   onToggleClick(event) {
-    let AppActions = this.props.flux.getActions('app');
+    let NavActions = this.props.flux.getActions('nav');
 
     event.preventDefault();
 
-    AppActions.setNavOpen(!this.props.open);
+    NavActions.setOpen(!this.props.open);
   },
 
   toggleMenuIcon() {
@@ -79,7 +79,7 @@ let AppNav = React.createClass({
     let _style = Object.assign({
       position: this.props.open ? 'fixed' : 'absolute',
     }, style._);
-    
+
     let logoIconStyle = Object.assign({
       fill: this.props.open ? color('text') : this.props.textColor,
     }, style.logoIcon);

@@ -20,7 +20,7 @@
     "detect-node": "~2.0.3",
     "dotenv": "~0.4.0",
     "fastclick": "~1.0.6",
-    "flummox": "~2.9.2",
+    "flummox": "~2.12.4",
     "ftellipsis": "~0.2.3",
     "htmlescape": "~1.0.0",
     "immutable": "~3.5.0",

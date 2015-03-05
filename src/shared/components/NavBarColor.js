@@ -29,10 +29,13 @@ let NavBarColorSideEffect = createSideEffect(propsList => {
 
   if (!innermostProps) return;
 
-  let { flux, color } = innermostProps;
+  let { flux, textColor, backgroundColor } = innermostProps;
 
   if (!isNode) {
-    flux.getActions('app').setNavTextColor(color);
+    flux.getActions('nav').setColor({
+      text: textColor,
+      background: backgroundColor,
+    });
   }
 });
 
