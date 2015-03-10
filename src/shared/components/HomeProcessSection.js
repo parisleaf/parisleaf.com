@@ -4,12 +4,15 @@ import React from 'react';
 import { nestedGet } from '../utils/ImmutableUtils';
 import HTMLContentArea from './HTMLContentArea';
 import SiteContainer from './SiteContainer';
-import { rhythm } from '../theme';
+import { rhythm, color } from '../theme';
 
 let style = {
   _: {
+    borderTop: `${rhythm(1)} ${color('yellow')} solid`,
     paddingTop: rhythm(2),
-    paddingBottom: rhythm(2)
+    paddingBottom: rhythm(2),
+    backgroundColor: color('darkGray'),
+    color: '#fff',
   }
 };
 

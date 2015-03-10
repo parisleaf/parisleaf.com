@@ -3,13 +3,14 @@ import React from 'react';
 import Header from './Header';
 
 import { nestedGet } from '../utils/ImmutableUtils';
-import { rhythm, fontFamily } from '../theme';
+import { rhythm, fontFamily, color } from '../theme';
 
 const { assign } = Object;
 
 const style = {
   card: {
     border: `${rhythm(3/4)} solid #fff`,
+    color: color('text'),
   }
 };
 

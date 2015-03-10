@@ -2,12 +2,14 @@
 
 import React from 'react';
 import { State, Link } from 'react-router';
-import Flux from 'flummox';
+import Flux from 'flummox/component';
+import Immutable from 'immutable';
 
-import { filter as filterPosts } from '../utils/PostUtils';
-import { rhythm, color } from '../theme';
+import { filter as filterPosts, getCategoryColor } from '../utils/PostUtils';
+import { rhythm, color, fontFamily } from '../theme';
 
 import Header from './Header';
+import Button from './Button';
 import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
 import BlogCard from './BlogCard';
@@ -24,10 +26,14 @@ let BlogHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    routerWillRun(state) {
-      let PostActions = state.flux.getActions('posts');
+    async routerWillRun(state) {
+      const PostActions = state.flux.getActions('posts');
+      const TermActions = state.flux.getActions('terms');
 
-      return PostActions.getPosts(state.query);
+      return await Promise.all([
+        PostActions.getPosts(state.query),
+        TermActions.getTaxonomyTerms('category'),
+      ]);
     },
   },
 
@@ -97,13 +103,13 @@ let BlogHandler = React.createClass({
 
     return (
       <div>
-        <PageHeader
-          title="Blog"
-          subtitle="Sometimes we talk about News, Events, Inspriation, and Education."
-        >
-          <Link to="blog" query={{ category: 'events' }}>Events</Link>
-          <Link to="blog" query={{ category: 'uncategorized' }}>Uncategorized</Link>
-        </PageHeader>
+        <Flux connectToStores={{
+          terms: store => ({
+            categories: store.getTaxonomyTerms('category')
+          })
+        }}>
+          <BlogHeader />
+        </Flux>
         <div style={postContainerStyle}>
           <SiteContainer hang>
             {cards}
@@ -113,6 +119,118 @@ let BlogHandler = React.createClass({
     );
   },
 
+});
+
+const BlogHeader = React.createClass({
+  render() {
+    let { categories } = this.props;
+
+    categories = categories || Immutable.List();
+
+    const filters = categories.map((category, i) => {
+      return (
+        <BlogCategoryFilter
+          category={category}
+        />
+      )
+    }).toArray()
+
+    const filterList = filters.reduce((result, filter, i) => {
+      if (i === (filters.length - 2)) {
+        result = result.concat([filter, ', and ']);
+      } else if (i === (filters.length - 1)) {
+        result = result.concat([filter]);
+      } else {
+        result = result.concat([filter, ', ']);
+      }
+
+      return result;
+    }, []);
+
+    return (
+      <PageHeader
+        title="Blog"
+      >
+        <Header level={2}>Sometimes we talk about {filterList}.</Header>
+      </PageHeader>
+    );
+  }
+});
+
+const BlogCategoryFilter = React.createClass({
+  render() {
+    const { category, style, ...props } = this.props;
+
+    return (
+      <BlogFilter
+        title={category.get('name')}
+        query={{ category: category.get('slug') }}
+        color={getCategoryColor(category.get('slug'))}
+        style={{
+          ...style
+        }}
+        {...props}
+      />
+    );
+  }
+});
+
+const BlogFilter = React.createClass({
+  mixins: [State],
+
+  getInitialState() {
+    return {
+      hover: false,
+    };
+  },
+
+  getDefaultProps() {
+    return {
+      query: {},
+      title: '',
+      color: 'currentColor',
+    };
+  },
+
+  mouseOver() {
+    this.setState({hover: true});
+  },
+
+  mouseOut() {
+    this.setState({hover: false});
+  },
+
+  render() {
+    const { title, query, style, color } = this.props;
+    const isActive = this.isActive('blog', {}, query);
+
+    return (
+      <Button
+        component={Link}
+        to="blog"
+        query={query}
+        onMouseOver={this.mouseOver}
+        onMouseOut={this.mouseOut}
+        style={{
+          fontStyle: 'italic',
+          position: 'relative',
+          color,
+          ...style,
+        }}
+      >
+        {title}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: rhythm(1/4),
+          background: color,
+          opacity: (this.state.hover || isActive) ? 1 : 0,
+        }}/>
+      </Button>
+    );
+  }
 });
 
 export default BlogHandler;

@@ -6,7 +6,7 @@ import AppLink from './AppLink';
 import SiteContainer from './SiteContainer';
 import { nestedGet } from '../utils/ImmutableUtils';
 import VerticalCenter from './VerticalCenter';
-import { rhythm } from '../theme';
+import { rhythm, color } from '../theme';
 import MediaMixin from 'react-media-mixin';
 
 let style = {
@@ -84,7 +84,6 @@ let ProjectSlide = React.createClass({
                 component={AppLink}
                 to={url}
                 primaryLight
-                style={style.primaryButton}
               >
                 Check it out
               </Button>
@@ -92,7 +91,7 @@ let ProjectSlide = React.createClass({
             <div style={style.buttonWrapper}>
               <Button
                 component={AppLink}
-                to={url}
+                to="/work"
                 secondaryLight
                 style={style.secondaryButton}
               >

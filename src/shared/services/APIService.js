@@ -78,6 +78,14 @@ export async function getProjectBySlug(slug, query = {}) {
   return projects.body[0];
 }
 
+export async function getTaxonomyTerms(taxonomyName) {
+  const response = await request.get(ensureIsomorphicUrl(`/api/taxonomies/${taxonomyName}/terms`)).exec();
+
+  console.log(response.body.terms);
+
+  if (response.body && response.body.terms) return response.body.terms;
+}
+
 /**
  * Get list of menus
  * @param {object} query - Query params

@@ -1,3 +1,4 @@
+'use strc4x';
 'use strict';
 
 /**
@@ -117,6 +118,7 @@ export var breakpoints = {
   m:       768,
   l:       1024,
   xl:      1200,
+  xxl:     1400,
 };
 
 export var mediaQueries = mapObject(breakpoints,

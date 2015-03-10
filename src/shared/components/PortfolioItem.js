@@ -5,8 +5,9 @@ import React from 'react';
 import Button from './Button';
 import AppLink from './AppLink';
 import Header from './Header';
-import ViewportContainer from 'react-viewport';
+import ProjectCard from './ProjectCard';
 
+import ViewportContainer from 'react-viewport';
 import MediaMixin from 'react-media-mixin';
 
 import { rhythm, navBarRhythmHeight } from '../theme';
@@ -89,7 +90,7 @@ let overlayStyle = {
     backgroundColor: 'rgba(0,0,0,0.8)',
     color: '#fff',
     padding: rhythm(1),
-    textAlign: 'center',
+    paddingBottom: 0,
     transition: '200ms opacity',
   },
 };
@@ -105,7 +106,7 @@ let PortfolioItemOverlay = React.createClass({
 
     return (
       <ViewportContainer style={_overlayStyle}>
-        <Header level={2}>{project.get('title')}</Header>
+        <ProjectCard project={project} />
       </ViewportContainer>
     );
   }

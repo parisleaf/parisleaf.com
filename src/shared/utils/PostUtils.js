@@ -72,6 +72,17 @@ export function getCardColor(post, query) {
   return color('yellow');
 }
 
+export function getCategoryColor(categorySlug) {
+  switch (categorySlug) {
+    case 'events':
+      return color('blue')
+    case 'inspiration':
+      return color('green')
+    default:
+      return color('yellow')
+  }
+}
+
 export function getFeaturedImage(post) {
   return nestedGet(post, 'featured_image', 'source');
 }

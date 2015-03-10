@@ -127,7 +127,7 @@ let PortfolioHandler = React.createClass({
   },
 
   itemsPerRow() {
-    if (this.state.media.xl) {
+    if (this.state.media.xxl) {
       return 4;
     } else if (this.state.media.l) {
       return 2;
@@ -137,7 +137,7 @@ let PortfolioHandler = React.createClass({
   },
 
   itemsPerCaseStudyRow() {
-    if (this.state.media.xl) {
+    if (this.state.media.xxl) {
       return 2;
     } else if (this.state.media.l) {
       return 1;

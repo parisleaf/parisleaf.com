@@ -11,6 +11,9 @@ import PageStore from './stores/PageStore';
 import ProjectActions from './actions/ProjectActions';
 import ProjectStore from './stores/ProjectStore';
 
+import TermActions from './actions/TermActions';
+import TermStore from './stores/TermStore';
+
 import MenuActions from './actions/MenuActions';
 import MenuStore from './stores/MenuStore';
 
@@ -39,6 +42,9 @@ export default class Flux extends Flummox {
 
     this.createActions('projects', ProjectActions);
     this.createStore('projects', ProjectStore, this);
+
+    this.createActions('terms', TermActions);
+    this.createStore('terms', TermStore, this);
 
     this.createActions('menus', MenuActions);
     this.createStore('menus', MenuStore, this);
