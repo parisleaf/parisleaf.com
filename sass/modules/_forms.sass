@@ -1,0 +1,24 @@
+.TextInput
+  margin: 0
+  border: 0
+  padding: 0
+  display: inline-block
+  white-space: normal
+  background: none
+  line-height: 1
+
+  &:focus
+    outline: 0
+
+.FormRow
+  flex-wrap: wrap
+
+  > *:not(:last-child)
+    margin-right: rhythm(1/2)
+
+  &-col2
+    > *
+      width: 100%
+
+      +bp('m')
+        width: auto

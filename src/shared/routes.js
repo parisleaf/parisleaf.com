@@ -8,6 +8,7 @@ import PostHandler from './components/PostHandler';
 import PageHandler from './components/PageHandler';
 import PortfolioHandler from './components/PortfolioHandler';
 import BlogHandler from './components/BlogHandler';
+import ContactHandler from './components/ContactHandler';
 import ProjectHandler from './components/ProjectHandler';
 import NotFoundHandler from './components/NotFoundHandler';
 
@@ -18,6 +19,7 @@ let Routes = (
     <Route path="/work/*/:slug" handler={ProjectHandler} />
     <Route path="/blog/:slug" name="post" handler={PostHandler} />
     <Route path="/blog/*/:slug" handler={PostHandler} />
+    <Route path="/contact" name="contact" handler={ContactHandler} />
     <Route path="/blog" name="blog" handler={BlogHandler} />
     <Route path="/:slug" name="page" handler={PageHandler} />
     <DefaultRoute name="home" handler={HomeHandler} />

@@ -1,5 +1,3 @@
-// Not a true react component
-//
 // Usage:
 //   <blockquote className="Blockquote">
 //     <p className="Blockquote-content">This is a quote</p>
@@ -10,6 +8,7 @@
   &-content
     @include font-size('h2')
     @include font-family('vollkorn')
+    padding: rhythm(1) 0
     font-style: italic
     font-weight: bold
     position: relative
@@ -20,9 +19,9 @@
       color: theme-color(gray)
       font-size: rhythm(5)
       position: absolute
-      right: 100%
-      margin-right: rhythm(1)
-      top: -75% // TODO: better way of doing this?
+      right: unquote("calc(100% + #{rhythm(1/2)})")
+      top: -0.15em
+      font-style: normal
 
   &-footer
     @include font-size('h4')

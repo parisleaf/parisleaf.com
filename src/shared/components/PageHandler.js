@@ -60,7 +60,6 @@ let SinglePage = React.createClass({
         <SiteContainer>
           <HTMLContentArea html={page.get('content')} />
         </SiteContainer>
-        <PageFooter />
       </article>
     );
   }
