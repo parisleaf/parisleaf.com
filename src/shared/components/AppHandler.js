@@ -8,6 +8,7 @@ import FluxComponent from 'flummox/component';
 
 import AppNav from './AppNav';
 import AppOverlay from './AppOverlay';
+import PageFooter from './PageFooter';
 
 import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
@@ -72,6 +73,7 @@ let App = React.createClass({
         <div>
           <RouteHandler />
         </div>
+        <PageFooter />
       </div>
     );
   }

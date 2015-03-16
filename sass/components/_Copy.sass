@@ -7,3 +7,38 @@
     @extend .Header--3
   h4
     @extend .Header--4
+
+  .alignleft
+    margin-left: auto
+    margin-right: auto
+
+    +bp(m)
+      clear: left
+      float: left
+      margin-right: rhythm(1.5)
+      margin-left: rhythm(-1.5)
+
+  .alignright
+    margin-left: auto
+    margin-right: auto
+
+    +bp(m)
+      clear: right
+      float: right
+      margin-left: rhythm(1.5)
+      margin-right: rhythm(-1.5)
+
+  .alignleft, .alignright
+    display: block
+
+    +bp(m)
+      width: span(4 of 8)
+      height: auto
+
+    +bp(l)
+      width: span(4 of 12)
+      height: auto
+
+  .aligncenter
+    display: block
+    margin: 0 auto

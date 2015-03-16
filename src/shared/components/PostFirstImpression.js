@@ -38,7 +38,7 @@ let PostFirstImpression = React.createClass({
       <ViewportContainer className="PostFirstImpression" style={_style}>
         <SiteContainer className="PostFirstImpression-content" style={style.content}>
           <BorderContainer borderColor={getCardColor(post)}>
-            <Header level={1}>{post.get('title')}</Header>
+            <Header level={1} dangerouslySetInnerHTML={{ __html: post.get('title') }} />
             <PostMeta post={post} />
           </BorderContainer>
         </SiteContainer>

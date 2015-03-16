@@ -1,4 +1,3 @@
-'use strc4x';
 'use strict';
 
 /**
@@ -78,7 +77,7 @@ export function modularScale(n) {
 }
 
 export var fontSizes = {
-  h1: modularScale(8),
+  h1: modularScale(7),
   h2: modularScale(6),
   h3: modularScale(5),
   h4: modularScale(5),
@@ -116,9 +115,9 @@ export function zIndex(name, offset = 0) {
 export var breakpoints = {
   s:       500,
   m:       768,
-  l:       1024,
-  xl:      1200,
-  xxl:     1400,
+  l:       950,
+  xl:      1100,
+  xxl:     1300,
 };
 
 export var mediaQueries = mapObject(breakpoints,
