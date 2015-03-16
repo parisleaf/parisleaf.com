@@ -3,7 +3,6 @@
 import React from 'react';
 import { RouteHandler, State } from 'react-router';
 import DocumentTitle from 'react-document-title';
-import NavBarColor from './NavBarColor';
 
 import FluxComponent from 'flummox/component';
 
@@ -31,10 +30,11 @@ let App = React.createClass({
     },
 
     routerDidRun(state) {
-      let NavActions = state.flux.getActions('nav');
+      const NavActions = state.flux.getActions('nav');
 
       // Make sure nav is dismissed on re-route
       NavActions.setOpen(false);
+      NavActions.setColor({ text: color('text'), background: '#fff' });
     }
   },
 
@@ -55,6 +55,7 @@ let App = React.createClass({
         nav: store => ({
           open: store.state.open,
           textColor: store.state.color.get('text'),
+          backgroundColor: store.state.color.get('background'),
         }),
         app: store => ({
           options: store.state.options,
@@ -66,7 +67,6 @@ let App = React.createClass({
     return (
       <div className="App">
         <DocumentTitle title="Parisleaf" />
-        <NavBarColor textColor={color('text')} backgroundColor={'#fff'} />
         {appNav}
         <AppOverlay />
         <div>

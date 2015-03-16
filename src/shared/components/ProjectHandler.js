@@ -6,7 +6,6 @@ import { State } from 'react-router';
 import Flux from 'flummox/component';
 
 import ProjectFirstImpression from './ProjectFirstImpression';
-import NavBarColor from './NavBarColor';
 import ProjectContent from './ProjectContent';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
@@ -21,6 +20,11 @@ let ProjectHandler = React.createClass({
 
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
+
+    routerDidRun(state) {
+      const NavActions = state.flux.getActions('nav');
+      NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
+    }
   },
 
   render() {
@@ -48,7 +52,6 @@ let SingleProject = React.createClass({
 
     return (
       <article>
-        <NavBarColor textColor="#fff" backgroundColor="rgba(0,0,0,0)" />
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
       </article>

@@ -7,6 +7,7 @@ import Flux from 'flummox/component'
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 import PageHeader from './PageHeader';
+import PageFooter from './PageFooter';
 
 import { nestedGet } from '../utils/ImmutableUtils';
 
@@ -59,6 +60,7 @@ let SinglePage = React.createClass({
         <SiteContainer>
           <HTMLContentArea html={page.get('content')} />
         </SiteContainer>
+        <PageFooter />
       </article>
     );
   }

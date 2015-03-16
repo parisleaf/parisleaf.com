@@ -29,8 +29,6 @@ export default class NavStore extends ImmutableStore {
   }
 
   handleSetColor(color) {
-    console.log(color);
-
     this.setState({
       color: this.state.color.merge(color)
     });

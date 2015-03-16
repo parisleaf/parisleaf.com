@@ -132,7 +132,7 @@ export function rhythm(lines) {
 }
 
 export var navBarRhythmHeight = 3;
-export var siteContainerRhythmPadding = 1;
+export var siteContainerRhythmPadding = 1.5;
 
 /**
  * Convert a pixel value to rems

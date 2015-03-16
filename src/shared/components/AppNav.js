@@ -23,7 +23,13 @@ let style = {
     top: 0,
     width: '100%',
     zIndex: zIndex('AppNav'),
+  },
+
+  bar: {
     padding: `0 ${rhythm(1)}`,
+    width: '100%',
+    transitionProperty: 'transform, -webkit-transform, background',
+    transitionDuration: '150ms',
   },
 
   logoIcon: {
@@ -53,18 +59,42 @@ let AppNav = React.createClass({
     };
   },
 
+  getInitialState() {
+    return {
+      pinned: false,
+      top: false,
+    }
+  },
+
   onToggleClick(event) {
-    let NavActions = this.props.flux.getActions('nav');
+    const NavActions = this.props.flux.getActions('nav');
 
     event.preventDefault();
 
     NavActions.setOpen(!this.props.open);
   },
 
+  textColor() {
+    if (this.props.open) return color('text');
+
+    if (!this.state.top && this.state.pinned) return color('text');
+
+    return this.props.textColor;
+  },
+
+  backgroundColor() {
+    if (this.props.open) return 'rgba(0,0,0,0)';
+
+    if (!this.state.top && this.state.pinned) return '#fff';
+
+    return this.props.backgroundColor;
+  },
+
   toggleMenuIcon() {
-    let toggleIconStyle = Object.assign({
-      fill: this.props.open ? color('text') : this.props.textColor,
-    }, style.toggleIcon);
+    const toggleIconStyle = {
+      fill: this.textColor(),
+      ...style.toggleIcon,
+    };
 
     if(this.props.open) {
       return(<SvgIcon name="close" style={toggleIconStyle} />);
@@ -73,21 +103,52 @@ let AppNav = React.createClass({
     }
   },
 
+  componentDidMount() {
+    require('headroom.js');
+
+    const el = this.getDOMNode();
+    this.headroom = new Headroom(el, {
+      onPin: () => this.setState({ pinned: true }),
+      onUnpin: () => this.setState({ pinned: false }),
+      onTop: () => this.setState({ top: true }),
+      onNotTop: () => this.setState({ top: false }),
+    });
+
+    this.headroom.init();
+  },
+
+  componentWillUnmount() {
+    this.headroom.destroy();
+  },
+
   render() {
-    let AppActions = this.props.flux.getActions('app');
+    const AppActions = this.props.flux.getActions('app');
 
-    let _style = Object.assign({
+    const _style = {
       position: this.props.open ? 'fixed' : 'absolute',
-    }, style._);
+      ...style._,
+    };
 
-    let logoIconStyle = Object.assign({
-      fill: this.props.open ? color('text') : this.props.textColor,
-    }, style.logoIcon);
+    const logoIconStyle = {
+      fill: this.textColor(),
+      ...style.logoIcon,
+    };
+
+    const barStyle = {
+      background: this.backgroundColor(),
+      position: this.state.top ? 'absolute' : 'fixed',
+      transform: this.state.pinned || this.state.top
+        ? `translateY(0%)`
+        : `translateY(-100%)`,
+      ...style.bar,
+    };
+
+    barStyle.WebkitTransform = barStyle.transform;
 
     return (
       <div onClick={this.onClick} style={style.wrapper}>
         <nav className="AppNav" style={_style}>
-          <div className="AppNav-bar">
+          <div className="AppNav-bar" style={barStyle}>
             <div className="AppNav-bar-logo" id="logo">
               <Button component={AppLink} onClick={AppActions.closeNav} to="/">
                 <SvgIcon name="logo" style={logoIconStyle} />

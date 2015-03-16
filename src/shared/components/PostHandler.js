@@ -22,9 +22,8 @@ let PostHandler = React.createClass({
     },
 
     routerDidRun(state) {
-      let AppActions = state.flux.getActions('app');
-
-      AppActions.setNavTextColor('#fff');
+      const NavActions = state.flux.getActions('nav');
+      NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
     }
   },
 
