@@ -1,6 +1,8 @@
 import React from 'react';
 import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
+import Metadata from './Metadata';
+import Button from './Button';
 import SuitCSS from 'react-suitcss'
 import FlexContainer from './FlexContainer';
 import FlexItem from './FlexItem';
@@ -40,6 +42,7 @@ const ContactHandler = React.createClass({
               label="Your Ideal Sandwich"
               placeholder="Yucca pancake reuben"
             />
+            <Button type="submit" secondaryDark>Submit</Button>
           </form>
         </SiteContainer>
       </div>
@@ -52,8 +55,11 @@ const TextInput = React.createClass({
     const { label, style, className, ...props } = this.props;
 
     return (
-      <FlexItem grow element="label">
-        {this.props.label}
+      <FlexItem grow element="label" style={{
+        marginTop: `${rhythm(1/2)}`,
+        marginBottom: `${rhythm(1/2)}`,
+      }}>
+        <Metadata>{this.props.label}</Metadata>
         <input
           className={[
             className,
@@ -63,7 +69,7 @@ const TextInput = React.createClass({
             width: '100%',
             background: color('lightGray'),
             fontFamily: fontFamily('alrightBlack'),
-            padding: `${rhythm(1/4)} ${rhythm(1)}`,
+            padding: `${rhythm(1/2)} ${rhythm(1)}`,
             margin: `${rhythm(1/2)} 0`,
             lineHeight: 1.5,
             minHeight: rhythm(1.5),

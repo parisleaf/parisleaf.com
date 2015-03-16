@@ -12,9 +12,10 @@
 
 .FormRow
   flex-wrap: wrap
-
-  > *:not(:last-child)
-    margin-right: rhythm(1/2)
+  
+  +bp('m')
+    > *:not(:last-child)
+      margin-right: rhythm(1)
 
   &-col2
     > *

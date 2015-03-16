@@ -1,11 +1,13 @@
 $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding);
 
 .BorderContainer
+  $overhang : $site-container-rhythm-padding / 2
+
   border-left: rhythm(1/4) solid
-  padding-left: rhythm($site-container-rhythm-padding - 1/4)
+  padding-left: rhythm($overhang - 1/4)
 
   +bp(m)
-    margin-left: rhythm(-1 * $site-container-rhythm-padding)
+    margin-left: rhythm(-1 * $overhang)
 
   &--noHang
     +bp(m)
