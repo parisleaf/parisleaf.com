@@ -25,7 +25,7 @@ let HomeProcessSection = React.createClass({
     return(
       <div className="HomeProcessSection" style={style._}>
         <SiteContainer>
-          <HTMLContentArea html={processCopy} />
+          <HTMLContentArea html={processCopy} fullWidth />
         </SiteContainer>
       </div>
     );

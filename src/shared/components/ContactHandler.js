@@ -1,4 +1,7 @@
 import React from 'react';
+import request from 'superagent';
+import serialize from 'form-serialize';
+import { ensureIsomorphicUrl } from '../utils/LinkUtils';
 import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
 import Metadata from './Metadata';
@@ -9,6 +12,18 @@ import FlexItem from './FlexItem';
 import { color, rhythm, fontFamily } from '../theme';
 
 const ContactHandler = React.createClass({
+  async onSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const body = serialize(form, { hash: true });
+
+    console.log(body);
+
+    await request.post(ensureIsomorphicUrl('/contact')).send(body).exec();
+  },
+
   render() {
     return (
       <div>
@@ -17,32 +32,44 @@ const ContactHandler = React.createClass({
           subtitle="We'd love to hear your crazy ideas."
         />
         <SiteContainer>
-          <form action="/login" method="post" style={{
-            padding: `${rhythm(1)} 0`,
-          }}>
-            <FormRow col2>
+          <form
+            action="/contact"
+            method="post"
+            onSubmit={this.onSubmit}
+            style={{
+              padding: `${rhythm(1)} 0`,
+            }}
+          >
+            <FlexRow col2>
               <TextInput
                 label="Your First Name"
+                name="firstName"
                 placeholder="Benji"
               />
               <TextInput
                 label="Your Last Name"
+                name="lastName"
                 placeholder="Haselhurst"
               />
-            </FormRow>
+            </FlexRow>
             <TextInput
               label="Your Email Address"
+              name="email"
               placeholder="Female@gmail.com"
             />
             <TextInput
               label="Your Company Name"
+              name="company"
               placeholder="Kitty Whispers"
             />
             <TextInput
               label="Your Ideal Sandwich"
+              name="idealSandwich"
               placeholder="Yucca pancake reuben"
             />
-            <Button type="submit" secondaryDark>Submit</Button>
+            <Button type="submit" secondaryDark>
+              Submit
+            </Button>
           </form>
         </SiteContainer>
       </div>
@@ -82,11 +109,11 @@ const TextInput = React.createClass({
   }
 });
 
-const FormRow = React.createClass({
+const FlexRow = React.createClass({
   render() {
     return (
       <SuitCSS
-        componentName="FormRow"
+        componentName="FlexRow"
         element="div"
         className="FlexContainer FlexContainer--fullWidth"
         modifiers={[

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import SuitCSS from 'react-suitcss';
 import chroma from 'chroma-js';
 import { color } from '../theme';
 import PLSlider from './PLSlider';
@@ -67,7 +68,10 @@ let HTMLContentArea = React.createClass({
             color: ${primaryTextColor}
           }
         `}</style>
-        <div
+        <SuitCSS
+          element="div"
+          componentName="HTMLContentArea"
+          modifiers={['fullWidth']}
           className={classes.join(' ')}
           dangerouslySetInnerHTML={{ __html: html }}
           {...props}

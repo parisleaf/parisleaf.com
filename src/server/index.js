@@ -31,6 +31,17 @@ app.on('error', (e) => {
   log.info(e);
 });
 
+// Set up nodemailer
+import nodemailer from 'nodemailer';
+
+nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'webadmin@parisleaf.com',
+    pass: 'hEQs-|Pmj1cl?la'
+  }
+});
+
 // Start listening
 app.listen(process.env.PORT);
 console.log(`App started listening on port ${process.env.PORT}`);

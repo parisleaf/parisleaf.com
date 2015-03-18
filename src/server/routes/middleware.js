@@ -5,6 +5,7 @@ import path from 'path';
 import gzip from 'koa-gzip';
 import fresh from 'koa-fresh';
 import conditional from 'koa-conditional-get';
+import bodyparser from 'koa-bodyparser';
 import etag from 'koa-etag';
 import serve from 'koa-static';
 import json from 'koa-json';
@@ -44,6 +45,9 @@ export default function(app) {
 
   // Add nesting support to query strings
   qs(app);
+
+  // Add body parsing
+  app.use(bodyparser());
 
   // Add jade rendering
   app.use(views(path.join(process.cwd(), 'views'), {

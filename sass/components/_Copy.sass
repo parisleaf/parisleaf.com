@@ -1,4 +1,10 @@
 .HTMLContentArea
+
+  &:not(.HTMLContentArea--fullWidth)
+    // Content-width
+    +bp(l)
+      +span(9 of 12)
+
   h1
     @extend .Header--1
   h2

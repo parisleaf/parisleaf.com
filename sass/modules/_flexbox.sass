@@ -7,3 +7,17 @@
 .FlexItem
   &--grow
     flex-grow: 1
+
+.FlexRow
+  flex-wrap: wrap
+
+  +bp('m')
+    > *:not(:last-child)
+      margin-right: rhythm(1)
+
+  &-col2
+    > *
+      width: 100%
+
+      +bp('m')
+        width: auto
