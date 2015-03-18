@@ -73,7 +73,6 @@ let App = React.createClass({
         <div>
           <RouteHandler />
         </div>
-        <PageFooter />
       </div>
     );
   }

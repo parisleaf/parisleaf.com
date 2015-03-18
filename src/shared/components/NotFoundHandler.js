@@ -24,8 +24,8 @@ let NotFoundHandler = React.createClass({
         </div>
         <div className="NotFound-content">
           <Header level={1}>Error 404!</Header>
-          <Header level={4}>There might still be hope:</Header>
-          <Button component={AppLink} to='/home' primaryDark>
+          <Header level={4}>It's not broken. It just isn't quite ready. Check back in April!</Header>
+          <Button component={AppLink} to='/blog/part-ii-parisleaf' primaryDark>
             Get me outta here
           </Button>
         </div>
