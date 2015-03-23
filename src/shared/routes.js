@@ -14,18 +14,17 @@ import NotFoundHandler from './components/NotFoundHandler';
 
 let Routes = (
   <Route name="app" path="/" handler={AppHandler}>
+    <Route path="/work" name="work" handler={PortfolioHandler} />
+    <Route path="/work/:slug" name="project" handler={ProjectHandler} />
+    <Route path="/work/*/:slug" handler={ProjectHandler} />
+    <Route path="/contact" name="contact" handler={ContactHandler} />
     <Route path="/blog/*/:slug" handler={PostHandler} />
     <Route path="/blog/:slug" name="post" handler={PostHandler} />
+    <Route path="/blog" name="blog" handler={BlogHandler} />
+    <Route path="/:slug" name="page" handler={PageHandler} />
+    <DefaultRoute name="home" handler={HomeHandler} />
     <NotFoundRoute name="404" handler={NotFoundHandler} />
   </Route>
 );
 
 export default Routes;
-
-// <Route path="/work" name="work" handler={PortfolioHandler} />
-// <Route path="/work/:slug" name="project" handler={ProjectHandler} />
-// <Route path="/work/*/:slug" handler={ProjectHandler} />
-// <Route path="/contact" name="contact" handler={ContactHandler} />
-// <Route path="/blog" name="blog" handler={BlogHandler} />
-// <Route path="/:slug" name="page" handler={PageHandler} />
-// <DefaultRoute name="home" handler={HomeHandler} />
