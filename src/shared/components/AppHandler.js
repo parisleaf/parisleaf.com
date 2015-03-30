@@ -18,10 +18,10 @@ let App = React.createClass({
   mixins: [State, MediaMixin],
 
   statics: {
-    routerWillRun(state) {
-      let AppActions = state.flux.getActions('app');
-      let MenuActions = state.flux.getActions('menus');
-      let TweetActions = state.flux.getActions('tweets');
+    routerWillRun({ state, flux }) {
+      let AppActions = flux.getActions('app');
+      let MenuActions = flux.getActions('menus');
+      let TweetActions = flux.getActions('tweets');
 
       return Promise.all([
         MenuActions.getMenus(),
@@ -30,8 +30,8 @@ let App = React.createClass({
       ]);
     },
 
-    routerDidRun(state) {
-      const NavActions = state.flux.getActions('nav');
+    routerDidRun({ state, flux }) {
+      const NavActions = flux.getActions('nav');
 
       // Make sure nav is dismissed on re-route
       NavActions.setOpen(false);
@@ -73,6 +73,7 @@ let App = React.createClass({
         <div>
           <RouteHandler />
         </div>
+        <PageFooter />
       </div>
     );
   }

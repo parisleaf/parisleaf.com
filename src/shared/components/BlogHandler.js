@@ -26,9 +26,9 @@ let BlogHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    async routerWillRun(state) {
-      const PostActions = state.flux.getActions('posts');
-      const TermActions = state.flux.getActions('terms');
+    async routerWillRun({ state, flux }) {
+      const PostActions = flux.getActions('posts');
+      const TermActions = flux.getActions('terms');
 
       return await Promise.all([
         PostActions.getPosts(state.query),

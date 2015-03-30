@@ -13,14 +13,14 @@ let ProjectHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    routerWillRun(state) {
-      let ProjectActions = state.flux.getActions('projects');
+    routerWillRun({ state, flux }) {
+      let ProjectActions = flux.getActions('projects');
 
       return ProjectActions.getProjectBySlug(state.params.slug);
     },
 
-    routerDidRun(state) {
-      const NavActions = state.flux.getActions('nav');
+    routerDidRun({ state, flux }) {
+      const NavActions = flux.getActions('nav');
       NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
     }
   },

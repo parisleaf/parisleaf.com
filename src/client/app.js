@@ -49,10 +49,10 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     RouterActions.routerWillRun(state);
 
     if (initialRun && bootstrapSuccess) {
-      performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+      performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
       initialRun = false;
     } else {
-      await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+      await performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
     }
 
     React.render(
@@ -62,7 +62,7 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
       , document.getElementById('app')
     );
 
-    await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', state);
+    await performRouteHandlerLifecyleMethod(state.routes, 'routerDidRun', { state, flux });
   }
 
   run().catch(error => {

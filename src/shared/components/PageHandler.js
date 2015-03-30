@@ -16,9 +16,10 @@ let PageHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    routerWillRun(state) {
+    routerWillRun({ state }) {
       let { flux, params } = state;
       let PageActions = flux.getActions('pages');
+
       return PageActions.getPageBySlug(params.slug);
     },
   },

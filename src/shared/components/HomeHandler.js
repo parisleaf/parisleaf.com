@@ -14,11 +14,11 @@ import { nestedGet } from '../utils/ImmutableUtils';
 let Home = React.createClass({
 
   statics: {
-    async routerWillRun(state) {
-      let PageActions = state.flux.getActions('pages');
-      let ProjectActions = state.flux.getActions('projects');
-      let PostActions = state.flux.getActions('posts');
-      let PageStore = state.flux.getStore('pages');
+    async routerWillRun({ state, flux }) {
+      let PageActions = flux.getActions('pages');
+      let ProjectActions = flux.getActions('projects');
+      let PostActions = flux.getActions('posts');
+      let PageStore = flux.getStore('pages');
 
       await PageActions.getPageBySlug('home');
       let homePage = PageStore.getPageBySlug('home');

@@ -25,11 +25,27 @@ import NavBarColor from '../../../shared/components/NavBarColor';
 export default function(app) {
   app.get(/.*/, function *() {
 
-    // Use useragent to override react-media-mixin's initial state
-    initialMediaState = userAgentToMediaState(this.headers['user-agent']);
+  const router = Router.create({
+    routes: routes,
+    location: this.url,
+    onError: error => {
+      throw error;
+    },
+    onAbort: abortReason => {
+      const error = new Error();
+
+      if (abortReason.constructor.name === 'Redirect') {
+        const { to, params, query } = abortReason;
+        const url = router.makePath(to, params, query);
+        error.redirect = url;
+      }
+
+      throw error;
+    }
+  });
 
     let { Handler, state } = yield new Promise((resolve, reject) => {
-      Router.run(routes, this.url, (Handler, state) => resolve({ Handler, state }));
+      router.run((Handler, state) => resolve({ Handler, state }));
     });
 
     let flux = new Flux();
@@ -37,19 +53,31 @@ export default function(app) {
     state.flux = flux;
 
     RouterActions.routerWillRun(state);
-    yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', state);
+    yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
 
-    let appString = React.renderToString(
-      <FluxComponent flux={flux}>
-        <Handler />
-      </FluxComponent>
-    );
+    // Use useragent to override react-media-mixin's initial state
+    initialMediaState = userAgentToMediaState(this.headers['user-agent']);
+
+    let appString;
+
+    try {
+      appString = React.renderToString(
+        <FluxComponent flux={flux}>
+          <Handler />
+        </FluxComponent>
+      );
+    } catch (error) {
+      if (error.redirect) {
+        return this.redirect(error.redirect);
+      }
+
+      throw error;
+    }
 
     let title = DocumentTitle.rewind();
     NavBarColor.dispose();
 
     let initialAppState = flux.serialize();
-
 
     yield this.render('app', {
       title,

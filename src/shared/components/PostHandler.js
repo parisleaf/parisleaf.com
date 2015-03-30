@@ -5,6 +5,7 @@ import Flux from 'flummox/component';
 import { State } from 'react-router';
 
 import PostFirstImpression from './PostFirstImpression';
+import PageFooter from './PageFooter';
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 
@@ -15,14 +16,14 @@ let PostHandler = React.createClass({
   mixins: [State],
 
   statics: {
-    routerWillRun(state) {
-      let { flux, params } = state;
+    routerWillRun({ state, flux }) {
+      let { params } = state;
       let PostActions = flux.getActions('posts');
       return PostActions.getPostBySlug(params.slug);
     },
 
-    routerDidRun(state) {
-      const NavActions = state.flux.getActions('nav');
+    routerDidRun({ state, flux }) {
+      const NavActions = flux.getActions('nav');
       NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
     }
   },
@@ -62,6 +63,7 @@ let SinglePost = React.createClass({
             padding: `${rhythm(2)} 0`
           }}/>
         </SiteContainer>
+        <PageFooter />
       </article>
     );
   }

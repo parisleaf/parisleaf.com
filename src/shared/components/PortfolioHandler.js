@@ -18,8 +18,8 @@ let PortfolioHandler = React.createClass({
   mixins: [MediaMixin],
 
   statics: {
-    routerWillRun(state) {
-      let ProjectActions = state.flux.getActions('projects');
+    routerWillRun({ state, flux }) {
+      let ProjectActions = flux.getActions('projects');
 
       return ProjectActions.getProjects();
     },
