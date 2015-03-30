@@ -12,7 +12,6 @@ import RevealOnScroll from './RevealOnScroll';
 
 let style = {
   _: {
-    backgroundColor: color('lightGray'),
     paddingTop: rhythm(1),
     paddingBottom: rhythm(2)
   }
