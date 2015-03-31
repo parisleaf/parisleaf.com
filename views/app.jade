@@ -6,9 +6,38 @@ html(class='no-js')
 
     title=title
 
-    meta(name='description', content='')
+    meta(name='description', content=description)
     meta(name='viewport', content='width=device-width, initial-scale=1')
+      
+    meta(name='og:site_name', content='Parisleaf')
+    
+    if (canonicalUrl)
+      link(rel='canonical', href=canonicalUrl)
+      meta(name='og:url', content=canonicalUrl)
+        
+        
+    if (keywords)
+      meta(name='keywords', content=keywords)
 
+    if (title)
+      meta(property='og:title', content=title)
+
+    if (description)
+      meta(property='og:description', content=description)
+
+    if (author)
+      meta(property='article:author', content=author)
+    
+    if (publishedTime)
+      meta(property='article:published_time', href=publishedTime)
+
+    if (modifiedTime)
+      meta(property='article:modified_time', href=modifiedTime)
+        
+    if (image)
+      meta(property='og:image', href=image)
+        
+        
     if (env.NODE_ENV == 'development')
       //- link(rel='stylesheet', href='/css/app.css')
     else
@@ -17,7 +46,7 @@ html(class='no-js')
 
     style
       include ../node_modules/swiper/dist/css/swiper.min.css
-
+      
   body
     include icon-sprite.svg
     #app(data-wp-endpoint=env.WP_ENDPOINT)!=appString

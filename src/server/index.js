@@ -28,7 +28,7 @@ let log = bunyan.createLogger({
 });
 
 app.on('error', (e) => {
-  log.info(e);
+  log.error(e);
 });
 
 // Set up nodemailer

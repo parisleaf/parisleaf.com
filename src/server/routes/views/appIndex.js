@@ -22,6 +22,9 @@ import Flux from '../../../shared/Flux';
 
 import NavBarColor from '../../../shared/components/NavBarColor';
 
+import { nestedGet } from '../../../shared/utils/ImmutableUtils';
+import url from 'url';
+
 export default function(app) {
   app.get(/.*/, function *() {
 
@@ -55,6 +58,18 @@ export default function(app) {
     RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
 
+    const posts = yield performRouteHandlerLifecyleMethod(state.routes, 'getPost', { state, flux });
+    let post;
+
+    for (let key in Object.keys(posts).reverse()) {
+      const p = posts[key];
+
+      if (p) {
+        post = p;
+        break;
+      }
+    }
+
     // Use useragent to override react-media-mixin's initial state
     initialMediaState = userAgentToMediaState(this.headers['user-agent']);
 
@@ -80,7 +95,14 @@ export default function(app) {
     let initialAppState = flux.serialize();
 
     yield this.render('app', {
-      title,
+      title: nestedGet(post, 'meta', 'yoast_wpseo_title') || title,
+      description: nestedGet(post, 'meta', 'yoast_wpseo_metadesc'),
+      image: nestedGet(post, 'featured_image', 'guid'),
+      canonicalUrl: url.resolve(this.host, this.url),
+      author: nestedGet(post, 'author', 'name'),
+      keywords: nestedGet(post, 'meta', 'yoast_wpseo_metakeywords'),
+      publishedTime: nestedGet(post, 'date_gmt'),
+      modifiedTime: nestedGet(post, 'modified_gmt'),
       appString,
       env: process.env,
       initialAppState,

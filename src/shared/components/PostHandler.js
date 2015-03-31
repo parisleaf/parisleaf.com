@@ -22,6 +22,11 @@ let PostHandler = React.createClass({
       return PostActions.getPostBySlug(params.slug);
     },
 
+    getPost({ state, flux }) {
+      const { params } = state;
+      return flux.getStore('posts').getPostBySlug(params.slug);
+    },
+
     routerDidRun({ state, flux }) {
       const NavActions = flux.getActions('nav');
       NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
