@@ -5,6 +5,7 @@ import { Route, DefaultRoute, NotFoundRoute } from 'react-router';
 import AppHandler from './components/AppHandler';
 import HomeHandler from './components/HomeHandler';
 import AboutHandler from './components/AboutHandler';
+import TeamHandler from './components/TeamHandler';
 import PostHandler from './components/PostHandler';
 import PageHandler from './components/PageHandler';
 import PortfolioHandler from './components/PortfolioHandler';
@@ -19,6 +20,7 @@ let Routes = (
     <Route path="/work/:slug" name="project" handler={ProjectHandler} />
     <Route path="/work/*/:slug" handler={ProjectHandler} />
     <Route path="/about" name="about" handler={AboutHandler} />
+    <Route path="/team" name="team" handler={TeamHandler} />
     <Route path="/contact" name="contact" handler={ContactHandler} />
     <Route path="/blog/*/:slug" handler={PostHandler} />
     <Route path="/blog/:slug" name="post" handler={PostHandler} />

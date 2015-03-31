@@ -35,7 +35,7 @@ let PostFirstImpression = React.createClass({
   },
 
   render() {
-    let { post, noMeta, image } = this.props;
+    let { post, noMeta, image, title, subtitle } = this.props;
 
     let _style = Object.assign({
       backgroundImage: `url(${image || getHeroImage(post)})`,
@@ -45,7 +45,8 @@ let PostFirstImpression = React.createClass({
       <ViewportContainer className="PostFirstImpression" style={_style}>
         <SiteContainer className="PostFirstImpression-content" style={style.content}>
           <BorderContainer borderColor={getCardColor(post)}>
-            <Header level={1} dangerouslySetInnerHTML={{ __html: this.props.title || post.get('title') }} />
+            <Header level={1} dangerouslySetInnerHTML={{ __html: title || post.get('title') }} />
+            {subtitle && <Header level={2} dangerouslySetInnerHTML={{ __html: subtitle }} />}
             {!noMeta && <PostMeta post={post} />}
           </BorderContainer>
         </SiteContainer>

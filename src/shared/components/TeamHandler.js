@@ -1,19 +1,14 @@
 import React from 'react';
 import Flux from 'flummox/component';
-import PostFirstImpression from './PostFirstImpression';
+import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 
-const AboutHandler = React.createClass({
+const TeamHandler = React.createClass({
   statics: {
     routerWillRun({ flux }) {
       const PageActions = flux.getActions('pages');
-      return PageActions.getPageBySlug('about');
-    },
-
-    routerDidRun({ state, flux }) {
-      const NavActions = flux.getActions('nav');
-      NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
+      return PageActions.getPageBySlug('team');
     }
   },
 
@@ -21,7 +16,7 @@ const AboutHandler = React.createClass({
     return (
       <Flux connectToStores={{
         pages: store => ({
-          page: store.getPageBySlug('about')
+          page: store.getPageBySlug('team')
         })
       }}>
         <AboutPage />
@@ -38,11 +33,9 @@ const AboutPage = React.createClass({
 
     return (
       <div>
-        <PostFirstImpression
-          post={page}
-          title="Separated, we’re raw talent."
-          subtitle="Together, we’re a force."
-          noMeta
+        <PageHeader
+          title="We’re nothing more than a collection of outstanding human beings…"
+          subtitle="just ask our parents."
         />
         <SiteContainer>
           <HTMLContentArea html={page.get('content')} />
@@ -52,4 +45,4 @@ const AboutPage = React.createClass({
   }
 });
 
-export default AboutHandler;
+export default TeamHandler;

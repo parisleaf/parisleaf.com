@@ -38,11 +38,9 @@ html(class='no-js')
       meta(property='og:image', href=image)
         
         
-    if (env.NODE_ENV == 'development')
-      //- link(rel='stylesheet', href='/css/app.css')
-    else
+    if (env.NODE_ENV !== 'development')
       style
-        include ../public/css/app.min.css
+        link(rel='stylesheet', href='/css/app.min.css')
 
     style
       include ../node_modules/swiper/dist/css/swiper.min.css
