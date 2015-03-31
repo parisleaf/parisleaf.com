@@ -12,19 +12,19 @@ const PageFooter = React.createClass({
     const data = [
       {
         title: "Twitter",
-        href: ""
+        href: "https://twitter.com/Parisleaf"
       },
       {
         title: "Vimeo",
-        href: ""
+        href: "https://vimeo.com/parisleaf"
       },
       {
         title: "Facebook",
-        href: ""
+        href: "https://www.facebook.com/parisleaf"
       },
       {
         title: "Behance",
-        href: ""
+        href: "https://www.behance.net/parisleaf/wip"
       },
     ];
 
