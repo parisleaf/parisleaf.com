@@ -1,6 +1,8 @@
 import React from 'react';
 import Flux from 'flummox/component';
 import PostFirstImpression from './PostFirstImpression';
+import SiteContainer from './SiteContainer';
+import HTMLContentArea from './HTMLContentArea';
 
 const AboutHandler = React.createClass({
   statics: {
@@ -37,6 +39,9 @@ const AboutPage = React.createClass({
     return (
       <div>
         <PostFirstImpression post={page} noMeta />
+        <SiteContainer>
+          <HTMLContentArea html={page.get('content')} />
+        </SiteContainer>
       </div>
     );
   }
