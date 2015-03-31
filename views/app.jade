@@ -14,8 +14,7 @@ html(class='no-js')
     if (canonicalUrl)
       link(rel='canonical', href=canonicalUrl)
       meta(name='og:url', content=canonicalUrl)
-        
-        
+
     if (keywords)
       meta(name='keywords', content=keywords)
 
@@ -39,8 +38,7 @@ html(class='no-js')
         
         
     if (env.NODE_ENV !== 'development')
-      style
-        link(rel='stylesheet', href='/css/app.min.css')
+      link(rel='stylesheet', href='/css/app.min.css')
 
     style
       include ../node_modules/swiper/dist/css/swiper.min.css
