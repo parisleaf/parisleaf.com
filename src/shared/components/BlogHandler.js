@@ -233,4 +233,6 @@ const BlogFilter = React.createClass({
   }
 });
 
+export { BlogHeader };
+
 export default BlogHandler;
