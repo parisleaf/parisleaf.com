@@ -25,6 +25,8 @@ let MoreFromBlog = React.createClass({
     if (!posts) return null;
 
     let cards = posts.toArray().map(function(post) {
+      if (!post) return null;
+
       return(
         <div className="Blog-postContainer-item" key={post.get('id_str')}>
           <BlogCard post={post} expanded/>
