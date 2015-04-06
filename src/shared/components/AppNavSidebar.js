@@ -132,10 +132,18 @@ let AppNavSidebar = React.createClass({
           <Metadata style={style.contactInfo}>Gainesville, FL 32601</Metadata>
         </div>
         <div className="AppNavDrawer-sidebar-icons" style={style.metaPadding}>
-           <SvgIcon name="vimeo-circle" style={style.firstIcon}/>
-           <SvgIcon name="facebook-circle" style={style.extraIcon}/>
-           <SvgIcon name="twitter-circle" style={style.extraIcon}/>
-           <SvgIcon name="email" style={style.extraIcon}/>
+          <AppLink href="https://vimeo.com/parisleaf">
+            <SvgIcon name="vimeo-circle" style={style.firstIcon}/>
+          </AppLink>
+          <AppLink href="https://www.facebook.com/parisleaf">
+            <SvgIcon name="facebook-circle" style={style.extraIcon}/>
+          </AppLink>
+          <AppLink href="https://twitter.com/Parisleaf">
+            <SvgIcon name="twitter-circle" style={style.extraIcon}/>
+          </AppLink>
+          <AppLink href="mailto:contact@parisleaf.com">
+            <SvgIcon name="email" style={style.extraIcon}/>
+          </AppLink>
         </div>
       </section>
     );
