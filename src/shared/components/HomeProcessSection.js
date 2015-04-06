@@ -10,8 +10,6 @@ let style = {
   _: {
     paddingTop: rhythm(2),
     paddingBottom: rhythm(2),
-    backgroundColor: color('darkGray'),
-    color: '#fff',
   }
 };
 
