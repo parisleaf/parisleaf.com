@@ -109,6 +109,7 @@ const iconMapping = {
   video: 'video',
   identity: 'visual_identity',
   'web-design': 'web_design',
+  'print-design': 'print_design',
 };
 
 const ProjectServiceIcon = React.createClass({
