@@ -88,6 +88,12 @@ let BlogHandler = React.createClass({
     let posts = filterPosts(this.state.posts, this.state.query);
 
     let cards = posts
+      // Sort by date
+      .sort((a, b) => {
+        a = new Date(a.get('date_gmt'));
+        b = new Date(b.get('date_gmt'));
+        return a > b ? -1 : a < b ? 1 : 0;
+      })
       .map((post, i) =>
         <div className="Blog-postContainer-item">
           <BlogCard
