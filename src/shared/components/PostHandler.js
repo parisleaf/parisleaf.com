@@ -68,7 +68,6 @@ let SinglePost = React.createClass({
             padding: `${rhythm(2)} 0`
           }}/>
         </SiteContainer>
-        <PageFooter />
       </article>
     );
   }
