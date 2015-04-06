@@ -24,7 +24,7 @@ const PageFooter = React.createClass({
       },
       {
         title: "Behance",
-        href: "https://www.behance.net/parisleaf/wip"
+        href: "https://www.behance.net/parisleaf"
       },
     ];
 
@@ -50,25 +50,17 @@ const PageFooter = React.createClass({
         </div>
         <SiteContainer>
           <section className="PageFooter-section">
-            <Header level={5} style={{
-              marginTop: rhythm(0)
-            }}>
-              A Gainesville Based Creative Studio.
-            </Header>
-            <p>We make your dreams come true.</p>
             <p>
-              +1 (352) 377-5560<br />
-              <a href="mailto:info@parisleaf.com">info@parisleaf.com</a>
-            </p>
-          </section>
-          <section className="PageFooter-section">
-            <p style={{
-              marginTop: rhythm(0)
-            }}>
-              Parisleaf Creative Studio<br />
+              Parisleaf: A branding &amp; digital studio<br />
               107 SW 7th Street<br />
               Gainesville, Florida 32601
             </p>
+          </section>
+          <section className="PageFooter-section">
+          <p>
+            <a href="mailto:info@parisleaf.com">info@parisleaf.com</a><br />
+            +1 (352) 377-5560
+          </p>
           </section>
           <section className="PageFooter-section">
             {this.socialLinks()}
