@@ -66,14 +66,25 @@ export function filter(posts, query) {
 }
 
 export function getCardColor(post, query) {
-  if (hasTerm(post, 'events', 'category')) return color('blue');
-  if (hasTerm(post, 'inspiration', 'category')) return color('green');
+  const categories = nestedGet(post, 'terms', 'category');
 
-  return color('yellow');
+  if (!categories) return color('yellow');
+
+  const category = categories.get(0);
+
+  if (!category) return color('yellow');
+
+  return getCategoryColor(category.get('slug'));
 }
 
 export function getCategoryColor(categorySlug) {
   switch (categorySlug) {
+    case 'announcements':
+      return color('pink');
+    case 'careers':
+      return color('aqua');
+    case 'education':
+      return color('orange')
     case 'events':
       return color('blue')
     case 'inspiration':
