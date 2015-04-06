@@ -28,8 +28,8 @@ const ContactHandler = React.createClass({
     return (
       <div>
         <PageHeader
-          title="Get in Touch."
-          subtitle="We'd love to hear your crazy ideas."
+          title="Get in touch."
+          subtitle="We'd love to hear from you."
         />
         <SiteContainer>
           <form
@@ -44,28 +44,28 @@ const ContactHandler = React.createClass({
               <TextInput
                 label="Your First Name"
                 name="firstName"
-                placeholder="Benji"
+                placeholder="Type here!"
               />
               <TextInput
                 label="Your Last Name"
                 name="lastName"
-                placeholder="Haselhurst"
+                placeholder="Then here!"
               />
             </FlexRow>
             <TextInput
               label="Your Email Address"
               name="email"
-              placeholder="Female@gmail.com"
+              placeholder="hey@parisleaf.com"
             />
             <TextInput
               label="Your Company Name"
               name="company"
-              placeholder="Kitty Whispers"
+              placeholder="Almost done!"
             />
             <TextInput
               label="Your Ideal Sandwich"
               name="idealSandwich"
-              placeholder="Yucca pancake reuben"
+              placeholder="All done!"
             />
             <Button type="submit" secondaryDark>
               Submit
