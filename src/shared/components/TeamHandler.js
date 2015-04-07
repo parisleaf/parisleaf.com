@@ -34,8 +34,8 @@ const AboutPage = React.createClass({
     return (
       <div>
         <PageHeader
-          title="We’re nothing more than a collection of outstanding human beings…"
-          subtitle="just ask our parents."
+          title="The Team"
+          subtitle="We all still have our wisdom teeth"
         />
         <SiteContainer>
           <HTMLContentArea html={page.get('content')} />
