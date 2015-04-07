@@ -56,7 +56,7 @@ const PageFooter = React.createClass({
               Gainesville, Florida 32601
             </p>
           </section>
-          <section className="PageFooter-section">
+          <section className="PageFooter-section" style={{ textAlign: 'center' }}>
           <p>
             <a href="mailto:info@parisleaf.com">info@parisleaf.com</a><br />
             +1 (352) 377-5560
