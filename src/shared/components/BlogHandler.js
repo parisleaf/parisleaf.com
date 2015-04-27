@@ -133,7 +133,9 @@ const BlogHeader = React.createClass({
 
     categories = categories || Immutable.List();
 
-    const filters = categories.map((category, i) => {
+    const filters = categories
+      .filter(c => c.get('slug') !== 'uncategorized')
+      .map((category, i) => {
       return (
         <BlogCategoryFilter
           category={category}
