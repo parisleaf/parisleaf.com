@@ -13,10 +13,6 @@ RUN /bin/bash -c "source /.nvm/nvm.sh && nvm install iojs-v1.2.0 && \
     ln -s /.nvm/versions/io.js/v1.2.0/bin/iojs /usr/bin/iojs && \
     ln -s /.nvm/versions/io.js/v1.2.0/bin/npm /usr/bin/npm"
 
-# Install sassc
-ADD scripts/libsass-install.sh /libsass-install.sh
-RUN bash /libsass-install.sh
-
 WORKDIR /app
 ADD . /app
 

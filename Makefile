@@ -1,7 +1,7 @@
 BABEL_CMD = node_modules/.bin/babel
 MOCHA_CMD = node_modules/.bin/mocha
 WEBPACK_CMD = node_modules/.bin/webpack
-SASS_CMD = sassc
+SASS_CMD = node_modules/.bin/node-sass
 WATCH_CMD = node_modules/.bin/watch
 AUTOPREFIXER_CMD = node_modules/.bin/autoprefixer
 SVG_SPRITE_CMD = svg-sprite
@@ -74,13 +74,13 @@ css: public/css/app.css
 minify-css: css public/css/app.min.css
 
 public/css/app.css: sass/app.sass theme
-	mkdir -p $(dir $@) && $(SASS_CMD) -m $< | $(AUTOPREFIXER_CMD) > $@
+	mkdir -p $(dir $@) && cat sass/app.sass | $(SASS_CMD) -i --include-path=sass --include-path=node_modules | $(AUTOPREFIXER_CMD) > public/css/app.css
 
 public/css/app.min.css: public/css/app.css
 	$(CLEANCSS_CMD) $< > $@
 
 watch-css:
-	$(WATCH_CMD) "mkdir -p public/css && $(SASS_CMD) -m sass/app.sass | $(AUTOPREFIXER_CMD) > public/css/app.css" sass
+	$(WATCH_CMD) "mkdir -p $(dir $@) && cat sass/app.sass | $(SASS_CMD) -i --include-path=sass --include-path=node_modules | $(AUTOPREFIXER_CMD) > public/css/app.css" sass
 
 theme: sass/dependencies/_theme.scss
 
