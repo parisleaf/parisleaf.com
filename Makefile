@@ -8,7 +8,7 @@ SVG_SPRITE_CMD = svg-sprite
 CLEANCSS_CMD = node_modules/.bin/cleancss
 JSON_SASS_CMD = node_modules/.bin/json-sass
 
-BABEL_ARGS = --experimental --external-helpers --source-maps-inline --blacklist regenerator,es6.blockScoping --optional asyncToGenerator
+BABEL_ARGS = --stage 0 --source-maps-inline --blacklist regenerator,es6.blockScoping --optional asyncToGenerator
 BROWSERIFY_ARGS = -t [ babelify $(BABEL_ARGS) ] -t envify
 
 SRC_JS = $(shell find src -name "*.js")

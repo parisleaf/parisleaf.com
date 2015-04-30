@@ -7,8 +7,6 @@ import { color, rhythm } from '../theme';
 import AppLink from './AppLink';
 import BlogCard from './BlogCard';
 import SiteContainer from './SiteContainer';
-import RevealOnScroll from './RevealOnScroll';
-
 
 let style = {
   _: {

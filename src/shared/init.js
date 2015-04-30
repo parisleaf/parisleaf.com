@@ -3,7 +3,7 @@
 /*
  * Polyfills
  */
-require('babel/external-helpers');
+require('babel-core/external-helpers');
 import 'babel/polyfill';
 
 /*

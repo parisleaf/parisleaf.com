@@ -8,10 +8,10 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:8081',
     'webpack/hot/only-dev-server',
     './public/css/app.css',
-    './src/client/app',
+    './src/client',
   ],
   output: {
-    path: __dirname + '/public/js/',
+    path: __dirname + '/public/js/index',
     filename: 'app.js',
     publicPath: 'http://localhost:8081/js/',
   },
@@ -24,7 +24,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loaders: ['react-hot', 'babel-loader?experimental&externalHelpers'], exclude: /node_modules/ },
+      { test: /\.jsx?$/, loaders: ['react-hot', 'babel-loader?stage=0&externalHelpers'], exclude: /node_modules/ },
       { test: /\.css/, loader: "style-loader!css-loader" },
     ]
   }

@@ -5,7 +5,7 @@ import MediaMixin from 'react-media-mixin';
 
 import PortfolioItem from './PortfolioItem';
 
-import { isCaseStudy } from '../utils/ProjectUtils';
+import * as ProjectUtils from '../utils/ProjectUtils';
 
 let style = {
   _: {
@@ -65,7 +65,7 @@ let PortfolioHandler = React.createClass({
     let items = this.rows()
       .reduce((result, row) => {
         let items = row.map(project => {
-          let _itemsPerRow = isCaseStudy(project)
+          let _itemsPerRow = ProjectUtils.isCaseStudy(project)
             ? itemsPerCaseStudyRow
             : itemsPerRow;
 
@@ -103,14 +103,14 @@ let PortfolioHandler = React.createClass({
     let normalRow = [];
 
     for (let project of projects) {
-      let _isCaseStudy = isCaseStudy(project);
-      let maxLength = _isCaseStudy ? itemsPerCaseStudyRow : itemsPerRow;
-      let row = _isCaseStudy ? caseStudyRow : normalRow;
+      let isCaseStudy = ProjectUtils.isCaseStudy(project);
+      let maxLength = isCaseStudy ? itemsPerCaseStudyRow : itemsPerRow;
+      let row = isCaseStudy ? caseStudyRow : normalRow;
 
       row.push(project);
 
       if (row.length === maxLength) {
-        if (_isCaseStudy) {
+        if (isCaseStudy) {
           caseStudyRows.push(caseStudyRow);
           caseStudyRow = [];
         } else {

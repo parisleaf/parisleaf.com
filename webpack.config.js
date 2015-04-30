@@ -3,7 +3,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/client/app',
+  entry: './src/client',
   output: {
     path: __dirname + '/public/js/',
     filename: 'app.min.js',
@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-          warnings: false
+        warnings: false
       }
     }),
   ],
@@ -21,7 +21,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loaders: ['babel-loader?experimental&externalHelpers'], exclude: /node_modules/ }
+      { test: /\.jsx?$/, loaders: ['babel-loader?stage=0&externalHelpers'], exclude: /node_modules/ }
     ]
   }
 };

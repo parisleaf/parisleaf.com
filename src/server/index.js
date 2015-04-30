@@ -1,17 +1,13 @@
-'use strict';
-
 // Initialization
 require('../shared/init');
-import sourceMapSupport from 'source-map-support';
+const dotenv = require('dotenv');
+dotenv.load();
+const app = require('./app');
+
+const sourceMapSupport = require('source-map-support');
 sourceMapSupport.install();
 
-// Load environment variables
-import dotenv from 'dotenv';
-dotenv.load();
-
-import app from './app';
-
-import bunyan from 'bunyan';
+const bunyan = require('bunyan');
 
 let log = bunyan.createLogger({
   name: 'parisleaf',
@@ -32,7 +28,7 @@ app.on('error', (e) => {
 });
 
 // Set up nodemailer
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 nodemailer.createTransport({
   service: 'gmail',

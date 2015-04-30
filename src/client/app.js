@@ -1,9 +1,3 @@
-'use strict';
-
-// Initialization
-require('../shared/init');
-import './init';
-
 import MediaMixin from 'react-media-mixin';
 
 let initialMediaStateEl = document.getElementById('initial-media-state');

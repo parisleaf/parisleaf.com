@@ -77,7 +77,7 @@ let BlogHandler = React.createClass({
 
   updateQuery() {
     let RouterStore = this.context.flux.getStore('router');
-    let { query, pathname } = RouterStore.getState();
+    let { query, pathname } = RouterStore.state;
 
     if (pathname !== '/blog') return;
 

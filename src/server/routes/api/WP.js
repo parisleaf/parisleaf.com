@@ -9,6 +9,8 @@ import request from 'superagent';
 let wp;
 
 
+console.log(process.env.WP_ENDPOINT);
+
 if (process.env.NODE_ENV !== 'test') {
   wp = new WP({
     endpoint: process.env.WP_ENDPOINT,
