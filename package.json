@@ -7,6 +7,9 @@
     "test": "make fast-js && make test",
     "start": "make fast-build && node lib/server/index.js"
   },
+  "engines": {
+    "iojs": "1.2.x"
+  },
   "author": "Andrew Clark <andrew@parisleaf.com>",
   "repository": "parisleaf/parisleaf.com",
   "homepage": "https://github.com/parisleaf/parisleaf.com",
