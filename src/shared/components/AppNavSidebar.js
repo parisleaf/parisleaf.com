@@ -110,7 +110,7 @@ let AppNavSidebar = React.createClass({
     let { visibility } = this.props;
 
     let _style = Object.assign({
-      transform: `translateX(${(1 - visibility) * -100}%)`,
+      transform: `translateX(${(1 - visibility) * 100}%)`,
       visibility: visibility > 0 ? 'visible' : 'hidden',
     }, style._);
 

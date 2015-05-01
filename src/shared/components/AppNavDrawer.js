@@ -137,15 +137,15 @@ let AppNavDrawer = React.createClass({
     return (
       <div style={_style}>
         <div style={style.container} className="AppNavDrawer">
-          <AppNavSidebar
-            primaryMenu={this.props.primaryMenu}
-            secondaryMenu={this.props.secondaryMenu}
-            visibility={sidebarVisibility}
-          />
           <AppNavContent
             tweets={this.props.tweets}
             visibility={contentVisibility}
             options={this.props.options}
+          />
+          <AppNavSidebar
+            primaryMenu={this.props.primaryMenu}
+            secondaryMenu={this.props.secondaryMenu}
+            visibility={sidebarVisibility}
           />
         </div>
       </div>

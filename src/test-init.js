@@ -2,20 +2,20 @@
 
 require('./shared/init');
 
-import path from 'path'
-import isNode from 'detect-node';
+const path = require('path');
+const isNode = require('detect-node');
 
 process.env.WP_ENDPOINT = 'http://wordpress.test/wp-json';
 
-import sourceMapSupport from 'source-map-support';
+const sourceMapSupport = require('source-map-support');
 if (isNode) sourceMapSupport.install();
 
-import chai from 'chai';
+const chai = require('chai');
 
 global.expect = chai.expect;
 
-import 'co-mocha';
-import chaiAsPromised from 'chai-as-promised';
+require('co-mocha');
+const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
 if (!process.env.ROOT_URL) {
@@ -25,5 +25,5 @@ if (!process.env.ROOT_URL) {
 /**
  * Start server
  */
-import app from './server/app';
+const app = require('./server/app');
 global.server = app.listen(process.env.PORT || 4000);
