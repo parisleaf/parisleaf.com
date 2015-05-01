@@ -5,7 +5,8 @@
   "main": "lib/server/index.js",
   "scripts": {
     "test": "make fast-js && make test",
-    "start": "make fast-build && node lib/server/index.js"
+    "prestart": "make fast-build && make test",
+    "start": "node lib/server/index.js"
   },
   "engines": {
     "iojs": "1.2.x"
