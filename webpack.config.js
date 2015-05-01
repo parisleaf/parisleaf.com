@@ -9,13 +9,13 @@ module.exports = {
     filename: 'app.min.js',
     publicPath: '/js/'
   },
-  // plugins: [
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     compress: {
-  //       warnings: false
-  //     }
-  //   }),
-  // ],
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+  ],
   resolve: {
     extensions: ['', '.js']
   },
