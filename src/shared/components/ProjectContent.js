@@ -9,7 +9,7 @@ let ProjectContainer = React.createClass({
   render() {
     let { project } = this.props;
 
-    if (!project) return null;
+    if (!project) return <span />;
 
     let primaryColor = getPrimaryColor(project);
 

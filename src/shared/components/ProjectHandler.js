@@ -46,7 +46,7 @@ let SingleProject = React.createClass({
   render() {
     let { project } = this.props;
 
-    if (!project) return null;
+    if (!project) return <span />;
 
     return (
       <article>

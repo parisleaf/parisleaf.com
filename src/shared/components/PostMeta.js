@@ -44,7 +44,7 @@ let PostMeta = React.createClass({
   categoryList() {
     let categories = getTermNames(this.props.post, 'category');
 
-    if (!categories.length) return null;
+    if (!categories.length) return <span />;
 
     return (
       <span> from {categories.join(' ,')}</span>

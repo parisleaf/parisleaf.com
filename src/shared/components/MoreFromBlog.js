@@ -20,10 +20,10 @@ let MoreFromBlog = React.createClass({
   cards() {
     let posts = this.props.posts;
 
-    if (!posts) return null;
+    if (!posts) return <span />;
 
     let cards = posts.toArray().map(function(post) {
-      if (!post) return null;
+      if (!post) return <span />;
 
       return(
         <div className="Blog-postContainer-item" key={post.get('id_str')}>

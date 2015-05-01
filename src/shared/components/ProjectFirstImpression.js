@@ -119,7 +119,7 @@ const ProjectServiceIcon = React.createClass({
 
     const iconName = iconMapping[slug];
 
-    if (!iconName) return null;
+    if (!iconName) return <span />;
 
     const fillColor = color('gray');
 

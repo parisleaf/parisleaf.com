@@ -67,7 +67,7 @@ let AppNavSidebar = React.createClass({
   primaryMenu() {
     let menu = this.props.primaryMenu;
 
-    if (!menu) return null;
+    if (!menu) return <span />;
 
     let items = menu.get('items').map(item =>
       <li key={item.get('ID')}>
@@ -88,7 +88,7 @@ let AppNavSidebar = React.createClass({
   secondaryMenu() {
     let menu = this.props.secondaryMenu;
 
-    if (!menu) return null;
+    if (!menu) return <span />;
 
     let items = menu.get('items').map(item =>
       <li key={item.get('ID')}>

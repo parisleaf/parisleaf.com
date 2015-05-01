@@ -71,7 +71,7 @@ let ProjectSlide = React.createClass({
   },
 
   footer() {
-    if (!this.state.media.s) return null;
+    if (!this.state.media.s) return <span />;
 
     let url = nestedGet(this.props.project, 'link');
 

@@ -18,7 +18,7 @@ const ProjectCard = React.createClass({
   render() {
     const { project, className, ...props } = this.props;
 
-    if (!project) return null;
+    if (!project) return <span />;
 
     const tagline = nestedGet(project, 'meta', 'tagline');
 
