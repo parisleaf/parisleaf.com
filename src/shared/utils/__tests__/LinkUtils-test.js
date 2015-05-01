@@ -80,6 +80,9 @@ describe('LinkUtils', () => {
       expect(isLocalUrl('https://google.com')).to.be.false;
     });
 
+    it('returns false for mailto', () => {
+      expect(isLocalUrl('mailto:info@parisleaf.com')).to.be.false;
+    });
   });
 
   describe('.isWPUrl()', () => {
@@ -118,6 +121,10 @@ describe('LinkUtils', () => {
       expect(removeHost('/foo?bar=baz')).to.equal('/foo?bar=baz');
       expect(removeHost('foo?bar=baz')).to.equal('foo?bar=baz');
     });
+
+    it('returns mailto as-is', () => {
+      expect(removeHost('mailto:info@parisleaf.com')).to.equal('mailto:info@parisleaf.com');
+    })
   });
 
   describe('.removeTrailingSlash', () => {
@@ -151,6 +158,10 @@ describe('LinkUtils', () => {
       expect(normalizeUrl('/foo/bar')).to.equal('/foo/bar');
       expect(normalizeUrl(`${rootUrl()}/foo/bar/`)).to.equal('/foo/bar');
       expect(normalizeUrl('http://google.com/')).to.equal('http://google.com/');
+    });
+
+    it('returns mailto as-is', () => {
+      expect(normalizeUrl('mailto:info@parisleaf.com')).to.equal('mailto:info@parisleaf.com');
     });
   });
 

@@ -85,11 +85,12 @@ export function removeHost(url) {
     return url;
   }
 
-  return urlObj.path;
+
+  return urlObj.path || url;
 }
 
 /**
-  * If url has a trailing slash, then remove it. 
+  * If url has a trailing slash, then remove it.
   * @param {string} url
   * @return {string} url without trailing slash
   */
