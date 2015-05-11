@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { List } from 'immutable';
 import ViewportContainer from 'react-viewport';
 import SiteContainer from './SiteContainer';
 import Header from './Header';
@@ -80,7 +81,7 @@ let ProjectFirstImpression = React.createClass({
 
   serviceMeta() {
     const { project } = this.props;
-    const services = nestedGet(project, 'terms', 'project_service');
+    const services = nestedGet(project, 'terms', 'project_service') || new List();
 
     const icons = services
       .map(
