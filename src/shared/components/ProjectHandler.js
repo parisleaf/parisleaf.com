@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React, { Component } from 'react/addons';
 
 import { State } from 'react-router';
 import Flux from 'flummox/component';
@@ -7,6 +7,7 @@ import ProjectFirstImpression from './ProjectFirstImpression';
 import ProjectContent from './ProjectContent';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
+import Button from './Button';
 
 let ProjectHandler = React.createClass({
 
@@ -16,7 +17,10 @@ let ProjectHandler = React.createClass({
     routerWillRun({ state, flux }) {
       let ProjectActions = flux.getActions('projects');
 
-      return ProjectActions.getProjectBySlug(state.params.slug);
+      return Promise.all([
+        ProjectActions.getProjectBySlug(state.params.slug),
+        ProjectActions.getProjects(),
+      ]);
     },
 
     routerDidRun({ state, flux }) {
@@ -30,9 +34,15 @@ let ProjectHandler = React.createClass({
 
     return (
       <Flux key={slug} connectToStores={{
-        projects: store => ({
-          project: store.getProjectBySlug(slug)
-        })
+        projects: store => {
+          const project = store.getProjectBySlug(slug);
+
+          return {
+            project,
+            nextProject: store.getNextProject(project),
+            previousProject: store.getPreviousProject(project)
+          }
+        }
       }}>
         <SingleProject />
       </Flux>
@@ -44,7 +54,7 @@ let ProjectHandler = React.createClass({
 
 let SingleProject = React.createClass({
   render() {
-    let { project } = this.props;
+    let { project, nextProject, previousProject } = this.props;
 
     if (!project) return <span />;
 
@@ -52,10 +62,23 @@ let SingleProject = React.createClass({
       <article>
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
+        <NextPreviousProjects next={nextProject} previous={previousProject} />
       </article>
     );
   }
 });
+
+class NextPreviousProjects extends Component {
+  render() {
+    const { next, previous } = this.props;
+
+    return (
+      <section>
+        <
+      </section>
+    );
+  }
+}
 
 
 export default ProjectHandler;

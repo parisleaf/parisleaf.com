@@ -51,17 +51,17 @@ export default class ProjectStore extends ImmutableStore {
   }
 
   getNextProject(project) {
-    const { projects } = this.state;
+    const projects = this.state.projects.toList();
     const i = projects.indexOf(project);
-    const next = i === projects.size() ? 0 : i + 1;
+    const next = i === projects.size - 1 ? 0 : i + 1;
 
     return projects.get(next);
   }
 
   getPreviousProject(project) {
-    const { projects } = this.state;
+    const projects = this.state.projects.toList();
     const i = projects.indexOf(project);
-    const previous = i === 0 ? projects.size() : i - 1;
+    const previous = i === 0 ? projects.size - 1 : i - 1;
 
     return projects.get(previous);
   }
