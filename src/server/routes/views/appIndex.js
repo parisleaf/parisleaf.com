@@ -47,9 +47,22 @@ export default function(app) {
     }
   });
 
-    let { Handler, state } = yield new Promise((resolve, reject) => {
-      router.run((Handler, state) => resolve({ Handler, state }));
-    });
+    let runResult;
+
+    try {
+      runResult = yield new Promise((resolve, reject) => {
+        router.run((Handler, state) => resolve({ Handler, state }));
+      });
+
+    } catch (error) {
+      if (error.redirect) {
+        return this.redirect(error.redirect);
+      }
+
+      throw error;
+    }
+
+    const { Handler, state } = runResult;
 
     let flux = new Flux();
     let RouterActions = flux.getActions('router');
@@ -75,19 +88,11 @@ export default function(app) {
 
     let appString;
 
-    try {
-      appString = React.renderToString(
-        <FluxComponent flux={flux}>
-          <Handler />
-        </FluxComponent>
-      );
-    } catch (error) {
-      if (error.redirect) {
-        return this.redirect(error.redirect);
-      }
-
-      throw error;
-    }
+    appString = React.renderToString(
+      <FluxComponent flux={flux}>
+        <Handler />
+      </FluxComponent>
+    );
 
     let title = DocumentTitle.rewind();
     NavBarColor.dispose();

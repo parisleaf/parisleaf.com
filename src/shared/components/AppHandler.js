@@ -18,6 +18,14 @@ let App = React.createClass({
   mixins: [State, MediaMixin],
 
   statics: {
+    willTransitionTo(transition) {
+      const { path } = transition;
+
+      if (path !== '/' && path.endsWith('/')) {
+        transition.redirect(path.substring(0, path.length - 1));
+      }
+    },
+
     routerWillRun({ state, flux }) {
       let AppActions = flux.getActions('app');
       let MenuActions = flux.getActions('menus');
