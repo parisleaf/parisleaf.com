@@ -8,6 +8,10 @@ import ProjectContent from './ProjectContent';
 import Header from './Header';
 import { nestedGet } from '../utils/ImmutableUtils';
 import Button from './Button';
+import AppLink from './AppLink';
+import Metadata from './Metadata';
+import SiteContainer from './SiteContainer';
+import { color } from '../theme';
 
 let ProjectHandler = React.createClass({
 
@@ -73,8 +77,17 @@ class NextPreviousProjects extends Component {
     const { next, previous } = this.props;
 
     return (
-      <section>
-        <
+      <section className="NextPrevious">
+        <SiteContainer>
+          <AppLink to="/work" className="NextPrevious--left BorderBlockButton">
+            <Header level={3} className="BorderBlockButton-title">See All Work</Header>
+            <Metadata>Back to the portfolio</Metadata>
+          </AppLink>
+          <AppLink to={`/work/${next.get('slug')}`} className="NextPrevious--right BorderBlockButton">
+            <Header level={3} className="BorderBlockButton-title">Next Project</Header>
+            <Metadata>{next.get('title')}</Metadata>
+          </AppLink>
+        </SiteContainer>
       </section>
     );
   }
