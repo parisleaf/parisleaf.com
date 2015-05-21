@@ -1,0 +1,14 @@
+.NextPrevious {
+  @include clearfix-contain;
+  margin: rhythm(2) 0;
+
+  @include bp('m') {
+    &--left {
+      @include span(first 4 of 8);
+    }
+
+    &--right {
+      @include span(last 4 of 8);
+    }
+  }
+}
