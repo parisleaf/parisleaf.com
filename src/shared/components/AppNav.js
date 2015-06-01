@@ -149,6 +149,7 @@ let AppNav = React.createClass({
       <div onClick={this.onClick} style={style.wrapper}>
         <nav className="AppNav" style={_style}>
           <div className="AppNav-bar" style={barStyle}>
+          laksjdflkadjdflkasjdkf
             <div className="AppNav-bar-logo" id="logo">
               <Button component={AppLink} onClick={AppActions.closeNav} to="/">
                 <SvgIcon name="logo" style={logoIconStyle} />
