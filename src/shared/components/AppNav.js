@@ -179,5 +179,5 @@ let AppNav = React.createClass({
   }
 
 });
-// comment
+
 export default AppNav;
