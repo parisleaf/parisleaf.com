@@ -25,7 +25,7 @@
     "detect-node": "~2.0.3",
     "dotenv": "~0.4.0",
     "fastclick": "~1.0.6",
-    "flummox": "~4.0.0-alpha",
+    "flummox": "~3.5.2",
     "form-serialize": "~0.6.0",
     "ftellipsis": "~0.2.3",
     "headroom.js": "WickyNilliams/headroom.js",
@@ -79,6 +79,7 @@
     "mocha": "~2.1.0",
     "moment": "~2.9.0",
     "nock": "~0.56.0",
+    "node-libs-browser": "^0.5.2",
     "node-sass": "~3.0.0",
     "react-hot-loader": "~1.1.5",
     "react-styleguide": "0.0.4",
@@ -94,7 +95,7 @@
     "watch": "~0.13.0",
     "watchify": "~2.2.1",
     "webdriverio": "~2.4.2",
-    "webpack": "~1.5.3",
+    "webpack": "^1.10.1",
     "webpack-dev-server": "~1.7.0"
   }
 }
