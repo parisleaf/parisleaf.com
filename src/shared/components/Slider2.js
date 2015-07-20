@@ -99,6 +99,4 @@ let Slider = React.createClass({
 
 });
 
-function noop() {}
-
 export default Slider;
