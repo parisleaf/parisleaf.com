@@ -7,7 +7,7 @@ import PageHeader from './PageHeader';
 import SiteContainer from './SiteContainer';
 import Metadata from './Metadata';
 import Button from './Button';
-import SuitCSS from 'react-suitcss'
+import SuitCSS from 'react-suitcss';
 import FlexContainer from './FlexContainer';
 import FlexItem from './FlexItem';
 import Alert from './Alert';
@@ -214,7 +214,6 @@ const FlexRow = React.createClass({
 });
 
 export default ContactHandler;
-
 
 const FuncSubject = {
   create() {
