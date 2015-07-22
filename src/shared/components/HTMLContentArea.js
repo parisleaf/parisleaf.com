@@ -64,8 +64,11 @@ let HTMLContentArea = React.createClass({
       <span>
         <style>{`
           .HTMLContentArea .CopyContainer--primary {
-            background-color: ${primaryColor || 'none'};
-            color: ${primaryTextColor}
+            background-color: ${primaryColor || 'none'} !important;
+            color: ${primaryTextColor} !important
+          }
+          .HTMLContentArea .CopyContainer--primary p {
+            color: ${primaryTextColor} !important
           }
         `}</style>
         <SuitCSS
