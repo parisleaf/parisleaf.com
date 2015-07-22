@@ -7,6 +7,18 @@
 .Blockquote
   margin-bottom: rhythm(2)
 
+  +bp(s)
+    margin-left: rhythm(-2)
+    margin-right: rhythm(-2)
+
+  +bp(l)
+    margin-left: rhythm(-4)
+    margin-right: rhythm(-4)
+
+  +bp(xxl)
+    margin-left: rhythm(-6)
+    margin-right: rhythm(-6)
+
   &-content
     @include font-size('h2')
     @include font-family('vollkorn')
@@ -16,14 +28,14 @@
     position: relative
     margin: 0
 
-    &:before
-      content: "\201C"
-      color: theme-color(gray)
-      font-size: rhythm(5)
-      position: absolute
-      right: unquote("calc(100% + #{rhythm(1/2)})")
-      top: -0.15em
-      font-style: normal
+    // &:before
+    //   content: "\201C"
+    //   color: theme-color(gray)
+    //   font-size: rhythm(5)
+    //   position: absolute
+    //   right: unquote("calc(100% + #{rhythm(1/2)})")
+    //   top: -0.15em
+    //   font-style: normal
 
   &-footer
     @include font-size('h4')

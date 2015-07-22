@@ -75,7 +75,7 @@ let App = React.createClass({
 
     return (
       <div className="App">
-        <DocumentTitle title="Parisleaf" />
+        <DocumentTitle title="Parisleaf | Florida Branding & Digital Studio" />
         {appNav}
         <AppOverlay />
         <div>

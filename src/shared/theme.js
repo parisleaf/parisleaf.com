@@ -17,7 +17,7 @@ var colors = {
 
   blue:         '#146cce',
   lightBlue:    '#58a8fd',
-  smoke:        '#6c6846',
+  smoke:        '#6b6b6b',
   green:        '#89f7bf',
   aqua:         '#2bd5d3',
   pink:         '#fb5382',
