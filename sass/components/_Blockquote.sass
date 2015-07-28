@@ -5,7 +5,9 @@
 //   </blockquote>
 
 .Blockquote
-  margin-bottom: rhythm(2)
+  margin-top: rhythm(3)
+  margin-bottom: rhythm(3)
+  text-align: center
 
   +bp(s)
     margin-left: rhythm(-1)
@@ -20,11 +22,10 @@
     margin-right: rhythm(-5)
 
   &-content
-    @include font-size('h2')
+    @include font-size('h1')
     @include font-family('vollkorn')
     padding: rhythm(1) 0
     font-style: italic
-    font-weight: bold
     position: relative
     margin: 0
 
@@ -38,9 +39,8 @@
     //   font-style: normal
 
   &-footer
-    @include font-size('h4')
-    @include font-family('vollkorn')
-    font-style: italic
+    @include font-size('h5')
+    @include font-family('alrightLight')
     color: theme-color(gray)
     padding-left: rhythm(1)
     &:before
