@@ -21,27 +21,26 @@
     margin-left: rhythm(-5)
     margin-right: rhythm(-5)
 
-  &-content
-    @include font-size('h1')
-    @include font-family('vollkorn')
-    padding: rhythm(1) 0
-    font-style: italic
-    position: relative
-    margin: 0
+  &-icon
+    display: block
+    vertical-align: middle
+    width: rhythm(2)
+    height: rhythm(2)
+    margin: 0 auto rhythm(1.5)
+    fill: theme-color(medGray)
 
-    // &:before
-    //   content: "\201C"
-    //   color: theme-color(gray)
-    //   font-size: rhythm(5)
-    //   position: absolute
-    //   right: unquote("calc(100% + #{rhythm(1/2)})")
-    //   top: -0.15em
-    //   font-style: normal
+  &-content
+    @include font-size('h2')
+    @include font-family('vollkorn')
+    position: relative
+    margin: 0 0 rhythm(1.5)
+    font-style: italic
+    line-height: 1.75
 
   &-footer
     @include font-size('h5')
     @include font-family('alrightLight')
-    color: theme-color(gray)
+    color: theme-color(medGray)
     padding-left: rhythm(1)
     &:before
       content: "\2014 \2002"

@@ -1,13 +1,22 @@
 .CopyContainer
   +clearfix-contain
+  margin: 0 auto
+
+  +bp(m)
+    width: 480px
+
+  +bp(l)
+    width: 520px
+
+  +bp(xl)
+    width: 640px
 
   &-inner, &-imageSplit-text-inner
     @extend .SiteContainer
-    padding: rhythm(1)
+    padding: 0
 
   &-imageSplit
     +bp(m)
-
       display: flex
 
       &-text, &-image
@@ -22,6 +31,3 @@
     &-image
       img
         display: block
-
-  p
-    color: theme-color(darkGray)

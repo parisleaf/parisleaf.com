@@ -47,7 +47,7 @@ let PostFirstImpression = React.createClass({
           <BorderContainer borderColor={getCardColor(post)}>
             <Header level={1} dangerouslySetInnerHTML={{ __html: title || post.get('title') }} />
             {subtitle && <Header level={2} dangerouslySetInnerHTML={{ __html: subtitle }} />}
-            {!noMeta && <PostMeta post={post} />}
+            {!noMeta && <PostMeta post={post} customClass="Metadata--post" />}
           </BorderContainer>
         </SiteContainer>
       </ViewportContainer>

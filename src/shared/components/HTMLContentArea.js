@@ -6,6 +6,7 @@ import chroma from 'chroma-js';
 import { color } from '../theme';
 import PLSlider from './PLSlider';
 import Video from './Video';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let HTMLContentArea = React.createClass({
 

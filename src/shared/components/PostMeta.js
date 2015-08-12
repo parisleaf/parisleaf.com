@@ -15,12 +15,12 @@ let PostMeta = React.createClass({
   render() {
     let { post } = this.props;
 
-    let byline = `By ${nestedGet(post, 'author', 'name')}`
+    let byline = `By ${nestedGet(post, 'author', 'name')}`;
     let dateline = `on ${this.dateString()}`;
     let categoryList = this.categoryList();
 
     let classes = ['Metadata'];
-
+    if (this.props.customClass) classes.push(this.props.customClass);
     if (this.props.hover) classes.push('Metadata--noColor');
 
     return (

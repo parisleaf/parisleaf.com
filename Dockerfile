@@ -2,7 +2,6 @@ FROM ubuntu:14.04
 
 RUN apt-get update
 RUN apt-get install -y build-essential curl git
-RUN apt-get install nano
 
 # Install nvm
 RUN git clone https://github.com/creationix/nvm.git /.nvm

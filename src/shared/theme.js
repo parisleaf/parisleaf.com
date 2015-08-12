@@ -13,6 +13,7 @@ var colors = {
   gray:         '#8b919b',
   yellow:       '#ffce2e',
   lightGray:    '#e2eaf2',
+  medGray:      '#c1c9d1',
   darkGray:     '#343844',
 
   blue:         '#146cce',
@@ -77,11 +78,11 @@ export function modularScale(n) {
 }
 
 export var fontSizes = {
-  h1: modularScale(7),
-  h2: modularScale(6),
-  h3: modularScale(5),
+  h1: modularScale(8),
+  h2: modularScale(7),
+  h3: modularScale(6),
   h4: modularScale(5),
-  h5: modularScale(3),
+  h5: modularScale(4),
   h6: modularScale(3),
 
   text: '1rem',
