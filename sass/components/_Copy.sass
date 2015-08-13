@@ -1,70 +1,13 @@
 .HTMLContentArea
-  color: theme-color(smoke)
 
   h1
     @extend .Header--1
-    line-height: 1.5
   h2
     @extend .Header--2
-    +font-family(text)
-    +font-size(h1)
-    width: 100%
-    margin: rhythm(3) auto rhythm(1.5)
-    +bp(m)
-      width: 150%
-      margin-left: -25%
-
-    &:first-of-type
-      margin-top: rhythm(1.5)
   h3
     @extend .Header--3
-    +font-family(text)
-
   h4
     @extend .Header--4
-    +font-family(text)
-    margin: rhythm(1.5) auto rhythm(0.75)
-
-  h5
-    @extend .Header--5
-    +font-family(header)
-    margin: rhythm(1.5) auto rhythm(0.75)
-
-  h6
-    @extend .Header--6
-    +font-family(header)
-    margin: rhythm(1.5) auto rhythm(0.75)
-
-  h1, h2, h3, h4, h5, h6
-    color: theme-color(darkGray)
-
-  a
-    color: theme-color(smoke)
-    padding-bottom: 3px
-    text-decoration: none
-    border-bottom: 3px solid theme-color(medGray)
-    transition: all 250ms ease-in-out
-
-  a:hover
-    color: theme-color(medGray)
-    border-color: transparent
-
-  li
-    margin-top: 1em
-    margin-bottom: 1em
-    list-style: none
-
-    &:before
-      content: '\2022'
-      display: block
-      position: relative
-      max-width: 0
-      max-height: 0
-      left: -40px
-      top: 0
-      color: theme-color(medGray)
-      font-size: 32px
-      line-height: 26px
 
   .lede
     +font-family(vollkorn)

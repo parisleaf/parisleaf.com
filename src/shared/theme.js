@@ -78,13 +78,13 @@ export function modularScale(n) {
 }
 
 export var fontSizes = {
-  h1: modularScale(8),
-  h2: modularScale(7),
-  h3: modularScale(6),
+  title: modularScale(8),
+  h1: modularScale(7),
+  h2: modularScale(6),
+  h3: modularScale(5),
   h4: modularScale(5),
-  h5: modularScale(4),
+  h5: modularScale(3),
   h6: modularScale(3),
-
   text: '1rem',
   small: modularScale(2),
   ms: scale,
@@ -96,7 +96,6 @@ export var fontSizes = {
 export function fontSize(name) {
   return fontSizes[name];
 };
-
 
 export var zIndices = {
   AppNav:              9999,
