@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 import { getPrimaryColor } from '../utils/ProjectUtils';
+import { rhythm } from '../theme';
 
 let ProjectContainer = React.createClass({
 
@@ -14,12 +16,15 @@ let ProjectContainer = React.createClass({
     let primaryColor = getPrimaryColor(project);
 
     return (
-      <div>
+      <SiteContainer>
         <HTMLContentArea
           primaryColor={primaryColor}
           html={project.get('content')}
+          style={{
+            padding: `${rhythm(2)} 0`
+          }}
         />
-      </div>
+      </SiteContainer>
     );
   },
 

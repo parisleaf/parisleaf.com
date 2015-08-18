@@ -12,10 +12,11 @@ let HTMLContentArea = React.createClass({
 
   renderSliders() {
     // query selector
-    let slidersObject = document.querySelectorAll('.Slider'); // Scoped correctly?
+    let slidersObject = document.querySelectorAll('.Slide-this'); // Scoped correctly?
 
     // scope it within this dom node only // TODO
     let sliders = Array.from(slidersObject);
+
     // loop thru sliders
     sliders.map(function(slider) {
       let images = Array.from(slider.querySelectorAll(':scope > img'));

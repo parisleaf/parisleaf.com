@@ -184,5 +184,4 @@ let BlogCardExcerpt = React.createClass({
 
 });
 
-
 export default BlogCard;
