@@ -46,9 +46,19 @@ let HTMLContentArea = React.createClass({
 
   },
 
+  cleanCaptions() {
+    let captions = Array.from(document.querySelectorAll('.wp-caption'));
+    // for each
+    captions.map(function(caption) {
+      caption.removeAttribute("style");
+    });
+
+  },
+
   componentDidMount() {
     this.renderSliders();
     this.renderVideos();
+    this.cleanCaptions();
   },
 
   render() {

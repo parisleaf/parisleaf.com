@@ -1,5 +1,4 @@
 .HTMLContentArea
-
   h1
     @extend .Header--1
   h2
@@ -13,29 +12,27 @@
     +font-family(vollkorn)
     font-size: 1.5em
 
-  .alignleft
+  .alignleft, .alignright, .aligncenter, .alignnone
+    position: relative
+    display: block
     margin-left: auto
     margin-right: auto
+    margin-top: rhythm(1.5)
+    margin-bottom: rhythm(1.5)
 
+  .alignleft
     +bp(m)
       clear: left
       float: left
       margin-right: rhythm(1.5)
-      margin-left: rhythm(-1.5)
 
   .alignright
-    margin-left: auto
-    margin-right: auto
-
     +bp(m)
       clear: right
       float: right
       margin-left: rhythm(1.5)
-      margin-right: rhythm(-1.5)
 
   .alignleft, .alignright
-    display: block
-
     +bp(m)
       width: span(4 of 8)
       height: auto
@@ -44,15 +41,25 @@
       width: span(4 of 12)
       height: auto
 
-  .alignleft, .alignright, .aligncenter
-    margin-top: rhythm(1)
-    margin-bottom: rhythm(1)
-
   .aligncenter
-    display: block
-    margin: rhythm(1.5) auto
-    position: relative
-
     +bp(m)
       width: 150%
       margin-left: -25%
+
+  .alignnone
+    margin-left: 0
+    margin-right: 0
+
+  .wp-caption img
+      display: block
+
+  .wp-caption-text
+    display: inline-block
+    margin-bottom: 0
+    color: theme-color(gray)
+    +font-family(vollkorn)
+    +font-size(small)
+    font-style: italic
+
+    +bp(m)
+      +font-size(text)
