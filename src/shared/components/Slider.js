@@ -1,24 +1,18 @@
-/**
- * Slider
- */
-
 'use strict';
 
 import React from 'react';
 
 var Slider = React.createClass({
   getInitialState: function() {
-    return {
-
-      // Index of current slide, starting from 1
-      currentSlide: 1,
-    };
+    return { currentSlide: 1 };
   },
 
   getDefaultProps: function() {
-    return {
-      overflow: 'hidden',
-    };
+    return { overflow: 'hidden' };
+  },
+
+  handleDotClick: function(setSlide) {
+    this.setState({ currentSlide: setSlide });
   },
 
   render: function() {
@@ -33,9 +27,14 @@ var Slider = React.createClass({
     };
 
     return (
-      <div className={this.props.className} style={style}>
-        <div ref="slideContainer" style={containerStyle}>
-          {this.slides()}
+      <div>
+        <div className={this.props.className} style={style}>
+          <div ref="slideContainer" style={containerStyle}>
+            {this.slides()}
+          </div>
+        </div>
+        <div className="PLSlider-dots">
+          {this.dots()}
         </div>
       </div>
     );
@@ -93,9 +92,24 @@ var Slider = React.createClass({
 
     return React.Children.map(this.props.children, function(child) {
       var key = child.props.key;
-
       return (
         <Slide key={key} width={width}>{child}</Slide>
+      );
+    });
+  },
+
+  dots: function() {
+    var setSlide = 0;
+    var parentThis = this;
+    return React.Children.map(this.props.children, function(child) {
+      var key = child.props.key;
+      setSlide += 1;
+      return (
+        <Dot
+          key={key}
+          className={setSlide === parentThis.state.currentSlide ? "active" : ""}
+          setSlide={setSlide}
+          whenItemClicked={parentThis.handleDotClick} />
       );
     });
   },
@@ -120,6 +134,16 @@ var Slide = React.createClass({
     );
   }
 
+});
+
+var Dot = React.createClass({
+  handleClick: function() {
+    this.props.whenItemClicked(this.props.setSlide);
+  },
+
+  render: function() {
+    return <button className={'PLSlider-dot ' + this.props.className} onClick={this.handleClick}></button>
+  }
 });
 
 module.exports = Slider;

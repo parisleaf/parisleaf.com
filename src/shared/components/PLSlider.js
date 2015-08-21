@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Slider from './Slider';
+import Dots from './SliderDots';
 
 // Just a wrapper for the normal Slider but add click, swipe, etc
 
@@ -16,14 +17,16 @@ let PLSlider = React.createClass({
   },
 
   onTouchStart(event) {
+
   },
+
   onTouchMove(event) {
     if(!firstTouch)
       firstTouch = event.touches[0];
 
     lastTouch = event.touches[0];
-
   },
+
   onTouchEnd(event) {
     let slider = this.refs.slider;
 
@@ -39,9 +42,9 @@ let PLSlider = React.createClass({
 
   render() {
     return(
-      <div className="PLSlider" onClick={this.nextSlide} style={{height:'100%'}} onTouchStart ={this.onTouchStart} onTouchMove={this.onTouchMove}  onTouchEnd={this.onTouchEnd} >
+      <div onClick={this.nextSlide} className="PLSlider" style={{height:'100%'}} onTouchStart ={this.onTouchStart} onTouchMove={this.onTouchMove}  onTouchEnd={this.onTouchEnd} >
         <Slider ref="slider" className="Slider">
-            {this.props.children}
+          {this.props.children}
         </Slider>
       </div>
     );
