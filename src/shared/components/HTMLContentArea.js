@@ -43,7 +43,6 @@ let HTMLContentArea = React.createClass({
         video
       );
     });
-
   },
 
   cleanCaptions() {
@@ -52,13 +51,23 @@ let HTMLContentArea = React.createClass({
     captions.map(function(caption) {
       caption.removeAttribute("style");
     });
+  },
 
+  cleanImages() {
+    let images = Array.from(document.querySelectorAll('img.aligncenter'));
+    // for each
+    images.map(function(image) {
+      let imageParent = image.parentNode;
+      imageParent.parentNode.insertBefore(image, imageParent.nextSibling);
+      imageParent.parentNode.removeChild(imageParent);
+    });
   },
 
   componentDidMount() {
     this.renderSliders();
     this.renderVideos();
     this.cleanCaptions();
+    this.cleanImages();
   },
 
   render() {

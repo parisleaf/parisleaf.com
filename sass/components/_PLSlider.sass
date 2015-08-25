@@ -5,9 +5,16 @@
 
   &-dots
     position: absolute
-    left: 100%
     top: 0
+    right: 0
+    width: 37.125px
+    padding-top: 8px
     text-align: center
+
+    +bp(m)
+      left: 100%
+      right: auto
+      width: 49.5px
 
   &-dot
     display: block

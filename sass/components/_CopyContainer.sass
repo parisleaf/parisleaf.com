@@ -1,3 +1,5 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
+
 .CopyContainer
   +clearfix-contain
   margin: 0 auto
@@ -25,8 +27,6 @@
       width: 150%
       margin-left: -25%
 
-    &:first-of-type
-      margin-top: rhythm(1.5)
   h3
     +font-family(text)
 
@@ -57,7 +57,7 @@
   a:hover
     color: theme-color(medGray)
     border-color: transparent
-    
+
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
     color: theme-color(darkGray)
 
@@ -85,6 +85,22 @@
   &-inner, &-imageSplit-text-inner
     @extend .SiteContainer
     padding: 0
+
+    > h1, > h2, > h3, > h4, > h5, > h6, > p
+      padding-left: rhythm($site-container-rhythm-padding)
+      padding-right: rhythm($site-container-rhythm-padding)
+
+      +bp(s)
+        padding-left: 0
+        padding-right: 0
+
+    > ul
+      margin-left: rhythm($site-container-rhythm-padding)
+      margin-right: rhythm($site-container-rhythm-padding)
+
+      +bp(s)
+        margin-left: 0
+        margin-right: 0
 
   &-imageSplit
     +bp(m)

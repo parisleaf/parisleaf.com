@@ -93,5 +93,4 @@ class NextPreviousProjects extends Component {
   }
 }
 
-
 export default ProjectHandler;

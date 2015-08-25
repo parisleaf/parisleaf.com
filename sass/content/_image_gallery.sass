@@ -2,15 +2,37 @@
   width: 100%
   display: flex
   padding: 0
-  margin: rhythm(1.5) 0
+  margin: 0 0 rhythm(1.5)
   flex-flow: row wrap
   font-size: 0
+
+  +bp(m)
+    margin: 0 0 rhythm(1.5)
+    padding: 0 rhythm(1.5)
+
+  +bp(l)
+    margin: 0 0 rhythm(3)
+    padding: 0 rhythm(3)
 
   &-image
     flex: auto
     width: 100%
-    +bp(s)
+    padding: rhythm(1.5) 0 0
+
+    +bp(m)
       width: 50%
+
+      &:nth-child(odd)
+        padding-right: rhythm(0.75)
+      &:nth-child(even)
+        padding-left: rhythm(0.75)
+
+    +bp(l)
+      padding-top: rhythm(3)
+      &:nth-child(odd)
+        padding-right: rhythm(1.5)
+      &:nth-child(even)
+        padding-left: rhythm(1.5)
 
     > img
       width: 100%
