@@ -29,10 +29,19 @@ export function getServices(project) {
 }
 
 /**
- * Return the primary color for a project, with a fallback.
+ * Return the primary color for a project, with a fallback
  * @param {object} project
  * @returns {string} color
  */
 export function getPrimaryColor(project) {
   return nestedGet(project, 'meta', 'primary_color') || color('pink');
+}
+
+/**
+ * Return the featured image for a project
+ * @param {object} project
+ * @returns {string} source
+ */
+export function getFeaturedImage(project) {
+  return nestedGet(project, 'featured_image', 'source');
 }

@@ -2,12 +2,30 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
 
 .SiteContainer
   +container
-  padding: 0 rhythm($site-container-rhythm-padding)
+  position: relative
   width: 100%
+  padding: 0
 
-  @each $name, $breakpoint in map-get($theme, 'breakpoints')
-    @include bp($name)
-      max-width: $breakpoint * 1px
+  &--breakAll
+    @each $name, $breakpoint in map-get($theme, 'breakpoints')
+      @include bp($name)
+        max-width: $breakpoint * 1px
 
-  &--hang
-    padding: 0
+  &--breakAfterLarge
+    @each $name, $breakpoint in map-get($theme, 'breakpoints')
+      @if $name != 's' and $name != 'm' and $name != 'l'
+        @include bp($name)
+          max-width: $breakpoint * 1px
+
+  &--breakFixed
+    @each $name, $breakpoint in map-get($theme, 'breakpoints')
+      @if $name != 's' and $name != 'm'
+        +bp($name)
+          max-width: 960px
+
+  &--padAll
+    padding: 0 rhythm($site-container-rhythm-padding)
+
+  &--padAfterLarge
+    +bp(xl)
+      padding: 0 rhythm($site-container-rhythm-padding)

@@ -2,28 +2,13 @@
 
 import React from 'react';
 import ViewportContainer from 'react-viewport';
-import SiteContainer from './SiteContainer';
+
 import BorderContainer from './BorderContainer';
 import Header from './Header';
 import PostMeta from './PostMeta';
+import SiteContainer from './SiteContainer';
+
 import { getHeroImage, getCardColor } from '../utils/PostUtils';
-import { color, rhythm, navBarRhythmHeight } from '../theme';
-
-let style = {
-  _: {
-    height: '100vh',
-    marginTop: rhythm(-1 * navBarRhythmHeight),
-    paddingTop: rhythm(navBarRhythmHeight),
-    backgroundColor: color('darkGray'),
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-
-  content: {
-    width: '100%',
-    color: '#fff',
-  },
-};
 
 let PostFirstImpression = React.createClass({
 
@@ -37,19 +22,15 @@ let PostFirstImpression = React.createClass({
   render() {
     let { post, noMeta, image, title, subtitle } = this.props;
 
-    let _style = Object.assign({
-      backgroundImage: `url(${image || getHeroImage(post)})`,
-    }, style._);
-
     return (
-      <ViewportContainer className="PostFirstImpression" style={_style}>
-        <SiteContainer className="PostFirstImpression-content" style={style.content}>
-          <BorderContainer borderColor={getCardColor(post)}>
-            <Header level={1} dangerouslySetInnerHTML={{ __html: title || post.get('title') }} />
-            {subtitle && <Header level={2} dangerouslySetInnerHTML={{ __html: subtitle }} />}
+      <ViewportContainer className="FirstImpressionCover">
+        <div className="FirstImpressionCover-header" style={{backgroundImage: `url(${image || getHeroImage(post)})`}}>
+          <SiteContainer breakAll padAll>
+            <Header level={1} dangerouslySetInnerHTML={{ __html: title || post.get('title') }} bold />
+            {subtitle && <Header level={2} dangerouslySetInnerHTML={{ __html: subtitle }} vollkorn noMargin />}
             {!noMeta && <PostMeta post={post} customClass="Metadata--post" />}
-          </BorderContainer>
-        </SiteContainer>
+          </SiteContainer>
+        </div>
       </ViewportContainer>
     );
   }

@@ -6,6 +6,7 @@ import Immutable from 'immutable';
 import AppLink from './AppLink';
 import { rhythm, zIndex, navBarRhythmHeight, color } from '../theme';
 import Button from './Button';
+import SiteContainer from './SiteContainer';
 import SvgIcon from './SvgIcon';
 import AppNavDrawer from './AppNavDrawer';
 
@@ -26,10 +27,11 @@ let style = {
   },
 
   bar: {
+    // removethis
     padding: `0 ${rhythm(1)}`,
     width: '100%',
     transitionProperty: 'transform, -webkit-transform, background',
-    transitionDuration: '150ms',
+    transitionDuration: '250ms',
   },
 
   logoIcon: {
@@ -108,6 +110,7 @@ let AppNav = React.createClass({
 
     const el = this.getDOMNode();
     this.headroom = new Headroom(el, {
+      tolerance: 3,
       onPin: () => this.setState({ pinned: true }),
       onUnpin: () => this.setState({ pinned: false }),
       onTop: () => this.setState({ top: true }),
@@ -145,6 +148,7 @@ let AppNav = React.createClass({
 
     barStyle.WebkitTransform = barStyle.transform;
 
+    // <div className="AppNav-bar-inner"></div>
     return (
       <div onClick={this.onClick} style={style.wrapper}>
         <nav className="AppNav" style={_style}>

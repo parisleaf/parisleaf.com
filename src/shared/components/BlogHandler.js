@@ -1,18 +1,18 @@
 'use strict';
 
 import React from 'react';
-import { State, Link } from 'react-router';
 import Flux from 'flummox/component';
 import Immutable from 'immutable';
+import { State, Link } from 'react-router';
+
+import BlogCard from './BlogCard';
+import Button from './Button';
+import Header from './Header';
+import PageHeader from './PageHeader';
+import SiteContainer from './SiteContainer';
 
 import { filter as filterPosts, getCategoryColor } from '../utils/PostUtils';
 import { rhythm, color, fontFamily } from '../theme';
-
-import Header from './Header';
-import Button from './Button';
-import PageHeader from './PageHeader';
-import SiteContainer from './SiteContainer';
-import BlogCard from './BlogCard';
 
 let style = {
   postContainer: {
@@ -117,7 +117,7 @@ let BlogHandler = React.createClass({
           <BlogHeader />
         </Flux>
         <div style={postContainerStyle}>
-          <SiteContainer hang>
+          <SiteContainer breakAll padAll>
             {cards}
           </SiteContainer>
         </div>

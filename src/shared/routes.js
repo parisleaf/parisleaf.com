@@ -6,7 +6,7 @@ import AboutHandler from './components/AboutHandler';
 import TeamHandler from './components/TeamHandler';
 import PostHandler from './components/PostHandler';
 import PageHandler from './components/PageHandler';
-import PortfolioHandler from './components/PortfolioHandler';
+import WorkHandler from './components/WorkHandler';
 import BlogHandler from './components/BlogHandler';
 import ContactHandler from './components/ContactHandler';
 import ProjectHandler from './components/ProjectHandler';
@@ -14,7 +14,7 @@ import NotFoundHandler from './components/NotFoundHandler';
 
 const Routes = (
   <Route name="app" path="/" handler={AppHandler}>
-    <Route path="/work" name="work" handler={PortfolioHandler} />
+    <Route path="/work" name="work" handler={WorkHandler} />
     <Route path="/work/:slug" name="project" handler={ProjectHandler} />
     <Route path="/work/*/:slug" handler={ProjectHandler} />
     <Route path="/about" name="about" handler={AboutHandler} />

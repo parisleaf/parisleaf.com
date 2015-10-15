@@ -6,10 +6,9 @@ let Swiper = React.createClass({
 
   componentDidMount() {
     let _Swiper = require('swiper');
-
     let { children, ...props } = this.props;
-
-    this.swiper = new _Swiper(this.getDOMNode(), props);
+    
+    this.swiper = new _Swiper(this.refs.swiperContainer.getDOMNode(), props);
   },
 
   componentDidUpdate() {
@@ -25,21 +24,25 @@ let Swiper = React.createClass({
   },
 
   render() {
-    let { children, className, ...props } = this.props;
+    let { children, containerClassName, paginationClassName, ...props } = this.props;
+    let containerClasses = ['swiper-container'];
+    let paginationClasses = ['swiper-pagination'];
 
-    let slides = React.Children.map(this.props.children, child => {
+    if (containerClassName) containerClasses.push(containerClassName);
+    if (paginationClassName) paginationClasses.push(paginationClassName);
+
+    let slideMap = React.Children.map(this.props.children, child => {
       return <div className="swiper-slide">{child}</div>;
     });
 
-    let classes = ['swiper-container'];
-
-    if (className) classes.push(className);
-
     return (
-      <div {...props} className={classes.join(' ')}>
-        <div className="swiper-wrapper">
-          {slides}
+      <div style={{position: 'relative', height: '100%', width: '100%'}}>
+        <div {...props} ref="swiperContainer" className={containerClasses.join(' ')}>
+          <div className="swiper-wrapper">
+            {slideMap}
+          </div>
         </div>
+        <div className={paginationClasses.join(' ')}></div>
       </div>
     );
   }

@@ -12,5 +12,4 @@ export default function(app) {
   Styleguide(app);
   contact(app);
   appIndex(app);
-
 }

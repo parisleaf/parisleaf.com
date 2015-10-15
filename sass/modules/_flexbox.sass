@@ -4,9 +4,31 @@
   &--fullWidth
     width: 100%
 
+  &--collapse
+    flex-direction: column
+
+    +bp(m)
+      flex-direction: row
+
+  &--noWrap
+    flex-wrap: nowrap
+
 .FlexItem
   &--grow
     flex-grow: 1
+
+  &--span4
+    width: 100%
+
+    +bp(m)
+      width: span(4 of 12)
+
+  &--span8
+    width: 100%
+
+    +bp(m)
+      padding-left: rhythm(2)
+      width: span(8 of 12)
 
 .FlexRow
   flex-wrap: wrap

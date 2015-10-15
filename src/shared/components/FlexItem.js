@@ -9,7 +9,9 @@ const FlexItem = React.createClass({
         componentName="FlexItem"
         element="div"
         modifiers={[
-          'grow'
+          'grow',
+          'span4',
+          'span8'
         ]}
       />
     );

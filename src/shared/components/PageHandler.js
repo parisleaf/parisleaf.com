@@ -1,15 +1,18 @@
 'use strict';
 
 import React from 'react';
-import { State } from 'react-router';
 import Flux from 'flummox/component'
+import DocumentTitle from 'react-document-title';
+import { State } from 'react-router';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
 import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
+import NotFoundHandler from './NotFoundHandler';
 
-import { nestedGet } from '../utils/ImmutableUtils';
+import { color } from '../theme';
 
 let PageHandler = React.createClass({
 
@@ -46,7 +49,9 @@ let SinglePage = React.createClass({
 
     // TODO: better not-found message
     if (!page) {
-      return <div>Page not found</div>;
+      return (
+        <NotFoundHandler navColor={color('text')} />
+      );
     }
 
     let title = page.get('title');
@@ -54,11 +59,8 @@ let SinglePage = React.createClass({
 
     return (
       <article>
-        <PageHeader
-          title={title}
-          subtitle={subtitle}
-        />
-        <SiteContainer>
+        <TitleSection title={title} subtitle={subtitle} />
+        <SiteContainer breakAll padAll>
           <HTMLContentArea html={page.get('content')} />
         </SiteContainer>
       </article>

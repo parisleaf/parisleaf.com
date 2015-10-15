@@ -1,0 +1,30 @@
+.PageFooter
+  margin-top: rhythm(4)
+  padding-top: rhythm(2)
+  padding-bottom: rhythm(2)
+  color: white
+  background-color: theme-color(darkGray)
+
+  a
+    color: theme-color(gray)
+    text-decoration: none
+    transition: color 150ms ease-in-out
+
+    &:hover, &:active, &:focus
+      color: white
+      text-decoration: none
+
+  &-section
+    +bp(l)
+      +gallery(4 of 12)
+
+  &-socialContainer
+    +clearfix-contain
+
+  &-socialLink
+    +gallery(2 of 4)
+
+  &-copyright
+    margin-top: rhythm(1)
+    padding-top: rhythm(1)
+    border-top: 2px solid white

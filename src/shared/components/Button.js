@@ -21,6 +21,9 @@ let Button = React.createClass({
         element={component}
         modifiers={[
           'block',
+          'left',
+          'rightResponsive',
+          'stacked',
           'callToAction',
           'primaryLight',
           'primaryDark',

@@ -33,6 +33,7 @@
   +reset-button
 
   position: relative
+  transition: all 250ms ease-in-out
 
   &:after, &:before
     content: ""
@@ -41,6 +42,17 @@
     left: 0
     width: 100%
     height: 100%
+
+  &--left
+    float: left
+
+  &--rightResponsive
+    float: left
+    +bp(m)
+      float: right
+
+  &--stacked
+    margin-top: rhythm(2)
 
   // outdated
   &--callToAction
@@ -51,7 +63,6 @@
     text-align: center
     margin-bottom: rhythm(1/4)
 
-  // TODO: switch to modifier classes? ideally primary--dark etc
   &--primaryLight, &--primaryDark
     +font-family(header)
     +font-size(h3)
@@ -70,21 +81,26 @@
 
   &--secondaryDark, &--secondaryLight
     +font-family(vollkorn)
-    +font-size(h3)
-    font-style: italic
+    +font-size(h4)
     display: inline-block
-
-    &:hover
-      color: theme-color(yellow)
-      border-bottom: rhythm(1/4) solid theme-color(yellow)
+    border: none
+    border-bottom-style: solid
+    border-bottom-width: rhythm(1/4)
 
   &--secondaryDark
-    color: theme-color(text)
-    border-bottom: rhythm(1/4) solid theme-color(text)
+    color: theme-color(smoke)
+    border-bottom-color: theme-color(lightGray)
+
+    &:hover
+      color: theme-color(medGray)
+      border-bottom-color: transparent
 
   &--secondaryLight
     color: white
-    border-bottom: rhythm(1/4) solid white
+    border-bottom-color: white
+
+    &:hover
+      border-bottom-color: transparent
 
   &--primaryMenuLink, &--secondaryMenuLink
     +font-family(header)

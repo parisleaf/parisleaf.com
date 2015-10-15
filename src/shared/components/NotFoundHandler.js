@@ -1,13 +1,13 @@
 'use strict';
 
 import React from 'react';
-import Header from './Header';
-import Button from './Button';
+
 import AppLink from './AppLink';
-import PageHeader from './PageHeader';
+import Button from './Button';
+import Header from './Header';
+import TitleSection from './TitleSection';
 
 let NotFoundHandler = React.createClass({
-
   render() {
     return (
       <div className="NotFound">
@@ -17,15 +17,13 @@ let NotFoundHandler = React.createClass({
           }
         `}</style>
         <div className="NotFound-header">
-          <PageHeader
-            subtitle="That page totally doesn't exist!"
+          <TitleSection
             title="Well, this is awkward."
           />
         </div>
         <div className="NotFound-content">
-          <Header level={1}>Error 404!</Header>
-          <Header level={4}>It's not broken. It just isn't quite ready. Check back in April!</Header>
-          <Button component={AppLink} to='/blog/part-ii-parisleaf' primaryDark>
+          <Header level={2}>Error 404!</Header>
+          <Button component={AppLink} to='/' primaryDark>
             Get me outta here
           </Button>
         </div>
@@ -33,6 +31,5 @@ let NotFoundHandler = React.createClass({
     );
   },
 });
-
 
 export default NotFoundHandler;

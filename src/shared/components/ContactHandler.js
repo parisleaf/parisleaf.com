@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Rx, { Observable } from 'rx';
 import request from 'superagent';
 import serialize from 'form-serialize';
-import { ensureIsomorphicUrl } from '../utils/LinkUtils';
-import PageHeader from './PageHeader';
-import SiteContainer from './SiteContainer';
-import Metadata from './Metadata';
-import Button from './Button';
-import SuitCSS from 'react-suitcss';
-import FlexContainer from './FlexContainer';
-import FlexItem from './FlexItem';
+
 import Alert from './Alert';
+import Button from './Button';
+import FlexItem from './FlexItem';
+import FlexContainer from './FlexContainer';
+import Metadata from './Metadata';
+import SiteContainer from './SiteContainer';
+import SuitCSS from 'react-suitcss';
+import TitleSection from './TitleSection';
+
+import { ensureIsomorphicUrl } from '../utils/LinkUtils';
 import { color, rhythm, fontFamily } from '../theme';
 
 const style = {
@@ -99,11 +101,10 @@ const ContactHandler = React.createClass({
 
     return (
       <div>
-        <PageHeader
-          title="Get in touch."
-          subtitle="We'd love to hear from you."
+        <TitleSection
+          title="We&#x2019;re all ears and always happy to lend one."
         />
-        <SiteContainer>
+      <SiteContainer breakAll padAll>
           <form
             ref="form"
             action="/contact"

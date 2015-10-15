@@ -1,0 +1,112 @@
+.ProjectRow
+  +container
+  position: relative
+  padding-top: 56.25%
+  overflow: hidden
+
+  &-inner, &-image, &-overlay, &-link, &-content
+    +overlay
+
+  &-inner
+    left: auto
+    right: 0
+    overflow: hidden
+    transition: transform 250ms ease
+
+  &-link
+    z-index: 4
+
+  &-content
+    padding: rhythm(1.5)
+    z-index: 3
+
+    +bp(m)
+      padding: rhythm(3)
+
+  &-overlay
+    opacity: 0.15
+    background-color: black
+    z-index: 2
+    transition: opacity 250ms ease
+
+  &-image
+    background-size: cover
+    background-position: center
+    z-index: 1
+    transition: transform 250ms ease
+
+  &-title
+    float: left
+    margin: 0
+    +font-family(subline)
+    color: white
+    opacity: 1
+    transition: opacity 250ms ease
+
+  &-button
+    float: right
+    margin-right: rhythm(3)
+    opacity: 0
+    transition: opacity 250ms ease
+
+  &-taglineContainer
+    +clearfix-contain
+    width: 100%
+
+    +bp(s)
+      width: percentage(3/4)
+
+    +bp(m)
+      width: percentage(2/3)
+
+  &-tagline
+    margin: 0
+    +font-family(bold)
+    line-height: 1.25
+    color: white
+    opacity: 1
+    transition: opacity 250ms ease
+
+    +bp(s)
+      margin: rhythm(2) 0 rhythm(1)
+
+.ProjectRow
+  &--thin
+    padding-top: 9/21*100%
+
+    +bp(xl)
+      padding-top: 9/27*100%
+
+  &--thin &
+    &-tagline
+      display: none
+
+      +bp(s)
+        display: block
+
+  &--spaced
+    margin: 0
+
+    +bp(xl)
+      margin: rhythm(2) 0
+
++bp(xl)
+  .ProjectRow
+    &:hover &
+      &-inner
+        transform: translate(rhythm(3), 0)
+
+      &-image, &-overlay
+        transform: scale(1.1)
+
+      &-overlay
+        opacity: 0
+
+      &-title
+        opacity: 0
+
+      &-button
+        opacity: 1
+
+      &-tagline
+        opacity: 0

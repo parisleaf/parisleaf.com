@@ -5,11 +5,12 @@ import Flux from 'flummox/component';
 import { State } from 'react-router';
 
 import PostFirstImpression from './PostFirstImpression';
-import PageFooter from './PageFooter';
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
+import PageFooter from './PageFooter';
+import NotFoundHandler from './NotFoundHandler';
 
-import { rhythm } from '../theme';
+import { rhythm, color } from '../theme';
 
 let PostHandler = React.createClass({
 
@@ -45,19 +46,19 @@ let PostHandler = React.createClass({
         <SinglePost />
       </Flux>
     );
-
   }
 
 });
 
 let SinglePost = React.createClass({
-
   render() {
     let { post } = this.props;
 
     // TODO: better not-found message
     if (!post) {
-      return <div>Post not found</div>;
+      return (
+        <NotFoundHandler navColor={color('text')} />
+      );
     }
 
     return (

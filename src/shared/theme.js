@@ -39,13 +39,16 @@ export function color(name) {
 };
 
 var fontFamilies = {
+  alrightThin: "'Alright Sans Thin', sans-serif",
   alrightLight: "'Alright Sans Light', sans-serif",
-  alrightBlack: "'Alright Sans Black', sans-serif",
+  alrightNormal: "'Alright Sans', sans-serif",
   vollkorn: 'Vollkorn, Georgia, serif',
 };
 
+fontFamilies.header = fontFamilies.alrightThin;
 fontFamilies.text = fontFamilies.alrightLight;
-fontFamilies.header = fontFamilies.alrightBlack;
+fontFamilies.bold = fontFamilies.alrightNormal;
+fontFamilies.subline = fontFamilies.vollkorn;
 
 export var sassFontFamilies = mapObject(fontFamilies, wrapSassExpression);
 
@@ -63,9 +66,8 @@ var scale = [
   16,
   20,
   24,
-  30,
-  45,
-  48,
+  32,
+  40,
   68,
   100,
   106,
@@ -78,11 +80,11 @@ export function modularScale(n) {
 }
 
 export var fontSizes = {
-  title: modularScale(8),
+  headline: modularScale(8),
   h1: modularScale(7),
   h2: modularScale(6),
   h3: modularScale(5),
-  h4: modularScale(5),
+  h4: modularScale(4),
   h5: modularScale(3),
   h6: modularScale(3),
   text: '1rem',
@@ -101,6 +103,7 @@ export var zIndices = {
   AppNav:              9999,
   AppOverlay:           999,
   AppTransition:         99,
+  AppPatternBg:          -9,
 };
 
 /**

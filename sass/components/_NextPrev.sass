@@ -1,0 +1,82 @@
+.NextPrev
+  &-inner
+    +clearfix-contain
+    padding-top: rhythm(2)
+    background-size: rhythm(3 3)
+
+    +bp(l)
+      padding-top: rhythm(4)
+      padding-right: rhythm(2)
+      padding-bottom: rhythm(2)
+      padding-left: rhythm(2)
+      background-image: url('/img/diagonal-gray-pattern.svg')
+
+    +bp(xl)
+      padding-top: rhythm(4)
+      padding-right: rhythm(3)
+      padding-bottom: rhythm(3)
+      padding-left: rhythm(3)
+
+    +bp(xxl)
+      padding: rhythm(4)
+
+  +bp(l)
+    &-next
+      @include span(first 4 of 8)
+
+    &-prev
+      @include span(last 4 of 8)
+
+  &-cardTitle
+    margin-top: rhythm(2)
+    margin-bottom: rhythm(1)
+
+    +bp(l)
+      margin-top: 0
+      margin-bottom: rhythm(2)
+
+  &-card
+    position: relative
+    display: block
+    padding-top: 9/21*100%
+    background-size: cover
+    background-position: center
+
+  &-projectTitle
+    position: absolute
+    top: 0
+    left: 0
+    margin: 0
+    padding: rhythm(1 2)
+    width: 100%
+    z-index: 2
+    opacity: 1
+    color: white
+    transition: opacity 250ms ease
+
+  &-overlay
+    +overlay
+    background: black
+    opacity: 0.15
+    z-index: 1
+    transition: opacity 250ms ease
+
+  &-logoContainer
+    display: flex
+    justify-content: center
+    position: absolute
+    top: rhythm(-1.5)
+    left: 0
+    width: 100%
+
+  &-logo
+    width: rhythm(3)
+    height: rhythm(3)
+    fill: theme-color(darkGray)
+
+.NextPrev-card:hover
+  .NextPrev-projectTitle
+    opacity: 0
+
+  .NextPrev-overlay
+    opacity: 0

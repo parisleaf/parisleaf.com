@@ -7,10 +7,12 @@ const FlexContainer = React.createClass({
       <SuitCSS
         {...this.props}
         componentName="FlexContainer"
-        modifiers={[
-          'fullWidth',
-        ]}
         element="div"
+        modifiers={[
+          'collapse',
+          'fullWidth',
+          'noWrap'
+        ]}
       />
     );
   }

@@ -2,7 +2,6 @@ import React from 'react';
 import Flux from 'flummox/component';
 import Header from './Header';
 import Button from './Button';
-import SvgIcon from './SvgIcon';
 import SiteContainer from './SiteContainer';
 import { color, rhythm } from '../theme';
 
@@ -29,10 +28,8 @@ const PageFooter = React.createClass({
     ];
 
     const links = data.map((item, i) =>
-      <div className="PageFooter-socialLinkContainer" key={i}>
-        <Button secondaryDark component="a" href={item.href} className="PageFooter-socialLink">
-          {item.title}
-        </Button>
+      <div className="PageFooter-socialLink" key={i}>
+        <a href={item.href}>{item.title}</a>
       </div>
     );
 
@@ -42,28 +39,37 @@ const PageFooter = React.createClass({
   render() {
     return (
       <footer className="PageFooter">
-        <div className="PageFooter-logoContainer">
-          <SvgIcon name="logo_compact" className="PageFooter-logo" style={{
-            height: rhythm(2),
-            width: rhythm(2),
-          }}/>
-        </div>
-        <SiteContainer>
+        <SiteContainer breakAll padAll>
           <section className="PageFooter-section">
+            <Header level={4} bold uppercase letterspace>
+              Contact
+            </Header>
             <p>
-              Parisleaf: A branding &amp; digital studio<br />
+              info[at]parisleaf.com<br />
+              +1 (352) 377-5560
+            </p>
+          </section>
+          <section className="PageFooter-section">
+            <Header level={4} bold uppercase letterspace>
+              Studio
+            </Header>
+            <p>
               107 SW 7th Street<br />
               Gainesville, Florida 32601
             </p>
           </section>
-          <section className="PageFooter-section" style={{ textAlign: 'center' }}>
-          <p>
-            <a href="mailto:info@parisleaf.com">info@parisleaf.com</a><br />
-            +1 (352) 377-5560
-          </p>
-          </section>
           <section className="PageFooter-section">
-            {this.socialLinks()}
+            <Header level={4} bold uppercase letterspace>
+              Social
+            </Header>
+            <div className="PageFooter-socialContainer">
+              {this.socialLinks()}
+            </div>
+          </section>
+        </SiteContainer>
+        <SiteContainer breakAll padAll>
+          <section className="PageFooter-copyright">
+            All content copyright 2015 Parisleaf.
           </section>
         </SiteContainer>
       </footer>

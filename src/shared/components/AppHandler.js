@@ -2,18 +2,25 @@
 
 import React from 'react';
 import { RouteHandler, State } from 'react-router';
-import DocumentTitle from 'react-document-title';
+// import DocumentTitle from 'react-document-title';
 
 import FluxComponent from 'flummox/component';
 
 import AppNav from './AppNav';
 import AppOverlay from './AppOverlay';
 import PageFooter from './PageFooter';
+import Preloader from './Preloader';
+import SvgIcon from './SvgIcon';
 
 import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
 
 let App = React.createClass({
+  getInitialState() {
+    return {
+      showPreloader: true
+    }
+  },
 
   mixins: [State, MediaMixin],
 
@@ -57,6 +64,10 @@ let App = React.createClass({
     }
   },
 
+  componentDidMount() {
+    this.setState({ showPreloader: false });
+  },
+
   render() {
 
     let appNav =
@@ -75,7 +86,7 @@ let App = React.createClass({
 
     return (
       <div className="App">
-        <DocumentTitle title="Parisleaf | Florida Branding & Digital Studio" />
+        <Preloader showPreloader={this.state.showPreloader} />
         {appNav}
         <AppOverlay />
         <div>

@@ -1,27 +1,190 @@
-.Home
+.HomeSwiper
+  position: relative
+  margin: 0
+  width: 100%
 
-  +bp(m)
-    &-firstImpression
+  +bp(xl)
+    width: 80%
 
-     &-helloZone
-       min-height: 40vh
-       display: flex
-       align-items: center
+  &-bg
+    display: none
+    position: absolute
+    top: rhythm(3)
+    right: 0
+    width: 30%
+    height: 100%
+    margin-right: rhythm(2)
 
-     &-slider .ProjectSlide
-       min-height: 60vh
+    +bp(xl)
+      display: block
 
+  &-pagination
+    top: auto
+    right: 0
+    bottom: 0
+    left: auto
 
-.HomeProcessSection
-  border-top: rhythm(1) theme-color(yellow) solid
-  background-color: theme-color(darkGray)
-  color: white
+    +bp(xl)
+      top: 0
+      right: auto
+      bottom: auto
+      left: 80%
+      margin-top: rhythm(3)
 
-  +bp(l)
-    border-top: none
+    button.swiper-pagination-bullet, .swiper-pagination-bullet
+      padding: 16px
+      font-size: 32px
 
-  a.Button--secondaryLight
-    color: white
+      +bp(m)
+        padding-right: 16px
 
-    &:hover
+.HomeServices
+  &-container
+    display: flex
+    flex-direction: column-reverse
+    flex-wrap: nowrap
+    justify-content: flex-start
+    align-content: flex-start
+    align-items: flex-start
+
+    +bp(xl)
+      flex-direction: row
+
+  &-featuredService, &-allServices
+    width: 100%
+    position: relative
+
+  +bp(xl)
+    &-featuredService
+      width: span(4 of 12)
+
+    &-allServices
+      width: span(8 of 12 last)
+
+  &-featuredService
+    display: none
+
+    +bp(xl)
+      display: block
+      min-height: 33rem
+
+    &-bg
+      display: none
+      position: absolute
+      top: rhythm(3)
+      right: 0
+      width: 80%
+      height: 30rem
+      z-index: z-index(AppPatternBg)
+
+      +bp(xl)
+        display: block
+
+    &-content
+      position: absolute
+      top: 0
+      left: 0
+      opacity: 0
+      z-index: 1
+      transition: opacity 250ms ease-in-out
+
+    &-iconWrap
+      text-align: center
+      display: none
+
+      +bp(xl)
+        display: block
+
+    &-icon
+      height: rhythm(4)
+      width: rhythm(4)
+      margin: rhythm(1) 0
+      fill: theme-color(yellow)
+      transform: translateY(-30px)
+      transition: transform 250ms ease-in-out
+
+      +bp(xl)
+        height: rhythm(6)
+        width: rhythm(6)
+
+    &-title
+      color: theme-color(yellow)
+      +font-family(alrightNormal)
+      font-weight: bold
+      text-transform: uppercase
+
+    &-description
+      color: theme-color(gray)
+      +font-family(alrightLight)
+
+      +bp(xl)
+        width: 80%
+
+  &-allServices
+    +bp(xl)
+      margin-left: rhythm(2)
+
+    &-header
+      margin-top: 0
+
+      +bp(xl)
+        margin-top: rhythm(3)
+        margin-left: rhythm(1.5)
+
+    &-container
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: flex-start
+      align-content: space-between
+      align-items: flex-start
+      margin-top: rhythm(2)
+
+    &-iconWrap
+      width: 50%
+      margin-bottom: rhythm(1)
+      text-align: center
+
+      +bp(m)
+        width: 25%
+
+      +bp(xxl)
+        width: 20%
+
+    &-icon
+      margin: rhythm(1) 0
+      width: rhythm(2)
+      height: rhythm(2)
+      fill: theme-color(yellow)
+      transition: fill 250ms ease-in-out
+
+      +bp(s)
+        height: rhythm(3)
+        width: rhythm(3)
+
+      +bp(xl)
+        fill: theme-color(lightGray)
+
+    &-title
+      margin: 0
+      color: theme-color(gray)
+      +font-family(vollkorn)
+      transition: color 250ms ease-in-out
+
+      +bp(xl)
+        display: block
+
++bp(xl)
+  .HomeServices-featuredService-content.is-active
+    opacity: 1
+    z-index: 2
+
+    .HomeServices-featuredService-icon
+      transform: translateY(0)
+
+  .HomeServices-allServices-iconWrap.is-active
+    .HomeServices-allServices-icon
+      fill: theme-color(yellow)
+
+    .HomeServices-allServices-title
       color: theme-color(yellow)

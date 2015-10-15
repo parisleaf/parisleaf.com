@@ -1,32 +1,75 @@
 .Header
-
   &--1
     +font-size(h2)
     +font-family(header)
-    margin: 0 0 rhythm(1/2)
+    margin: rhythm(3) 0 rhythm(1.5)
     line-height: 1.5
+    font-weight: normal
 
     +bp(m)
       +font-size(h1)
 
   &--2
-    +font-family(vollkorn)
+    +font-size(h3)
+    +font-family(header)
+    margin: rhythm(2) 0 rhythm(1)
     line-height: 1.5
     font-weight: normal
 
+    +bp(m)
+      +font-size(h2)
+
   &--3
-    +font-size(h3)
+    +font-size(h4)
     +font-family(header)
-    margin-top: rhythm(3)
+    margin: rhythm(1.5) 0 rhythm(0.75)
+    line-height: 1.5
+    font-weight: normal
+    font-weight: normal
+
+    +bp(m)
+      +font-size(h3)
 
   &--4
     +font-size(h4)
-    +font-family(vollkorn)
+    +font-family(header)
     font-weight: normal
 
   &--5
-    +font-size(text)
+    +font-size(h5)
     +font-family(header)
+    font-weight: normal
+
+  &--6
+    +font-size(h6)
+    +font-family(header)
+    font-weight: normal
+
+  &--headline
+    +font-size(h1)
+    +font-family(header)
+
+    +bp(m)
+      +font-size(headline)
+
+  &--bold
+    +font-family(alrightNormal)
+    font-weight: bold
+
+  &--vollkorn
+    +font-family(vollkorn)
+
+  &--uppercase
+    text-transform: uppercase
+
+  &--letterspace
+    letter-spacing: 2px
+
+  &--sectionBreak
+    margin: rhythm(2) 0
+
+    +bp(m)
+      margin: rhythm(4) 0
 
   &--blogCard, &--blogCardLarge, &--blogTitle
     +font-size(h5)
@@ -37,3 +80,6 @@
 
   &--blogCardLarge
     +font-size(h3)
+
+  &--noMargin
+    margin: 0

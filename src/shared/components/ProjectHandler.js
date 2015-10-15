@@ -3,14 +3,18 @@ import React, { Component } from 'react/addons';
 import { State } from 'react-router';
 import Flux from 'flummox/component';
 
+import AppLink from './AppLink';
+import Button from './Button';
+import Header from './Header';
+import Metadata from './Metadata';
+import NotFoundHandler from './NotFoundHandler';
 import ProjectFirstImpression from './ProjectFirstImpression';
 import ProjectContent from './ProjectContent';
-import Header from './Header';
-import { nestedGet } from '../utils/ImmutableUtils';
-import Button from './Button';
-import AppLink from './AppLink';
-import Metadata from './Metadata';
 import SiteContainer from './SiteContainer';
+import SvgIcon from './SvgIcon';
+
+import { getFeaturedImage } from '../utils/ProjectUtils';
+import { nestedGet } from '../utils/ImmutableUtils';
 import { color } from '../theme';
 
 let ProjectHandler = React.createClass({
@@ -60,13 +64,18 @@ let SingleProject = React.createClass({
   render() {
     let { project, nextProject, previousProject } = this.props;
 
-    if (!project) return <span />;
+    // TODO: better not-found message
+    if (!project) {
+      return (
+        <NotFoundHandler navColor={color('text')} />
+      );
+    }
 
     return (
       <article>
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
-        <NextPreviousProjects next={nextProject} previous={previousProject} />
+        <NextPreviousProjects next={nextProject} prev={previousProject} />
       </article>
     );
   }
@@ -74,19 +83,30 @@ let SingleProject = React.createClass({
 
 class NextPreviousProjects extends Component {
   render() {
-    const { next, previous } = this.props;
+    const { next, prev } = this.props;
 
     return (
-      <section className="NextPrevious">
-        <SiteContainer>
-          <AppLink to="/work" className="NextPrevious--left BorderBlockButton">
-            <Header level={3} className="BorderBlockButton-title">See All Work</Header>
-            <Metadata>Back to the portfolio</Metadata>
-          </AppLink>
-          <AppLink to={`/work/${next.get('slug')}`} className="NextPrevious--right BorderBlockButton">
-            <Header level={3} className="BorderBlockButton-title">Next Project</Header>
-            <Metadata>{next.get('title')}</Metadata>
-          </AppLink>
+      <section className="NextPrev Section">
+        <SiteContainer breakAll padAll>
+          <div className="NextPrev-logoContainer">
+            <SvgIcon name="logo_compact" className="NextPrev-logo" />
+          </div>
+          <div className="NextPrev-inner">
+            <div className="NextPrev-next">
+              <Header level={3} className="NextPrev-cardTitle">Previous project:</Header>
+              <Button component={AppLink}  to={`/work/${prev.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(prev)})`}}>
+                <Header level={3} className="NextPrev-projectTitle" vollkorn>{prev.get('title')}</Header>
+                <div className="NextPrev-overlay" />
+              </Button>
+            </div>
+            <div className="NextPrev-prev">
+              <Header level={3} className="NextPrev-cardTitle">Next project:</Header>
+              <Button component={AppLink} to={`/work/${next.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(next)})`}}>
+                <Header level={3} className="NextPrev-projectTitle" vollkorn>{next.get('title')}</Header>
+                <div className="NextPrev-overlay" />
+              </Button>
+            </div>
+          </div>
         </SiteContainer>
       </section>
     );

@@ -8,13 +8,6 @@ import { color, rhythm } from '../theme';
 
 let { assign } = Object;
 
-let style = {
-  header: {
-    padding: `${rhythm(1)} 0`,
-    borderBottom: `1px ${color('lightGray')} solid`,
-  },
-};
-
 let PageHeader = React.createClass({
 
   getDefaultProps() {
@@ -26,24 +19,13 @@ let PageHeader = React.createClass({
   },
 
   render() {
-    let headerStyle = assign({}, style.header);
-
-    if (this.props.noBorder) {
-      headerStyle.borderBottom = 'none';
-    }
-
     return (
-      <header style={headerStyle}>
-        <SiteContainer>
-          <BorderContainer noHang={this.props.noHang} borderColor={this.props.borderColor}>
-            <Header level={1}>
-              {this.props.title}
-            </Header>
-            <Header level={2}>
-              {this.props.subtitle}
-            </Header>
-            {this.props.children}
-          </BorderContainer>
+      <header>
+        <SiteContainer breakFixed padAll>
+          <Header level={1} className="Header--title">
+            {this.props.title}
+          </Header>
+          {this.props.children}
         </SiteContainer>
       </header>
     );

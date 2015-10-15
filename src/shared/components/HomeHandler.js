@@ -1,13 +1,16 @@
 'use strict';
 
 import React from 'react';
-import HomeFirstImpression from './HomeFirstImpression';
-import HomeProcessSection from './HomeProcessSection';
-import MoreFromBlog from './MoreFromBlog';
-
 import Flux from 'flummox/component';
-
+import DocumentTitle from 'react-document-title';
 import Immutable from 'immutable';
+
+import ContactSection from './ContactSection';
+import HomeSwiper from './HomeSwiper';
+import HomeServices from './HomeServices';
+import MoreFromBlog from './MoreFromBlog';
+import TitleSection from './TitleSection';
+
 import { color } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
 
@@ -55,9 +58,11 @@ let Home = React.createClass({
 let HomePage = React.createClass({
   render() {
     let { page } = this.props;
+    const pageTitle = ( nestedGet(page, 'meta', 'yoast_wpseo_title') ) ? nestedGet(page, 'meta', 'yoast_wpseo_title') : nestedGet(page, 'title');
 
     return (
       <div>
+        <DocumentTitle title={pageTitle} />
         <Flux connectToStores={{
           projects: (store) => ({
             projects: getFirstImpressionProjectSlugs(this.props.page)
@@ -65,11 +70,12 @@ let HomePage = React.createClass({
               .toArray()
           })
         }}>
-          <HomeFirstImpression page={page} />
+          <TitleSection title={nestedGet(page, 'meta', 'first_impression_title')} />
+          <HomeSwiper />
         </Flux>
-
-        <HomeProcessSection page={page} />
-
+        <TitleSection title="Parisleaf is a branding and digital agency. Being creative is who we are, but helping our clients succeed is what we live for." />
+        <HomeServices />
+        <ContactSection />
         <Flux connectToStores={{
           posts: (store) => ({
             posts: getFirstImpressionPostSlugs(this.props.page)

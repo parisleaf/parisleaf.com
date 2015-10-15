@@ -1,0 +1,42 @@
+.swiper-pagination
+  +clearfix-contain
+  position: absolute
+  top: 0
+  right: 0
+  padding: rhythm(0.75) 0
+  text-align: center
+  z-index: 2
+
+  +bp(xl)
+    right: auto
+    left: 100%
+
+button.swiper-pagination-bullet, .swiper-pagination-bullet
+  float: left
+  clear: both
+  display: block
+  width: auto
+  height: auto
+  padding: 12px
+  font-size: 24px
+  line-height: 0
+  cursor: pointer
+  border: 0
+  outline: none
+  background: transparent
+  color: theme-color(medGray)
+  opacity: 1
+
+  +bp(s)
+    padding: 16px
+    font-size: 32px
+
+  &:hover, &:focus
+    outline: none
+
+  &:before
+    content: '•'
+    box-sizing: border-box
+
+  &:hover:before, &:focus:before, &-active
+    color: theme-color(yellow)

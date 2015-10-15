@@ -1,106 +1,76 @@
 import React from 'react';
-import Header from './Header';
-import Button from './Button';
-import ProjectCard from './ProjectCard';
+// import MediaMixin from 'react-media-mixin';
+
 import AppLink from './AppLink';
+import Button from './Button';
+import Header from './Header';
 import SiteContainer from './SiteContainer';
-import { nestedGet } from '../utils/ImmutableUtils';
 import VerticalCenter from './VerticalCenter';
+
 import { rhythm, color } from '../theme';
-import MediaMixin from 'react-media-mixin';
-
-let style = {
-  slide: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'relative',
-  },
-
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.25)',
-  },
-
-  content: {
-    position: 'relative',
-    paddingTop: rhythm(2.5),
-    overflow: 'hidden',
-  },
-
-  footer: {
-    color: '#fff',
-    paddingBottom: rhythm(2.5),
-  },
-
-  buttonWrapper: {
-    margin: `${rhythm(1.5)} 0`,
-  },
-};
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let ProjectSlide = React.createClass({
-  mixins: [MediaMixin],
+  // mixins: [MediaMixin],
+
+  // getInitialState: function() {
+  //   return { isHovered: false };
+  // },
+  //
+  // slideMouseEnter() {
+  //   this.setState({ isHovered: true });
+  // },
+  //
+  // slideMouseLeave() {
+  //   this.setState({ isHovered: false });
+  // },
 
   render() {
-
+    let slidesClasses = ['ProjectRow'];
     let backgroundImage = nestedGet(this.props.project, 'featured_image', 'source');
-
-    let slideStyle = Object.assign({
+    let tagline = nestedGet(this.props.project, 'meta', 'tagline');
+    let slideImageStyle = Object.assign({
       backgroundImage: `url(${backgroundImage})`,
-      minHeight: !this.state.media.s ? rhythm(12) : rhythm(20),
-    }, style.slide, this.props.style);
+      // minHeight: !this.state.media.s ? rhythm(12) : rhythm(20),
+    });
+    let projectLink = nestedGet(this.props.project, 'link');
 
-    if (!this.state.media.s) {
-      slideStyle.paddingTop = rhythm(2);
-    }
+    // if (!this.state.media.s) {
+    //   slidesStyle.paddingTop = rhythm(2);
+    // }
+
+    // if (this.state.isHovered) {
+    //   slidesClasses.push('isHovered');
+    // } else {
+    //   slidesClasses.filter(function(item) { return item !== 'isHovered' });
+    // }
 
     return(
-      <div style={slideStyle} className="ProjectSlide">
-        <div style={style.overlay} />
-        <section className="ProjectSlide-content" style={style.content}>
-          <SiteContainer className="ProjectSlide-cardContainer">
-            <ProjectCard className="ProjectSlide-card" project={this.props.project} />
-          </SiteContainer>
-        </section>
-        {this.footer()}
-      </div>
-    );
-  },
-
-  footer() {
-    if (!this.state.media.s) return <span />;
-
-    let url = nestedGet(this.props.project, 'link');
-
-    return (
-      <footer className="ProjectSlide-footer" style={style.footer}>
-        <SiteContainer>
-          <div className="ProjectSlide-buttonContainer">
-            <div style={style.buttonWrapper}>
-              <Button
-                component={AppLink}
-                to={url}
-                primaryLight
-              >
-                Check it out
-              </Button>
-            </div>
-            <div style={style.buttonWrapper}>
-              <Button
-                component={AppLink}
-                to="/work"
-                secondaryLight
-                style={style.secondaryButton}
-              >
-                See All Work
-              </Button>
+      <div className={slidesClasses.join(' ')}>
+        <div className="ProjectRow-inner">
+          <Button className="ProjectRow-link" component={AppLink} href={projectLink} />
+          <div className="ProjectRow-content">
+            <Header level={3} className="ProjectRow-title">
+              {nestedGet(this.props.project, 'title')}
+            </Header>
+            <Button
+              className="ProjectRow-button"
+              component={AppLink}
+              to={nestedGet(this.props.project, 'link')}
+              secondaryLight
+            >
+              See this project
+            </Button>
+            <div className="ProjectRow-taglineContainer">
+              <Header level={2} className="ProjectRow-tagline">
+                {tagline}
+              </Header>
             </div>
           </div>
-        </SiteContainer>
-      </footer>
+          <div className="ProjectRow-overlay" />
+          <div className="ProjectRow-image" style={slideImageStyle} />
+        </div>
+      </div>
     );
   }
 });

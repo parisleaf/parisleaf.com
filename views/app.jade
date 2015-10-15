@@ -56,9 +56,8 @@ html(class='no-js')
     if (image)
       meta(property='og:image', href=image)
     
-    
+    link(rel='stylesheet', href='/css/app.min.css')
     if (env.NODE_ENV !== 'development')
-      link(rel='stylesheet', href='/css/app.min.css')
       script.
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,16 +79,16 @@ html(class='no-js')
   script.
     WebFontConfig = {
       google: {
-        families: [ 'Vollkorn:400italic,700italic,400,700' ],
+        families: [ 'Vollkorn:400italic,400' ],
       },
       
       custom: {
-        families: [ 'Alright Sans Black', 'Alright Sans Light', 'Alright Sans Italic' ],
+        families: [ 'Alright Sans:bold', 'Alright Sans Thin:regular', 'Alright Sans Light:regular,italic' ],
         urls: ['//cloud.webtype.com/css/9c937990-02b7-4606-9e8b-9a50d6cb097d.css'],
       }
     };
   
-  script(src='//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js', async, defer)
+  script(src='//ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js', async, defer)
   
   if (env.NODE_ENV == 'development')
     script(src='http://0.0.0.0:8081/js/app.js', defer)

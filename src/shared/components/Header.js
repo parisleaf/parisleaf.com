@@ -33,6 +33,13 @@ let Header = React.createClass({
           '6',
           'blogCard',
           'blogCardLarge',
+          'bold',
+          'headline',
+          'letterspace',
+          'noMargin',
+          'sectionBreak',
+          'uppercase',
+          'vollkorn'
         ]}
       />
     );

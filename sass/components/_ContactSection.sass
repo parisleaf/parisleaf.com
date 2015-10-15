@@ -1,0 +1,34 @@
+.ContactSection
+  padding: rhythm(4) 0
+  color: white
+  background-color: theme-color(darkGray)
+  overflow: hidden
+
+  &-image, &-overlay
+    +overlay
+
+  &-content
+    position: relative
+    z-index: 3
+
+  &-overlay
+    opacity: 0
+    background-color: black
+    z-index: 2
+    transition: opacity 250ms ease-in-out
+
+  &-image
+    background-image: url('https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/10/14150431/contact-parisleaf-sparks-fly-home.jpg')
+    background-position: center
+    background-size: cover
+    z-index: 1
+    transform: scale(1.0)
+    transition: transform 250ms ease-in-out
+
+.ContactSection
+  &:hover &
+    &-image
+      transform: scale(1.05)
+
+    &-overlay
+      opacity: 0.4
