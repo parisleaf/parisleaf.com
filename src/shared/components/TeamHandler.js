@@ -17,10 +17,10 @@ const team = [
     title: "Co-Founder, CRO (Chief Relationship Officer) & CEO",
     handle: "@CHAD_PARIS",
     questions: {
-      bucket_list: "To one day have the happiest design firm in the world. Mission: Accomplished Also, to be a good husband to my loving business partner and wife Alison and, someday, a good father.",
-      super_power: "Well, since everyone is going to say ‘Flying’, (#maria #janie #amelia) I would say the ability to bring peace in the midst of confusion and commotion by simply shifting my energy.",
-      spirit_animal: "Hawk – I’ve always thought that hawks and eagles are so mysterious. They always seem to appear when I least expect them to, but when I need a sign that there’s hope on the other side, or just as a reminder that I need to pay attention to the present moment. They also really resonate with me because they have such a keen eye for minute details, but spend most of their time flying above the commotion and observing the bigger picture.",
-      character: ""
+      bucket_list: "Hiking the A.T.",
+      super_power: "Read minds",
+      spirit_animal: "Hawk or owl - wise and a love a good 10,000 foot view",
+      character: "I’m down with Shia LaBeouf - less the drugs. The guy’s a maniac, but I respect that he does weird sh*t."
     }
   },
   {
@@ -29,10 +29,10 @@ const team = [
     title: "Co-Founder & Chief Financial Officer",
     handle: "@Alicparis",
     questions: {
-      bucket_list: "Marry the man of my dreams… Whoops, already did that! Okay, another item on my bucket list is to start a non-profit that impacts the world in a positive and healing way.",
-      super_power: "To heal through touch and/or meditation.",
-      spirit_animal: "I guess I would say an elephant; I find them mesmerizing. They are incredibly intelligent, social, and one of the only animals to show empathy for one another as well as other species.",
-      character: "Belle from Beauty & the Beast. My nose is always stuck in a book!"
+      bucket_list: "Visit the Galapagos Islands",
+      super_power: "Healing powers",
+      spirit_animal: "Sea Otter",
+      character: "Rory from Gilmore Girls meets Jess from New Girl"
     }
   },
   {
@@ -41,22 +41,22 @@ const team = [
     title: "Creative Director",
     handle: "@Psanders3001",
     questions: {
-      bucket_list: "I want to write a book…seriously.",
-      super_power: "Simple, teleportation because I hate traffic and love to travel.",
-      spirit_animal: "I’m a wolf! I’m loyal to a fault and I love my pack!",
-      character: "Unfortunately, probably the dad in Little House on the Prairie. I thrive off being a mentor, but I don’t take anyone’s $@&#!"
+      bucket_list: "Own and run a B&B on some exotic island",
+      super_power: "Time Travel",
+      spirit_animal: "Wolf",
+      character: "Jon Snow"
     }
   },
   {
     name: "Zack Graber",
     photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/07/20161317/Zack.jpg",
-    title: "Art Director",
-    handle: "",
+    title: "Art Director/Brand Designer",
+    handle: "zacharyjgraber",
     questions: {
-      bucket_list: "I want to go to Bavaria and explore Neuschwantstien Castle. It looks like your typical castle from a fantasy, I think it’d be so surreal to actually be there.",
-      super_power: "If I could be like a genie that’d be awesome. I love to make people happy and would be thrilled to be able to grant wishes.",
+      bucket_list: "Ride my bike around the country. Bike as in bicycle, pedal powered.",
+      super_power: "If I could have any superpower it would have to be the ability to grant wishes. Like a genie without the servitude.",
       spirit_animal: "Octopus. I’m generally pretty shy but also very adaptive and creative. I also have a very wide range of interests characterized by the many legs of the octopus.",
-      character: "Jack Dawson. I figure life’s a gift and I don’t intend on wasting it."
+      character: "Dumbeldore - quiet, caring, and friendly."
     }
   },
   {
@@ -75,12 +75,12 @@ const team = [
     name: "Maria Juan",
     photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/07/20161316/Maria.jpg",
     title: "Director of Client Services",
-    handle: "",
+    handle: "@_mariajuan",
     questions: {
-      bucket_list: "",
-      super_power: "",
-      spirit_animal: "",
-      character: ""
+      bucket_list: "To perform great danceworks in famous theaters around the world.",
+      super_power: "Teleportation",
+      spirit_animal: "Pig",
+      character: "A combo Amy Schumer and the chicks from Broad City… the Latina version."
     }
   },
   {
@@ -89,10 +89,10 @@ const team = [
     title: "Copywriter",
     handle: "",
     questions: {
-      bucket_list: "",
-      super_power: "",
-      spirit_animal: "",
-      character: ""
+      bucket_list: "Machu Picchu",
+      super_power: "Flight",
+      spirit_animal: "Coyote",
+      character: "Silver Surfer"
     }
   },
   {
@@ -110,13 +110,13 @@ const team = [
   {
     name: "James Hill",
     photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/10/14182233/James.jpg",
-    title: "",
-    handle: "",
+    title: "Videographer / Photographer",
+    handle: "jameslbhill",
     questions: {
-      bucket_list: "",
-      super_power: "",
-      spirit_animal: "",
-      character: ""
+      bucket_list: "Go backpacking in New Zealand",
+      super_power: "Flight",
+      spirit_animal: "Wolf",
+      character: "Jim Halpert from The Office"
     }
   }
 ];
