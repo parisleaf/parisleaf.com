@@ -37,13 +37,14 @@
 
   &-title
     float: left
-    margin: 0
+    margin-top: 0
     +font-family(subline)
     color: white
     opacity: 1
     transition: opacity 250ms ease
 
   &-button
+    display: none
     float: right
     margin-right: rhythm(3)
     opacity: 0
@@ -92,6 +93,8 @@
 
 +bp(xl)
   .ProjectRow
+    &-button
+      display: inline-block
     &:hover &
       &-inner
         transform: translate(rhythm(3), 0)

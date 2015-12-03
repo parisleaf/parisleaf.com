@@ -40,9 +40,7 @@ let MoreCardImage = React.createClass({
 
     return (
       <div className="MoreCard-image" style={{backgroundImage: `url(${getFeaturedImage(post)})`}}>
-        <Header level={3} className="MoreCard-title" bold>
-          {post.get('title')}
-        </Header>
+        <Header level={3} className="MoreCard-title" bold dangerouslySetInnerHTML={{__html: post.get('title')}} />
         <div className="MoreCard-overlay" />
       </div>
     );

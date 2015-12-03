@@ -35,8 +35,6 @@ let App = React.createClass({
       if (path !== '/' && path.endsWith('/')) {
         transition.redirect(path.substring(0, path.length - 1));
       }
-
-      ga('send', 'pageview', {'page': transition.path});
     },
 
     routerWillRun({ state, flux }) {
@@ -72,8 +70,10 @@ let App = React.createClass({
 
   componentDidMount() {
     this.setState({ showPreloader: false });
-
     ga('create', GA_TRACKING_CODE);
+  },
+
+  componentDidUpdate() {
     ga('send', 'pageview');
   },
 

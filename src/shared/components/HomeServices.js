@@ -110,7 +110,7 @@ const HomeServices = React.createClass({
             to="/work"
             secondaryDark stacked left
           >
-            See related projects
+            See all projects
           </Button>
           <Button
             component={AppLink}

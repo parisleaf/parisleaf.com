@@ -23,9 +23,7 @@ let ProjectRow = React.createClass({
         <div className="ProjectRow-inner">
           <Button className="ProjectRow-link" component={AppLink} href={project.get('link')} />
           <div className="ProjectRow-content">
-            <Header level={3} className="ProjectRow-title">
-              {project.get('title')}
-            </Header>
+            <Header level={3} className="ProjectRow-title" dangerouslySetInnerHTML={{__html: project.get('title')}} />
             <Button
               className="ProjectRow-button"
               component={AppLink}
