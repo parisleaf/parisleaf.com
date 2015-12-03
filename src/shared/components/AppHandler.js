@@ -15,6 +15,10 @@ import SvgIcon from './SvgIcon';
 import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
 
+import ga from 'react-google-analytics';
+let GAInitiailizer = ga.Initializer;
+const GA_TRACKING_CODE = 'UA-18415954-1';
+
 let App = React.createClass({
   getInitialState() {
     return {
@@ -31,6 +35,8 @@ let App = React.createClass({
       if (path !== '/' && path.endsWith('/')) {
         transition.redirect(path.substring(0, path.length - 1));
       }
+
+      ga('send', 'pageview', {'page': transition.path});
     },
 
     routerWillRun({ state, flux }) {
@@ -66,6 +72,9 @@ let App = React.createClass({
 
   componentDidMount() {
     this.setState({ showPreloader: false });
+
+    ga('create', GA_TRACKING_CODE);
+    ga('send', 'pageview');
   },
 
   render() {
@@ -91,6 +100,7 @@ let App = React.createClass({
         <AppOverlay />
         <div>
           <RouteHandler />
+          <GAInitiailizer />
         </div>
         <PageFooter />
       </div>

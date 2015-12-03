@@ -10,18 +10,12 @@ MediaMixin.getInitialState = function () {
 import React from 'react';
 import Router from 'react-router';
 import routes from '../../../shared/routes';
-
 import DocumentTitle from 'react-document-title';
-
 import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
-
 import userAgentToMediaState from '../../userAgentToMediaState';
-
 import FluxComponent from 'flummox/component';
 import Flux from '../../../shared/Flux';
-
 import NavBarColor from '../../../shared/components/NavBarColor';
-
 import { nestedGet } from '../../../shared/utils/ImmutableUtils';
 import url from 'url';
 

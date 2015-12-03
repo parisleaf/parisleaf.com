@@ -11,7 +11,15 @@
   "engines": {
     "iojs": "1.2.x"
   },
-  "author": "Andrew Clark <andrew@parisleaf.com>",
+  "author": [
+    "Andrew Clark <andrew@parisleaf.com>"
+  ],
+  "contributors": [
+    {
+      "name": "Eric Leite",
+      "email": "<eric@parisleaf.com>"
+    }
+  ],
   "repository": "parisleaf/parisleaf.com",
   "homepage": "https://github.com/parisleaf/parisleaf.com",
   "license": "ISC",
@@ -47,6 +55,7 @@
     "qs": "~2.3.3",
     "react": "~0.13.2",
     "react-document-title": "~0.1.3",
+    "react-google-analytics": "^0.2.0",
     "react-media-mixin": "~1.0.5",
     "react-router": "~0.13.3",
     "react-side-effect": "~0.2.0",
