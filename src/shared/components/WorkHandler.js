@@ -6,7 +6,6 @@ import ProjectRow from './ProjectRow';
 import TitleSection from './TitleSection';
 import SiteContainer from './SiteContainer';
 
-import { nestedGet } from '../utils/ImmutableUtils';
 import * as ProjectUtils from '../utils/ProjectUtils';
 
 let WorkHandler = React.createClass({
@@ -51,18 +50,9 @@ let WorkHandler = React.createClass({
     });
   },
 
-  sortByDate(a, b) {
-    let dateA, dateB;
-    dateA = new Date(nestedGet(a, 'date_gmt'));
-    dateB = new Date(nestedGet(b, 'date_gmt'));
-    return dateB.getTime() - dateA.getTime();
-  },
-
   render() {
     let projects = this.state.projects.toArray();
-
-    projects.sort(this.sortByDate);
-
+    
     let mappedProjects = projects.map( (project) => <ProjectRow key={project.get('ID')} project={project} /> );
 
     return (

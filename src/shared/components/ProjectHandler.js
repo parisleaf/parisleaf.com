@@ -93,16 +93,16 @@ class NextPreviousProjects extends Component {
           </div>
           <div className="NextPrev-inner">
             <div className="NextPrev-next">
-              <Header level={3} className="NextPrev-cardTitle">Previous project:</Header>
-              <Button component={AppLink}  to={`/work/${prev.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(prev)})`}}>
-                <Header level={3} className="NextPrev-projectTitle" vollkorn>{prev.get('title')}</Header>
+              <Header level={3} className="NextPrev-cardTitle">Next project:</Header>
+              <Button component={AppLink} to={`/work/${next.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(next)})`}}>
+                <Header level={3} className="NextPrev-projectTitle" vollkorn dangerouslySetInnerHTML={{ __html: next.get('title') }} />
                 <div className="NextPrev-overlay" />
               </Button>
             </div>
             <div className="NextPrev-prev">
-              <Header level={3} className="NextPrev-cardTitle">Next project:</Header>
-              <Button component={AppLink} to={`/work/${next.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(next)})`}}>
-                <Header level={3} className="NextPrev-projectTitle" vollkorn>{next.get('title')}</Header>
+              <Header level={3} className="NextPrev-cardTitle">Previous project:</Header>
+              <Button component={AppLink}  to={`/work/${prev.get('slug')}`} className="NextPrev-card" style={{backgroundImage: `url(${getFeaturedImage(prev)})`}}>
+                <Header level={3} className="NextPrev-projectTitle" vollkorn dangerouslySetInnerHTML={{ __html: prev.get('title') }} />
                 <div className="NextPrev-overlay" />
               </Button>
             </div>
