@@ -20,11 +20,6 @@ let GAInitiailizer = ga.Initializer;
 const GA_TRACKING_CODE = 'UA-18415954-1';
 
 let App = React.createClass({
-  getInitialState() {
-    return {
-      showPreloader: true
-    }
-  },
 
   mixins: [State, MediaMixin],
 
@@ -55,6 +50,9 @@ let App = React.createClass({
       // Make sure nav is dismissed on re-route
       NavActions.setOpen(false);
       NavActions.setColor({ text: color('text'), background: '#fff' });
+
+      // Send google analytics page view on initial route and re-route
+      ga('send', 'pageview', state.path);
     }
   },
 
@@ -68,13 +66,15 @@ let App = React.createClass({
     }
   },
 
+  getInitialState() {
+    return {
+      showPreloader: true
+    }
+  },
+
   componentDidMount() {
     this.setState({ showPreloader: false });
     ga('create', GA_TRACKING_CODE);
-  },
-
-  componentDidUpdate() {
-    ga('send', 'pageview');
   },
 
   render() {
