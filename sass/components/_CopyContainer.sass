@@ -90,7 +90,7 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
       padding-left: rhythm($site-container-rhythm-padding)
       padding-right: rhythm($site-container-rhythm-padding)
 
-      +bp(s)
+      +bp(m)
         padding-left: 0
         padding-right: 0
 
@@ -101,6 +101,9 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
       +bp(s)
         margin-left: 0
         margin-right: 0
+
+  &:first-child > .CopyContainer-inner > *:first-child
+    margin-top: rhythm(3)
 
   &-imageSplit
     +bp(m)

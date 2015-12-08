@@ -16,13 +16,7 @@ let ProjectContainer = React.createClass({
     let primaryColor = getPrimaryColor(project);
 
     return (
-      <HTMLContentArea
-        primaryColor={primaryColor}
-        html={project.get('content')}
-        style={{
-          padding: `${rhythm(2)} 0`
-        }}
-      />
+      <HTMLContentArea primaryColor={primaryColor} html={project.get('content')} />
     );
   },
 

@@ -1,0 +1,143 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
+
+.CopySection
+  +clearfix-contain
+  margin: rhythm(3) auto
+  color: theme-color(smoke)
+
+  // Headers
+  h1
+    @extend .Header--1
+    +font-family(text)
+    width: 100%
+    margin: rhythm(3) auto rhythm(1.5)
+    +bp(m)
+      width: 150%
+      margin-left: -25%
+
+  h2
+    +font-family(text)
+
+  h3
+    +font-family(text)
+    margin: rhythm(1.5) auto rhythm(0.75)
+
+  h4
+    @extend .Header--4
+    +font-family(header)
+    margin: rhythm(1.5) auto rhythm(0.75)
+
+  h1, h2, h3, h4, h5, h6
+    color: theme-color(darkGray)
+
+  // Links
+  a
+    color: theme-color(smoke)
+    padding-bottom: 3px
+    text-decoration: none
+    border-bottom: 3px solid theme-color(medGray)
+    transition: all 250ms ease-in-out
+
+    &:hover
+      color: theme-color(medGray)
+      border-color: transparent
+
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
+    color: theme-color(darkGray)
+
+  // Lists
+  ul
+    margin-top: rhythm(1.5)
+    margin-bottom: rhythm(1.5)
+
+    li
+      margin-top: 1em
+      margin-bottom: 1em
+      list-style: none
+
+      &:before
+        content: '\2022'
+        display: block
+        position: relative
+        max-width: 0
+        max-height: 0
+        left: -40px
+        top: 0
+        color: theme-color(medGray)
+        font-size: 32px
+        line-height: 26px
+
+  > h1, > h2, > h3, > h4, > h5, > h6, > p
+    padding-left: rhythm($site-container-rhythm-padding)
+    padding-right: rhythm($site-container-rhythm-padding)
+
+    +bp(m)
+      padding-left: 0
+      padding-right: 0
+
+  > ul
+    margin-left: rhythm($site-container-rhythm-padding)
+    margin-right: rhythm($site-container-rhythm-padding)
+
+    +bp(s)
+      margin-left: 0
+      margin-right: 0
+
+  img
+    display: block
+
+  .alignleft, .alignright, .aligncenter, .alignnone
+    position: relative
+    margin-left: auto
+    margin-right: auto
+    margin-top: rhythm(3)
+    margin-bottom: rhythm(3)
+
+  .alignleft
+    +bp(m)
+      clear: left
+      float: left
+      margin-right: rhythm(1.5)
+
+  .alignright
+    +bp(m)
+      clear: right
+      float: right
+      margin-left: rhythm(1.5)
+
+  .alignleft, .alignright
+    +bp(m)
+      width: span(4 of 8)
+      height: auto
+
+    +bp(l)
+      width: span(4 of 12)
+      height: auto
+
+  .aligncenter
+    +bp(m)
+      width: 150%
+      margin-left: -25%
+
+  .alignnone
+    margin-left: 0
+    margin-right: 0
+
+.CopySection
+  &.CopySection--contain
+    +bp(m)
+      width: 480px
+    +bp(l)
+      width: 520px
+    +bp(xl)
+      width: 640px
+
+    > p
+      margin-top: rhythm(1.5)
+      margin-bottom: rhythm(1.5)
+
+  > *:first-child
+    margin-top: 0
+
+  > *:last-child
+    margin-bottom: 0

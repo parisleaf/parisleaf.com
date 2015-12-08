@@ -26,7 +26,7 @@ let ProjectFirstImpression = React.createClass({
       <ViewportContainer className="FirstImpressionCover">
         <div className="FirstImpressionCover-header" style={{backgroundImage: `url(${heroImageUrl})`}}>
           <SiteContainer breakAll padAll>
-            <Header level={1} headline bold noMargin dangerouslySetInnerHTML={{__html: project.get('title')}} />
+            <Header level={1} headline bold dangerouslySetInnerHTML={{__html: project.get('title')}} />
             <Header level={2} vollkorn noMargin dangerouslySetInnerHTML={{__html: nestedGet(projectMeta, 'tagline')}} />
           </SiteContainer>
         </div>

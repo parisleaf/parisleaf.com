@@ -48,14 +48,15 @@
       visibility: visible
       height: auto
 
+  &:hover &
+    &-overlay
+      opacity: 0
+
 +bp(l)
   .MoreCard
     &:hover &
       &-image
         transform: translateY(rhythm(-1))
-
-      &-overlay
-        opacity: 0
 
       &-meta
         transform: translateY(0)

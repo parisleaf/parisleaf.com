@@ -1,15 +1,27 @@
 .NextPrev
+  margin-top: rhythm(2)
+  margin-bottom: rhythm(-4)
+
+  +bp(l)
+    margin-bottom: 0
+
   &-inner
     +clearfix-contain
     padding-top: rhythm(2)
+    padding-right: rhythm($site-container-rhythm-padding)
+    padding-bottom: rhythm(2)
+    padding-left: rhythm($site-container-rhythm-padding)
     background-size: rhythm(3 3)
+    background-image: url('/img/diagonal-gray-pattern.svg')
+
+    +bp(m)
+      padding-right: rhythm(2)
+      padding-left: rhythm(2)
 
     +bp(l)
       padding-top: rhythm(4)
       padding-right: rhythm(2)
-      padding-bottom: rhythm(2)
       padding-left: rhythm(2)
-      background-image: url('/img/diagonal-gray-pattern.svg')
 
     +bp(xl)
       padding-top: rhythm(4)
@@ -47,12 +59,15 @@
     top: 0
     left: 0
     margin: 0
-    padding: rhythm(1 2)
+    padding: rhythm(1)
     width: 100%
     z-index: 2
     opacity: 1
     color: white
     transition: opacity 250ms ease
+
+    +bp(l)
+      padding: rhythm(1 2)
 
   &-overlay
     +overlay
@@ -75,8 +90,8 @@
     fill: theme-color(darkGray)
 
 .NextPrev-card:hover
-  .NextPrev-projectTitle
-    opacity: 0
+  +bp(l)
+    transform: translateY(rhythm(-1/2))
 
   .NextPrev-overlay
     opacity: 0

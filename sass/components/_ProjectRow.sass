@@ -1,8 +1,11 @@
 .ProjectRow
   +container
   position: relative
-  padding-top: 56.25%
+  padding-top: 10/16*100%
   overflow: hidden
+
+  +bp(s)
+    padding-top: 9/16*100%
 
   &-inner, &-image, &-overlay, &-link, &-content
     +overlay
@@ -17,8 +20,11 @@
     z-index: 4
 
   &-content
-    padding: rhythm(1.5)
+    padding: rhythm(1)
     z-index: 3
+
+    +bp(s)
+      padding: rhythm(2)
 
     +bp(m)
       padding: rhythm(3)
@@ -63,7 +69,6 @@
   &-tagline
     margin: 0
     +font-family(bold)
-    line-height: 1.25
     color: white
     opacity: 1
     transition: opacity 250ms ease
@@ -81,15 +86,26 @@
   &--thin &
     &-tagline
       display: none
+      margin-top: 0
 
       +bp(s)
         display: block
+
+      +bp(xl)
+        margin-top: rhythm(2)
 
   &--spaced
     margin: 0
 
     +bp(xl)
       margin: rhythm(2) 0
+
+.ProjectRow
+  &:hover &
+    &-image, &-overlay
+      transform: scale(1.1)
+    &-overlay
+      opacity: 0
 
 +bp(xl)
   .ProjectRow
@@ -98,18 +114,9 @@
     &:hover &
       &-inner
         transform: translate(rhythm(3), 0)
-
-      &-image, &-overlay
-        transform: scale(1.1)
-
-      &-overlay
-        opacity: 0
-
       &-title
         opacity: 0
-
       &-button
         opacity: 1
-
       &-tagline
         opacity: 0

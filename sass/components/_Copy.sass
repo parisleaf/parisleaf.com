@@ -8,50 +8,6 @@
   h4
     @extend .Header--4
 
-  .lede
-    +font-family(vollkorn)
-    font-size: 1.5em
-
-  .alignleft, .alignright, .aligncenter, .alignnone
-    position: relative
-    margin-left: auto
-    margin-right: auto
-    margin-top: rhythm(1.5)
-    margin-bottom: rhythm(1.5)
-
-  img.alignleft, img.alignright, img.aligncenter, img.alignnone
-    display: block
-
-  .alignleft
-    +bp(m)
-      clear: left
-      float: left
-      margin-right: rhythm(1.5)
-
-  .alignright
-    +bp(m)
-      clear: right
-      float: right
-      margin-left: rhythm(1.5)
-
-  .alignleft, .alignright
-    +bp(m)
-      width: span(4 of 8)
-      height: auto
-
-    +bp(l)
-      width: span(4 of 12)
-      height: auto
-
-  .aligncenter
-    +bp(m)
-      width: 150%
-      margin-left: -25%
-
-  .alignnone
-    margin-left: 0
-    margin-right: 0
-
   .wp-caption img
       display: block
 

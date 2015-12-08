@@ -9,18 +9,25 @@
     display: flex
     align-items: flex-end
     padding-top: rhythm(3)
-    padding-bottom: rhythm(2)
+    padding-bottom: rhythm(1)
     background-color: theme-color(darkGray)
     background-size: cover
     background-position: center
     color: white
 
+    +bp(m)
+      padding-bottom: rhythm(3)
+
   &-footer
+    display: none
     padding: rhythm(1) 0
     text-align: center
     background-color: theme-color(lightGray)
 
+    +bp(m)
+      display: block
+
   &-iconWrap
     display: flex
-    justify-content: space-around
+    justify-content: space-between
     flex-wrap: wrap

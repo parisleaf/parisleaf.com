@@ -6,7 +6,6 @@ let { PureRenderMixin } = React.addons;
 import AppLink from './AppLink';
 import Button from './Button';
 import Header from './Header';
-import HTMLContentArea from './HTMLContentArea';
 import SiteContainer from './SiteContainer';
 import SvgIcon from './SvgIcon';
 

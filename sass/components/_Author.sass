@@ -1,5 +1,13 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
+
 .Author
   margin-top: rhythm(3)
+  padding-left: rhythm($site-container-rhythm-padding)
+  padding-right: rhythm($site-container-rhythm-padding)
+
+  +bp(m)
+    padding-left: 0
+    padding-right: 0
 
   .avatar
     margin-left: auto

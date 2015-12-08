@@ -64,9 +64,7 @@ let SinglePost = React.createClass({
     return (
       <article>
         <PostFirstImpression post={post} />
-        <HTMLContentArea html={post.get('content')} style={{
-          padding: `${rhythm(2)} 0`
-        }}/>
+        <HTMLContentArea html={post.get('content')} />
       </article>
     );
   }

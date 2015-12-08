@@ -6,7 +6,6 @@ import Button from './Button';
 import FlexItem from './FlexItem';
 import FlexContainer from './FlexContainer';
 import Header from './Header';
-import HTMLContentArea from './HTMLContentArea';
 import TitleSection from './TitleSection';
 import SiteContainer from './SiteContainer';
 
