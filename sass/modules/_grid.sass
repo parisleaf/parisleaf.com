@@ -1,0 +1,50 @@
+.Grid
+  display: flex
+  flex-wrap: wrap
+  list-style: none
+  margin: 0
+  padding: 0
+
+.Grid-cell
+  flex: 1
+  min-width: 1px
+  min-height: 1px
+
+.Grid--flexCells > .Grid-cell
+  display: flex
+
+.Grid--center
+  align-items: center
+
+.Grid-cell--center
+  align-self: center
+
+.Grid--fit > .Grid-cell
+  flex: 1
+
+.Grid--full > .Grid-cell
+  flex: 0 0 100%
+
+.Grid--1of2 > .Grid-cell
+  flex: 0 0 50%
+
+// BUGFIX: https://github.com/philipwalton/flexbugs#7-flex-basis-doesnt-account-for-box-sizingborder-box
+.Grid--1of2box > .Grid-cell
+  flex: 0 0 auto
+  width: 50%
+
++bp(l)
+  .Grid--lgFit > .Grid-cell
+    flex: 1
+  .Grid--lgFull > .Grid-cell
+    flex: 0 0 100%
+  .Grid--lg1of2 > .Grid-cell
+    flex: 0 0 50%
+  .Grid--lg1of2box > .Grid-cell
+    flex: 0 0 auto
+    width: 50%
+
+.Grid--gutters
+  margin: -1*rhythm(1) 0 rhythm(1) -1*rhythm(1)
+.Grid--gutters > .Grid-cell
+  padding: rhythm(1) 0 0 rhythm(1)
