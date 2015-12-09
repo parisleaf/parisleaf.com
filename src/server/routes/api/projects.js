@@ -12,8 +12,12 @@ export default function(app) {
 
     let filter = whitelist(this.query, acceptedProjectFilters);
     let projects = yield wp.posts()
-      .type( 'project' )
-      .filter(filter)
+      .type('project')
+      .filter({
+        filter,
+        nopaging      : true,
+        posts_per_page: 100,
+      })
       .get();
     this.body = projects;
   });

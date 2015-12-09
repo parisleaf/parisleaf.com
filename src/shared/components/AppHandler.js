@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { RouteHandler, State } from 'react-router';
-// import DocumentTitle from 'react-document-title';
+import ga from 'react-google-analytics';
 
 import FluxComponent from 'flummox/component';
 
@@ -14,8 +14,8 @@ import SvgIcon from './SvgIcon';
 
 import MediaMixin from 'react-media-mixin';
 import { color } from '../theme';
+import { nestedGet } from '../utils/ImmutableUtils';
 
-import ga from 'react-google-analytics';
 let GAInitiailizer = ga.Initializer;
 const GA_TRACKING_CODE = 'UA-18415954-1';
 
@@ -78,7 +78,6 @@ let App = React.createClass({
   },
 
   render() {
-
     let appNav =
       <FluxComponent connectToStores={{
         nav: store => ({
@@ -98,10 +97,8 @@ let App = React.createClass({
         <Preloader showPreloader={this.state.showPreloader} />
         {appNav}
         <AppOverlay />
-        <div>
-          <RouteHandler />
-          <GAInitiailizer />
-        </div>
+        <RouteHandler />
+        <GAInitiailizer />
         <PageFooter />
       </div>
     );

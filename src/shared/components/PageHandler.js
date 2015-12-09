@@ -2,15 +2,15 @@
 
 import React from 'react';
 import Flux from 'flummox/component'
-import DocumentTitle from 'react-document-title';
 import { State } from 'react-router';
 import { nestedGet } from '../utils/ImmutableUtils';
 
-import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
-import PageHeader from './PageHeader';
-import PageFooter from './PageFooter';
 import NotFoundHandler from './NotFoundHandler';
+import PageFooter from './PageFooter';
+import PageHeader from './PageHeader';
+import SiteContainer from './SiteContainer';
+import TitleSection from './TitleSection';
 
 import { color } from '../theme';
 
@@ -24,7 +24,7 @@ let PageHandler = React.createClass({
       let PageActions = flux.getActions('pages');
 
       return PageActions.getPageBySlug(params.slug);
-    },
+    }
   },
 
   render() {

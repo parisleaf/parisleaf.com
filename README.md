@@ -2,7 +2,7 @@
 
 # parisleaf.com
 
-The new parisleaf.com, currently at beta.parisleaf.com.
+The new parisleaf.com, currently live at parisleaf.com.
 
 ## Architecture
 

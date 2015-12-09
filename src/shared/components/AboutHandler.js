@@ -1,8 +1,13 @@
+'use strict';
+
 import React from 'react';
 import Flux from 'flummox/component';
+
 import PostFirstImpression from './PostFirstImpression';
 import SiteContainer from './SiteContainer';
 import HTMLContentArea from './HTMLContentArea';
+
+import { nestedGet } from '../utils/ImmutableUtils';
 
 const AboutHandler = React.createClass({
   statics: {
@@ -35,6 +40,8 @@ const AboutPage = React.createClass({
     const { page } = this.props;
 
     if (!page) return <span />;
+
+    let pageTitle = nestedGet(page, 'meta', 'yoast_wpseo_title') || nestedGet(page, 'title');
 
     return (
       <div>

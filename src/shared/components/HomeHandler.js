@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Flux from 'flummox/component';
-import DocumentTitle from 'react-document-title';
 import Immutable from 'immutable';
 
 import ContactSection from './ContactSection';
@@ -38,7 +37,7 @@ let Home = React.createClass({
             .map(slug => ProjectActions.getProjectBySlug(slug))
         );
       }
-    },
+    }
   },
 
   render() {
@@ -57,12 +56,12 @@ let Home = React.createClass({
 
 let HomePage = React.createClass({
   render() {
-    let { page } = this.props;
-    const pageTitle = ( nestedGet(page, 'meta', 'yoast_wpseo_title') ) ? nestedGet(page, 'meta', 'yoast_wpseo_title') : nestedGet(page, 'title');
+    const { page } = this.props;
+    let pageTitle = nestedGet(page, 'meta', 'yoast_wpseo_title') || nestedGet(page, 'title');
 
     return (
       <div>
-        <DocumentTitle title={pageTitle} />
+        <TitleSection title={nestedGet(page, 'meta', 'first_impression_title')} />
         <Flux connectToStores={{
           projects: (store) => ({
             projects: getFirstImpressionProjectSlugs(this.props.page)
@@ -70,7 +69,6 @@ let HomePage = React.createClass({
               .toArray()
           })
         }}>
-          <TitleSection title={nestedGet(page, 'meta', 'first_impression_title')} />
           <HomeSwiper />
         </Flux>
         <TitleSection title="Parisleaf is a branding and digital agency. Being creative is who we are, but helping our clients succeed is what we live for." />

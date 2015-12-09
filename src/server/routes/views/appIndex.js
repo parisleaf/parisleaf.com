@@ -9,15 +9,17 @@ MediaMixin.getInitialState = function () {
 
 import React from 'react';
 import Router from 'react-router';
-import routes from '../../../shared/routes';
-import DocumentTitle from 'react-document-title';
-import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
-import userAgentToMediaState from '../../userAgentToMediaState';
-import FluxComponent from 'flummox/component';
+import Helmet from 'react-helmet';
+
 import Flux from '../../../shared/Flux';
+import FluxComponent from 'flummox/component';
 import NavBarColor from '../../../shared/components/NavBarColor';
-import { nestedGet } from '../../../shared/utils/ImmutableUtils';
+import performRouteHandlerLifecyleMethod from '../../../shared/performRouteHandlerLifecyleMethod';
+import routes from '../../../shared/routes';
 import url from 'url';
+import userAgentToMediaState from '../../userAgentToMediaState';
+
+import { nestedGet } from '../../../shared/utils/ImmutableUtils';
 
 export default function(app) {
   app.get(/.*/, function *() {
@@ -66,6 +68,7 @@ export default function(app) {
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
 
     const posts = yield performRouteHandlerLifecyleMethod(state.routes, 'getPost', { state, flux });
+
     let post;
 
     for (let key in Object.keys(posts).reverse()) {
@@ -88,15 +91,15 @@ export default function(app) {
       </FluxComponent>
     );
 
-    let title = DocumentTitle.rewind();
+    // let head = Helmet.rewind();
     NavBarColor.dispose();
 
     let initialAppState = flux.serialize();
 
     yield this.render('app', {
-      title: nestedGet(post, 'meta', 'yoast_wpseo_title') || title,
+      title: nestedGet(post, 'meta', 'yoast_wpseo_title'),
       description: nestedGet(post, 'meta', 'yoast_wpseo_metadesc'),
-      image: nestedGet(post, 'featured_image', 'guid'),
+      image: nestedGet(post, 'featured_image', 'source'),
       canonicalUrl: url.resolve(this.host, this.url),
       author: nestedGet(post, 'author', 'name'),
       keywords: nestedGet(post, 'meta', 'yoast_wpseo_metakeywords'),
