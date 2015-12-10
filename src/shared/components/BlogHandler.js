@@ -4,6 +4,7 @@ import React from 'react';
 import Flux from 'flummox/component';
 import Immutable from 'immutable';
 import { State, Link } from 'react-router';
+import Helmet from 'react-helmet';
 
 import BlogCard from './BlogCard';
 import Button from './Button';
@@ -13,6 +14,7 @@ import SiteContainer from './SiteContainer';
 
 import { filter as filterPosts, getCategoryColor } from '../utils/PostUtils';
 import { rhythm, color, fontFamily } from '../theme';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let style = {
   postContainer: {
@@ -27,10 +29,12 @@ let BlogHandler = React.createClass({
 
   statics: {
     async routerWillRun({ state, flux }) {
+      const PageActions = flux.getActions('pages');
       const PostActions = flux.getActions('posts');
       const TermActions = flux.getActions('terms');
 
       return await Promise.all([
+        PageActions.getPageBySlug('blog'),
         PostActions.getPosts(state.query),
         TermActions.getTaxonomyTerms('category'),
       ]);
@@ -110,6 +114,13 @@ let BlogHandler = React.createClass({
     return (
       <div>
         <Flux connectToStores={{
+          pages: store => ({
+            page: store.getPageBySlug('blog')
+          })
+        }}>
+          <BlogHead />
+        </Flux>
+        <Flux connectToStores={{
           terms: store => ({
             categories: store.getTaxonomyTerms('category')
           })
@@ -127,6 +138,35 @@ let BlogHandler = React.createClass({
 
 });
 
+const BlogHead = React.createClass({
+  render() {
+    const { page } = this.props;
+
+    let titleTag = nestedGet(page, 'meta', 'yoast_wpseo_title') || nestedGet(page, 'title');
+    titleTag += " | Parisleaf, A Florida Branding & Digital Agency";
+
+    return (
+      <Helmet
+        title={titleTag}
+        meta={[
+          {"name": "description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+          {"name": "keywords", "content": nestedGet(page, 'meta', 'yoast_wpseo_metakeywords')},
+          {"property": "og:description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+          {"property": "og:image", "content": nestedGet(page, 'featured_image', 'source') || ""},
+          {"property": "og:title", "content": titleTag},
+          {"property": "og:type", "content": "article"},
+          {"property": "og:url", "content": "https://parisleaf.com/blog"},
+          {"property": "article:author", "content": ""},
+          {"property": "article:published_time", "content": ""},
+          {"property": "article:modified_time", "content": ""},
+        ]}
+        link={[
+          {"rel": "canonical", "href": "https://parisleaf.com/blog"},
+        ]} />
+    );
+  }
+});
+
 const BlogHeader = React.createClass({
   render() {
     let { categories } = this.props;
@@ -141,7 +181,7 @@ const BlogHeader = React.createClass({
           category={category}
         />
       )
-    }).toArray()
+    }).toArray();
 
     const filterList = filters.reduce((result, filter, i) => {
       if (i === (filters.length - 2)) {

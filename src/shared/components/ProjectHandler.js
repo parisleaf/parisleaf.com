@@ -1,7 +1,7 @@
 import React, { Component } from 'react/addons';
-
 import { State } from 'react-router';
 import Flux from 'flummox/component';
+import Helmet from 'react-helmet';
 
 import AppLink from './AppLink';
 import Button from './Button';
@@ -52,7 +52,7 @@ let ProjectHandler = React.createClass({
           }
         }
       }}>
-        <SingleProject />
+        <SingleProject pathname={this.getPathname()} />
       </Flux>
     );
 
@@ -62,17 +62,37 @@ let ProjectHandler = React.createClass({
 
 let SingleProject = React.createClass({
   render() {
-    let { project, nextProject, previousProject } = this.props;
+    let { project, nextProject, previousProject, pathname } = this.props;
 
     // TODO: better not-found message
     if (!project) {
       return (
-        <NotFoundHandler navColor={color('text')} />
+        <NotFoundHandler />
       );
     }
 
+    let titleTag = nestedGet(project, 'meta', 'yoast_wpseo_title') || nestedGet(project, 'title');
+    titleTag += " | Work | Parisleaf, A Florida Branding & Digital Agency";
+
     return (
       <article>
+        <Helmet
+          title={titleTag}
+          meta={[
+            {"name": "description", "content": nestedGet(project, 'meta', 'yoast_wpseo_metadesc')},
+            {"name": "keywords", "content": nestedGet(project, 'meta', 'yoast_wpseo_metakeywords')},
+            {"property": "og:description", "content": nestedGet(project, 'meta', 'yoast_wpseo_metadesc')},
+            {"property": "og:image", "content": nestedGet(project, 'featured_image', 'source') || ""},
+            {"property": "og:title", "content": titleTag},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:url", "content": "https://parisleaf.com"+pathname},
+            {"property": "article:author", "content": nestedGet(project, 'author', 'name')},
+            {"property": "article:published_time", "content": nestedGet(project, 'date_gmt')},
+            {"property": "article:modified_time", "content": nestedGet(project, 'modified_gmt')},
+          ]}
+          link={[
+            {"rel": "canonical", "href": "https://parisleaf.com"+pathname},
+          ]} />
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
         <NextPreviousProjects next={nextProject} prev={previousProject} />

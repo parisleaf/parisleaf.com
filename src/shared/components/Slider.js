@@ -17,10 +17,6 @@ let Slider = React.createClass({
     this.onSlideChangeStart();
   },
 
-  componentWillUnmount() {
-
-  },
-
   nextSlide(e) {
     if (!this.swiper) return;
 

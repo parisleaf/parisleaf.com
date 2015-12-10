@@ -3,12 +3,12 @@ html(class='no-js')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    
-    title=title
-    
-    meta(name='description', content=description)
     meta(name='viewport', content='width=device-width, initial-scale=1')
     
+    !=meta
+    !=title
+    !=link
+
     link(rel='apple-touch-icon', sizes='57x57', href='/apple-touch-icon-57x57.png')
     link(rel='apple-touch-icon', sizes='60x60', href='/apple-touch-icon-60x60.png')
     link(rel='apple-touch-icon', sizes='72x72', href='/apple-touch-icon-72x72.png')
@@ -28,34 +28,7 @@ html(class='no-js')
     meta(name='msapplication-TileColor', content='#ffffff')
     meta(name='msapplication-TileImage', content='/mstile-144x144.png')
     meta(name='theme-color', content='#ffffff')
-    
-    meta(name='og:site_name', content='Parisleaf')
-    
-    if (canonicalUrl)
-      link(rel='canonical', href=canonicalUrl)
-      meta(name='og:url', content=canonicalUrl)
-    
-    if (keywords)
-      meta(name='keywords', content=keywords)
-    
-    if (title)
-      meta(property='og:title', content=title)
-    
-    if (description)
-      meta(property='og:description', content=description)
-    
-    if (author)
-      meta(property='article:author', content=author)
-    
-    if (publishedTime)
-      meta(property='article:published_time', href=publishedTime)
-    
-    if (modifiedTime)
-      meta(property='article:modified_time', href=modifiedTime)
-    
-    if (image)
-      meta(property='og:image', href=image)
-    
+        
     style
       include ../node_modules/swiper/dist/css/swiper.min.css
       

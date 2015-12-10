@@ -3,14 +3,16 @@
 import React from 'react';
 import Flux from 'flummox/component';
 import { State } from 'react-router';
+import Helmet from 'react-helmet';
 
+import HTMLContentArea from './HTMLContentArea';
+import NotFoundHandler from './NotFoundHandler';
+import PageFooter from './PageFooter';
 import PostFirstImpression from './PostFirstImpression';
 import SiteContainer from './SiteContainer';
-import HTMLContentArea from './HTMLContentArea';
-import PageFooter from './PageFooter';
-import NotFoundHandler from './NotFoundHandler';
 
 import { rhythm, color } from '../theme';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 let PostHandler = React.createClass({
 
@@ -43,7 +45,7 @@ let PostHandler = React.createClass({
           post: store.getPostBySlug(slug)
         })
       }}>
-        <SinglePost />
+        <SinglePost pathname={this.getPathname()} />
       </Flux>
     );
   }
@@ -52,17 +54,37 @@ let PostHandler = React.createClass({
 
 let SinglePost = React.createClass({
   render() {
-    let { post } = this.props;
+    let { post, pathname } = this.props;
 
     // TODO: better not-found message
     if (!post) {
       return (
-        <NotFoundHandler navColor={color('text')} />
+        <NotFoundHandler />
       );
     }
 
+    let titleTag = nestedGet(post, 'meta', 'yoast_wpseo_title') || nestedGet(post, 'title');
+    titleTag += " | Blog | Parisleaf, A Florida Branding & Digital Agency";
+
     return (
       <article>
+        <Helmet
+          title={titleTag}
+          meta={[
+            {"name": "description", "content": nestedGet(post, 'meta', 'yoast_wpseo_metadesc')},
+            {"name": "keywords", "content": nestedGet(post, 'meta', 'yoast_wpseo_metakeywords')},
+            {"property": "og:description", "content": nestedGet(post, 'meta', 'yoast_wpseo_metadesc')},
+            {"property": "og:image", "content": nestedGet(post, 'featured_image', 'source') || ""},
+            {"property": "og:title", "content": titleTag},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:url", "content": "https://parisleaf.com"+pathname},
+            {"property": "article:author", "content": nestedGet(post, 'author', 'name')},
+            {"property": "article:published_time", "content": nestedGet(post, 'date_gmt')},
+            {"property": "article:modified_time", "content": nestedGet(post, 'modified_gmt')},
+          ]}
+          link={[
+            {"rel": "canonical", "href": "https://parisleaf.com"+pathname},
+          ]} />
         <PostFirstImpression post={post} />
         <HTMLContentArea html={post.get('content')} />
       </article>

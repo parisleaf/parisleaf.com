@@ -3,6 +3,7 @@
 import React from 'react';
 import { RouteHandler, State } from 'react-router';
 import ga from 'react-google-analytics';
+import Helmet from 'react-helmet';
 
 import FluxComponent from 'flummox/component';
 
@@ -94,6 +95,24 @@ let App = React.createClass({
 
     return (
       <div className="App">
+        <Helmet
+          title="Parisleaf, A Florida Branding & Digital Agency"
+          meta={[
+            {"name": "description", "content": "We work with higher education and tech in Gainesville, Orlando, Tampa, Atlanta, & Seattle on branding, websites, copywriting, design, photography, & video."},
+            {"name": "keywords", "content": "branding, agency, florida, branding agency, florida branding agency, website design, website development, web design, web development"},
+            {"property": "og:description", "content": "We work with higher education and tech in Gainesville, Orlando, Tampa, Atlanta, & Seattle on branding, websites, copywriting, design, photography, & video."},
+            {"property": "og:image", "content": "https://parisleaf.com/img/admin-logo.png"},
+            {"property": "og:site_name", "content": "Parisleaf, A Florida Branding & Digital Agency"},
+            {"property": "og:title", "content": "Parisleaf, A Florida Branding & Digital Agency"},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:url", "content": "https://parisleaf.com"},
+            {"property": "article:author", "content": ""},
+            {"property": "article:published_time", "content": ""},
+            {"property": "article:modified_time", "content": ""},
+          ]}
+          link={[
+            {"rel": "canonical", "href": "https://www.parisleaf.com"},
+          ]} />
         <Preloader showPreloader={this.state.showPreloader} />
         {appNav}
         <AppOverlay />

@@ -1,5 +1,6 @@
 import React from 'react';
 import Flux from 'flummox/component';
+import Helmet from 'react-helmet';
 
 import AppLink from './AppLink';
 import Button from './Button';
@@ -8,6 +9,8 @@ import FlexContainer from './FlexContainer';
 import Header from './Header';
 import TitleSection from './TitleSection';
 import SiteContainer from './SiteContainer';
+
+import { nestedGet } from '../utils/ImmutableUtils';
 
 const team = [
   {
@@ -153,8 +156,28 @@ const TeamPage = React.createClass({
       ( human, count ) => <Human key={count} human={human} />
     );
 
+    let titleTag = nestedGet(page, 'meta', 'yoast_wpseo_title') || nestedGet(page, 'title');
+    titleTag += " | Parisleaf, A Florida Branding & Digital Agency";
+
     return (
       <div>
+        <Helmet
+          title={titleTag}
+          meta={[
+            {"name": "description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+            {"name": "keywords", "content": nestedGet(page, 'meta', 'yoast_wpseo_metakeywords')},
+            {"property": "og:description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+            {"property": "og:image", "content": nestedGet(page, 'featured_image', 'source') || ""},
+            {"property": "og:title", "content": titleTag},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:url", "content": "https://parisleaf.com/team"},
+            {"property": "article:author", "content": ""},
+            {"property": "article:published_time", "content": ""},
+            {"property": "article:modified_time", "content": ""},
+          ]}
+          link={[
+            {"rel": "canonical", "href": "https://parisleaf.com/team"},
+          ]} />
         <TitleSection
           title="Everyone has an ego. We just hook ours to the bike rack on our way in."
         />

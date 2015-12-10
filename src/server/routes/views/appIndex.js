@@ -67,19 +67,6 @@ export default function(app) {
     RouterActions.routerWillRun(state);
     yield performRouteHandlerLifecyleMethod(state.routes, 'routerWillRun', { state, flux });
 
-    const posts = yield performRouteHandlerLifecyleMethod(state.routes, 'getPost', { state, flux });
-
-    let post;
-
-    for (let key in Object.keys(posts).reverse()) {
-      const p = posts[key];
-
-      if (p) {
-        post = p;
-        break;
-      }
-    }
-
     // Use useragent to override react-media-mixin's initial state
     initialMediaState = userAgentToMediaState(this.headers['user-agent']);
 
@@ -91,20 +78,16 @@ export default function(app) {
       </FluxComponent>
     );
 
-    // let head = Helmet.rewind();
+    let head = Helmet.rewind();
+
     NavBarColor.dispose();
 
     let initialAppState = flux.serialize();
 
     yield this.render('app', {
-      title: nestedGet(post, 'meta', 'yoast_wpseo_title'),
-      description: nestedGet(post, 'meta', 'yoast_wpseo_metadesc'),
-      image: nestedGet(post, 'featured_image', 'source'),
-      canonicalUrl: url.resolve(this.host, this.url),
-      author: nestedGet(post, 'author', 'name'),
-      keywords: nestedGet(post, 'meta', 'yoast_wpseo_metakeywords'),
-      publishedTime: nestedGet(post, 'date_gmt'),
-      modifiedTime: nestedGet(post, 'modified_gmt'),
+      title: head.title.toString(),
+      meta: head.meta.toString(),
+      link: head.link.toString(),
       appString,
       env: process.env,
       initialAppState,

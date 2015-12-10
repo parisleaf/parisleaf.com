@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Rx, { Observable } from 'rx';
 import request from 'superagent';
 import serialize from 'form-serialize';
+import Helmet from 'react-helmet';
+import Flux from 'flummox/component';
 
 import Alert from './Alert';
 import Button from './Button';
@@ -14,6 +16,7 @@ import TitleSection from './TitleSection';
 
 import { ensureIsomorphicUrl } from '../utils/LinkUtils';
 import { color, rhythm, fontFamily } from '../theme';
+import { nestedGet } from '../utils/ImmutableUtils';
 
 const style = {
   textInput: {
@@ -28,6 +31,27 @@ const style = {
 }
 
 const ContactHandler = React.createClass({
+  statics: {
+    routerWillRun({ flux }) {
+      const PageActions = flux.getActions('pages');
+      return PageActions.getPageBySlug('contact');
+    },
+  },
+
+  render() {
+    return (
+      <Flux connectToStores={{
+        pages: store => ({
+          page: store.getPageBySlug('contact')
+        })
+      }}>
+        <ContactPage />
+      </Flux>
+    );
+  }
+});
+
+const ContactPage = React.createClass({
   getInitialState() {
     return {
       errorMessage: null,
@@ -98,13 +122,34 @@ const ContactHandler = React.createClass({
 
   render() {
     const { success, errorMessage } = this.state;
+    const { page } = this.props;
+
+    let titleTag = nestedGet(page, 'meta', 'yoast_wpseo_title') || nestedGet(page, 'title');
+    titleTag += " | Parisleaf, A Florida Branding & Digital Agency";
 
     return (
       <div>
+        <Helmet
+          title={titleTag}
+          meta={[
+            {"name": "description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+            {"name": "keywords", "content": nestedGet(page, 'meta', 'yoast_wpseo_metakeywords')},
+            {"property": "og:description", "content": nestedGet(page, 'meta', 'yoast_wpseo_metadesc')},
+            {"property": "og:image", "content": nestedGet(page, 'featured_image', 'source') || ""},
+            {"property": "og:title", "content": titleTag},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:url", "content": "https://parisleaf.com/contact"},
+            {"property": "article:author", "content": ""},
+            {"property": "article:published_time", "content": ""},
+            {"property": "article:modified_time", "content": ""},
+          ]}
+          link={[
+            {"rel": "canonical", "href": "https://parisleaf.com/contact"},
+          ]} />
         <TitleSection
           title="We&#x2019;re all ears and always happy to lend one."
         />
-      <SiteContainer breakAll padAll>
+        <SiteContainer breakAll padAll>
           <form
             ref="form"
             action="/contact"
