@@ -142,9 +142,6 @@ const ContactPage = React.createClass({
             {"property": "article:author", "content": ""},
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://parisleaf.com/contact"},
           ]} />
         <TitleSection
           title="We&#x2019;re all ears and always happy to lend one."

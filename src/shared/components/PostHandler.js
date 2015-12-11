@@ -81,9 +81,6 @@ let SinglePost = React.createClass({
             {"property": "article:author", "content": nestedGet(post, 'author', 'name')},
             {"property": "article:published_time", "content": nestedGet(post, 'date_gmt')},
             {"property": "article:modified_time", "content": nestedGet(post, 'modified_gmt')},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://parisleaf.com"+pathname},
           ]} />
         <PostFirstImpression post={post} />
         <HTMLContentArea html={post.get('content')} />

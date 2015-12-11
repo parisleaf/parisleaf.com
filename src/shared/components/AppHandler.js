@@ -109,9 +109,6 @@ let App = React.createClass({
             {"property": "article:author", "content": ""},
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://www.parisleaf.com"},
           ]} />
         <Preloader showPreloader={this.state.showPreloader} />
         {appNav}

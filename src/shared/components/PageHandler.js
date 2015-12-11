@@ -75,9 +75,6 @@ let SinglePage = React.createClass({
             {"property": "article:author", "content": ""},
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://parisleaf.com/contact"},
           ]} />
         <TitleSection title={title} subtitle={subtitle} />
         <SiteContainer breakAll padAll>

@@ -174,9 +174,6 @@ const TeamPage = React.createClass({
             {"property": "article:author", "content": ""},
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://parisleaf.com/team"},
           ]} />
         <TitleSection
           title="Everyone has an ego. We just hook ours to the bike rack on our way in."

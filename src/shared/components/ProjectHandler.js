@@ -89,9 +89,6 @@ let SingleProject = React.createClass({
             {"property": "article:author", "content": nestedGet(project, 'author', 'name')},
             {"property": "article:published_time", "content": nestedGet(project, 'date_gmt')},
             {"property": "article:modified_time", "content": nestedGet(project, 'modified_gmt')},
-          ]}
-          link={[
-            {"rel": "canonical", "href": "https://parisleaf.com"+pathname},
           ]} />
         <ProjectFirstImpression project={project} />
         <ProjectContent project={project} />
