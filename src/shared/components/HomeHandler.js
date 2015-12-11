@@ -71,7 +71,7 @@ let HomePage = React.createClass({
         }}>
           <HomeSwiper />
         </Flux>
-        <TitleSection title="Parisleaf is a branding and digital agency. Being creative is who we are, but helping our clients succeed is what we live for." />
+        <TitleSection title={nestedGet(page, 'meta', 'first_impression_subtitle')} />
         <HomeServices />
         <ContactSection />
         <Flux connectToStores={{

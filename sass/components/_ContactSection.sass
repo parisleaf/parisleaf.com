@@ -1,8 +1,20 @@
 .ContactSection
-  padding: rhythm(4) 0
+  padding: 0 0 rhythm(2) 0
   color: white
   background-color: theme-color(darkGray)
   overflow: hidden
+
+  +bp(s)
+    padding: rhythm(2) 0 rhythm(4)
+
+  +bp(m)
+    padding: rhythm(4) 0
+
+  +bp(l)
+    padding: rhythm(6) 0
+
+  +bp(xxl)
+    padding: rhythm(8) 0
 
   &-image, &-overlay
     +overlay
@@ -12,23 +24,13 @@
     z-index: 3
 
   &-overlay
-    opacity: 0
+    opacity: 0.2
     background-color: black
     z-index: 2
     transition: opacity 250ms ease-in-out
 
   &-image
-    background-image: url('https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/10/14150431/contact-parisleaf-sparks-fly-home.jpg')
+    background-image: url('https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/12/11162123/filming-in-a-creek-unity-maine-parisleaf1.jpg')
     background-position: center
     background-size: cover
     z-index: 1
-    transform: scale(1.0)
-    transition: transform 250ms ease-in-out
-
-.ContactSection
-  &:hover &
-    &-image
-      transform: scale(1.05)
-
-    &-overlay
-      opacity: 0.4
