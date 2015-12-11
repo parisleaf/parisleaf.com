@@ -6,3 +6,13 @@
   +bp(m)
     margin-top: rhythm(4)
     margin-bottom: rhythm(4)
+
+  &--noMargin
+    margin-top: 0
+    margin-bottom: 0
+
+  &--invertBottomMargin
+    margin-bottom: -1*rhythm(2)
+
+    +bp(m)
+      margin-bottom: -1*rhythm(4)

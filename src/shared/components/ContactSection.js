@@ -17,8 +17,9 @@ const ContactSection = React.createClass({
   mixins: [PureRenderMixin],
 
   render() {
-    let sectionClass = ['ContactSection'];
-    if (!this.props.noMargin) sectionClass.push('Section');
+    let sectionClass = ['Section', 'ContactSection'];
+    if (this.props.noMargin) sectionClass.push('Section--noMargin');
+    if (this.props.invertBottomMargin) sectionClass.push('Section--invertBottomMargin');
 
     return(
       <div className={sectionClass.join(' ')}>

@@ -5,11 +5,41 @@
   margin: 0
   padding: 0
 
+  &--space
+    margin-top: rhythm(3)
+    margin-bottom: rhythm(3)
+
+  &--extend
+    margin-left: auto
+    margin-right: auto
+
+    +bp(m)
+      width: 150%
+      margin-left: -25%
+
+  &--top
+    align-items: flex-start
+
+  &--center
+    align-items: center
+
+  &--bottom
+    align-items: flex-end
+
 .Grid-cell
   flex: 1
   min-width: 1px
   min-height: 1px
-  
+
+  &--top
+    align-self: flex-start
+
+  &--center
+    align-self: center
+
+  &--bottom
+    align-self: flex-end
+
   > *:first-child
     margin-top: 0 !important
 
@@ -18,12 +48,6 @@
 
 .Grid--flexCells > .Grid-cell
   display: flex
-
-.Grid--center
-  align-items: center
-
-.Grid-cell--center
-  align-self: center
 
 .Grid--fit > .Grid-cell
   flex: 1

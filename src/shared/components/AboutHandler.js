@@ -4,9 +4,10 @@ import React from 'react';
 import Flux from 'flummox/component';
 import Helmet from 'react-helmet';
 
-import PostFirstImpression from './PostFirstImpression';
-import SiteContainer from './SiteContainer';
+import ContactSection from './ContactSection';
 import HTMLContentArea from './HTMLContentArea';
+import SiteContainer from './SiteContainer';
+import TitleSection from './TitleSection';
 
 import { nestedGet } from '../utils/ImmutableUtils';
 
@@ -15,11 +16,6 @@ const AboutHandler = React.createClass({
     routerWillRun({ flux }) {
       const PageActions = flux.getActions('pages');
       return PageActions.getPageBySlug('about');
-    },
-
-    routerDidRun({ state, flux }) {
-      const NavActions = flux.getActions('nav');
-      NavActions.setColor({ text: '#fff', background: 'rgba(0,0,0,0)' });
     }
   },
 
@@ -61,14 +57,10 @@ const AboutPage = React.createClass({
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},
           ]} />
-        <PostFirstImpression
-          post={page}
-          title="Separated, we’re raw talent."
-          subtitle="Together, we’re a force."
-          noMeta />
         <SiteContainer>
           <HTMLContentArea html={page.get('content')} />
         </SiteContainer>
+        <ContactSection invertBottomMargin />
       </div>
     );
   }
