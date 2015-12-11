@@ -6,8 +6,8 @@
   padding: 0
 
   &--space
-    margin-top: rhythm(3)
-    margin-bottom: rhythm(3)
+    margin-top: rhythm(3) !important
+    margin-bottom: rhythm(3) !important
 
   &--extend
     margin-left: auto
@@ -15,12 +15,12 @@
 
     +bp(m)
       width: 150%
-      margin-left: -25%
+      margin-left: -25% !important
 
   &--top
     align-items: flex-start
 
-  &--center
+  &--middle
     align-items: center
 
   &--bottom
@@ -34,7 +34,7 @@
   &--top
     align-self: flex-start
 
-  &--center
+  &--middle
     align-self: center
 
   &--bottom
@@ -76,5 +76,6 @@
 
 .Grid--gutters
   margin: -1*rhythm(1) 0 rhythm(1) -1*rhythm(1)
+
 .Grid--gutters > .Grid-cell
   padding: rhythm(1) 0 0 rhythm(1)
