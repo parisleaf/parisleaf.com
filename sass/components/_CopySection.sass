@@ -83,7 +83,8 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
       margin-left: 0
       margin-right: 0
 
-  img
+  img:not(.aligncenter)
+    max-width: 100%
     display: block
 
 .CopySection
@@ -142,6 +143,9 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
 
   > *:first-child
     margin-top: 0 !important
+
+    > img
+      margin-top: 0 !important
 
   > *:last-child
     margin-bottom: 0 !important
