@@ -37,7 +37,7 @@ let PageHandler = React.createClass({
           page: store.getPageBySlug(slug)
         })
       }}>
-        <SinglePage />
+        <SinglePage pathname={this.getPathname()} />
       </Flux>
     );
   },
@@ -46,7 +46,7 @@ let PageHandler = React.createClass({
 
 let SinglePage = React.createClass({
   render() {
-    let { page } = this.props;
+    let { page, pathname } = this.props;
 
     // TODO: better not-found message
     if (!page) {
@@ -71,7 +71,7 @@ let SinglePage = React.createClass({
             {"property": "og:image", "content": nestedGet(page, 'featured_image', 'source') || ""},
             {"property": "og:title", "content": titleTag},
             {"property": "og:type", "content": "article"},
-            {"property": "og:url", "content": "https://parisleaf.com/contact"},
+            {"property": "og:url", "content": "https://parisleaf.com"+pathname},
             {"property": "article:author", "content": ""},
             {"property": "article:published_time", "content": ""},
             {"property": "article:modified_time", "content": ""},

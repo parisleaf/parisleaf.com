@@ -11,14 +11,14 @@
     background-size: cover
     background-position: center
     transform: translateY(0)
-    transition: transform 250ms ease-in-out
+    transition: transform 250ms ease
 
   &-overlay
     +overlay
     z-index: 1
     opacity: 0.4
     background-color: black
-    transition: opacity 250ms ease-in-out
+    transition: opacity 250ms ease
 
   &-title
     position: absolute
@@ -42,7 +42,7 @@
     height: rhythm(0)
     color: white
     transform: translateY(-100%)
-    transition: transform 250ms ease-in-out
+    transition: transform 250ms ease
 
     +bp(l)
       visibility: visible

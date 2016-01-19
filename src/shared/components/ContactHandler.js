@@ -15,20 +15,10 @@ import SuitCSS from 'react-suitcss';
 import TitleSection from './TitleSection';
 
 import { ensureIsomorphicUrl } from '../utils/LinkUtils';
-import { color, rhythm, fontFamily } from '../theme';
+import { rhythm } from '../theme';
 import { nestedGet } from '../utils/ImmutableUtils';
 
-const style = {
-  textInput: {
-    width: '100%',
-    background: color('lightGray'),
-    fontFamily: fontFamily('alrightBlack'),
-    padding: `${rhythm(1/2)} ${rhythm(1)}`,
-    margin: `${rhythm(1/2)} 0`,
-    lineHeight: 1.5,
-    minHeight: rhythm(1.5),
-  }
-}
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const ContactHandler = React.createClass({
   statics: {
@@ -56,6 +46,7 @@ const ContactPage = React.createClass({
     return {
       errorMessage: null,
       success: null,
+      valid: true,
     }
   },
 
@@ -81,7 +72,6 @@ const ContactPage = React.createClass({
           errorMessage: null
         });
       });
-
 
     const formResponseFailure = formResponse
       .filter(response => !response.ok)
@@ -115,9 +105,19 @@ const ContactPage = React.createClass({
     this.subscription.dispose();
   },
 
+  handleFieldUpdated(status) {
+    this.setState({ valid: status });
+    console.log(status);
+  },
+
   onSubmit(event) {
     event.preventDefault();
-    this.formSubmission(event);
+    if ( this.state.valid === true ) {
+      this.setState({ errorMessage: "" });
+      this.formSubmission(event);
+    } else {
+      this.setState({ errorMessage: "One or more fields are not valid." });
+    }
   },
 
   render() {
@@ -148,78 +148,133 @@ const ContactPage = React.createClass({
         />
         <SiteContainer breakAll padAll>
           <form
+            className={"Form" + (this.state.isProcessing ? " Form--processing" : (!!this.state.success ? " Form--hidden" : ""))}
             ref="form"
             action="/contact"
             method="post"
             onSubmit={this.onSubmit}
-            style={{
-              padding: `${rhythm(1)} 0`,
-            }}
           >
             <FlexRow col2>
-              <TextInput
+              <FormField
                 type="text"
                 label="Your First Name"
                 name="firstName"
                 placeholder="Type here!"
+                whenFieldUpdated={this.handleFieldUpdated}
+                required
               />
-              <TextInput
+              <FormField
                 type="text"
                 label="Your Last Name"
                 name="lastName"
                 placeholder="Then here!"
+                whenFieldUpdated={this.handleFieldUpdated}
+                required
               />
             </FlexRow>
-            <TextInput
+            <FormField
               type="text"
               label="Your Email Address"
               name="email"
               placeholder="hey@parisleaf.com"
+              fieldPattern={EMAIL_REGEX}
+              whenFieldUpdated={this.handleFieldUpdated}
+              required
             />
-            <TextInput
+            <FormField
+              type="text"
+              label="Your Phone Number"
+              name="phone"
+              placeholder="(555) 555-5555"
+            />
+            <FormField
               type="text"
               label="Your Company Name"
               name="company"
-              placeholder="Almost done!"
             />
-            <TextInput
+            <FormField
               type="text"
               label="Your Ideal Sandwich"
               name="idealSandwich"
-              placeholder="All done!"
+              placeholder="Almost done!"
             />
-            <FlexItem grow element="label" style={{
-              marginTop: `${rhythm(1/2)}`,
-              marginBottom: `${rhythm(1/2)}`,
-            }}>
-              <Metadata>Your Message</Metadata>
-              <textarea
-                name="message"
-                style={style.textInput}
-                className="TextInput"
-              />
-            </FlexItem>
-            {errorMessage && <Alert error>{errorMessage}</Alert>}
-            {success && <Alert success>Thank you for your submission!</Alert>}
+            <FormField
+              type="textarea"
+              label="Your Message"
+              name="message"
+              placeholder="All done!"
+              className="TextInput"
+              rows="4"
+              whenFieldUpdated={this.handleFieldUpdated}
+              required
+            />
             <Button type="submit" secondaryDark>
               Submit
             </Button>
           </form>
+          {errorMessage && <Alert failure style={{marginTop: rhythm(2)}}>{errorMessage}</Alert>}
+          {success && <Alert success>Thank you for your submission!</Alert>}
         </SiteContainer>
       </div>
     );
   }
 });
 
-class ErrorMessage extends Component {
-  render() {
-    return <p className="">{this.props.children}</p>;
-  }
-}
+const FormField = React.createClass({
+  getInitialState() {
+    return {
+      fieldErrorMessage: '',
+      fieldIsValid: true,
+    };
+  },
 
-const TextInput = React.createClass({
+  componentDidMount() {
+    if ( this.props.whenFieldUpdated ) this.props.whenFieldUpdated(this.state.fieldIsValid);
+  },
+
+  handleChange(event) {
+    if ( this.props.required ) this.validateField( event.target.value, this.props.fieldPattern );
+  },
+
+  handleBlur(event) {
+    if ( this.props.required ) this.validateField( event.target.value, this.props.fieldPattern );
+  },
+
+  validateField(value, pattern) {
+    if ( !!pattern ) {
+      if ( pattern.test(value) ) {
+        this.setState({ fieldErrorMessage: "", fieldIsValid: true });
+      } else {
+        this.setState({ fieldErrorMessage: "This field is not formatted correctly.", fieldIsValid: false });
+      }
+    } else {
+      if ( !!value ) {
+        this.setState({ fieldErrorMessage: "", fieldIsValid: true });
+      } else {
+        this.setState({ fieldErrorMessage: "Please fill out this field.", fieldIsValid: false });
+      }
+    }
+  },
+
   render() {
-    const { label, style: _style, className, ...props } = this.props;
+    const { label, className, ...props } = this.props;
+    let fieldErrorMessage = this.state.fieldErrorMessage;
+    let fieldIsValid = this.state.fieldIsValid;
+
+    // Create field from prop definition
+    let field;
+    switch ( this.props.type ) {
+      case "text":
+        field = <input className={[className, 'TextInput'].filter(Boolean).join(' ')} onBlur={this.handleBlur} onChange={this.handleChange} {...props} />;
+        break;
+      case "textarea":
+        field = <textarea className={[className, 'TextInput'].filter(Boolean).join(' ')} onBlur={this.handleBlur} onChange={this.handleChange} {...props} />;
+        break;
+    }
+
+    // Create field error from state definition
+    let fieldError;
+    if ( fieldErrorMessage ) { fieldError = <Alert failure>{fieldErrorMessage}</Alert> }
 
     return (
       <FlexItem grow element="label" style={{
@@ -227,14 +282,8 @@ const TextInput = React.createClass({
         marginBottom: `${rhythm(1/2)}`,
       }}>
         <Metadata>{this.props.label}</Metadata>
-        <input
-          className={[
-            className,
-            'TextInput'
-          ].filter(Boolean).join(' ')}
-          style={{ ...style.textInput, ..._style }}
-          {...props}
-        />
+        {field}
+        {fieldError}
       </FlexItem>
     );
   }
@@ -256,8 +305,6 @@ const FlexRow = React.createClass({
   }
 });
 
-export default ContactHandler;
-
 const FuncSubject = {
   create() {
     function subject(value) {
@@ -272,4 +319,28 @@ const FuncSubject = {
 
     return subject;
   }
+};
+
+class ErrorMessage extends Component {
+  render() {
+    return <p className="">{this.props.children}</p>;
+  }
+}
+
+export default ContactHandler;
+
+// http://davidwalsh.name/javascript-debounce-function
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
 };

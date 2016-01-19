@@ -1,11 +1,23 @@
+.Form
+  &--processing
+    opacity: 0.5
+    transition: all 250ms ease
+
+  &--hidden
+    display: none
+
 .TextInput
-  margin: 0
-  border: 0
-  padding: 0
   display: inline-block
+  margin: rhythm(1/2) 0
+  padding: rhythm(1/2) rhythm(1)
+  width: 100%
+  min-height: rhythm(1.5)
+  line-height: 1.5
+  border: 2px solid theme-color(lightGray)
+  outline: 0
+  background: theme-color(lightGray)
   white-space: normal
-  background: none
-  line-height: 1
+  transition: all 250ms ease
 
   &:focus
-    outline: 0
+    border: 2px solid theme-color(medGray)
