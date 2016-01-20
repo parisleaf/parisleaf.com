@@ -4,6 +4,7 @@ import React from 'react';
 import SuitCSS from 'react-suitcss';
 import chroma from 'chroma-js';
 
+import Accordion from './Accordion';
 import Slider from './Slider';
 import Video from './Video';
 
@@ -14,7 +15,7 @@ let HTMLContentArea = React.createClass({
 
   renderSliders() {
     // query selector
-    let slidersObject = document.querySelectorAll('.Slide-this'); // Scoped correctly?
+    let slidersObject = document.querySelectorAll('div.slider-shortcode'); // Scoped correctly?
 
     // scope it within this dom node only // TODO
     let sliders = Array.from(slidersObject);
@@ -33,7 +34,6 @@ let HTMLContentArea = React.createClass({
         <Slider
           key={count}
           grabCursor={true}
-          // ref="projectSlider"
           pagination={'.swiper-pagination'}
           paginationHide={false}
           paginationClickable={true}
@@ -42,6 +42,27 @@ let HTMLContentArea = React.createClass({
           {images}
         </Slider>
       , slider);
+
+    });
+  },
+
+  renderAccordions() {
+    // find accordions
+    let accordionObject = document.querySelectorAll('div.accordion-shortcode'); // Scoped correctly?
+
+    // scope it within this dom node only // TODO
+    let accordions = Array.from(accordionObject);
+
+    // get datasets from accordions
+    accordions.map(function(accordion, count) {
+      let sectionDOMNodes = Array.from(accordion.querySelectorAll(':scope > div.accordion-section-shortcode'));
+      let sections = sectionDOMNodes.map(function(section) {
+        return JSON.parse(JSON.stringify(section.dataset));
+      });
+
+      React.render(
+        <Accordion totalSections={sections.length} sections={sections} />
+      , accordion);
 
     });
   },
@@ -77,6 +98,7 @@ let HTMLContentArea = React.createClass({
 
   componentDidMount() {
     this.renderSliders();
+    this.renderAccordions();
     this.renderVideos();
     this.cleanCaptions();
     this.cleanImages();

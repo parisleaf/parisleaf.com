@@ -107,7 +107,6 @@ const ContactPage = React.createClass({
 
   handleFieldUpdated(status) {
     this.setState({ valid: status });
-    console.log(status);
   },
 
   onSubmit(event) {
@@ -224,7 +223,7 @@ const FormField = React.createClass({
   getInitialState() {
     return {
       fieldErrorMessage: '',
-      fieldIsValid: true,
+      fieldIsValid: true
     };
   },
 

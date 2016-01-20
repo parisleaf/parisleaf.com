@@ -1,0 +1,62 @@
+$site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
+
+.Accordion
+  display: flex
+  flex-direction: column
+
+  +bp(l)
+    height: 80vh
+    flex-direction: row
+    width: auto
+
+  &:hover &-section-content-background
+    opacity: 1
+
+  &-section
+    flex: 1 1 auto
+    background: black
+
+    height: rhythm(10)
+
+    +bp(l)
+      height: auto
+
+    &-content
+      color: white
+
+      &:hover &-background
+        opacity: 0.5
+
+      &-background
+        +z-index(AppOverlay, -1)
+        position: absolute
+        height: 100%
+        width: 100%
+        background: unquote("linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8))")
+        opacity: 0.5
+        transition-property: opacity
+        transition-duration: 200ms
+
+      &-title
+        margin-bottom: 0 !important
+        color: white !important
+        font-family: font-family(alrightNormal) !important
+        font-weight: bold !important
+
+      &-description
+        margin-bottom: rhythm(2)
+
+      &-text
+        padding: 0
+        +bp(m)
+          padding: rhythm(1)
+
+      &-button
+        margin-left: rhythm($site-container-rhythm-padding)
+        margin-right: rhythm($site-container-rhythm-padding)
+        margin-bottom: rhythm($site-container-rhythm-padding)
+
+        +bp(m)
+          margin-left: 0
+          margin-right: 0
+          margin-bottom: rhythm($site-container-rhythm-padding)/2
