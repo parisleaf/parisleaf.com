@@ -20,7 +20,7 @@ WORKDIR /app
 ADD . /app
 
 RUN npm install
-RUN bower install
+RUN bower install --allow-root
 
 ENV NODE_ENV production
 ENV PORT 8080
