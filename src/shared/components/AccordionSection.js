@@ -90,7 +90,7 @@ let AccordionSection = React.createClass({
     };
 
     if (this.state.media.l) {
-      style.minWidth = `${videoVisibility * 100}vw`;
+      style.minWidth = `${videoVisibility * 100}%`;
     } else {
       style.minHeight = !isiOS7()
         ? `${videoVisibility * 100}vh`

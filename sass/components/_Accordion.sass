@@ -5,9 +5,13 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
   flex-direction: column
 
   +bp(l)
-    height: 80vh
     flex-direction: row
     width: auto
+    height: 80vh
+    margin: rhythm(1.5)
+
+  +bp(xxl)
+    margin: rhythm(3)
 
   &:hover &-section-content-background
     opacity: 1
