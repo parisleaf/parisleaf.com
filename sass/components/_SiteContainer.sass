@@ -23,6 +23,12 @@ $site-container-rhythm-padding: map-get($theme, siteContainerRhythmPadding)
         +bp($name)
           max-width: 960px
 
+  &--breakFixedSmall
+    @each $name, $breakpoint in map-get($theme, 'breakpoints')
+      @if $name != 's' and $name != 'm'
+        +bp($name)
+          max-width: 640px
+
   &--padAll
     padding: 0 rhythm($site-container-rhythm-padding)
 

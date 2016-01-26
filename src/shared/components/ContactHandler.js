@@ -145,7 +145,7 @@ const ContactPage = React.createClass({
         <TitleSection
           title="We&#x2019;re all ears and always happy to lend one."
         />
-        <SiteContainer breakAll padAll>
+        <SiteContainer breakFixedSmall padAll>
           <form
             className={"Form" + (this.state.isProcessing ? " Form--processing" : (!!this.state.success ? " Form--hidden" : ""))}
             ref="form"
@@ -153,24 +153,14 @@ const ContactPage = React.createClass({
             method="post"
             onSubmit={this.onSubmit}
           >
-            <FlexRow col2>
-              <FormField
-                type="text"
-                label="Your First Name"
-                name="firstName"
-                placeholder="Type here!"
-                whenFieldUpdated={this.handleFieldUpdated}
-                required
-              />
-              <FormField
-                type="text"
-                label="Your Last Name"
-                name="lastName"
-                placeholder="Then here!"
-                whenFieldUpdated={this.handleFieldUpdated}
-                required
-              />
-            </FlexRow>
+            <FormField
+              type="text"
+              label="Your Name"
+              name="fullName"
+              placeholder="First and last please!"
+              whenFieldUpdated={this.handleFieldUpdated}
+              required
+            />
             <FormField
               type="text"
               label="Your Email Address"
@@ -193,8 +183,8 @@ const ContactPage = React.createClass({
             />
             <FormField
               type="text"
-              label="Your Ideal Sandwich"
-              name="idealSandwich"
+              label="How did you hear about us?"
+              name="howDidYouHearAboutUs"
               placeholder="Almost done!"
             />
             <FormField
@@ -277,8 +267,8 @@ const FormField = React.createClass({
 
     return (
       <FlexItem grow element="label" style={{
-        marginTop: `${rhythm(1/2)}`,
-        marginBottom: `${rhythm(1/2)}`,
+        marginTop: `${rhythm(0)}`,
+        marginBottom: `${rhythm(1.5)}`,
       }}>
         <Metadata>{this.props.label}</Metadata>
         {field}

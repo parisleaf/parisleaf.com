@@ -15,7 +15,13 @@
       text-decoration: none
 
   &-section
+    margin-bottom: rhythm(2)
+    text-align: center
+
     +bp(l)
+      margin-bottom: 0
+      text-align: left
+
       +gallery(4 of 12)
 
   &-socialContainer
@@ -28,3 +34,7 @@
     margin-top: rhythm(1)
     padding-top: rhythm(1)
     border-top: 2px solid white
+    text-align: center
+
+    +bp(l)
+      text-align: left

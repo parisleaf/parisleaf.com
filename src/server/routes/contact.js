@@ -21,7 +21,7 @@ export default function(app) {
     sendMail({
       from: process.env.CONTACT_FORM_FROM,
       to: process.env.CONTACT_FORM_TO.split(','),
-      subject: `Contact Form: ${data.firstName} ${data.lastName}`,
+      subject: `Contact Form: ${data.fullName}`,
       text: message,
       replyTo: data.email
     });

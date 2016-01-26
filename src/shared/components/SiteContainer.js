@@ -11,7 +11,7 @@ let BorderContainer = React.createClass({
         {...this.props}
         componentName="SiteContainer"
         element="div"
-        modifiers={['breakAll','breakAfterLarge','breakFixed','padAll','padAfterLarge']}
+        modifiers={['breakAll','breakAfterLarge','breakFixed','breakFixedSmall','padAll','padAfterLarge']}
       />
     );
   }
