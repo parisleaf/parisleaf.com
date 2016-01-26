@@ -18,12 +18,20 @@ const PageFooter = React.createClass({
         href: "https://vimeo.com/parisleaf"
       },
       {
+        title: "LinkedIn",
+        href: "https://www.linkedin.com/company/parisleaf-printing-and-design"
+      },
+      {
         title: "Facebook",
         href: "https://www.facebook.com/parisleaf"
       },
       {
         title: "Behance",
         href: "https://www.behance.net/parisleaf"
+      },
+      {
+        title: "Instagram",
+        href: "https://www.instagram.com/teamparisleaf/"
       },
     ];
 
