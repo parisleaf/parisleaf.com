@@ -27,7 +27,7 @@ const ContactSection = React.createClass({
           <SiteContainer breakAll padAll>
             <div className="ContactSection-inner">
               <Header level={1}>
-                Let&rsquo;s make sparks fly.
+                Let&rsquo;s get our feet wet.
               </Header>
               <Button
                 component={AppLink}
