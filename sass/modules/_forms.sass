@@ -1,23 +1,74 @@
+$input-padding-base: rhythm(1)
+
 .Form
-  &--processing
-    opacity: 0.5
-    transition: all 250ms ease
-
-  &--hidden
-    display: none
-
-.TextInput
-  display: inline-block
-  margin: rhythm(1/2) 0 0
-  padding: rhythm(1/2) rhythm(1)
-  width: 100%
-  min-height: rhythm(1.5)
-  line-height: 1.5
-  border: 2px solid theme-color(lightGray)
-  outline: 0
-  background: theme-color(lightGray)
-  white-space: normal
+  position: relative
   transition: all 250ms ease
 
-  &:focus
-    border: 2px solid theme-color(medGray)
+  &--isSubmitting
+    opacity: 0.5
+
+  &--isComplete
+    opacity: 0
+
+.Field
+  position: relative
+  margin-bottom: rhythm(1)
+  transition: all 250ms ease
+
+  &-label
+    position: absolute
+    z-index: 3
+    top: 0
+    left: 0
+    padding: $input-padding-base $input-padding-base 0
+    border: 2px solid transparent
+    color: theme-color(gray)
+    cursor: text
+    font-family: font-family(vollkorn)
+    pointer-events: none
+    transition: all 250ms ease
+
+  &-input
+    display: block
+    position: relative
+    z-index: 2
+    width: 100%
+    margin: 0
+    padding: ($input-padding-base + $input-padding-base*0.4) $input-padding-base ($input-padding-base - $input-padding-base*0.6)
+    background: theme-color(lightGray)
+    border: 2px solid transparent
+    line-height: 1.75
+    outline: 0
+    white-space: normal
+    transition: all 250ms ease
+
+    &:focus
+      border-bottom: 2px solid theme-color(medGray)
+
+  &-error
+    position: absolute
+    z-index: 1
+    font-size: font-size(small)
+    opacity: 0
+    transform: translateY(-100%)
+    transition: all 250ms ease
+
+.Field--isFocused, .Field--isNotEmpty
+  .Field-label
+    padding: ($input-padding-base - $input-padding-base*0.4) $input-padding-base 0
+    color: theme-color(gray)
+    font-size: font-size(small)
+
+.Field--isNotValid
+  margin-bottom: rhythm(1.5)
+
+  .Field-input
+    border-bottom: 2px solid theme-color(orange)
+
+  .Field-error
+    opacity: 1
+    transform: translateY(0)
+
+.Field--isValid
+  .Field-input
+    border-bottom: 2px solid theme-color(green)

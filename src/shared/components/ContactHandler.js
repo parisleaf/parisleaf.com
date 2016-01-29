@@ -57,13 +57,14 @@ const ContactPage = React.createClass({
           ]} />
         <TitleSection title="We&#x2019;re all ears and always happy to lend one." />
         <SiteContainer breakFixedSmall padAll>
-          <Form action="/contact" method="post" recaptcha>
+          <Form action="/contact" method="post">
             <FormField type="text" name="fullName" label="Your name" required />
             <FormField type="text" name="email" label="Your email" required validations="isEmail" validationError="Please enter a valid email address." />
             <FormField type="text" name="phone" label="Your phone number" required />
             <FormField type="text" name="company" label="Your company name" />
             <FormField type="text" name="howDidYouHearAboutUs" label="How did you hear about us?" />
-            <FormField type="textarea" name="message" label="Your message" required />
+            <FormField type="textarea" name="message" label="Your message" rows={4} required />
+            <FormField type="text" name="captcha" label={['Please enter the phrase ', <span>&lsquo;</span>, 'I like turtles', <span>&rsquo;</span>]} required />
           </Form>
         </SiteContainer>
       </div>
