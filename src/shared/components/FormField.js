@@ -13,6 +13,7 @@ const FormField = React.createClass({
       isFocused   : false,
       isInputValid: false,
       showErrors  : false,
+      serverError : '',
       value       : this.props.value || '',
     };
   },
@@ -62,12 +63,14 @@ const FormField = React.createClass({
       }
     };
 
+    // Set rules for custom classes
     const markAsEmpty    = !this.state.value;
     const markAsFocused  = this.state.isFocused;
     const markAsRequired = this.props.required && !this.state.value;
     const markAsValid    = !this.state.isFocused && this.state.isInputValid && this.state.value;
     const markAsInvalid  = this.state.showErrors && !this.state.isInputValid;
 
+    // Assign custom classes
     const fieldClasses = ['Field'];
     const labelClasses = ['Field-label'];
     const inputClasses = ['Field-input'];
@@ -79,7 +82,7 @@ const FormField = React.createClass({
     if (markAsValid) fieldClasses.push('Field--isValid');
 
     // Build fields based on the "type" prop
-    let field;
+    let field = null;
     switch (this.props.type) {
       case 'textarea':
         field = <textarea ref="input" className={inputClasses.join(' ')} name={this.props.name} value={this.state.value} onChange={this.handleInputChange} onBlur={this.handleInputBlur} onFocus={this.handleInputFocus} {...this.props} />;
@@ -89,13 +92,23 @@ const FormField = React.createClass({
         break;
     }
 
+    // Set error message on input
+    let fieldError = '';
+    if (this.state.serverError.length > 0) {
+      // If there are server errors, set them here
+      fieldError = this.state.serverError;
+    } else {
+      // Show the default error from this.props.validationError
+      fieldError = this.props.validationError;
+    }
+
     return (
       <FlexItem className={fieldClasses.join(' ')} grow>
         <label ref="label" className={labelClasses.join(' ')} htmlFor={this.props.name}>
           {[this.props.label, this.props.required ? '*' : '']}
         </label>
         {field}
-        <div ref="error" className={errorClasses.join(' ')}>{markAsInvalid ? [<SvgIcon name="xmark" style={style.errorIcon} />,this.props.validationError] : ''}</div>
+        <div ref="error" className={errorClasses.join(' ')}>{markAsInvalid ? [<SvgIcon name="xmark" style={style.errorIcon} />,fieldError] : ''}</div>
       </FlexItem>
     );
   }

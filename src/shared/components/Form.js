@@ -20,6 +20,14 @@ const Form = React.createClass({
   },
 
   componentWillMount() {
+    // model = {
+    //   my_field_name: {
+    //     value: "some input value",
+    //     validations: "isEmail",
+    //     validationError: "Please enter a valid email."
+    //   },
+    //   ...
+    // }
     this.model = {}; // form input values
     this.inputs = {}; // form input components
     this.children = this.registerInputs(this.props.children); // process children components
@@ -87,7 +95,10 @@ const Form = React.createClass({
 
   attachToForm(component) {
     this.inputs[component.props.name] = component;
-    this.model[component.props.name] = component.state.value;
+    this.model[component.props.name] = {};
+    this.model[component.props.name].value = component.state.value;
+    this.model[component.props.name].validations = component.props.validations;
+    this.model[component.props.name].validationError = component.props.validationError;
     this.validate(component);
   },
 
@@ -98,7 +109,7 @@ const Form = React.createClass({
 
   updateModel() {
     Object.keys(this.inputs).forEach(function (name) {
-      this.model[name] = this.inputs[name].state.value;
+      this.model[name].value = this.inputs[name].state.value;
     }.bind(this));
   },
 
@@ -110,10 +121,10 @@ const Form = React.createClass({
     // We only validate if the input has a value, or if it is required
     if (component.props.value || component.props.required) {
 
-      // The following just reads the "validations" prop and finds the individual parameters
+      // Now we read the "validations" prop and find the individual validator parameters
       // For example, the prop may read: validations="isNumeric,isLength:5"
       // We want to get the methods from that string, and an array of each method's parameters
-      // So for the method "isLength", we have the array ["value", 5]
+      // So for the method "isLength", we have the array [component.state.value, 5]
       component.props.validations.split(',').forEach(function (validation) {
         let args = validation.split(':');
         let validateMethod = args.shift();
@@ -129,7 +140,8 @@ const Form = React.createClass({
 
     // Update the state of this component, and then the entire form
     component.setState({
-      isInputValid: isValid
+      isInputValid: isValid,
+      serverError: '',
     }, this.validateForm);
   },
 
@@ -172,10 +184,6 @@ const Form = React.createClass({
     });
   },
 
-  getServerErrors() {
-    
-  },
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -201,10 +209,14 @@ const Form = React.createClass({
       // this.model['g-recaptcha-response'] = grecaptcha.getResponse(this.recaptchaId);
 
       request.post(ensureIsomorphicUrl(this.props.action))
-             .send(this.model)
-             .exec()
-             .then(this.onSuccess)
-             .catch(this.getServerErrors);
+        .send(this.model)
+        .end(function(err, res){
+          if (res.error) {
+            console.log('A server error was encountered. Please refresh the page and try again.');
+          } else {
+            this.onSuccess(res);
+          }
+        }.bind(this));
     } else {
       // TODO: Show all field errors and focus on the first offending input
       this.showErrors();
@@ -217,13 +229,26 @@ const Form = React.createClass({
     }
   },
 
-  onSuccess() {
-    console.log('submit complete!');
+  onSuccess(response) {
+    const errors = response.body.errors;
 
-    this.setState({
-      isSubmitting: false,
-      isComplete: true
-    });
+    if (!errors) {
+      this.setState({
+        isSubmitting: false,
+        isComplete: true,
+      });
+    } else {
+      Object.keys(errors).forEach(function (name) {
+        var component = this.inputs[name];
+        component.setState({
+          isInputValid: false,
+          serverError: errors[name],
+        });
+        this.setState({
+          isSubmitting: false,
+        }, this.validateForm);
+      }.bind(this));
+    }
   },
 
   render() {
@@ -237,19 +262,23 @@ const Form = React.createClass({
     const markAsComplete = this.state.isComplete;
     const markAsSubmitting = this.state.isSubmitting;
 
+    // Set conditional classes
     const formClasses = ['Form'];
-    if (markAsComplete) formClasses.push('Form--isComplete');
     if (markAsSubmitting) formClasses.push('Form--isSubmitting');
+    if (markAsComplete) formClasses.push('Form--isComplete');
 
     // Create reCAPTCHA field
     const recaptcha = <FlexItem grow style={style.captchaField}><div ref="recaptcha"></div></FlexItem>;
 
     return (
-      <form className={formClasses.join(' ')} action={this.props.action} method={this.props.method} noValidate onSubmit={this.onSubmit}>
-        {this.children}
-        {this.props.recaptcha ? recaptcha : ''}
-        <Button ref="submit" type="submit" disabled={this.state.isSubmitting || this.state.isComplete} secondaryDark>Submit</Button>
-      </form>
+      <div>
+        <form className={formClasses.join(' ')} action={this.props.action} method={this.props.method} noValidate onSubmit={this.onSubmit}>
+          {this.children}
+          {this.props.recaptcha ? recaptcha : ''}
+          <Button ref="submit" type="submit" disabled={this.state.isSubmitting || this.state.isComplete} secondaryDark>Submit</Button>
+        </form>
+        {markAsComplete ? <Alert success>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</Alert> : ''}
+      </div>
     );
   }
 });
