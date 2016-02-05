@@ -2,13 +2,41 @@ $input-padding-base: rhythm(1)
 
 .Form
   position: relative
+  overflow: hidden
   transition: all 250ms ease
 
-  &--isSubmitting
-    opacity: 0.5
+  &-checkmark
+    position: absolute
+    +z-index(AppTransition, -1)
+    top: 0
+    left: 0
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 100%
+    height: 100%
+    padding: rhythm(1)
 
-  &--isComplete
-    display: none
+    > *
+      flex: 0 0 auto
+      min-width: 1px
+      min-height: 1px
+
+    &-icon
+      width: rhythm(6)
+      height: (64.2422/98.4365)*rhythm(6)
+      fill: none
+      stroke: theme-color(green)
+      stroke-dasharray: 140
+      stroke-width: 8px
+      stroke-linejoin: round
+      stroke-linecap: round
+
+    &-message
+      margin-top: rhythm(2)
+      text-align: center
+      max-width: 480px
 
 .Field
   position: relative

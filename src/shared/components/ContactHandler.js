@@ -64,7 +64,7 @@ const ContactPage = React.createClass({
             <FormField type="text" name="company" label="Your company name" />
             <FormField type="text" name="howDidYouHearAboutUs" label="How did you hear about us?" />
             <FormField type="textarea" name="message" label="Your message" rows={4} required />
-            <FormField type="text" name="captcha" label={['Please enter the phrase ', <span>&lsquo;</span>, 'I like turtles', <span>&rsquo;</span>]} required />
+            <FormField type="text" name="captcha" label={['Please enter the phrase ', <span>&lsquo;</span>, 'I am definitely not a robot', <span>&rsquo;</span>]} required />
           </Form>
         </SiteContainer>
       </div>

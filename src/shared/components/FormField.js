@@ -56,10 +56,10 @@ const FormField = React.createClass({
   render() {
     const style = {
       errorIcon: {
-        width: `${rhythm(0.3)}`,
-        height: `${rhythm(0.3)}`,
+        width      : `${rhythm(0.3)}`,
+        height     : `${rhythm(0.3)}`,
         marginRight: `${rhythm(0.2)}`,
-        fill: `${color('darkGray')}`
+        fill       : `${color('darkGray')}`
       }
     };
 

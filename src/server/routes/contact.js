@@ -29,7 +29,7 @@ export default function(app) {
     //       Is sending a "required" property from the client secure?
     const requiredFields = ['fullName', 'email', 'phone', 'message', 'captcha'];
     const ignoredFields = ['captcha', 'recaptcha'];
-    const captchaAnswer = "I like turtles";
+    const captchaAnswer = "I am definitely not a robot";
 
     // Set errors as an empty object
     let errors = {};
@@ -60,7 +60,7 @@ export default function(app) {
 
       // Validate the captcha
       if (key === "captcha") {
-        if (dataObject.value !== captchaAnswer) {
+        if (dataObject.value.toUpperCase() !== captchaAnswer.toUpperCase()) {
           errors[key] = "Please enter the correct phrase."
         }
       }

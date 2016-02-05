@@ -1,21 +1,35 @@
 import React from 'react';
 import request from 'superagent';
 import serialize from 'form-serialize';
+import tweenState from 'react-tween-state';
 import validator from 'validator';
 
 import Alert from './Alert';
 import Button from './Button';
 import FlexItem from './FlexItem';
+import SvgIcon from './SvgIcon';
 
 import { ensureIsomorphicUrl } from '../utils/LinkUtils';
-import { rhythm } from '../theme';
+import { rhythm, color } from '../theme';
+
+const scaleCentered = function(value) {
+  return {
+    transform: `scale(${value}) translateX(0%) translateY(0%)`,
+    webkitTransform: `scale(${value}) translateX(0%) translateY(0%)`,
+  }
+};
 
 const Form = React.createClass({
+  mixins: [tweenState.Mixin],
+
   getInitialState() {
     return {
-      isFormValid   : false,
-      isSubmitting  : false,
-      isComplete    : false,
+      isFormValid              : false,
+      isSubmitting             : false,
+      isComplete               : false,
+      opacity                  : 1,
+      checkmarkStrokeDashoffset: 140,
+      checkmarkMessageOpacity  : 0,
     }
   },
 
@@ -212,6 +226,7 @@ const Form = React.createClass({
         .send(this.model)
         .end(function(err, res){
           if (res.error) {
+            // TODO: Catch server errors and display them under the submit button
             console.log('A server error was encountered. Please refresh the page and try again.');
           } else {
             this.onSuccess(res);
@@ -233,10 +248,7 @@ const Form = React.createClass({
     const errors = response.body.errors;
 
     if (!errors) {
-      this.setState({
-        isSubmitting: false,
-        isComplete: true,
-      });
+      this.setCompletedState();
     } else {
       Object.keys(errors).forEach(function (name) {
         var component = this.inputs[name];
@@ -251,13 +263,57 @@ const Form = React.createClass({
     }
   },
 
+  setCompletedState() {
+    this.setState({
+      isSubmitting: false,
+      isComplete: true,
+    });
+    this.tweenState('opacity', {
+      easing: tweenState.easingTypes.linear,
+      duration: 300,
+      endValue: this.state.opacity === 0 ? 1 : 0,
+    });
+    this.tweenState('checkmarkStrokeDashoffset', {
+      easing: tweenState.easingTypes.easeInQuad,
+      delay: 650,
+      duration: 300,
+      endValue: this.state.checkmarkStrokeDashoffset === 140 ? 0 : 140,
+      onEnd: function() {
+        this.tweenState('checkmarkMessageOpacity', {
+          easing: tweenState.easingTypes.linear,
+          delay: 150,
+          duration: 300,
+          endValue: this.state.checkmarkMessageOpacity === 1 ? 0 : 1,
+        });
+      }.bind(this)
+    });
+  },
+
   render() {
     const style = {
+      wrapper: {
+        position: 'relative'
+      },
+      form: {
+        opacity: this.getTweeningValue('opacity'),
+      },
       captchaField: {
         marginTop: `${rhythm(0)}`,
         marginBottom: `${rhythm(1.5)}`,
       }
     };
+
+    let checkmarkStyle = {
+      container: {
+        display: this.getTweeningValue('checkmarkStrokeDashoffset') === 140 ? 'none' : 'flex',
+      },
+      icon: {
+        strokeDashoffset: this.getTweeningValue('checkmarkStrokeDashoffset'),
+      },
+      message: {
+        opacity: this.getTweeningValue('checkmarkMessageOpacity'),
+      }
+    }
 
     const markAsComplete = this.state.isComplete;
     const markAsSubmitting = this.state.isSubmitting;
@@ -267,17 +323,72 @@ const Form = React.createClass({
     if (markAsSubmitting) formClasses.push('Form--isSubmitting');
     if (markAsComplete) formClasses.push('Form--isComplete');
 
-    // Create reCAPTCHA field
-    const recaptcha = <FlexItem grow style={style.captchaField}><div ref="recaptcha"></div></FlexItem>;
-
     return (
-      <div>
-        <form className={formClasses.join(' ')} action={this.props.action} method={this.props.method} noValidate onSubmit={this.onSubmit}>
+      <div style={style.wrapper}>
+        <form className={formClasses.join(' ')} action={this.props.action} method={this.props.method} noValidate onSubmit={this.onSubmit} style={style.form}>
           {this.children}
-          {this.props.recaptcha ? recaptcha : ''}
+          {this.props.recaptcha ? <FlexItem grow style={style.captchaField}><div ref="recaptcha"></div></FlexItem> : ''}
           <Button ref="submit" type="submit" disabled={this.state.isSubmitting || this.state.isComplete} secondaryDark>Submit</Button>
         </form>
-        {markAsComplete ? <Alert success>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</Alert> : ''}
+        <div className="Form-checkmark" style={checkmarkStyle.container}>
+          <SvgIcon className="Form-checkmark-icon" name="checkoutline" style={checkmarkStyle.icon} />
+          <div className="Form-checkmark-message" style={checkmarkStyle.message}>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</div>
+        </div>
+      </div>
+    );
+  }
+});
+
+const Checkmark = React.createClass({
+  mixins: [tweenState.Mixin],
+
+  getInitialState() {
+    return {
+      opacity: 0,
+      scale: 1,
+      strokeDashoffset: Math.PI*parseFloat(rhythm(10)),
+      message: 0,
+    }
+  },
+
+  runAnimations() {
+    this.tweenState('opacity', {
+      easing: tweenState.easingTypes.easeOutQuad,
+      delay: 250,
+      duration: 400,
+      endValue: 1,
+    });
+    this.tweenState('scale', {
+      easing: tweenState.easingTypes.easeOutQuad,
+      delay: 250,
+      duration: 400,
+      endValue: 1.1,
+    });
+  },
+
+  render() {
+    let style = {
+      container: {
+        display: this.props.active ? 'block' : 'none',
+      },
+      icon: {
+        width: rhythm(10),
+        height: rhythm(10),
+        fill: color('green'),
+        opacity: this.getTweeningValue('opacity'),
+        strokeDashoffset: this.getTweeningValue('strokeDashoffset'),
+      },
+      message: {
+        opacity: this.getTweeningValue('message'),
+      }
+    }
+
+    Object.assign(style.icon, scaleCentered(this.getTweeningValue('scale')));
+
+    return (
+      <div className="Form-checkmark" style={style.container}>
+        <SvgIcon name="circle-check-mark" style={style.icon} />
+        <div style={style.message}>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</div>
       </div>
     );
   }
