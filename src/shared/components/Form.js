@@ -388,7 +388,7 @@ const Checkmark = React.createClass({
     return (
       <div className="Form-checkmark" style={style.container}>
         <SvgIcon name="circle-check-mark" style={style.icon} />
-        <div style={style.message}>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</div>
+        <div style={style.message}>Great Scott, it worked! We've received your message and will be in touch as soon as possible.</div>
       </div>
     );
   }
