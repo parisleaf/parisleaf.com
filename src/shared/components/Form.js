@@ -332,7 +332,7 @@ const Form = React.createClass({
         </form>
         <div className="Form-checkmark" style={checkmarkStyle.container}>
           <SvgIcon className="Form-checkmark-icon" name="checkoutline" style={checkmarkStyle.icon} />
-          <div className="Form-checkmark-message" style={checkmarkStyle.message}>Great Scott, it worked! We've recieved your message and will be in touch as soon as possible.</div>
+          <div className="Form-checkmark-message" style={checkmarkStyle.message} dangerouslySetInnerHTML={{__html: 'Great Scott, it worked! We&#39;ve recieved your message and will be in touch as soon as possible.'}} />
         </div>
       </div>
     );
