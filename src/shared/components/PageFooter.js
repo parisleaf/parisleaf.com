@@ -6,7 +6,6 @@ import SiteContainer from './SiteContainer';
 import { color, rhythm } from '../theme';
 
 const PageFooter = React.createClass({
-
   socialLinks() {
     const data = [
       {
@@ -45,6 +44,8 @@ const PageFooter = React.createClass({
   },
 
   render() {
+    const today = new Date();
+
     return (
       <footer className="PageFooter">
         <SiteContainer breakAll padAll>
@@ -77,7 +78,7 @@ const PageFooter = React.createClass({
         </SiteContainer>
         <SiteContainer breakAll padAll>
           <section className="PageFooter-copyright">
-            All content copyright 2015 Parisleaf.
+            All content copyright {today.getFullYear()} Parisleaf.
           </section>
         </SiteContainer>
       </footer>
