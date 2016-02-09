@@ -1,12 +1,11 @@
 language: node_js
 node_js:
 - iojs-v1.2.0
+before_install:
+- openssl aes-256-cbc -K $encrypted_178fa280071e_key -iv $encrypted_178fa280071e_iv -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
 after_success:
 - chmod +x .travis/after_success.sh
 - ".travis/after_success.sh"
 addons:
-  ssh_known_hosts: beta.parisleaf.com
-before_install:
-- openssl aes-256-cbc -K $encrypted_178fa280071e_key -iv $encrypted_178fa280071e_iv
-  -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
+  ssh_known_hosts: parisleaf.com
 sudo: false

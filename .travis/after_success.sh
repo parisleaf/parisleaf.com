@@ -8,7 +8,7 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "develop" ]]; the
   ssh-add .travis/deploy_key.pem
 
   # Add git remote
-  git remote add staging dokku@beta.parisleaf.com:staging
+  git remote add staging dokku@parisleaf.com:staging
 
   # Push to dokku-alt server
   git push staging develop:master
