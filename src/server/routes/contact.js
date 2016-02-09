@@ -67,7 +67,7 @@ export default function(app) {
     });
 
     if (Object.keys(errors).length === 0) {
-      // No errors -> build and send the email message
+      // Great success!
       const message = Object.keys(data).reduce((message, key) => {
 
         // Ignore "ignoredFields" when building email message

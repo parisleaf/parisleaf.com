@@ -27,6 +27,7 @@ const Form = React.createClass({
       isFormValid              : false,
       isSubmitting             : false,
       isComplete               : false,
+      serverError              : '',
       opacity                  : 1,
       checkmarkStrokeDashoffset: 140,
       checkmarkMessageOpacity  : 0,
@@ -224,13 +225,8 @@ const Form = React.createClass({
 
       request.post(ensureIsomorphicUrl(this.props.action))
         .send(this.model)
-        .end(function(err, res){
-          if (res.error) {
-            // TODO: Catch server errors and display them under the submit button
-            console.log('A server error was encountered. Please refresh the page and try again.');
-          } else {
-            this.onSuccess(res);
-          }
+        .end(function(error, response){
+          this.handleServerResponse(error, response);
         }.bind(this));
     } else {
       // TODO: Show all field errors and focus on the first offending input
@@ -244,18 +240,35 @@ const Form = React.createClass({
     }
   },
 
-  onSuccess(response) {
-    const errors = response.body.errors;
+  handleServerResponse(error, response) {
+    // Rudimentary catch for server errors
+    if (error) {
+      this.setFailedState();
+      return false;
+    }
 
-    if (!errors) {
+    if (!response.body.errors) {
+      // Great success!
       this.setCompletedState();
+
+      // Send a fake success pageview to google analytics for tracking purposes
+      ga('send', 'pageview', '/contact/success');
+
     } else {
-      Object.keys(errors).forEach(function (name) {
+      // Errors found
+      const fieldErrors = response.body.errors;
+
+      // Assign individual errors to inputs
+      Object.keys(fieldErrors).forEach(function (name) {
         var component = this.inputs[name];
+
+        // Set input error state
         component.setState({
           isInputValid: false,
-          serverError: errors[name],
+          serverError: fieldErrors[name],
         });
+
+        // Open form back up for submissions and validate it again
         this.setState({
           isSubmitting: false,
         }, this.validateForm);
@@ -286,6 +299,14 @@ const Form = React.createClass({
           endValue: this.state.checkmarkMessageOpacity === 1 ? 0 : 1,
         });
       }.bind(this)
+    });
+  },
+
+  setFailedState() {
+    this.setState({
+      isSubmitting: false,
+      isComplete: true,
+      serverError: 'Uh oh! Looks like something went wrong, and your info did not go through. Please refresh the page and try again or contact us directly via phone.',
     });
   },
 
@@ -328,6 +349,7 @@ const Form = React.createClass({
         <form className={formClasses.join(' ')} action={this.props.action} method={this.props.method} noValidate onSubmit={this.onSubmit} style={style.form}>
           {this.children}
           {this.props.recaptcha ? <FlexItem grow style={style.captchaField}><div ref="recaptcha"></div></FlexItem> : ''}
+          <div>{this.state.serverError ? this.state.serverError : ''}</div>
           <Button ref="submit" type="submit" disabled={this.state.isSubmitting || this.state.isComplete} secondaryDark>Submit</Button>
         </form>
         <div className="Form-checkmark" style={checkmarkStyle.container}>
