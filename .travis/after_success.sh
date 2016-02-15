@@ -8,8 +8,8 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then
   ssh-add .travis/deploy_key.pem
 
   # Add git remote
-  git remote add dokku-production dokku@parisleaf.com:staging
+  # git remote add dokku-production dokku@parisleaf.com:production
 
   # Push to production server
-  git push dokku-production master:master
+  # git push dokku-production master:master
 fi
