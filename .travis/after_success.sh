@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Deploy to staging server if on branch `master`
+# Deploy to production server if on branch `master`
 if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then
   # Add deploy key
   chmod 600 .travis/deploy_key.pem
@@ -8,8 +8,8 @@ if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then
   ssh-add .travis/deploy_key.pem
 
   # Add git remote
-  git remote add staging dokku@parisleaf.com:staging
+  git remote add dokku-production dokku@parisleaf.com:production
 
-  # Push to dokku-alt server
-  git push staging master
+  # Push to production server
+  git push dokku-production master:master
 fi
