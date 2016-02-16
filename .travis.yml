@@ -18,8 +18,12 @@ before_install:
 # 4. script
 # 5. after_success or after_failure
 after_success:
-  - chmod +x .travis/after_success.sh
-  - ".travis/after_success.sh"
+  # see https://docs.travis-ci.com/user/deployment/custom/
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 .travis/deploy_key.pem # this key should have push access
+  - ssh-add .travis/deploy_key.pem
+  - git remote add deploy dokku@paisleaf.com:production
+  - git push deploy
 # 6. OPTIONAL before_deploy
 # 7. OPTIONAL deploy
 # 8. OPTIONAL after_deploy
