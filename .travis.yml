@@ -12,7 +12,7 @@ sudo: false
 #
 # 1. before_install
 before_install:
-  - openssl aes-256-cbc -K $encrypted_5dd9bc9d7f79_key -iv $encrypted_5dd9bc9d7f79_iv -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
+  - openssl aes-256-cbc -K $encrypted_8e16e27e53c4_key -iv $encrypted_8e16e27e53c4_iv -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
 # 2. install
 # 3. before_script
 before_script:
