@@ -30,8 +30,8 @@ node_modules
 .env
 
 # Deploy keys
-.travis/deploy_key.pem
-.travis/deploy_key.pub
+.travis/*.pem
+.travis/*.pub
 
 public/js/app.js
 public/js/app.js.map
