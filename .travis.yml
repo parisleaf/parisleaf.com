@@ -16,8 +16,7 @@ before_install:
 # 2. install
 # 3. before_script
 before_script:
-  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "Host *\n\tPasswordAuthentication no\n" >> ~/.ssh/config
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\tPasswordAuthentication no\n" >> ~/.ssh/config
 # 4. script
 # 5. after_success or after_failure
 after_success:
