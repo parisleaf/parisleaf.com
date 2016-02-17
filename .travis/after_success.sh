@@ -7,7 +7,7 @@ ssh-add .travis/deploy_key.pem
 
 # Add git remote
 git config --global push.default simple
-git remote add production dokku@paisleaf.com:production
+git remote add production dokku@45.55.202.78:production
 
 # Push to dokku-alt server
 git push production master:master
