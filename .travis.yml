@@ -5,7 +5,8 @@ language: node_js
 node_js:
   - iojs-v1.2.0
 addons:
-  ssh_known_hosts: parisleaf.com
+  ssh_known_hosts:
+  - parisleaf.com
 sudo: false
 
 # Begin Build Lifecycle
@@ -15,8 +16,6 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_8e16e27e53c4_key -iv $encrypted_8e16e27e53c4_iv -in .travis/deploy_key.pem.enc -out .travis/deploy_key.pem -d
 # 2. install
 # 3. before_script
-before_script:
-  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 # 4. script
 # 5. after_success or after_failure
 after_success:
