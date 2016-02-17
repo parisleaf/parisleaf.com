@@ -31,7 +31,6 @@ node_modules
 
 # Deploy keys
 .travis/*.pem
-.travis/*.pub
 
 public/js/app.js
 public/js/app.js.map
