@@ -84,10 +84,10 @@ In both staging and production, this app is set up to deploy via dokku-alt. Push
 
 #### Production
 
-In production, the `master` branch is deployed to [Travis-CI](https://travis-ci.org/). Travis will then deploy to dokku-alt if all tests pass:
+In production, the `master` branch is deployed to [Travis-CI](https://travis-ci.org). Travis will then deploy to dokku-alt if all tests pass:
 
 1. `git push`
-2. Check [Travis-CI](https://travis-ci.o1)
+2. Check [Travis-CI](https://travis-ci.org)
 
 #### Staging
 
