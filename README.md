@@ -11,9 +11,9 @@ Node.js v0.11 (harmony flag enabled)
 [koa.js](https://github.com/koajs/koa)
 
 #### Client
-[React.js](https://github.com/facebook/react) (rendered server-side and then resumed on the client)
+[React.js](https://github.com/facebook/react) is rendered server-side and then resumed on the client.
 
-Content is fetched from an external WordPress application using [WP-API](http://wp-api.org/). That project can be found at [parisleaf/wp.parisleaf.com](https://github.com/parisleaf/wp.parisleaf.com).
+Content is fetched from a REST API endpoint. [WP-API](http://wp-api.org/) generates the JSON data for this endpoint on top of a standard WordPress installation. That project can be found at [parisleaf/wp.parisleaf.com](https://github.com/parisleaf/wp.parisleaf.com).
 
 ## Git Conventions
 
@@ -57,20 +57,20 @@ On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-insta
 
 ## Development
 
-**Clone** the repository to your development environment.
+#### Clone the repository to your development environment.
 ```git
 git clone git@github.com:parisleaf/parisleaf.com.git
 ```
 
-**Duplicate** .env.example and rename it to .env. Open the file and set your environment variables.
+#### Duplicate .env.example and rename it to .env. Open the file and set your environment variables.
 
-**Build** the application.
+#### Build the application.
 ```shell
 make build
 ```
 Running `make` again will cause only files with updated dependencies to rebuild.
 
-**Spin up** the local dev server.
+#### Spin up the local dev server.
 ```shell
 make watch
 ```
@@ -82,19 +82,19 @@ If it's the first build, you can run `make fast-build`. This will build the appl
 
 In both staging and production, this app is set up to deploy via dokku-alt. Pushing to dokku-alt will automatically build a new container based on whatever git commit you just pushed.
 
-#### Staging
-
-In staging, the `develop` branch is deployed directly to dokku-alt:
-
-1. `git remote add dokku-staging dokku@parisleaf.com:staging`
-2. `git push dokku-staging develop:master`
-
 #### Production
 
 In production, the `master` branch is deployed to [Travis-CI](https://travis-ci.org/). Travis will then deploy to dokku-alt if all tests pass:
 
 1. `git push`
 2. Check [Travis-CI](https://travis-ci.org/)
+
+#### Staging
+
+In staging, the `develop` branch is deployed directly to dokku-alt:
+
+1. `git remote add dokku-staging dokku@parisleaf.com:staging`
+2. `git push dokku-staging develop:master`
 
 Refer to [dokku-alt's documentation](https://github.com/dokku-alt/dokku-alt) for more information.
 
