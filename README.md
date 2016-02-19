@@ -57,24 +57,24 @@ On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-insta
 
 ## Development
 
-#### Clone the repository to your development environment.
-```git
-git clone git@github.com:parisleaf/parisleaf.com.git
-```
+1. Clone the repository to your development environment.
+  ```git
+  git clone git@github.com:parisleaf/parisleaf.com.git
+  ```
 
-#### Duplicate .env.example and rename it to .env. Open the file and set your environment variables.
+2. Duplicate .env.example and rename it to .env. Open the file and set your environment variables.
 
-#### Build the application.
-```shell
-make build
-```
-Running `make` again will cause only files with updated dependencies to rebuild.
+3. Build the application.
+  ```shell
+  make build
+  ```
+  Running `make` again will cause only files with updated dependencies to rebuild.
 
-#### Spin up the local dev server.
-```shell
-make watch
-```
-This will watch for changes, rebuild, and inject changes in the browser as files are changed.
+4. Spin up the local dev server.
+  ```shell
+  make watch
+  ```
+  This will watch for changes, rebuild, and inject changes in the browser as files are changed.
 
 If it's the first build, you can run `make fast-build`. This will build the application more quickly, but it won't check for changes — it runs every time. On subsequent builds, use `make build`.
 
@@ -87,7 +87,7 @@ In both staging and production, this app is set up to deploy via dokku-alt. Push
 In production, the `master` branch is deployed to [Travis-CI](https://travis-ci.org/). Travis will then deploy to dokku-alt if all tests pass:
 
 1. `git push`
-2. Check [Travis-CI](https://travis-ci.org/)
+2. Check [Travis-CI](https://travis-ci.o1.
 
 #### Staging
 
