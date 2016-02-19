@@ -24,7 +24,7 @@ Content is fetched from a REST API endpoint. [WP-API](http://wp-api.org/) genera
 #### Branches
 There are two long-term branches - **master** and **develop** - that should never be removed. New branches should be merged into **develop** when complete. Once tested and confirmed to be stable, the **develop** branch should be merged into **master** with an updated [semantic versioning](http://semver.org/) tag.
 ```shell
-npm version [major|minor|patch]`)
+npm version [major|minor|patch]
 ```
 
 **Master** contains *production-ready* code only, and is deployed to the production environment at [parisleaf.com](https://parisleaf.com)
@@ -87,7 +87,7 @@ In both staging and production, this app is set up to deploy via dokku-alt. Push
 In production, the `master` branch is deployed to [Travis-CI](https://travis-ci.org/). Travis will then deploy to dokku-alt if all tests pass:
 
 1. `git push`
-2. Check [Travis-CI](https://travis-ci.o1.
+2. Check [Travis-CI](https://travis-ci.o1)
 
 #### Staging
 
