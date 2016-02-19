@@ -1,6 +1,6 @@
 {
   "name": "parisleaf.com",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "New parisleaf.com",
   "main": "lib/server/index.js",
   "scripts": {
