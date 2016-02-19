@@ -4,11 +4,14 @@ A frontend blog-style app that fetches data using the WP REST API.
 
 ## Architecture
 
-**Server** - Node.js v0.11 (harmony flag enabled)
+#### Server
+Node.js v0.11 (harmony flag enabled)
 
-**Middleware** - [koa.js](https://github.com/koajs/koa)
+#### Middleware
+[koa.js](https://github.com/koajs/koa)
 
-**Client** - [React.js](https://github.com/facebook/react) (rendered server-side and then resumed on the client)
+#### Client
+[React.js](https://github.com/facebook/react) (rendered server-side and then resumed on the client)
 
 Content is fetched from an external WordPress application using [WP-API](http://wp-api.org/). That project can be found at [parisleaf/wp.parisleaf.com](https://github.com/parisleaf/wp.parisleaf.com).
 
