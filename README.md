@@ -2,6 +2,26 @@
 
 A frontend blog-style app that fetches data using the WP REST API.
 
+## Git Conventions
+
+**1 Topic = 1 Commit.** Each commit should be attributed to one change.
+
+**Never commit half-done work.** Commits are made to wrap up something completed, no matter how small the change.
+
+#### Branches
+There are two long-term branches - **master** and **develop** - that should never be removed. New branches should be merged into **develop** when complete. Once tested and confirmed to be stable, the **develop** branch should be merged into **master** with an updated [semantic versioning](http://semver.org/) tag.
+
+Use NPM to bump the version and automatically stage a commit with the new version tag.
+```shell
+npm version [major|minor|patch]
+```
+
+**Master** contains *production-ready* code only, and is accessed at [parisleaf.com](https://parisleaf.com)
+
+**Develop** contains *potentially unstable* code, and is accessed at [staging.parisleaf.com](https://staging.parisleaf.com).
+
+These two branches of the frontend are hosted on the same Droplet in Digital Ocean, and deployed via [dokku-alt](https://github.com/dokku-alt/dokku-alt).
+
 ## Architecture
 
 #### Server
@@ -14,24 +34,6 @@ Node.js v0.11 (harmony flag enabled)
 [React.js](https://github.com/facebook/react) is rendered server-side and then resumed on the client.
 
 Content is fetched from a REST API endpoint. [WP-API](http://wp-api.org/) generates the JSON data for this endpoint on top of a standard WordPress installation. That project can be found at [parisleaf/wp.parisleaf.com](https://github.com/parisleaf/wp.parisleaf.com).
-
-## Git Conventions
-
-**1 Topic = 1 Commit.** Each commit should be attributed to one change.
-
-**Never commit half-done work.** Commits are made to wrap up something completed, no matter how small the change.
-
-#### Branches
-There are two long-term branches - **master** and **develop** - that should never be removed. New branches should be merged into **develop** when complete. Once tested and confirmed to be stable, the **develop** branch should be merged into **master** with an updated [semantic versioning](http://semver.org/) tag.
-```shell
-npm version [major|minor|patch]
-```
-
-**Master** contains *production-ready* code only, and is deployed to the production environment at [parisleaf.com](https://parisleaf.com)
-
-**Develop** contains *potentially unstable* code and is deployed to [staging.parisleaf.com](https://staging.parisleaf.com).
-
-These two branches of the frontend are hosted on the same Droplet in Digital Ocean, and deployed via [dokku-alt](https://github.com/dokku-alt/dokku-alt).
 
 ## Tooling
 
