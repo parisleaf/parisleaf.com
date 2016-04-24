@@ -8,7 +8,8 @@ import request from 'superagent';
 
 export default function(app) {
   app.get('/api/options', function *() {
-    this.set('Cache-Control', 'max-age=2400');
+    this.set('Cache-Control', 'max-age=604800');
+    this.set('Vary', 'Accept-Encoding');
 
     let options = yield wpRequest('/acf/options').exec();
 

@@ -6,7 +6,8 @@ import request from 'superagent';
 export default function(app) {
 
   app.get('/api/menus', function *() {
-    this.set('Cache-Control', 'max-age=300');
+    this.set('Cache-Control', 'max-age=604800');
+    this.set('Vary', 'Accept-Encoding');
 
     let response = yield wpRequest('/menus').exec();
 

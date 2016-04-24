@@ -4,7 +4,8 @@ import T from './Twitter';
 
 export default function(app) {
   app.get('/api/tweets', function *() {
-    this.set('Cache-Control', 'max-age=30');
+    this.set('Cache-Control', 'max-age=86400');
+    this.set('Vary', 'Accept-Encoding');
 
     if (typeof T === 'undefined') {
       throw new Error('Twitter authentication error');
@@ -20,7 +21,8 @@ export default function(app) {
 
 
   app.get('/api/tweets/:id', function *() {
-    this.set('Cache-Control', 'max-age=2400');
+    this.set('Cache-Control', 'max-age=86400');
+    this.set('Vary', 'Accept-Encoding');
 
     if (typeof T === 'undefined') {
       throw new Error('Twitter authentication error');
