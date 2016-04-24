@@ -36,7 +36,7 @@
     "flummox": "~3.5.2",
     "form-serialize": "~0.6.0",
     "ftellipsis": "~0.2.3",
-    "headroom.js": "WickyNilliams/headroom.js",
+    "headroom.js": "^0.9.3",
     "htmlescape": "~1.0.0",
     "immutable": "~3.5.0",
     "jade": "~1.8.2",

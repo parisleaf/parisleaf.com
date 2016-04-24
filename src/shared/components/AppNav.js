@@ -106,10 +106,10 @@ let AppNav = React.createClass({
   },
 
   componentDidMount() {
-    require('headroom.js');
+    let _Headroom = require('headroom.js');
 
     const el = this.getDOMNode();
-    this.headroom = new Headroom(el, {
+    this.headroom = new _Headroom(el, {
       tolerance: 3,
       onPin: () => this.setState({ pinned: true }),
       onUnpin: () => this.setState({ pinned: false }),
