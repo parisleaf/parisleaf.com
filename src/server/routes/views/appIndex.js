@@ -23,25 +23,27 @@ import { nestedGet } from '../../../shared/utils/ImmutableUtils';
 
 export default function(app) {
   app.get(/.*/, function *() {
+    this.set('Cache-Control', 'max-age=86400');
+    this.set('Vary', 'Accept-Encoding');
 
-  const router = Router.create({
-    routes: routes,
-    location: this.url,
-    onError: error => {
-      throw error;
-    },
-    onAbort: abortReason => {
-      const error = new Error();
+    const router = Router.create({
+      routes: routes,
+      location: this.url,
+      onError: error => {
+        throw error;
+      },
+      onAbort: abortReason => {
+        const error = new Error();
 
-      if (abortReason.constructor.name === 'Redirect') {
-        const { to, params, query } = abortReason;
-        const url = router.makePath(to, params, query);
-        error.redirect = url;
+        if (abortReason.constructor.name === 'Redirect') {
+          const { to, params, query } = abortReason;
+          const url = router.makePath(to, params, query);
+          error.redirect = url;
+        }
+
+        throw error;
       }
-
-      throw error;
-    }
-  });
+    });
 
     let runResult;
 
