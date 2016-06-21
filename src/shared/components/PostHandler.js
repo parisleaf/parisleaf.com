@@ -36,7 +36,14 @@ let PostHandler = React.createClass({
     }
   },
 
+  componentDidMount() {
+    const path = this.getPathname();
+    window.location = 'http://blog.parisleaf.com' + path.replace('/blog', '');
+  },
+
   render() {
+    return false;
+
     let { slug } = this.getParams();
 
     return (

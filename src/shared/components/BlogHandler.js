@@ -56,6 +56,8 @@ let BlogHandler = React.createClass({
   },
 
   componentDidMount() {
+    window.location = 'http://blog.parisleaf.com'; return;
+
     let PostStore = this.context.flux.getStore('posts');
     let RouterStore = this.context.flux.getStore('router');
 
@@ -89,6 +91,8 @@ let BlogHandler = React.createClass({
   },
 
   render() {
+    return false;
+
     let posts = filterPosts(this.state.posts, this.state.query);
 
     let cards = posts
