@@ -23,7 +23,7 @@ let MoreCard = React.createClass({
       <Button
         className="MoreCard"
         component={AppLink}
-        to={post.get('link')}
+        href={'http://blog.parisleaf.com/'+post.get('slug')}
       >
         <article className="MoreCard-card">
           <MoreCardImage className="MoreCard-image" post={post} />
