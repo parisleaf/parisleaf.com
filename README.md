@@ -63,20 +63,21 @@ On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-insta
   ```git
   git clone git@github.com:parisleaf/parisleaf.com.git
   ```
-
-2. Duplicate .env.example and rename it to .env. Open the file and set your environment variables.
-
-3. Build the application.
+1. Duplicate .env.example and rename it to .env. Open the file and set your environment variables
+1. Make sure you have XCode developer tools installed
+1. Switch to the correct version of Node for this project (see package.json) and install bower globally
+1. Run `npm install`
+1. Run `bower install`
+1. Build the application.
   ```shell
   make build
   ```
   Running `make` again will cause only files with updated dependencies to rebuild.
-
-4. Spin up the local dev server.
+1. Spin up the local dev server.
   ```shell
   make watch
   ```
-  This will watch for changes, rebuild, and inject changes in the browser as files are changed.
+  This will watch for changes, rebuild, and inject changes in the browser as files are changed. Your site should now be live on your local environment at [localhost:3000](http://localhost:3000).
 
 If it's the first build, you can run `make fast-build`. This will build the application more quickly, but it won't check for changes — it runs every time. On subsequent builds, use `make build`.
 
