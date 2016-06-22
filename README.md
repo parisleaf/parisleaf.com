@@ -59,17 +59,29 @@ On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-insta
 
 ## Development
 
-1. Clone the repository to your development environment.
+1. Clone the repository to your development environment
   ```git
   git clone git@github.com:parisleaf/parisleaf.com.git
   ```
 1. Duplicate .env.example and rename it to .env. Open the file and set your environment variables
 1. Make sure you have XCode developer tools installed
-1. Switch to the correct version of Node for this project (see package.json) and install bower globally
-1. Run `npm install`
-1. Run `bower install`
+1. Switch to the correct version of Node for this project (see package.json)
+1. Install global NPM packages
+```shell
+npm install -g bower bunyan nodemon svg-sprite
+```
 
-1. Build the application.
+1. Install local NPM dependencies
+  ```shell
+  npm install
+  ```
+
+1. Install Bower dependencies
+  ```shell
+  bower install
+  ```
+
+1. Build the application
   ```shell
   make build
   ```
