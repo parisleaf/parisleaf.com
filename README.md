@@ -68,11 +68,13 @@ On Linux, it's [a bit more complicated](http://crocodillon.com/blog/how-to-insta
 1. Switch to the correct version of Node for this project (see package.json) and install bower globally
 1. Run `npm install`
 1. Run `bower install`
+
 1. Build the application.
   ```shell
   make build
   ```
   Running `make` again will cause only files with updated dependencies to rebuild.
+
 1. Spin up the local dev server.
   ```shell
   make watch
