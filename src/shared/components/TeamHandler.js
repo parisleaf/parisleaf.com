@@ -16,7 +16,7 @@ const team = [
   {
     name: "Chad Paris",
     photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/01/17035946/Chad-Progressive.jpg",
-    title: "Co-Founder, CRO (Chief Relationship Officer) & CEO",
+    title: "Co-Founder & CEO"
     // handle: "@CHAD_PARIS",
     questions: {
       bio: "Chad wanted to own the happiest business in the world and that goal fuels everything he does. Chad’s role is all about relationships and communication with clients and with the Parisleaf team. Chad’s passion lies in giving back to the community - some may call this networking."
