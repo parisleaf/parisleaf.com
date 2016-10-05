@@ -32,7 +32,7 @@ const team = [
     title: "Co-Founder & Chief Financial Officer",
     // handle: "@Alicparis",
     questions: {
-      bio: "Alison’s passion for managing the o ce with love and making everything run smoothly comes through in everything she does. A Pinterest fanatic, she loves both data analysis and design, working both sides of her brain equally. Her dazzling smile and efficient disposition keep the Leaf running beautifully."
+      bio: "Alison’s passion for managing the office with love and making everything run smoothly comes through in everything she does. A Pinterest fanatic, she loves both data analysis and design, working both sides of her brain equally. Her dazzling smile and efficient disposition keep the Leaf running beautifully."
       // bucket_list: "Visit the Galapagos Islands",
       // super_power: "Healing powers",
       // spirit_animal: "Sea Otter",
