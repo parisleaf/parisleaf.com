@@ -229,7 +229,6 @@ const Human = React.createClass({
           } */}
           { !!human.questions.bio &&
             [
-              <Header level={5} bold noMargin>Bio:</Header>,
               <p>{human.questions.bio}</p>
             ]
           }
