@@ -15,11 +15,11 @@ import { nestedGet } from '../utils/ImmutableUtils';
 const team = [
   {
     name: "Chad Paris",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/01/17035946/Chad-Progressive.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165705/chad.jpg",
     title: "Co-Founder & CEO",
     // handle: "@CHAD_PARIS",
     questions: {
-      bio: "Chad wanted to own the happiest business in the world and that goal fuels everything he does. Chad’s role is all about relationships and communication with clients and with the Parisleaf team. Chad’s passion lies in giving back to the community - some may call this networking."
+      bio: "Chad wanted to own the happiest business in the world, and that goal fuels everything he does. Chad’s role is all about relationships and communication with clients and with the Parisleaf team. Chad’s passion lies in giving back to the community - some may call this networking."
       // bucket_list: "Hiking the A.T.",
       // super_power: "Read minds",
       // spirit_animal: "Hawk or owl - wise and a love a good 10,000 foot view",
@@ -28,7 +28,7 @@ const team = [
   },
   {
     name: "Alison Paris",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/07/20161314/Alison.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165701/alison.jpg",
     title: "Co-Founder & Chief Financial Officer",
     // handle: "@Alicparis",
     questions: {
@@ -41,7 +41,7 @@ const team = [
   },
   {
     name: "Matt Steel",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05164640/Matt.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165710/matt.jpg",
     title: "Creative Director",
     // handle: "@Psanders3001",
     questions: {
@@ -50,7 +50,7 @@ const team = [
   },
   {
     name: "Allen Shorter",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05164639/Allen.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165703/allen.jpg",
     title: "Senior Project Manager",
     // handle: "@_mariajuan",
     questions: {
@@ -63,7 +63,7 @@ const team = [
   },
   {
     name: "Larry Werner",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/07/20161315/Larry.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165709/larry.jpg",
     title: "Senior Copywriter",
     // handle: "",
     questions: {
@@ -76,7 +76,7 @@ const team = [
   },
   {
     name: "Benji Haselhurst",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/07/20161314/Benji.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165704/benji.jpg",
     title: "Senior Designer",
     // handle: "",
     questions: {
@@ -89,11 +89,11 @@ const team = [
   },
   {
     name: "James Hill",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2015/10/14182233/James.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165707/james.jpg",
     title: "Videographer / Photographer",
     // handle: "jameslbhill",
     questions: {
-      bio: "James helps our clients tell their stories through motion. His focus on meaningful and impactful storytelling makes a brand come to life. His quiet yet thoughtful approach to his craft results in rich media that pulls at the heartstrings, and fall in love with your brand all over again. James may be quiet, but he usually has the funniest joke just waiting for everyone else to be quiet enough for him to chime in with."
+      bio: "James helps our clients tell their stories through motion. His focus on meaningful and impactful storytelling makes a brand come to life. His thoughtful approach to his craft results in rich media that pulls at the heartstrings and will make you fall in love with your brand all over again. James may be quiet, but he usually has the funniest joke and is just waiting for everyone else to calm down before he chimes in."
       // bucket_list: "Go backpacking in New Zealand",
       // super_power: "Flight",
       // spirit_animal: "Wolf",
@@ -102,25 +102,16 @@ const team = [
   },
   {
     name: "Shane Buchan",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05164641/Shane.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165711/shane.jpg",
     title: "Web Developer",
     // handle: "",
     questions: {
-      bio: "Shane is a digital craftsman that specializes in graphic design, front-end web development, and animation. When he is not working, he is a doting husband, father, and can be found getting his hands dirty in the outdoors."
-    }
-  },
-  {
-    name: "Audrey Zipperer",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05170619/Audrey.jpg",
-    title: "Relationship Strategist",
-    // handle: "",
-    questions: {
-      bio: "Audrey is a senior advertising major at the University of Florida who loves to surround herself with interesting, creative people. Audrey is energized by ideas and tackles new projects with a full cup of coffee and enthusiasm. When she isn’t globe-trotting, she’s probably snacking on cupcakes and listening to NPR."
+      bio: "Shane is a digital craftsman who specializes in graphic design, front-end web development and animation. When he's not working, he is a doting husband and father and can be found getting his hands dirty in the outdoors."
     }
   },
   {
     name: "Shirley Rodriguez",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05170620/Shirley.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165712/shirley.jpg",
     title: "Relationship Coordinator",
     // handle: "",
     questions: {
@@ -129,11 +120,11 @@ const team = [
   },
   {
     name: "Kaley Shorter",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/10/05165557/Kaley.jpg",
+    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165708/kaley.jpg",
     title: "Marketing Manager",
     // handle: "",
     questions: {
-      bio: "With a natural curiosity for peoples’ stories, Kaley brings a fresh approach to marketing. Aligning Parisleaf’s unique goals and personality with the capabilities of its database might seem like trying to align a butterfly with a robot, but Kaley pulls it off in time for dinner with the family, disc golf and rocking out on stage at the piano."
+      bio: "A creative in her own right, Kaley has tapped years of journalism, CRM management, inbound marketing and customer experience shaping to launch Parisleaf’s blog to international recognition in less than four months. Kaley still makes it home in time for dinner with the family, disc golf and rocking out on stage at the piano."
     }
   }
 ];
@@ -209,7 +200,7 @@ const Human = React.createClass({
     const { human, ...props } = this.props;
 
     return (
-      <FlexContainer className="Section" collapse>
+      <FlexContainer className="Section Team" collapse>
         <FlexItem span4>
           <img src={human.photo} />
         </FlexItem>
