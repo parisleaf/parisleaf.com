@@ -170,7 +170,7 @@ const Human = React.createClass({
         <FlexItem span4>
           <img src={human.photo} />
         </FlexItem>
-        <FlexItem span8>
+        <FlexItem span8 className="Team-bio">
           <Header level={1} noMargin>
             {human.name}
           </Header>
