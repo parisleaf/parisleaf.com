@@ -78,14 +78,6 @@ const team = [
     }
   },
   {
-    name: "Shirley Rodriguez",
-    photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165712/shirley.jpg",
-    title: "Relationship Coordinator",
-    questions: {
-      bio: "Parisleaf’s second half to the business development team, Shirley is also the funniest person she has ever met. When she is not bringing in dollar bills to Parisleaf, she can be found pet-sitting your furry children or painting custom artwork for art lovers."
-    }
-  },
-  {
     name: "Kaley Shorter",
     photo: "https://d2aetxz8kifmdn.cloudfront.net/wordpress/wp-content/uploads/2016/11/29165708/kaley.jpg",
     title: "Marketing Manager",
